@@ -1,7 +1,11 @@
-#ТЕКУЩАЯ ВЕРСИЯ - 2.3
-#добавлены новые анимации - ходьбы, зума, пощёчины
-#исправлены мелкие недочеты
-#ОБНОВЛЕНИЕ ДО ВЕРСИИ 2.4:
+#Версия 2.4
+#улучшены ВСЕ имевшиеся ранее анимации
+#добавлено ещё больше анимаций ходьбы и зумов, починены неработавшие ранее 
+#исправлено множество мелких недочетов в тексте
+#чуть улучшены два фона
+#добавлен новый спрайт
+
+#Обновление до 2.5:
 #добавить th, где надо
 #в каждую часть добавить даты тоже пока хз как
 #Сторона А - перерисовать все бг
@@ -11,7 +15,6 @@
 #цг - вид из автобуса ночной
 #426 и 1536-бг:сделать вечернюю площадь
 #699-включить музон из лмр японский как в ЯОД
-#799 и ниже-есть проблема с уходом спрайтов за кадр, надо поправить
 #1300-заменить на появление таблички с текстом капсом, без текстбоксов ниже
 #1330-цг:Семен держит Алису за руку как Кетрин в лмр
 #1405-бг:по хорошему тут надо отдельный фон, но пока его нет
@@ -94,7 +97,7 @@ init:
     $ sot = Character (u'Сотрудник', color="FFFFFF", what_color="E2C778", kind=nvl)
     $ sot2 = Character (u'Второй сотрудник', color="FFFFFF", what_color="E2C778", kind=nvl)
     $ ktoto = Character (u'???', color="16bd00", what_color="E2C778",)
-    $ alx  = Character (u'Алекс', color="#ff3200", what_color="E2C778",)
+    $ alx  = Character (u'Алекс', color="16bd00", what_color="E2C778",)
     $ of = Character (u'Офицер', color="#a5a5ff", what_color="E2C778",)
     $ gn = Character (u'Генда', color="#ffd200", what_color="E2C778",)
     $ muj = Character (u'Мужчина', color="#c0c0c0", what_color="E2C778",)
@@ -102,7 +105,6 @@ init:
     $ rb = Character (u'Рабочий', color="#ff3200", what_color="E2C778",)
     $ mh = Character (u'Михаил', color="#ffaa00", what_color="E2C778",)
     $ ks = Character (u'Кастелянша', color="#a5a5ff", what_color="E2C778",)
-
 
     #Музыка
     $ lyudi_nadoeli = "ray_v_panelke/music/lyudi_nadoeli.mp3"
@@ -131,6 +133,7 @@ init:
 
     #Спрайты
     #image  = "ray_v_panelke/sprites/.png"
+    image unubiusport = "ray_v_panelke/sprites/unubiusport.png"
     image mh4 = "ray_v_panelke/sprites/mh4.png"
     image iv = "ray_v_panelke/sprites/iv.png"
     image mh = "ray_v_panelke/sprites/mh.png"
@@ -141,11 +144,7 @@ init:
     image gn_nasmeh = "ray_v_panelke/sprites/gn_nasmeh.png"
     image gn_smile = "ray_v_panelke/sprites/gn_smile.png"
     image gn_zloy = "ray_v_panelke/sprites/gn_zloy.png"
-    
-    image rvp_a = "ray_v_panelke/menu/rvp_a.jpg"
-    image rvp_b = "ray_v_panelke/menu/rvp_b.jpg"
-    image shadow = "ray_v_panelke/menu/shadow.png"
-    
+
     #Лена
     #image un   = ConditionSwitch(
     #"persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites//un/un__body.png",(0,0), "ray_v_panelke/sprites//.png",(0,0), "images/sprites///.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
@@ -293,7 +292,12 @@ init:
     "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_angry.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
     "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_angry.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
     True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_angry.png") )
-
+    
+    #Меню
+    image rvp_a = "ray_v_panelke/menu/rvp_a.jpg"
+    image rvp_b = "ray_v_panelke/menu/rvp_b.jpg"
+    image shadow = "ray_v_panelke/menu/shadow.png"
+    
 label rvp:
     scene bg black with dissolve
     play music plastinki fadein 1
@@ -314,14 +318,12 @@ screen rvp_menu:
             hovered [Show("rvp_b", transition=Dissolve(0.5))]
             unhovered [Hide("rvp_b", transition=Dissolve(1.0))]
             action [Hide("rvp_b", transition=Dissolve(0.5)), Jump("a1")]
-        hotspot((960, 0, 1920, 1080)):
+        hotspot((960, 0, 1920, 1000)):
             hovered [Show("rvp_a", transition=Dissolve(0.5))]
             unhovered [Hide("rvp_a", transition=Dissolve(1.0))]
             action [Hide("rvp_a", transition=Dissolve(0.5)), Jump("b1")]
-#        hotspot((1248, 861, 1920, 1080)):
-#            hovered [Show("ray_v_panelke/menu/backrooms.png", transition=Dissolve(0.5))]
-#            action Hide("rvp_menu", transition=dissolve2),Jump("backrooms")
-
+        hotspot((960, 1000, 1920, 1080)):
+            action [Jump("backrooms")]
 
 label backrooms:
     stop music fadeout 2
@@ -329,6 +331,28 @@ label backrooms:
     $ renpy.with_statement(fade3)
     $ renpy.pause(2.0, hard=True)
     $ renpy.pause()
+
+#Время суток - цвет спрайтов и текстбоксов
+#    $ persistent.sprite_time = ""
+#    $ _time
+
+#Новелльный режим
+#   $ set_mode_nvl()
+#   window show
+#   nvl clear
+#   "" with dissolve
+#   window hide
+#   $ set_mode_adv()
+    
+#Карусель спрайтов
+#    show :
+#       anchor(0.5,0.5) pos (1.3,0.5)
+#       ease 1 pos(0.5,0.5)
+#    window show
+#    "" with dissolve
+#    window hide
+#    show :
+#       ease 1 pos(-0.3,0.5)
 
     stop music fadeout 2
     stop ambience fadeout 1
@@ -362,7 +386,7 @@ label b1:
     me "Пожалуйста, расскажи, а то я уже не могу так, непонятно где, непонятно в каком году." with dissolve
     show un shy pioneer2 with dspr
     "Лена поняла, что не стоит препираться и нужно помочь." with dissolve
-    un "Ну как же. Я проснулась, и мы решили в последний раз погулять по Совёнку, пока ждали автобус. Дошли до площади, затем сели на лавочку любоваться звёздами." with dissolve
+    un "Ну как же. Я проснулась, и мы решили в последний раз погулять по Совёнку, пока ждали автобус. Дошли до площади, затем сели на лавочку полюбоваться лагерем напоследок." with dissolve
     un "Потом ты положил голову мне на колени и задремал." with dissolve
     "Наконец-то воспоминания вернулись ко мне. Всё так и было." with dissolve
     un "Ну как, вспомнил?" with dissolve
@@ -473,7 +497,6 @@ label b1:
     with dissolve
     "Там был весь наш отряд." with dissolve
     play music music_list["reminiscences"] fadein 2
-#Шурик, Мику, Уля, Славя
     sh "Ну наконец-то, приехали! Думали, не успеем попрощаться!" with dissolve
     mi "Лена здесь местная, нам Алиса сказала. А ты, Семён, куда поедешь?" with dissolve
     "Действительно, куда я поеду? Да и зачем? Единственный человек, которому я нужен и который нужен мне, живёт здесь." with dissolve
@@ -483,15 +506,15 @@ label b1:
     me "А куда поезд?" with dissolve
     sl "В Москву, дальше разъедемся кто куда. Садись к нам, последний раз ведь вместе." with dissolve
     "Неужели всё? А я ведь уже привык к ребятам за одну неделю, а они ещё сильнее сдружились между собой за две недели смены." with dissolve
-    "Лена не сидела одна, она общалась со своей соседкой по домику ¬– Мику – и со своей подругой по библиотеке – Женей." with dissolve
-    "Меня подозвал Электроник." with dissolve #чекнуть точку в тексте на конце
     scene bg square_lmr_night with dissolve
+    "Лена не сидела одна, она общалась со своей соседкой по домику ¬– Мику – и со своей подругой по библиотеке – Женей." with dissolve
+    "Меня подозвал Электроник." with dissolve
     show el smile pioneer with dissolve
     el "Слушай, спасибо тебе, что поговорил со мной. У нас с Женей всё-таки получилось." with dissolve
     me "Да ладно, как?" with dissolve
     "Вспомнилось, как он убегал от неё из библиотеки, какая рассвирепевшая была Женя в тот момент." with dissolve
-    el "Мы помирились… а потом танцевали с ней в последнюю ночь." with dissolve
-    el "Женя, она только с виду такая бука, на самом деле она добрая, если к ней подход найти." with dissolve
+    el "Мы помирились." with dissolve
+    el "Женя только с виду такая бука, но так-то добрая, если подход найти. В последнюю ночь мы танцевали среди звёзд." with dissolve
     window hide
 
     #Приближение Электроника и выдвигание девочек
@@ -554,13 +577,13 @@ label b1:
     scene bg black with dissolve
     $ renpy.pause(1.0)
     show unblink
-    window show
 
     scene bg square_lmr_night with dissolve
     show sl smile pioneer with dissolve
+    window show
     me "Славя, можно я тут сяду?" with dissolve
     sl "Да, конечно. Скажи, тебе понравилась смена?" with dissolve
-    me "Да, безусловно. Спасибо тебе за твою помощь, особенно в начале." with dissolve
+    me "Да, безусловно. Спасибо тебе за помощь в начале." with dissolve
     sl "Помнишь, как я тебя у ворот встретила?" with dissolve
     me "О да, ты мне сказала, как пройти к вожатой, а я всё равно перепутал и снова к тебе пришёл." with dissolve
     show sl laugh pioneer with dspr
@@ -828,14 +851,6 @@ label b1:
     un "Ох, ну ладно. Подожди нас здесь, мы скоро." with dissolve
     window hide
     stop ambience fadeout 2
-    
-    #Карусель спрайтов
-    #show :
-    #    anchor(0.5,0.5) pos (1.3,0.5)
-    #    ease 1 pos(0.5,0.5)
-    #"" with dissolve
-    #show :
-    #    ease 1 pos(-0.3,0.5)
 
     scene bg int_voxhall with dissolve
     play music music_list["drown"]
@@ -846,55 +861,71 @@ label b1:
         ease 1 pos(0.5,0.5)
     window show
     un "Алис, а до дома дотерпеть никак?" with dissolve
+    window hide
     show un angry2 pioneer2:
         ease 1 pos(-0.3,0.5)
     show dv scared pioneer2:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
+    window show
     dv "Лен, надо поговорить." with dissolve
     dv "Слушай, ты всё-таки с ним?" with dissolve
+    window hide
     show dv scared pioneer2:
         ease 1 pos(-0.3,0.5)
     show un angry2 pioneer2:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
+    window show
     un "Да, Алиса, и не нужно больше вмешиваться!" with dissolve
+    window hide
     show un angry2 pioneer2:
         ease 1 pos(-0.3,0.5)
     show dv angry pioneer2:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
+    window show
     dv "Лена, ну как же ты не понимаешь, не с тем ты связалась! Я тебе говорила об этом ещё в походе, но ты мне не веришь." with dissolve
+    window hide
     show dv angry pioneer2:
         ease 1 pos(-0.3,0.5)
     show un angry pioneer2:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
+    window show
     un "Да, Алиса, я тебе не поверила и не верю сейчас. Ты просто хочешь разрушить наши отношения." with dissolve
+    window hide
     show un angry pioneer2:
         ease 1 pos(-0.3,0.5)
     show dv guilty pioneer2:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
+    window show
     dv "Лена, я лишь хотела предупредить тебя." with dissolve
     dv "Ты так уверена в нём? Я же правду говорю, он за мной подглядывал." with dissolve
+    window hide
     show dv guilty pioneer2:
         ease 1 pos(-0.3,0.5)
     show un angry2 pioneer2:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
-    un "Знаю я твои штучки. Наверняка ты его шантажировала под выдуманными предлогами, по типу таких." with dissolve
+    window show
+    un "Знаю я твои штучки. Наверняка ты его шантажировала." with dissolve
+    window hide
     show un angry2 pioneer2:
         ease 1 pos(-0.3,0.5)
     show dv scared pioneer2:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
+    window show
     dv "Лена, ты не понимаешь, это другое." with dissolve
+    window hide
     show dv scared pioneer2:
         ease 1 pos(-0.3,0.5)
     show un angry2 pioneer2:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
+    window show
     un "Ладно, давай спросим у него прямо. Я думаю, он не будет отпираться и скажет правду." with dissolve
     window hide
     stop music fadeout 2
@@ -939,23 +970,30 @@ label b1:
         ease 1 pos(-0.3,0.5)
     with dissolve
     scene bg square_lmr_night with dissolve
-    show dv shy pioneer2 far:
-        anchor(0.5,0.5) pos(0.3,0.5)
-        ease 1 pos(0.5,0.5)
-    #зум
-    show dv shy pioneer2 far:
-        xcenter 0.5 ycenter 0.5
-        ease 18 zoom 1.7
-    show bg square_lmr_night behind dv:
-        xcenter 0.5 ycenter 0.5
-        ease 18 zoom 1.7
+    show un normal pioneer2 at left
+    show pi normal at right
     "Черт возьми, а он всё-таки признался. Я думала, будет до последнего отрицать. И что теперь? Ленка в слезах, он тоже понурый идёт." with dissolve
     "Да, я вроде как поступила правильно. Я предупредила её. Я не хотела, чтобы он ей изменял, а она потом лила слёзы." with dissolve
     "В порыве справедливого гнева я хотела, чтобы он получил по заслугам. Ну получил, и что дальше с этого?" with dissolve
     "Всё же я что-то не так сделала. Может, он и вправду полюбил её уже после." with dissolve
     "Надо с ним поговорить. Проверить, искренен ли он." with dissolve
-    scene bg street_lmr_night with dissolve
-    show dv shy pioneer2 far
+    scene bg street_lmr_night:
+        parallel:
+            zoom 1.05 anchor (48,27)
+        parallel:
+            ease 0.50 pos (0, 0)
+            ease 0.50 pos (25,25)
+            ease 0.50 pos (0, 0)
+            ease 0.50 pos (-25,25)
+        repeat
+    show dv shy pioneer2 far at left:
+        parallel:
+            zoom 1.05 anchor (48,27)
+        parallel:
+            ease 0.50 pos (0, 0)
+            ease 0.50 pos (0,25)
+        repeat
+#подумать над ходьбой
     "Мы шли вдвоём, Лена в нескольких метрах позади нас. Было слышно, как она иногда всхлипывала." with dissolve
     "Ситуация просто хуже некуда. Один в незнакомом городе, без средств, в другом времени." with dissolve
     "Опозорился перед единственным человеком, которому я дорог. И который бесконечно дорог мне." with dissolve
@@ -1017,18 +1055,14 @@ label b1:
     
     play ambience ambience_camp_center_evening fadein 1
     scene bg internat_night with dissolve
-    show un smile pioneer2:
-        anchor(0.5,0.5) pos(0.3,0.5)
-    with dissolve
+    show un smile pioneer2 at left with dissolve
     show dv normal pioneer2 at right with dissolve
     "Через пару минут мы подошли к какому-то жилому зданию." with dissolve
     un "Вот и пришли." with dissolve
-    show un shy pioneer2:
-        anchor(0.5,0.5) pos(0.3,0.5)
-    with dspr
+    show un shy pioneer2 with dspr
     un "Ой, а где тебе ночевать? Алис, ему переночевать надо, может, проведём его?" with dissolve 
     me "А вы… вместе живёте?"
-    show dv guilty pioneer2 with dissolve
+    show dv guilty pioneer2 with dspr
     dv "Нет, Лен, не позволят. У нас сейчас жёстко с этим. Надо переночевать – пусть идёт на вокзал. Тут по улице прямо как сейчас шли, и до площади." with dissolve
     "На двери была табличка, но за Леной я не смог увидеть, что там написано." with dissolve
     un "Да, вот ещё." with dissolve
@@ -1036,33 +1070,21 @@ label b1:
     un "Вот, возьми на еду, завтра столовая откроется." with dissolve
     show dv shy pioneer2 with dspr
     dv "Лена, мы вообще-то с тобой эти деньги откладывали..." with dissolve
-    show un normal pioneer2:
-        anchor(0.5,0.5) pos(0.3,0.5)
-    with dspr
+    show un normal pioneer2 with dissolve
     un "Алиса, ему сейчас нужнее." with dissolve
-    show dv sad pioneer2 at right with dspr
+    show dv sad pioneer2 with dissolve
     "Алиса не стала возражать, но была недовольна этим решением Лены. Я взял деньги и положил в пакет с вещами." with dissolve
-    show un smile3 pioneer2 close:
-        anchor(0.5,0.5) pos(0.3,0.5)
-    with dissolve
+    show un smile3 pioneer2 close with dspr
     un "Ладно, Сём, завтра увидимся тогда." with dissolve
+    window hide
     show un grin pioneer2 close:
         anchor(0.5,0.5) pos(0.3,0.5)
-        ease 1 zoom 1.5
-    with dissolve
+        ease 2 zoom 1.5
     show un grin pioneer2 close:
         anchor(0.5,0.5) pos(0.3,0.5) zoom 1.5
         ease 1 zoom 1.0
-    with dspr
+    window show
     "Она поцеловала меня в ту самую щёку, по которой ударила." with dissolve
-
-    #Новелльный режим
-    #$ set_mode_nvl()
-    #window show
-    #nvl clear
-    #"" with dissolve
-    #window hide
-    #$ set_mode_adv()
 
     scene bg internat_night with dissolve
     $ set_mode_nvl()
@@ -1131,54 +1153,71 @@ label b1:
     show dv guilty pioneer:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
+    window show
     dv "Лена, надо поговорить." with dissolve
+    window hide
     show dv guilty pioneer:
         ease 1 pos(-0.3,0.5)
     show un shy pioneer:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
+    window show
     un "Ой, а что такое? Ты такая серьёзная." with dissolve
+    window hide
     show un shy pioneer:
         ease 1 pos(-0.3,0.5)
     show dv guilty pioneer:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
+    window show
     dv "Мне нужно кое-что рассказать тебе про Семёна." with dissolve
+    window hide
     show dv guilty pioneer:
         ease 1 pos(-0.3,0.5)
     show un angry2 pioneer:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
+    window show
     un "Да? Ну и что же такое ты хочешь мне сказать?" with dissolve
+    window hide
     show un angry2 pioneer:
         ease 1 pos(-0.3,0.5)
     show dv guilty pioneer:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
+    window show
     dv "Лена, он не такой хороший, как ты думаешь." with dissolve
+    window hide
     show dv guilty pioneer:
         ease 1 pos(-0.3,0.5)
     show un angry2 pioneer:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
+    window show
     un "Если честно, не хочу от тебя ничего слушать." with dissolve
+    window hide
     show un angry2 pioneer:
         ease 1 pos(-0.3,0.5)
     show dv angry pioneer:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
+    window show
     dv "Ну Лена, я сейчас хочу тебе сказать правду." with dissolve
+    window hide
     show dv angry pioneer:
         ease 1 pos(-0.3,0.5)
     show un angry pioneer:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
+    window show
     un "Послушай, Алиса!" with dissolve
+    window hide
     show un angry pioneer:
         ease 1 pos(-0.3,0.5)
     show dv angry pioneer:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
+    window show
     dv "Нет, это ты меня послушай!" with dissolve
     window hide
     stop music fadeout 2
@@ -1332,7 +1371,6 @@ label b1:
     "Лена скрылась за дверью." with dissolve
     "Я остался ждать."
     scene bg internat_day:
-        zoom 1.05 anchor (48,27)
         ease 5 zoom 3 anchor (500,1600)
     "Вскоре я начал смотреть на место её жительства. Не похоже на обычный дом, ограждено забором." with dissolve
     "Наконец я прочитал название на табличке." with dissolve
@@ -1343,7 +1381,7 @@ label b1:
     "Что такое интернат? Это там, где дети и учатся и живут? Почему Лена и Алиса живут здесь, а не с родителями?" with dissolve
     scene bg internat_day:
         zoom 3 anchor (500,1600)
-        ease 2 zoom 1 anchor (48,27)
+        ease 2 zoom 1 anchor (0,0)
     "Мне пришлось прервать свои размышления, так как пришла Алиса." with dissolve
     play music music_list["that_s_our_madhouse"]
     show dv angry pioneer2 far with dissolve
@@ -1353,7 +1391,7 @@ label b1:
     show dv angry pioneer2 with dissolve
     dv "Ты что творишь? Я думала, ты нормальный парень, а ты…" with dissolve #убрал слово вчера
     dv "Что за лапшу ты Ленке на уши навешал! Какое ещё попадание из будущего?!" with dissolve
-    me "Алис, я, правда…" with dissolve 
+    me "Алис, я правда…" with dissolve 
     dv "Ты чё, Булычёва обчитался?!" with dissolve
     dv "Ведь ещё как убедительно напел ей про это! Лена умная девочка, а ты смог ей такую чушь внушить!" with dissolve
     dv "Со мной такое не пройдёт. Я в такие сказки не верю." with dissolve
@@ -1494,14 +1532,14 @@ label b1:
     $ set_mode_nvl()
     window show
     nvl clear
-    "- Здравствуйте, у вас есть работа?" with dissolve
+    me "Здравствуйте, у вас есть работа?" with dissolve
     "На меня подняла глаза сотрудница отдела кадров бальзаковского возраста." with dissolve
-    "- Нет работы!" with dissolve
-    "- Прям никакой? Ну, мне очень надо, а то с голоду помру!" with dissolve
-    "- Ладно, давай документы." with dissolve
+    kd "Нет работы!" with dissolve
+    me "Прям никакой? Ну, мне очень надо, а то с голоду помру!" with dissolve
+    kd "Ладно, давай документы." with dissolve
     "Я протянул бумагу." with dissolve
-    "- И что это? Где паспорт?" with dissolve
-    "- Может быть ещё это поможет?" with dissolve
+    kd "И что это? Где паспорт?" with dissolve
+    kd "Может быть ещё это поможет?" with dissolve
     "Я протянул бумагу с надписью “Ходатайство”." with dissolve
     "Лицо кадровика изменилось, когда она увидела, кем оно было подписано. Оказалось, товарищ Генда позаботился и о моём трудоустройстве." with dissolve
     "Нужно было лишь дописать в верхнем правом углу, что ходатайство на имя директора завода." with dissolve
@@ -1664,14 +1702,14 @@ label b1:
     me "Да уж, завтра на смену. Спокойной ночи!" with dissolve
     show un smile2 pioneer2 close with dissolve
     un "Спокойной ночи!" with dissolve
+    window hide
     show un grin pioneer2 close:
         anchor(0.5,0.5) pos(0.5,0.5)
         ease 1 zoom 1.5
-    with dissolve
     show un grin pioneer2 close:
         anchor(0.5,0.5) pos(0.5,0.5) zoom 1.5
         ease 1 zoom 1.0
-    with dspr
+    window show
     "Лена поцеловала меня на прощание, и мы разошлись. Завтра трудный день." with dissolve
     window hide
     stop ambience fadeout 1  
@@ -1735,6 +1773,9 @@ label a1:
     $ renpy.with_statement(fade3)
     $ renpy.pause(2.0, hard=True)
     $ new_chapter(0, u'Рай в панельке: Сторона А.')
+    $ persistent.sprite_time = "day"
+    $ day_time
+
     play music lyudi_nadoeli fadein 1
     show prologue_dream
     with fade
@@ -1795,7 +1836,7 @@ label a1:
     window show
     "До рассвета ещё далеко, часы на вахте показывали пять утра. Смена начинается." with dissolve
     "Взяв листок, я иду к своему троллейбусу под номером 1480." with dissolve
-    "Проверка узлов, запуск двигателя, прогрев."
+    "Проверка узлов, запуск двигателя, прогрев кабины и салона."
     play sound_loop sfx_bus_interior_moving fadein 4
     "Зима не за горами, начинают чувствоваться холода, но снег ещё не выпал." with dissolve
     "Лена ещё спит, наверное." with dissolve
@@ -1855,7 +1896,7 @@ label a1:
     "А я так и буду троллейбус водить. Союз интеллигенции и рабочего класса." with dissolve
     "Не всё, конечно, было так плохо. Лене в наследство досталась пусть и однокомнатная, но уютная, с хорошим убранством, квартира." with dissolve
     "Всё же это был и своеобразный укор мне – когда нам негде было жить, спасение пришло со стороны Лены." with dissolve
-    "Я тогда не смог добыть нам нормальный кров, не считая комнаты в общежитии завода, которой бы меня всё равно лишили. Так что жильём я обеспечить нас обоих не смог." with dissolve
+    "Я тогда не смог добыть нам нормальный кров, не считая комнаты в коммуналке, которую мы бы всё равно не потянули. Так что жильём я обеспечить нас обоих не смог." with dissolve
     "И зачем я ей?" with dissolve
     "В меде хоть и немного парней, но она может найти себе какого-нибудь богатого. И жить с ним не в однушке от покойной родственницы, а в многокомнатной квартире." with dissolve
     "Порой мне кажется, что наша встреча в Совёнке была роковой случайностью." with dissolve
@@ -1892,7 +1933,7 @@ label a1:
     "В любом случае, меня вряд ли оставят из-за малого опыта. Меня им не жалко уволить – молодой, найду себе работу." with dissolve
     "Не знаю, как я скажу Лене, что меня уволили. И как жить не знаю." with dissolve
     "Хотя почему же, пойду на шабашку какую-нибудь." with dissolve
-    "И вот опять же: зачем Лене это всё." with dissolve
+    "И вот опять же, зачем Лене это всё?" with dissolve
     "Муж-неудачник, получающий копейки." with dissolve
     "Ах да, я же учусь. Только не уверен, что доучусь. В здешний политех принимать не хотели, думали, не потяну. А ведь ещё сессию сдавать скоро." with dissolve
     play sound sfx_intro_bus_engine_start
@@ -1952,8 +1993,8 @@ label a1:
     "Через несколько минут мы уже разговаривали. После смены мы обсуждали, кто как отработал, не забывая при этом обругать слесарей." with dissolve
     me "Ну ладно, мужики, я пойду."
     mh4 "Погоди Семён, к нам присоединиться не желаешь?"
-    me "А куда вы собрались, к кому-то из вас в общагу? Ходили уже в общагу депошную, там у вас неуютно." with dissolve
-    mh4 "Да не, зачем сразу в общагу то? В гараже посидим без лишних глаз. Слесари как раз позвали, у них выходной завтра. Дернем немного." with dissolve
+    me "А куда вы собрались, к кому-то в общагу депошную? Ходили уже, неуютно там." with dissolve
+    mh4 "Да не, зачем сразу в общагу то? В гараже посидим без лишних глаз. Слесаря как раз позвали, у них выходной завтра. Дёрнем немного." with dissolve
     me "Не знаю, мужики… я с женой уже договорился время провести, и так на выходных почти с ней не вижусь." with dissolve
     iv "Э… ну ты чё, под каблуком в натуре, я не пойму. Успеешь к жене, мы тебя там в кандалы не закуём." with dissolve
     "Второй водитель говорил уже немного заплетавшимся языком. На мгновение в голове возникла мысль ему зубы пересчитать, чтобы за языком следил. И когда он успел накатить?" with dissolve
@@ -1963,13 +2004,13 @@ label a1:
     iv "Да я…" with dissolve
     mh4 "Все, угомонись. Семён, мы набухиваться не будем, просто немного выпьем и посидим. Немного хоть посиди, а?" with dissolve
     me "Ну, пойдёмте тогда." with dissolve
+    window hide
     show mh4 at left:
         anchor(0.5,0.5) pos(0.3,0.5)
         ease 1.5 pos(1.1,0.5)
     show iv at right:
         anchor(0.5,0.5) pos(0.7,0.5)
         ease 1.5 pos(1.3,0.5)
-    window hide
     stop music fadeout 4
     stop ambience fadeout 2
 
@@ -1995,8 +2036,8 @@ label a1:
     $ renpy.pause(1)
     window show
     "Всё проходило довольно мирно, мы втроём познакомились со слесарями. Не самые плохие люди оказались, но не всё было так просто…" with dissolve
-    show gn_nasmeh with dissolve
     show iv at right with dissolve
+    show gn_nasmeh with dissolve
     voicegn "Семён, а что мы тебя раньше не видели в нашем кругу?" with dissolve
     "Был у них в коллективе один мутный тип, даже имя его никак не мог запомнить. А вот он меня, похоже, знал хорошо." with dissolve
     iv "А он у нас порядочный семьянин." with dissolve
@@ -2021,7 +2062,7 @@ label a1:
     voicegn "Небось уже к другому пошла развлекаться. Но лучше ко мне, я бы её без внимания не оставил." with dissolve
     "Я вскипал от ненависти к этому ублюдку. Нужно было проучить его." with dissolve
     me "Пойдём-ка, выйдем." with dissolve
-    scene bg garage_ext:
+    scene bg garage_int:
        parallel:
             zoom 1.05 anchor (48,27)
             ease 2 zoom 3 anchor (1200,1200)
@@ -2031,6 +2072,8 @@ label a1:
     window hide
     
     stop music fadeout 2
+    $ persistent.sprite_time = "night"
+    $ night_time
     scene bg garage_ext with dissolve
     show gn_smile with dissolve
     play ambience ambience_cold_wind_loop
@@ -2038,7 +2081,6 @@ label a1:
     $ renpy.pause(2)
     
     window show
-    
     "Я вышел из гаража, затем вышел он." with dissolve
     "Больше уже ничего говорить не хотелось. Хотелось лишь одним ударом заставить его сожалеть о сказанном." with dissolve
     window hide
@@ -2047,15 +2089,15 @@ label a1:
     hide gn_zloy with dissolve
     play sound sfx_grate_hand_fall
     
-    window show
     show gn_smile:
         anchor(0.5,0.5) pos(0.5,0.5)
         ease 1.0 pos(-0.2,0.5)
+    window show
     "Я замахнулся, но промазал, попав по железной двери гаража. Гулкий удар по гаражу." with dissolve
     "А он воспользовался этим, схватил меня за волосы и треснул головой об эту дверь." with dissolve
     scene bg garage_ext:
         zoom 1.05 anchor (48,27)
-        ease 3 zoom 1.5 anchor (500,1600)
+        ease 1.5 zoom 1.5 anchor (0,300)
     play sound sfx_grate_hand_fall
     "Это был второй удар." with dissolve
     "Вот же гнида, взбесил и ударил исподтишка!" with dissolve
@@ -2192,6 +2234,8 @@ label a1:
     "Мы зашли внутрь, я закрыл дверь." with dissolve
     window hide
 
+    $ persistent.sprite_time = "day"
+    $ day_time
     play sound sfx_close_door_1
     play ambience ambience_medstation_inside_night
     scene bg prih with dissolve
@@ -2261,15 +2305,12 @@ label a1:
     show un angry coat with dissolve
     un "Ты совсем идиот?! Что за бред ты несёшь…" with dissolve
     show un normal coat with dissolve
-    un "...ох, ладно, иди спать уже." with dissolve
-    window hide
-    
+    un "...ох, ладно, иди спать уже." with dissolve    
     stop music fadeout 2
-    scene bg kvartira
-    show black:
-        alpha 0.8
-    with dissolve
-    
+    window hide
+    show un normal coat:
+        anchor(0.5,0.5) pos (0.5,0.5)
+        ease 1 pos(-0.3,0.5)
     window show
     "Лена, наконец, сдвинулась с места, разулась, сняла пальто и пошла по квартире." with dissolve
     "Несмотря на мой выплеск праведного гнева на нелёгкую жизнь, она одержала верх. Правда была на её стороне." with dissolve
@@ -2341,10 +2382,7 @@ label a1:
     stop sound_loop fadeout 2
     stop ambience fadeout 2
     $ renpy.pause(2)
-    scene bg kvartira
-    show black:
-        alpha 0.8
-    with dissolve
+    scene bg prih with dissolve
     play music music_list["drown"] fadein 2
     
     window show
@@ -2355,6 +2393,9 @@ label a1:
     "Фух, устала. Надо чайник поставить, чаю попью хоть." with dissolve
     "Куда он пропал, у него же смена должна была закончиться четыре часа назад." with dissolve
     "Может с ним что-то случилось на работе? Надо позвонить в депо." with dissolve
+    window hide
+    $ renpy.pause(1.0)
+    window show
     "Хм, странно, в депо сказали, он сдал смену без происшествий." with dissolve
     window hide
     
@@ -2371,6 +2412,8 @@ label a1:
     un "Надо пойти к нему в депо. Чай потом выпью." with dissolve
     window hide
 
+    $ persistent.sprite_time = "night"
+    $ night_time
     scene bg ivlieva:
     show black:
         alpha 0.8
@@ -2404,8 +2447,10 @@ label a1:
     mil2 "Лёха, чё ты с ним лясы точишь, лучше помоги мне повязать второго, он какой-то буйный!" with dissolve
     alex "Сейчас приду!" with dissolve
     alex "Ладно, я сейчас отойду, но чтобы когда я вернулся, вас здесь не было, понятно?!" with dissolve
+    window hide
     show mil at left:
-        ease 1.0 pos(-0.1,0.5)
+        ease 1 pos(-0.1,0.5)
+    window show
     "Надо быстрее поднять Сёму и уходить, пока они заняты." with dissolve
     window hide
     
@@ -2430,17 +2475,11 @@ label a1:
     play ambience ambience_medstation_inside_night
     
     window show
-    scene bg kvartira:
-       parallel:
-            zoom 1.05 anchor (48,27)
-            ease 15 zoom 3 anchor (1900,900)
-       parallel:
-            ease 0.35 pos (0, 0)
-            ease 0.35 pos (25,25)
-            ease 0.35 pos (0, 0)
-            ease 0.35 pos (-25,25)
-            repeat
+    scene bg kvartira with dissolve
+    $ persistent.sprite_time = "day"
+    $ day_time
     "Я встал с кровати в районе девяти." with dissolve
+#анимация либо вообще фразу убрать
     "Голова гудела, но скорее от удара об дверь, чем от алкоголя…" with dissolve
     scene bg kvartira with dissolve
     "Лена лежала, отвернувшись от меня. Её лицо я увидел, лишь обойдя кровать." with dissolve
@@ -2451,6 +2490,7 @@ label a1:
     "И что мне делать в выходной, когда поругался с единственным человеком, с которым хотел провести всё свободное время?" with dissolve
     "Просто собрать молча вещи и уйти навсегда из квартиры или из жизни?" with dissolve
     "Оставить записку с прощальным посланием типа: “Прости, но так будет лучше для всех нас. Я недостоин тебя…” и так далее?" with dissolve
+    with hpunch
     "Семён, не твори ерунды." with dissolve
     "Ты был моложе, менее опытным, оказался один в незнакомом месте и времени и смог начать отношения с ней. Вы тогда поругались, а потом помирились." with dissolve
     "Внезапно появились силы не унижать себя, не жалеть себя, а решать проблему как задачу." with dissolve
@@ -2476,6 +2516,7 @@ label a1:
             ease 0.20 pos (0, 0)
             ease 0.20 pos (-25,25)
             repeat
+    window show
     "Причём реально пошлёпал, было довольно прилично луж на улице." with dissolve
     scene bg ivlieva with dissolve
     play ambience ambience_cold_wind_loop
@@ -2619,9 +2660,11 @@ label a1:
     me "Я в депо пошёл…" with dissolve
     "Ох, зря это сказал. Лену с этого просто вынесло." with dissolve
     show un rage sport with dspr
-    un "Куда???" with dissolve
+    un "Куда?!!" with dissolve
     un "Опять к своим дружкам-алкашам! Тебе вчера не хватило, ты ещё хочешь?!" with dissolve
+    show unubiusport with dspr
     "Секундная пауза. Лена набрала воздуха в лёгкие для новой очереди слов." with dissolve
+    hide unubiusport with dspr
     un "Опохмелиться надо, да?! А то непривычно, с утра голова болит от водки!" with dissolve
     "Твою мать, как же я вляпался. Если Лена вышла из себя, то это очень плохо." with dissolve
     un "О, я знаю! Пошёл жаловаться своим товарищам, как его жена молодая пилит." with dissolve
@@ -2642,7 +2685,7 @@ label a1:
     "Не, ну это уже надо было останавливать." with dissolve
     me "Не хотел я ни с кем опохмеляться с утра. И жаловаться я тоже не хотел никому на тебя!" with dissolve
     show un angry2 sport with dspr
-    "Я немного повысил голос. Это помогло успокоить Лену, главное не перегнуть палку." with dissolve
+    "Я немного повысил голос. Это помогло успокоить Лену, главное не переборщить." with dissolve
     un "А зачем тогда в депо пошёл?" with dissolve
     me "Хотел взять смену." with dissolve
     un "Семён, ты серьёзно? Ты что у нас, герой соцтруда?" with dissolve
@@ -2661,21 +2704,30 @@ label a1:
     un "Да больно надо! Ещё из-за него я тут буду… нет, вы подумайте, какой он уникальный и важный!" with dissolve
     un "А ты не волнуйся, у нас незаменимых нет." with dissolve
     stop music fadeout 3
+    window hide
     scene bg kvartira:
        parallel:
-            zoom 1.05 anchor (48,27)
-            ease 6 zoom 2 anchor (800,200)
+            zoom 1.0 anchor (0,0)
+            ease 5 zoom 2 anchor (800,200)
     show un shy sport at left:
         parallel:
-            zoom 1.05 anchor (48,27)
+            zoom 1.0 anchor (0,0)
             ease 5 zoom 2 anchor (460,200)
+    window show
     "В этот момент она остановилась. Я стоял в шоке от её последних слов." with dissolve
     "Лена поняла, что сказала достаточно или даже слишком много." with dissolve
     "Прежний напор ушёл, его место занимал дискомфорт. Как всегда в тех ситуациях, когда на эмоциях высказываешь человеку всё, что о нём думаешь." with dissolve
     "Но в определённый момент от праведного гнева перегибаешь палку и несправедливо задеваешь человека." with dissolve
     "И уже твоя совесть тебя мучает." with dissolve
     window hide
-#    show bg kvartira with dissolve
+    scene bg kvartira:
+       parallel:
+            zoom 2 anchor (800,200)
+            ease 2 zoom 1 anchor (0,0)
+    show un normal sport at left:
+        parallel:
+            zoom 2 anchor (460,200)
+            ease 2 zoom 1 anchor (0,0)
     show un normal sport
     window show
     un "Ладно, надоело мне это всё. Иди пол вымой. И дверь закрой нормально, не в лифте родился." with dissolve
@@ -2708,8 +2760,8 @@ label a1:
     "Интересно ещё и то, что Лена верила мне. Она не кричала после моих слов что-то вроде:" with dissolve
     window hide
     
-    scene bg kvartira with dissolve
-    show un angry2 sport with dissolve
+    scene bg kvartira
+    show un angry2 sport
     show prologue_dream
     with fade
 
@@ -2743,11 +2795,9 @@ label a1:
     me "А как же ты?" with dissolve
     un "Я уже поела." with dissolve
     window hide
-
     show un shy sport:
-        anchor(0.5,0.5) pos (0.5,0.5)
+        anchor(0.5,0.5) pos(0.5,0.5)
         ease 1 pos(-0.3,0.5)
-    
     window show
     "И с этими словами она резко вышла." with dissolve
     "Даже лица её разглядеть не успел." with dissolve
@@ -2895,15 +2945,19 @@ label a1:
     window hide
     window show
     un "Пойду{w=0.3} полежу, совсем сил нет." with dissolve
+    window hide
     show un normal sport:
-        anchor(0.5,0.5) pos (0.5,0.5)
+        anchor(0.5,0.5) pos(0.5,0.5)
         ease 1 pos(-0.3,0.5)
+    window show
     "И скрылась в спальне." with dissolve
     "От этих слов я совсем расстроился." with dissolve
     "Опять возможность решить ситуацию ускользает от меня." with dissolve
     "Сейчас она уснёт. Будить её было как-то неприлично, человек работал." with dissolve
     window hide
-    
+
+    $ persistent.sprite_time = "night"
+    $ night_time
     scene bg kvartira
     show black:
         alpha 0.8
@@ -2932,17 +2986,21 @@ label a1:
     "Почему не тянуло домой, а хотелось посидеть подольше? Хотелось излить душу, но не видеть Лену." with dissolve
     "Почему хотел излить душу кому-то, но не Лене? Стыдно было говорить с ней." with dissolve
     "Ведь я считаю, что я её недостоин. Если я признаюсь ей в своих проблемах, что рискую быть уволенным, она меня бросит." with dissolve
-    "Почему она меня бросит? Она никогда не ругала меня, всегда поддерживала." with dissolve
+    "Почему она меня бросит? Она ведь всегда меня поддерживала." with dissolve
     window hide
 
+    $ persistent.sprite_time = "day"
+    $ day_time
     show bg kvartira
     show un smile2 sport
     show prologue_dream
     with fade
-    
     window show
     "Снова вспомнил, как она сказала мне, что не стыдится того, что я работаю простым водителем троллейбуса." with dissolve
     window hide
+
+    $ persistent.sprite_time = "night"
+    $ night_time
     scene bg okno with dissolve
     window show
     "Почему она любит меня? Не знаю."
@@ -2979,7 +3037,7 @@ label a1:
     un "Но я всё же не понимаю, почему ты так поступил? Почему не пошёл домой как обычно?" with dissolve
     "Я решил, что хватит с меня молчать и скрывать свои мысли от Лены. Скажу как есть, а уж дальше она делает, что хочет." with dissolve
     me "Я ж говорю, жизнь заела." with dissolve
-    me "Зарплата маленькая, работа не престижная. Живём в панельной однушке." with dissolve
+    me "Зарплата маленькая, работа непрестижная. Живём в панельной однушке." with dissolve
     "Лене не понравились мои слова." with dissolve
     un "Что значит не престижная? Для меня нет такого понятия. Есть нужная и ненужная обществу." with dissolve
     un "Ты возишь людей на работу и учёбу, меня в том числе. Это нужная обществу работа, значит достойная." with dissolve
@@ -3000,7 +3058,7 @@ label a1:
     "Я выдохнул. Затем тяжело продолжил." with dissolve
     me "Давай расстанемся. Я не хочу тебя тяготить." with dissolve
     show un shocked sport with dspr
-    "Лена испугалась от моих слов. Я продолжил высказывать всё, что таилось в душе." with dissolve
+    "Лена испугалась моих слов. Я продолжил высказывать всё, что таилось в душе." with dissolve
     me "Ты найдёшь себе достойного мужа." with dissolve
     un "Я уже нашла…" with dissolve
     me "У него будет нормальная работа, богатые родители. Он тебя обеспечит." with dissolve
@@ -3038,9 +3096,18 @@ label a1:
     un "Мне порой и страшно и неуютно здесь, всё вместе. Я же всю жизнь в райцентре прожила, не знала, каково это." with dissolve
     un "Мы всё думали, как повезло тебе сесть на автобус и попасть в другое время. Я не знаю, как ты пережил, это же так страшно, наверное, было." with dissolve
     me "Ну да, тяжело мне тогда было. Но главное, что это позади." with dissolve
+    window hide
+    show un sad sport:
+        anchor(0.5,0.5) pos(0.5,0.5)
+        ease 3 zoom 2.5 pos(0.0,0.8)
+    window show
     "Я обнял Лену. Она всем видом показывала, что её нужно было поддержать." with dissolve
     me "Хочешь, не буду пить? Вообще." with dissolve
-    show un smile sport with dspr
+    window hide
+    show un smile sport:
+        anchor(0.5,0.5) pos(0.0,0.8)
+        ease 3 zoom 1.0 pos(0.5,0.5)
+    window show
     "Лену обрадовали эти слова." with dissolve
     un "Было бы славно." with dissolve
     un "Но что мужикам скажешь?" with dissolve
@@ -3106,9 +3173,9 @@ label a1:
     un "Я горжусь тобой, Сёма." with dissolve
     "Недопонимание между нами ушло, и наши души снова стали близки. Всё начало идти к тому, что не только души." with dissolve
     "Вдруг я вспомнил, что у меня в наушниках до сих пор играет песня." with dissolve
-    stop sound fadeout 3
+    stop music fadeout 3
     un "А что это играет? Почему сам слушаешь, а мне не даёшь?" with dissolve
-    play sound sp_noch_solo
+    play music sp_noch_solo
     "Она выдернула штекер из разъёма. И в этот момент как раз начиналось то самое каспаряновское соло на гитаре. Оно громко заиграло на всю квартиру." with dissolve
     "От неожиданности я вскочил из-за стола. Лена резко сначала обняла меня, затем запрыгнула на меня." with dissolve
     "Я хотел было что-то сказать, но она заняла мои губы своими…" with dissolve
@@ -3150,7 +3217,7 @@ label a1:
     window hide
     show blink
     
-    stop sound fadeout 2
+    stop music fadeout 2
     stop ambience fadeout 2
     play sound sp_noch_solo fadein 2
     scene black with dissolve2
