@@ -140,7 +140,6 @@ init:
     image genda = "ray_v_panelke/sprites/genda.png"
     image mil = "ray_v_panelke/sprites/mil.png"
     image mil2 = "ray_v_panelke/sprites/mil2.png"
-    image lena_shadow = "ray_v_panelke/sprites/lena_shadow.png"
     image gn_nasmeh = "ray_v_panelke/sprites/gn_nasmeh.png"
     image gn_smile = "ray_v_panelke/sprites/gn_smile.png"
     image gn_zloy = "ray_v_panelke/sprites/gn_zloy.png"
@@ -358,7 +357,1480 @@ label backrooms:
     stop ambience fadeout 1
     scene bg black with dissolve
     jump exit
+
+#Плавный выход из мода
+label exit:
+    stop sound fadeout 2
+    stop music fadeout 2
+    stop ambience fadeout 2
+    scene black with dissolve2
+    return
+
+label a1:
+    stop music fadeout 2
+    $ renpy.show("black")
+    $ renpy.with_statement(fade3)
+    $ renpy.pause(2.0, hard=True)
+    $ new_chapter(0, u'Рай в панельке: Сторона А.')
+    $ persistent.sprite_time = "day"
+    $ day_time
+
+    play music lyudi_nadoeli fadein 1
+    show prologue_dream
+    with fade
+    window show
+    "Последнее время мне не снятся сны."
+    "Ночи пролетают быстро, и не успеваешь отдохнуть перед новым днём. Днём, полным рутинной работы, скучной, серой действительности." with dissolve
+    "Будильник поднимет меня своим звоном, и я ни свет ни заря отправлюсь на смену. Работа, конечно, не пыльная, но довольно монотонная." with dissolve
+    window hide
+
+    scene bg kvartira
+    show unblink
+    show black:
+        alpha 0.8
+    show prologue_dream
+    with fade
     
+    window show
+    "К вечеру смена заканчивается, и я прихожу домой в одинокую квартиру." with dissolve
+    "Она ещё не вернулась. То занятия до вечера, то тренировки." with dissolve
+    "А потом она сидит на кухне и учит свой патан и гисту." with dissolve
+    "Мне тоже надо. Я же не просто работник, а ещё и студент." with dissolve
+    "{b}Какая же это всё соковыжималка!{/b}" with dissolve
+    "Сначала работа, потом учёба. У неё очная учёба, где надо всё зубрить."  with dissolve
+    "Живём в складчину с моей маленькой зарплаты и её стипендии. От получки до получки. Вроде хватает." with dissolve
+    window hide
+
+    scene bg universam
+    show un shy coat
+    show prologue_dream
+    with fade
+    
+    window show
+    "Но копить не получается, даже порадовать себя вкусной едой выходит редко." with dissolve
+    "Хотя Лена старается изо всех сил приготовить что-то приятное для нас обоих из тех продуктов, которые мы берём в универсаме “Нагорный”." with dissolve
+    "Со всей этой учебной и рабочей деятельностью мы с Леной не находим сил и времени друг для друга." with dissolve
+    hide un shy coat with dissolve
+    "Встаём мы в разное время, потом большую часть дня проводим в разных местах, вечером тоже много сидим, каждый в своём углу. Я в комнате, она на кухне." with dissolve
+    "А ночью, обессиленные, мы ложимся спать." with dissolve
+    window hide
+
+    scene bg vasyunina
+    show prologue_dream
+    with fade
+    window show
+    "А выходные? Да всё этот чёртов график “два через два”." with dissolve
+    "То у меня выходные, у неё учёба, то наоборот." with dissolve
+    "Бывают дни, когда у нас обоих выходные, но все планы срываются – то мне позвонят идти на смену, то у неё какие-то дела." with dissolve
+    "Но вот вроде сегодня, наконец, совпало и ничто не помешает провести эти два дня вместе. Надо только эту смену оттрубить." with dissolve
+    window hide
+    
+    scene bg vasyunina with dissolve
+    $ renpy.pause(2)    
+    window show
+    "С такими мыслями я подходил к троллейбусному депо. Моему месту работы." with dissolve
+    window hide
+
+    scene bg depo with dissolve
+    window show
+    "До рассвета ещё далеко, часы на вахте показывали пять утра. Смена начинается." with dissolve
+    "Взяв листок, я иду к своему троллейбусу под номером 1480." with dissolve
+    "Проверка узлов, запуск двигателя, прогрев кабины и салона."
+    play sound_loop sfx_bus_interior_moving fadein 4
+    "Зима не за горами, начинают чувствоваться холода, но снег ещё не выпал." with dissolve
+    "Лена ещё спит, наверное." with dissolve
+    "Интересно, в этот день удастся её подвезти до института?" with dissolve
+    play sound sfx_intro_bus_engine_start
+    "Пару раз я замечал её фиолетовые хвостики через лобовое стекло и аккуратно подъезжал к ней. " with dissolve
+    "Она тоже меня видела и всегда заходила в переднюю дверь." with dissolve
+    window hide
+
+    scene bg salon
+    show un smile2 coat
+    show prologue_dream
+    with fade
+    window show
+    un "Доброе утро, Сёма!"
+    hide un smile2 coat with dissolve
+    "Но поговорить в рейсе не удавалось, опасное это дело, могу отвлечься. А я, чай, не «Окой» управляю, да и не одного себя везу." with dissolve
+    "Чёрт, местные словечки уже прилипают к моей речи. Как, например “чай”, который не в значении напитка, а как частица “всё-таки”." with dissolve
+    "Ну, вот и выезжать пора. Покидаю ворота первого депо и выхожу на маршрут." with dissolve
+    window hide
+    scene bg depo with dissolve
+    window show
+    "Довольно интересно получилось, что я вожу троллейбус. После переезда в Горький стал искать работу." with dissolve
+    "Чтобы не тратить время и деньги на дорогу, искал работу у дома. Да и Лена просила, чтобы работа была недалеко, ей так спокойнее было за меня." with dissolve
+    "Всё, что я имел – корочка слесаря и три года работы на заводе. Рядом было троллейбусное депо на улице Ивлиева. Пришёл туда и спросил, не нужны ли слесари." with dissolve
+    nd "Слесари нам не нужны. А вот водителей не хватает на семнадцатом маршруте. Если не работал, ничего страшного, у нас курсы есть, стипендию платим. Ну что, согласен?" with dissolve
+    "Пришлось согласиться. Прошёл обучение, недавно корочку получил и полноценно стал работать." with dissolve
+    "Водителям платили немного. Неудивительно, почему не хватало кадров. Лена получала столько же со стипендии, сколько я с зарплаты." with dissolve
+    "Правда ради этого ей приходилось зубрить весь материал и сдавать экзамены без права на ошибку. Даже одна четвёрка могла уменьшить ей стипендию в два раза." with dissolve
+    "А значит, уменьшала наш бюджет и приводила к нищете." with dissolve
+    "Но Лена справлялась, по крайней мере, до переезда, сдавать сессию на отлично. Хотя ради этих несчастных оценок она каждый день сидела по несколько часов и учила." with dissolve
+    window hide
+    
+    stop sound_loop fadeout 1
+    scene bg kvartira
+    show un shy sport
+    show prologue_dream
+    with fade
+
+    window show
+    "Лена однажды предложила бросить свои занятия спортом и тоже найти хоть какую-то подработку после учебы, но я наотрез отказался." with dissolve
+    "По себе знаю, как сильно это временами может давить, ведь я сам совмещаю работу и учебу." with dissolve
+    "А у Лены очная форма обучения. Тренировки для Лены — хоть какая-то отдушина в отрыве от учебы и повседневной серости, и лишать её этого я себе не позволил бы." with dissolve
+    "Хоть она под вечер и приходит уставшая, я вижу в её глазах, что ей нравятся эти занятия." with dissolve
+    "Возможно, сказалось желание Слави приучить всех к спорту, и Лена подхватила этот настрой. Пусть она будет разносторонне развита, а я заработаю нам денег." with dissolve
+    window hide
+    
+    play sound sfx_intro_bus_engine_start
+    scene bg square with dissolve
+    play sound_loop sfx_bus_interior_moving fadein 4
+    
+    window show
+    me "«Бориса Корнилова»! Следующая остановка – «Адмирала Васюнина»!" with dissolve
+    "Какая же она молодец. Не то, что я… кое-как на заочном учусь. Единственное оправдание – работа. Такие мы с ней разные. Лена посвящает себя учёбе и спорту." with dissolve
+    stop sound fadeout 2
+    "Может в принципе и одна жить, без меня. Закончит мед, будет хорошим врачом, им платят нормально." with dissolve
+    "А я так и буду троллейбус водить. Союз интеллигенции и рабочего класса." with dissolve
+    "Не всё, конечно, было так плохо. Лене в наследство досталась пусть и однокомнатная, но уютная, с хорошим убранством, квартира." with dissolve
+    "Всё же это был и своеобразный укор мне – когда нам негде было жить, спасение пришло со стороны Лены." with dissolve
+    "Я тогда не смог добыть нам нормальный кров, не считая комнаты в коммуналке, которую мы бы всё равно не потянули. Так что жильём я обеспечить нас обоих не смог." with dissolve
+    "И зачем я ей?" with dissolve
+    "В меде хоть и немного парней, но она может найти себе какого-нибудь богатого. И жить с ним не в однушке от покойной родственницы, а в многокомнатной квартире." with dissolve
+    "Порой мне кажется, что наша встреча в Совёнке была роковой случайностью." with dissolve
+    play sound sfx_intro_bus_engine_start
+    "Ей не нужен неудачник типа меня, она достойна чего-то большего." with dissolve
+    me "Остановка «Улица Адмирала Васюнина»! Следующая – «Надежды Сусловой»!" with dissolve
+    "Так ведь мало того, что она меня не бросила, она ещё поддерживает меня." with dissolve
+    window hide
+    
+    stop sound fadeout 2
+    stop sound_loop fadeout 1
+    show bg kvartira
+    show un smile2 sport
+    show prologue_dream
+    with fade
+
+    window show
+    un "Сёма, это не плохо, что ты водителем работаешь. И мне не стыдно за тебя. Ты же можешь расти в этом направлении." with dissolve
+    me "Да куда там расти, можно баранку крутить десятками лет." with dissolve
+    un "Так у тебя же руки золотые, на заводе тебя хвалили. Спроси, может, слесари нужны или ещё кто." with dissolve
+    window hide
+
+    scene bg square with dissolve
+    play sound_loop sfx_bus_interior_moving fadein 4
+    play sound sfx_intro_bus_engine_start
+    
+    window show
+    "Правильно она, конечно, это всё говорит. Вот только, боюсь, не светит мне ни повышение, ни даже эта работа в будущем." with dissolve
+    me "«Улица Надежды Сусловой»! Следующая – «Ванеева»!" with dissolve
+    "До депо уже дошли слухи о сокращении бюджета на общественный транспорт." with dissolve
+    stop sound fadeout 2
+    "Причём не просто зарплаты подрежут, но ещё и подвижной состав спишут, а персонал уволят." with dissolve
+    "Мужики на измене сидят, непонятно, кого в таком случае оставят, кого уволят." with dissolve
+    "В любом случае, меня вряд ли оставят из-за малого опыта. Меня им не жалко уволить – молодой, найду себе работу." with dissolve
+    "Не знаю, как я скажу Лене, что меня уволили. И как жить не знаю." with dissolve
+    "Хотя почему же, пойду на шабашку какую-нибудь." with dissolve
+    "И вот опять же, зачем Лене это всё?" with dissolve
+    "Муж-неудачник, получающий копейки." with dissolve
+    "Ах да, я же учусь. Только не уверен, что доучусь. В здешний политех принимать не хотели, думали, не потяну. А ведь ещё сессию сдавать скоро." with dissolve
+    play sound sfx_intro_bus_engine_start
+    "Горький – город крупный, институты тут посерьёзнее, чем там, откуда мы летом переехали." with dissolve
+    me "«Улица Ванеева»! Следующая – «Бориса Панина»!" with dissolve
+    "Раньше чуть голос не срывал, объявляя эти остановки. Сейчас научился уже говорить громко, да только толку в этом горлопанстве." with dissolve
+    window hide
+    
+    stop sound_loop fadeout 1
+    stop sound fadeout 2
+    $ renpy.pause(3)
+
+    window show
+    "Сука, опять ус слетел с провода." with dissolve
+    "Открываю дверь, подхожу к месту аварии." with dissolve
+    "Ус конечно никак не хотел ловиться, но я настаивал на том, чтобы он вернулся к своей обязанности быть проводником тока." with dissolve
+    "Работаем дальше." with dissolve
+    "Захожу в кабину и веду дальше. Впереди долгий рабочий день." with dissolve
+    window hide
+    
+    stop music fadeout 3
+    $ renpy.pause(3)
+
+    scene bg vasyunina with dissolve
+    play sound_loop sfx_bus_interior_moving fadein 4
+    play music trolleybus fadein 1   
+    window show
+    "К третьему часу дня смена закончилась." with dissolve
+    "С чувством облегчения я катил на своём электротранспорте на восток, к депо." with dissolve
+    "Смена выдалась трудной, усы слетали с проводов раза в два чаще обычного." with dissolve
+    "Один раз чуть в аварию не попал, причём по своей вине, задумался о вечере. Но это всё позади, остались считанные метры и я свободен." with dissolve
+    window hide
+    scene bg depo with dissolve
+    window show
+    "Часы в салоне показывали три часа дня. Я завёл троллейбус в гараж, провёл все необходимые процедуры по выключению машины." with dissolve
+    stop sound_loop fadeout 1
+    play ambience ambience_cold_wind_loop
+    "Затем сразу пошёл и сдал смену. Лена ещё нескоро вернётся." with dissolve
+    "Ладно, можно пока посидеть в депо и пообщаться с кем-нибудь." with dissolve
+    "Контингент в депо составлял довольно типичный пролетариат." with dissolve
+    "Три года работы на заводе, конечно, научили тому, как быть своим в их окружении, но во мне оставался домосед-интеллигент, не дававший окончательно стать рабочим классом." with dissolve
+    "С ними не поговоришь о высоком, как иногда можно было с собеседниками на имиджбордах, но у них можно было набраться житейского опыта." with dissolve
+    "Да и, можно подумать, как будто на имиджбордах мы о высоком говорили." with dissolve
+    "Вот ведь что вспомнил! Интернет, имиджборды… когда-то была жизнь в других условиях и другом времени." with dissolve
+    "Впрочем, не особо по ней скучаю." with dissolve
+    "Я сидел на стоянке и ждал других водил. С ними у меня были лучше всего отношения в депо." with dissolve
+    "Со слесарями всё было непросто – о них ходила дурная слава, что они приблатнённые раздолбаи с руками явно не из плеч." with dissolve
+    "Из-за них и приходилось мучиться, потому что делали кое-как. Вдобавок я им завидовал в душе, что они занимают должность, которую я хотел, когда устраивался в депо." with dissolve
+    "Если бы мне дали написать список того, что погубит в ближайшее время Союз, одним из первых на листе бы появилось слово из четырёх букв - “блат”." with dissolve
+    play sound sfx_intro_bus_engine_start
+    "Вдруг из-за поворота возникли ещё пара “рогатых”. Я узнал их. Это были два водителя, работавших на одном маршруте со мной." with dissolve
+    stop sound fadeout 2
+    "По сложившейся пролетарской традиции я их называл по отчеству Михалыч и Иваныч." with dissolve
+    show mh4 at left with dissolve
+    show iv at right with dissolve
+    "Первый был работягой довольно приличного вида, второй немного вызывал у меня неприязнь запущенной внешностью, но по характеру был довольно безобидным." with dissolve
+    "Через несколько минут мы уже разговаривали. После смены мы обсуждали, кто как отработал, не забывая при этом обругать слесарей." with dissolve
+    me "Ну ладно, мужики, я пойду."
+    mh4 "Погоди Семён, к нам присоединиться не желаешь?"
+    me "А куда вы собрались, к кому-то в общагу депошную? Ходили уже, неуютно там." with dissolve
+    mh4 "Да не, зачем сразу в общагу то? В гараже посидим без лишних глаз. Слесаря как раз позвали, у них выходной завтра. Дёрнем немного." with dissolve
+    me "Не знаю, мужики… я с женой уже договорился время провести, и так на выходных почти с ней не вижусь." with dissolve
+    iv "Э… ну ты чё, под каблуком в натуре, я не пойму. Успеешь к жене, мы тебя там в кандалы не закуём." with dissolve
+    "Второй водитель говорил уже немного заплетавшимся языком. На мгновение в голове возникла мысль ему зубы пересчитать, чтобы за языком следил. И когда он успел накатить?" with dissolve
+    mh4 "Иваныч, не наезжай." with dissolve
+    "Более трезвый водитель успокоил своего товарища." with dissolve
+    mh4 "Сёмыч у нас порядочный семьянин, почти не пьет, вот и стесняется. Не хочет он собачиться на ночь глядя, и сковородкой по башке получать как ты." with dissolve
+    iv "Да я…" with dissolve
+    mh4 "Все, угомонись. Семён, мы набухиваться не будем, просто немного выпьем и посидим. Немного хоть посиди, а?" with dissolve
+    me "Ну, пойдёмте тогда." with dissolve
+    window hide
+    show mh4 at left:
+        anchor(0.5,0.5) pos(0.3,0.5)
+        ease 1.5 pos(1.1,0.5)
+    show iv at right:
+        anchor(0.5,0.5) pos(0.7,0.5)
+        ease 1.5 pos(1.3,0.5)
+    stop music fadeout 4
+    stop ambience fadeout 2
+
+    play music tuman fadein 2
+    scene bg garage_int with dissolve
+    window show
+    "Последний раз пил с Алисой в августе, поминали Витю." with dissolve
+    play sound sfx_open_metal_hatch
+    "В гараже реально тепло, уютно." with dissolve
+    "Один из слесарей, который работал с восьмидесятого года и жил не в общаге, а в квартире, купил гараж и позвал на “новоселье”." with dissolve
+    "Идти далеко не пришлось – много гаражей настроили в низине за депо." with dissolve
+    "Часть города, называемая местными “нагорной”, делилась на низины, застроенными гаражами и высокими местами, на которых строились дома." with dissolve
+    "Место, где мы жили с Леной, тоже называлось Нагорным микрорайоном…" with dissolve
+    "Вечер как-то быстро пролетел. Хоть я и выпил не так много, пару рюмок, но этого было достаточно, чтобы развязать мой язык и высказать мужикам недовольство своей жизнью." with dissolve
+    "В процессе этого я потерял счёт времени." with dissolve
+    window hide
+    $ renpy.pause(2)
+    window show
+    show mh4 at left with dissolve
+    me "Да я в Лениноморске на заводе уважаемым человеком был. До старшего смены с нуля за два года дорос! А здесь баранку кручу, блин…" with dissolve
+    mh4 "Да, Семён, непростой ты судьбы человек." with dissolve
+    window hide
+    $ renpy.pause(1)
+    window show
+    "Всё проходило довольно мирно, мы втроём познакомились со слесарями. Не самые плохие люди оказались, но не всё было так просто…" with dissolve
+    show iv at right with dissolve
+    show gn_nasmeh with dissolve
+    voicegn "Семён, а что мы тебя раньше не видели в нашем кругу?" with dissolve
+    "Был у них в коллективе один мутный тип, даже имя его никак не мог запомнить. А вот он меня, похоже, знал хорошо." with dissolve
+    iv "А он у нас порядочный семьянин." with dissolve
+    "Вот придурок. Небось, у самого каждый день ссоры со своей женой, вот и завидует." with dissolve
+    voicegn "Значит вот как, жёнушка есть. А я видел тебя с ней, красивая." with dissolve
+    "Это ещё что за базар пошёл. Где он мог видеть нас?" with dissolve
+    "Хотя чему удивляться, мы с Леной часто ходили гулять до того же универсама за продуктами." with dissolve
+    voicegn "И кем она работает, продавщицей?" with dissolve
+    me "Нет, в меде учится." with dissolve
+    voicegn "Ты посмотри-ка, а водила наш с интеллигенцией водится." with dissolve
+    voicegn "И зачем ты ей? Чё она нормального мужика найти не может?" with dissolve
+    "У меня потемнело в глазах от злости." with dissolve
+    mh4 "Э, слышь, криворучка, кончай трепаться. Ты бы лучше наши тралики так чинил, как до людей докапываешься." with dissolve
+    me "Чё ты там про мою сказал?" with dissolve
+    mh4 "Сёмыч, не слушай его, он дурной, от него жена ушла просто, вот он и бесится." with dissolve
+    show gn_zloy with dspr
+    hide gn_nasmeh with dspr
+    voicegn "Да пошла она! Все они бабы сволочи, твоя тоже, наверное." with dissolve
+    voicegn "Думаешь, пока ты тут сидишь, она ждёт тебя? Ага, размечтался." with dissolve
+    show gn_smile with dspr
+    hide gn_zloy with dspr
+    voicegn "Небось уже к другому пошла развлекаться. Но лучше ко мне, я бы её без внимания не оставил." with dissolve
+    "Я вскипал от ненависти к этому ублюдку. Нужно было проучить его." with dissolve
+    me "Пойдём-ка, выйдем." with dissolve
+    scene bg garage_int:
+       parallel:
+            zoom 1.05 anchor (48,27)
+            ease 2 zoom 3 anchor (1200,1200)
+    show gn_smile:
+        anchor(0.5,0.5) pos(0.5,0.5)
+        ease 1.5 pos(1.3,0.5)
+    window hide
+    
+    stop music fadeout 2
+    $ persistent.sprite_time = "night"
+    $ night_time
+    scene bg garage_ext with dissolve
+    show gn_smile with dissolve
+    play ambience ambience_cold_wind_loop
+    play music music_list["pile"] fadein 2
+    $ renpy.pause(2)
+    
+    window show
+    "Я вышел из гаража, затем вышел он." with dissolve
+    "Больше уже ничего говорить не хотелось. Хотелось лишь одним ударом заставить его сожалеть о сказанном." with dissolve
+    window hide
+    
+    play sound sfx_armature_swish
+    hide gn_zloy with dissolve
+    play sound sfx_grate_hand_fall
+    
+    show gn_smile:
+        anchor(0.5,0.5) pos(0.5,0.5)
+        ease 1.0 pos(-0.2,0.5)
+    window show
+    "Я замахнулся, но промазал, попав по железной двери гаража. Гулкий удар по гаражу." with dissolve
+    "А он воспользовался этим, схватил меня за волосы и треснул головой об эту дверь." with dissolve
+    scene bg garage_ext:
+        zoom 1.05 anchor (48,27)
+        ease 1.5 zoom 1.5 anchor (0,300)
+    play sound sfx_grate_hand_fall
+    "Это был второй удар." with dissolve
+    "Вот же гнида, взбесил и ударил исподтишка!" with dissolve
+    show blink
+    "Я закрыл глаза от боли." with dissolve
+    "Положение моё казалось безвыходным, как вдруг рука отпустила меня." with dissolve
+    "С той стороны я услышал звуки перепалки и драки. Мужики мне помочь решили, что ли?" with dissolve
+    play sound sfx_bodyfall_1
+    "Я уже был не боец и, пройдя пару шагов, упал считать звёзды, что называется." with dissolve
+    scene anim stars_1
+    show unblink
+    stop music fadeout 2
+    "Надо было через бедро бросить, ну что же я…" with dissolve
+    "Краем глаза я увидел фигуры, похожие на милиционеров. Этого ещё не хватало." with dissolve
+    "Как же голова болит..." with dissolve
+    window hide
+
+    play music music_list["meet_me_there"] fadein 2
+    window show
+    "Лёжа у гаража, я смотрел на небо." with dissolve
+    "Было слышно возню и знакомые голоса, видимо наша доблестная милиция занималась этим хмырём. Так ему и надо." with dissolve
+    scene anim stars_3 with dissolve
+    "Хм, ноябрь, а звёзды видно." with dissolve
+    "Помню, как с Леной смотрели на них в Совёнке. Это было всего-то три года назад." with dissolve
+    "Помню, как в прошлой жизни читал в интернете про то, что любовь живёт три года. Видимо мы с Леной не исключение..." with dissolve
+    show blink
+    "Я закрыл глаза и начал вспоминать..." with dissolve
+    window hide
+
+    scene bg intro_xx
+    show prologue_dream
+    with fade
+    
+    window show
+    "Как я уснул в автобусе в тот вечер..." with dissolve
+    window hide
+
+    scene bg ext_camp_entrance_day
+    show prologue_dream
+    with fade
+    
+    window show
+    "...и проснулся в пионерлагере." with dissolve
+    window hide
+
+    scene cg epilogue_un
+    show prologue_dream
+    with fade
+    
+    window show
+    "Как познакомился с ней и остался в её мире." with dissolve
+    window hide
+
+    scene bg black
+    show prologue_dream
+    with fade
+    
+    window show
+    "Сначала я думал, что будет трудно строить новую жизнь. А оказалось, что это было ещё легко." with dissolve
+    "Это были цветочки по сравнению с настоящей взрослой жизнью, с которой я, считай, не справился." with dissolve
+    "Я не смог справиться, не смог дать ей то, что она заслуживает." with dissolve
+    "Только бы она не видела меня сейчас." with dissolve
+    "Не буду никуда вставать, буду лежать и замёрзну. Утром мужики найдут мой окоченевший труп. Сегодня как раз температура ночью ниже нуля..." with dissolve
+    window hide
+    
+    $ renpy.pause(1)
+    scene bg black with dissolve
+    
+    window show
+    "Руки коснулось что-то тёплое. Другая рука." with dissolve
+    "Взяв меня за запястье, она потянула вверх. На ощупь и по температуре очень знакомо." with dissolve
+    "Слушаясь её, я медленно приподнялся и сел." with dissolve
+    window hide
+    $ renpy.pause(0.5)
+    window show
+    "И тут я понял." with dissolve
+    window hide
+
+    scene anim stars_1 with dissolve
+    show un normal coat:
+        anchor(0.5,0.5) pos(0.5,0.5)
+        matrixcolor BrightnessMatrix (-1.0)
+    with dissolve
+    $ renpy.pause(2)
+    window show
+    "Нет, только не это." with dissolve
+    "Господи, неужели она смотрит на меня сейчас в этот момент, когда я просто опустился на самое дно?" with dissolve
+    "Я не хотел открывать глаза." with dissolve
+    "Казалось, я увижу её и умру от стыда." with dissolve
+    "До последнего я надеялся на то, что мои веки закрывают мои зрачки от кого-то другого." with dissolve
+    voiceun "Ты глаза-то открой." with dissolve
+    "Её голос." with dissolve
+    scene bg black with dissolve
+    "Всё, теперь никаких надежд. Я разлепил веки." with dissolve
+    scene anim stars_1
+    show un normal coat
+    show unblink
+    "И тут же устремился взглядом в пару зелёных глаз." with dissolve
+    "В них было много злости, разбавленной сожалением." with dissolve
+    "Было ощущение, что она видит эту картину уже далеко не в первый раз, хотя я впервые напился в гараже." with dissolve
+    "Несколько секунд мы смотрели друг другу в глаза. Её молчание было оглушающим." with dissolve
+    un "Идём домой." with dissolve
+    window hide
+    scene anim stars_3 with dissolve
+    window show
+    "В её голосе слышалась сдавленная боль и злость." with dissolve
+    "Она сейчас хотела высказать всё, что у неё на душе, но сдерживала себя. Я без промедления встал и пошёл за ней." with dissolve
+    window hide
+    scene bg dvor with dissolve
+    window show
+    "За время лежания на холодной земле я успел протрезветь и мог идти, не теряя равновесия." with dissolve
+    "Путь до дома пролегал по серым дворам между панельных домов. Ещё немного шатаясь, я следовал за ней." with dissolve
+    "Мы шли молча." with dissolve
+    "Что она думала?" with dissolve
+    "Наверное, какой я конченый и опустившийся алкаш." with dissolve
+    "Какая она дура, что тогда пошла за меня замуж." with dissolve
+    "О том, что наше счастье закончилось, только начавшись." with dissolve
+    "Всё ведь шло к этому ещё там." with dissolve
+    "Перестали платить зарплату на заводе. Перебивались заработками, потом переехали сюда." with dissolve
+    "И вот, не выдержав груза работы и учёбы, груза ответственности, я опустился на дно. Не думаю, что она меня расцелует за это." with dissolve
+    "И так всю мою жизнь нужно какие-то препятствия преодолевать, не имея за собой поддержки. Будто барахтанье в море во время шторма." with dissolve
+    "Ты сражаешься изо всех сил со стихией, но всё захлёбываешься." with dissolve
+    "В конце концов, без опоры под ногами ты теряешь последние силы и сдаёшься." with dissolve
+    window hide
+
+    stop music fadeout 2
+    scene bg dom
+    show black:
+        alpha 0.8
+    with dissolve
+
+    window show
+    "Вот и наш дом на улице Васюнина." with dissolve
+    stop ambience fadeout 2
+    "Лена сама открыла дверь в подъезд, затем в квартиру." with dissolve
+    play sound sfx_open_door_1
+    "Мы зашли внутрь, я закрыл дверь." with dissolve
+    window hide
+
+    $ persistent.sprite_time = "day"
+    $ day_time
+    play sound sfx_close_door_1
+    play ambience ambience_medstation_inside_night
+    scene bg prih with dissolve
+    show un normal coat with dissolve
+    $ renpy.pause(2)
+    window show
+    "Лена сделала пару шагов, но вдруг развернулась и посмотрела на меня." with dissolve
+    "По лицу читалось, что она была как бурлящий вулкан, который вот-вот извергнется." with dissolve
+    "Её молчание было громче всех криков." with dissolve
+    un "Семён… что это было?" with dissolve
+    "Устало сказала она. Ситуация её вымотала." with dissolve
+    me "Не знаю." with dissolve
+    un "Ладно… как сегодня поработал?" with dissolve
+    me "Нормально, смену отработал." with dissolve
+    un "Так, а дальше что было?" with dissolve
+    me "Сидел, ждал в депо, когда ты придёшь." with dissolve
+    un "Почему… ты не пошёл домой после смены… как обычно?" with dissolve
+    "Её голос был убийственно холоден и спокоен." with dissolve
+    "Однако как она ни старалась, он выдавал бурю эмоций в ней." with dissolve
+    "Ещё немного и…" with dissolve
+    me "Меня мужики позвали с ними посидеть в гараже немного." with dissolve
+    play music music_list["awakening_power"]
+    un "То есть ты хотел провести вечер с женой, но пока меня ждал, решил ещё и накатить с мужиками? И с теми успеть и со мной?" with dissolve
+    "Лена начала понемногу повышать голос." with dissolve
+    me "Ну… да." with dissolve
+    show un angry coat with dissolve
+    un "Объясни мне тогда почему я тут сидела как дура одна!" with dissolve
+    "Лена разозлилась не на шутку. Мой план провалился, и она пострадала из-за этого." with dissolve
+    un "Всегда приходил с работы раньше меня и именно когда мы хотели провести вечер вместе…" with dissolve
+    "Чёрт, сколько же я там пробыл…" with dissolve
+    un "Я уж думала, случилось ли чего на работе, в аварию попал или током ударило!" with dissolve
+    un "Позвонила в депо, сказали, что ты нормально смену отработал без происшествий." with dissolve
+    un "Позвонила в больницу. Мне сказали, не привозили им такого товарища. Я уже сижу и не знаю, что и думать!" with dissolve
+    "Твою мать…" with dissolve
+    un "А ты лежишь где-то за гаражами!" with dissolve
+    un "Тебя какой-то хмырь побил, чуть в отделение не забрали!" with dissolve
+    un "Тебе вечер не с женой, а в милиции хотелось провести?" with dissolve
+    un "Ты мне скажи одно – почему сегодня-то? Что случилось?! У тебя умер кто-то?" with dissolve
+    un "Нет же, кто у тебя мог умереть, у тебя никого кроме меня нет, мужиков ты своих пару месяцев знаешь." with dissolve
+    "Вдруг я всполыхнул, будто эти слова были искрой, взорвавший порох внутри меня. Из глубин души пошло всё раздражение, вся боль, накопившаяся за месяцы." with dissolve
+    me "Лен, я не знаю почему я так поступил, наверное потому что устал от жизни этой нелепой, от работы, на которой копейки платят, от того что у нас сил нет, и мы не говорим друг с другом как тогда, заела нас эта жизнь!" with dissolve
+    un "Тебя жизнь заела? Так почему ты всегда молчишь и ничего не говоришь?! Почему такие сюрпризы мне даришь?!" with dissolve
+    me "Я молчал, потому что не хотел расстраивать тебя." with dissolve
+    un "Зато сейчас прямо обрадовал. Очень умно – копить в себе, а потом пойти напиться и подраться." with dissolve
+    me "…" with dissolve
+    me "И ты, правда, меня ждала?" with dissolve
+    un "Конечно! А потом пошла{w=0.3} искать тебя." with dissolve
+    un "И еле успела, сидел бы сейчас в вытрезвителе со своим собутыльником!" with dissolve
+    "Вдруг вспомнились его слова..." with dissolve
+    window hide
+    
+    scene bg garage_int
+    show gn_nasmeh
+    show prologue_dream
+    with fade
+    $ renpy.pause(2)
+    
+    window show
+    voicegn "И зачем ты ей? Че она нормального мужика найти не может?" with dissolve
+    window hide
+    
+    scene bg prih with dissolve
+    show un normal coat with dissolve
+    
+    window show
+    me "Ну и дура ты, Лена. Лучше бы к другому мужику пошла. Чем меня, дурака... Бросила бы меня, и я бы там замёрз и умер." with dissolve
+    show un angry coat with dissolve
+    un "Ты совсем идиот?! Что за бред ты несёшь…" with dissolve
+    show un normal coat with dissolve
+    un "...ох, ладно, иди спать уже." with dissolve    
+    stop music fadeout 2
+    window hide
+    show un normal coat:
+        anchor(0.5,0.5) pos (0.5,0.5)
+        ease 1 pos(-0.3,0.5)
+    window show
+    "Лена, наконец, сдвинулась с места, разулась, сняла пальто и пошла по квартире." with dissolve
+    "Несмотря на мой выплеск праведного гнева на нелёгкую жизнь, она одержала верх. Правда была на её стороне." with dissolve
+    un "Да за что мне судьба такая, постоянно с алкашами жить! Чем я заслужила такое?!" with dissolve
+    "Это было уже слышно в глубине квартиры. Я остался стоять у двери." with dissolve
+    "О чём это она? Ах да, отец…" with dissolve
+    "Чёрт, похоже, я ей напомнил главный кошмар её детства." with dissolve
+    "Что будет дальше? Если она не дура, а она не дура, то развод." with dissolve
+    "Затем выселение из квартиры, потому что квартира от её родственницы." with dissolve
+    "Я, конечно, опустился, но не до такого уровня, чтобы делить не моё имущество. Соберу пожитки и пойду по миру." with dissolve
+    "Теперь в общаге депошной жить… отвратительно." with dissolve
+    "Ну, а зачем Лене такой неудачник? Она сама себя обеспечит без моей помощи. Найдёт себе достойного мужчину, при деньгах. Захочет, вообще работать не будет, сможет дома творчеством заниматься." with dissolve
+    "Я задумался – а что делать дальше? Собирать вещи?" with dissolve
+    "Она не говорила это делать. Да и куда идти, на ночь глядя." with dissolve
+    "Пойти извиняться? Конечно, надо извиниться за всё это, но она сейчас явно не намерена разговаривать." with dissolve
+    "Всё же попробую, не ложиться же просто спать." with dissolve
+    "Я тоже разулся, снял пальто и пошёл на кухню." with dissolve
+    window hide
+    scene bg rvp_kitchen with dissolve
+    window show
+    "Лена сидела за столом и пила чай." with dissolve
+    "Вид у неё был подавленный и задумчивый." with dissolve
+    show un normal sport with dissolve
+    me "Лена… ну прости меня." with dissolve
+    "Выглядело это жалко." with dissolve
+    "Я вроде и правильно сделал, но как будто для приличия." with dissolve
+    "Нужно было раскаяться по-настоящему. Не осознав причины своего проступка, я был недостоин прощения." with dissolve
+    un "Завтра поговорим ещё. А сейчас иди спать." with dissolve
+    un "А хотя стой. Встань-ка у раковины." with dissolve
+    "Лена потихоньку наклонила мою голову и нежно потрогала место удара." with dissolve
+    un "Сразу говори, как себя чувствуешь? Не тошнит? Голова не кружится? Сильно болит?" with dissolve
+    "Я помотал головой, отрицая симптомы, хотя голова гудела знатно." with dissolve
+    "Лена пристально смотрела мне в глаза. Взгляд был всё ещё сердитый, но в глубине её изумрудных глаз виднелось беспокойство." with dissolve
+    hide un normal sport with dissolve
+    "Она достала из кухонного шкафчика бутылёк с зелёнкой, бинт и вату." with dissolve
+    window hide
+    
+    play sound sfx_open_water_sink
+    $ renpy.pause(1)
+    play sound_loop sfx_water_sink_stream fadein 1
+    
+    window show
+    "Поставила мою голову под кран и помыла под холодной водой." with dissolve
+    stop sound_loop fadeout 1
+    play sound sfx_close_water_sink
+    "Выключив воду, взяла немного ваты, смочила зелёнкой и обработала ушибленное место. Затем обмотала голову бинтом." with dissolve
+    un "Теперь иди. Повязку до утра не снимай." with dissolve
+    scene bg kvartira
+    show black:
+        alpha 0.8
+    with dissolve
+    "Я поплёлся в комнату." with dissolve
+    play sound sfx_bed_squeak1
+    "Плюхнулся на диван “чебурашку”. И кто его так назвал…" with dissolve
+    window hide
+    
+    play sound_loop sfx_head_heartbeat fadein 2
+    $ renpy.pause(1)
+    
+    window show
+    "..." with dissolve
+    "Ну и денёк." with dissolve
+    "Я бы мог ещё поразмышлять на то, какой я плохой и недостоин её." with dissolve
+    "Но всё уже сказано самому себе." with dissolve
+    show blink
+    "Лучше просто провалюсь в сон и дождусь нового дня." with dissolve
+    window hide
+
+    stop sound_loop fadeout 2
+    stop ambience fadeout 2
+    $ renpy.pause(2)
+    scene bg prih with dissolve
+    play music music_list["drown"] fadein 2
+    
+    window show
+    "Наконец-то я дома, мы с Сёмой проведём эти выходные вместе. Я ему приготовлю его любимый суп, он так рад будет. Наверное, тяжёлый день выдался." with dissolve
+    window hide
+    scene bg rvp_kitchen with dissolve
+    window show
+    "Фух, устала. Надо чайник поставить, чаю попью хоть." with dissolve
+    "Куда он пропал, у него же смена должна была закончиться четыре часа назад." with dissolve
+    "Может с ним что-то случилось на работе? Надо позвонить в депо." with dissolve
+    window hide
+    $ renpy.pause(1.0)
+    window show
+    "Хм, странно, в депо сказали, он сдал смену без происшествий." with dissolve
+    window hide
+    
+    scene bg kvartira
+    show black:
+        alpha 0.8
+    with dissolve
+    
+    window show
+    un "Алло, привет, Алён. Персунов Семён, к вам такой не поступал?" with dissolve
+    al "Нет, Лен, такого товарища не было. С мужем что случилось?" with dissolve
+    un "Да сама не понимаю. Ладно, пока тогда." with dissolve
+    $ renpy.pause(1.5)
+    un "Надо пойти к нему в депо. Чай потом выпью." with dissolve
+    window hide
+
+    $ persistent.sprite_time = "night"
+    $ night_time
+    scene bg ivlieva:
+    show black:
+        alpha 0.8
+    with dissolve
+    play ambience ambience_cold_wind_loop
+    window show
+    un "Здравствуйте, а Персунов Семён сегодня на работе был?" with dissolve
+    vh "Здрасти, ну конечно. Отработал как обычно. А вы кто?" with dissolve
+    un "Меня Елена зовут, я жена его. Он пропал куда-то, домой не пришёл." with dissolve
+    vh "Ой, Лена, он ведь с мужиками пошёл. Пить будут, не иначе." with dissolve
+    un "А куда они пошли?" with dissolve
+    vh "Известно куда, в гаражи рядом с депо. Там они всегда пьянствуют." with dissolve
+    vh "И мой тоже там. Я уже милицию вызвала, пусть его в вытрезвитель отвезут. Сил моих нет больше." with dissolve
+    un "Мой так никогда не делал!" with dissolve
+    vh "Ну, раньше не делал, теперь начнёт." with dissolve
+    un "Ладно, я пойду за ним, спасибо вам." with dissolve
+    vh "Давайте, спасайте его. Один ведь непьющий на всё депо был." with dissolve
+    un "Как же так, он же не киряет обычно. Я не хочу верить в то, что он там с ними." with dissolve
+    window hide
+    scene bg garage_ext with dissolve
+    window show
+    "О боже, его кто-то бьёт." with dissolve
+    "Ой, милиция тут, вяжут этого урода." with dissolve
+    "Один к Сёме идёт. Его же сейчас тоже повяжут, надо его скорее спасать!" with dissolve
+    show mil at left with dissolve
+    un "Товарищ лейтенант, не забирайте его, пожалуйста. Я жена его, он так никогда не гулял. Отдайте мне его, я его заберу домой." with dissolve
+    mil "В отделении разберёмся, кто кому муж, кто кому жена. О, Михалыч, ты чего тут делаешь?" with dissolve
+    show mh4 at right with dissolve
+    mh4 "Алёш, здравствуй. Она правду говорит, это не ваш клиент." with dissolve
+    mh4 "Это я его позвал выпить, а оно вот как вышло." with dissolve
+    mil2 "Лёха, чё ты с ним лясы точишь, лучше помоги мне повязать второго, он какой-то буйный!" with dissolve
+    alex "Сейчас приду!" with dissolve
+    alex "Ладно, я сейчас отойду, но чтобы когда я вернулся, вас здесь не было, понятно?!" with dissolve
+    window hide
+    show mil at left:
+        ease 1 pos(-0.1,0.5)
+    window show
+    "Надо быстрее поднять Сёму и уходить, пока они заняты." with dissolve
+    window hide
+    
+    stop music fadeout 2
+    stop ambience fadeout 2
+    scene bg black
+    show prologue_dream
+    with fade
+    
+    window show
+    "Сегодня мы впервые спали раздельно, на расстоянии друг от друга." with dissolve
+    "Обычно всегда в обнимку. После трудного дня давали друг другу отдых." with dissolve
+    "К этому дню у меня уже сформировался режим сна. Ложусь в десять, встаю в четыре утра, выхожу на смену. Возвращаюсь к трём часам дня, досыпаю пару часов." with dissolve
+    "К пяти часам вечера из института приходила Лена." with dissolve
+    "Вроде привык, но сегодня мои биологические часы не стали работать." with dissolve
+    "Видимо, после алкоголя и стресса организм решил взять тайм-аут на восстановление." with dissolve
+    window hide
+
+    scene bg black with dissolve
+    scene bg kvartira
+    show unblink
+    play ambience ambience_medstation_inside_night
+    
+    window show
+    scene bg kvartira with dissolve
+    $ persistent.sprite_time = "day"
+    $ day_time
+    "Я встал с кровати в районе девяти." with dissolve
+#анимация либо вообще фразу убрать
+    "Голова гудела, но скорее от удара об дверь, чем от алкоголя…" with dissolve
+    scene bg kvartira with dissolve
+    "Лена лежала, отвернувшись от меня. Её лицо я увидел, лишь обойдя кровать." with dissolve
+    scene bg int_house_of_un_night with dissolve
+    "Помню как в тот вечер в Совёнке, когда мы остались вдвоём в лагере, я смотрел на её лицо. Тогда мы помирились, и её лицо выражало спокойствие, умиротворение, тихую радость." with dissolve
+    scene bg kvartira with dissolve
+    "Сейчас у неё на лице грусть, будто видит плохой сон." with dissolve
+    "И что мне делать в выходной, когда поругался с единственным человеком, с которым хотел провести всё свободное время?" with dissolve
+    "Просто собрать молча вещи и уйти навсегда из квартиры или из жизни?" with dissolve
+    "Оставить записку с прощальным посланием типа: “Прости, но так будет лучше для всех нас. Я недостоин тебя…” и так далее?" with dissolve
+    with hpunch
+    "Семён, не твори ерунды." with dissolve
+    "Ты был моложе, менее опытным, оказался один в незнакомом месте и времени и смог начать отношения с ней. Вы тогда поругались, а потом помирились." with dissolve
+    "Внезапно появились силы не унижать себя, не жалеть себя, а решать проблему как задачу." with dissolve
+    "Если вчера преобладали мысли Семёна до Совёнка, то сейчас, наконец, взяла верх новая личность, которая брала ответственность за свои действия." with dissolve
+    "Да я в принципе и был таким все эти три года. И всё с Леной было хорошо – мы старались провести вместе каждую свободную минуту." with dissolve
+    "Мы не сидели на месте – я её вытаскивал куда-то погулять, а она – меня." with dissolve
+    "Но жизнь в этом большом сером городе ослабила нас, мы стали меньше общаться и больше занимать всё своё внимание работой и учёбой. Из-за этого и замкнулись в себе…" with dissolve
+    "Однако Лена скоро проснётся." with dissolve
+    "Молчание будет убивать наши нервы, мы будем чувствовать себя неловко. С чего начать разговор?" with dissolve
+    "Не знаю. Пойду в депо и напрошусь на смену." with dissolve
+    "За баранкой троллейбуса придёт и решение, и нужные слова. А вот насчёт того, что со мной происходит, тоже стоит подумать." with dissolve
+    "С этими мыслями я оделся, обулся и пошлёпал в депо." with dissolve
+    stop ambience fadeout 2
+    window hide
+    #ходьба плюс зум
+    scene bg vasyunina:
+       parallel:
+            zoom 1.05 anchor (48,27)
+            ease 15 zoom 3 anchor (1900,900)
+       parallel:
+            ease 0.20 pos (0, 0)
+            ease 0.20 pos (25,25)
+            ease 0.20 pos (0, 0)
+            ease 0.20 pos (-25,25)
+            repeat
+    window show
+    "Причём реально пошлёпал, было довольно прилично луж на улице." with dissolve
+    scene bg ivlieva with dissolve
+    play ambience ambience_cold_wind_loop
+    window show
+    nd "Да ты чего, Персунов, какие смены?" with dissolve
+    me "Ну, выйти сегодня на рейс хочу. Сегодня же суббота, считай, что я решил устроить себе субботник." with dissolve
+    nd "И на чём ты выходить собрался, ударник пятилетки?" with dissolve
+    nd "Все, что на ходу, уже в рейсе, других не починили, слесари сам знаешь, как работают. Лучше бы они так пили, как работают, ну или наоборот." with dissolve
+    "Слесари вообще были бичом депо. А я с ними пил вчера." with dissolve
+    nd "А вообще, что за желание поработать? Ты вроде договаривался всё себе выходные устроить…" with dissolve
+    "Секунду было молчание." with dissolve
+    nd "Поругались что ли?" with dissolve
+    me "Ага." with dissolve
+    nd "Да не переживай, помиритесь. Иди домой, не ищи приключений себе." with dissolve
+    play music kzd fadein 2
+    "Тоже верные слова. Может не стоит убегать от проблемы в работу, всё равно она так не решится." with dissolve
+    "Однако пойду, прогуляюсь. Сразу возвращаться домой как-то скучно. Да и пока я так и не придумал, как извиниться и поговорить с Леной." with dissolve
+    "Я ещё ни разу не ходил пешком по моему маршруту. Но в какую сторону пойти? В центр идти долго и утомительно, поэтому пойду в Кузнечиху." with dissolve
+    window hide
+    scene bg kuzn with dissolve
+    window show
+    "Кузнечиха это другой микрорайон, где заканчивался мой маршрут." with dissolve
+    "Он мало чем отличается от Нагорного, такие же панельки, разве что новее. В основном девятиэтажки." with dissolve
+    window hide
+
+    scene bg ivlieva with dissolve
+    play sound sfx_intro_bus_engine_start
+
+    window show
+    "Я пошёл вниз по Ивлиева. Рядом проезжали “коллеги” на троллейбусах и автобусах, везли пассажиров на учёбу и работу." with dissolve
+    "Было бы немного иронично, если бы я пошёл работать в автобусный парк. Ведь именно автобус стал проводником сначала в тот загадочный и немного странный пионерлагерь, а затем в райцентр." with dissolve
+    "Когда-то меня отвезли, а теперь я вожу." with dissolve
+    "Зато электротранспорт меньше загрязняет воздух! – усмехнулся я." with dissolve
+    "Будто в этой стране и эпохе кому-то было дело до этого." with dissolve
+    "Только если каким-нибудь мудрым партийцам, которые одной рукой составляли директивы о развитии электротранспорта, а другой подписывали приказ о строительстве новой ТЭС." with dissolve
+    "Ведь если подумать, откуда берётся электричество для трамваев и троллейбусов?" with dissolve
+    "В основном от электростанций, которые работают на энергии сжигания угля." with dissolve
+    "Ещё неизвестно, кто больше коптит небо тогда – выхлопы машины или дым от ТЭС." with dissolve
+    "Хотя человечество освоило безопасную атомную энергию, а если ещё освоит и термояд…" with dissolve
+    "За размышлениями о судьбе энергетики, я прошёл мимо рынка, третьего микрорайона и дошёл до улицы Козицкого." with dissolve
+    "Дальше овраг, через который можно перейти по пешеходному мосту. Я дошёл до него и снова погрузился в свои думы." with dissolve
+    window hide
+    stop music fadeout 2
+    scene bg kuzn_most with dissolve
+    window show
+    play music music_list["faceless"] fadein 2
+    "Так о чём я?" with dissolve
+    "Так, стоп!" with dissolve
+    "Я опять убегаю от проблемы! Мировая энергетика сама решит, в каком направлении ей развиваться и какие источники использовать!" with dissolve
+    "А у меня есть более насущные проблемы, которые не требуют отлагательств." with dissolve
+    "Например, вчера я обидел самого дорогого мне человека. Плюнул на своё обещание ей. Так и не извинился." with dissolve
+    "И сейчас оставил в одиночестве. Я снова её бросил, как вчера." with dissolve
+    "Она, наверное, уже проснулась и не знает, где я. Ей, наверное, страшно за меня." with dissolve
+    "Я остановился на середине моста." with dissolve
+    "Слева овраг, справа овраг. Впереди дома, позади тоже." with dissolve
+    "Мой дом тоже там. Нет смысла куда-то ходить, надо прийти к Лене. Всё-таки я дурную вещь сделал, что ушёл. На обратном пути придумаю, что скажу." with dissolve
+    "Обратно я уже шёл не прогулочным шагом, а довольно быстрым." with dissolve
+    "Ох, зря я Лену оставил, она надумает себе чего-нибудь не то." with dissolve
+    "Впрочем, вещи я не собирал, так что она поймёт, что я не ушёл насовсем." with dissolve
+    "Сука, надо было записку оставить в духе: “Ушёл на работу, к вечеру вернусь”." with dissolve
+    "Куда я мог пойти, по её мнению? В универсам, в депо, просто погулять." with dissolve
+    "Вроде бы ничего такого, но я же не могу залезть ей в голову и понять, что она думает." with dissolve
+    window hide
+    
+    stop music fadeout 2
+    scene bg universam with dissolve
+    
+    window show
+    "Я проходил мимо универсама." with dissolve
+    "Может купить ей чего-нибудь вкусного?" with dissolve
+    "Полез в карман. Ну да, конечно, деньги-то я не взял. Да и не так у нас их много." with dissolve
+    "Всё-таки Лена ранимая и может надумать плохого." with dissolve
+    "Вдруг она сидит и рыдает сейчас, расстроившись от того, что я её оставил." with dissolve
+    "Или не плачет, а уже с горя…" with dissolve
+    stop ambience fadeout 2
+    play music music_list["scarytale"] fadein 2
+    "Твою мать!" with dissolve
+    "Нужно срочно бежать к ней." with dissolve
+    "Чёрт с ними со словами, лишь бы увидеть её живой." with dissolve
+    "Пусть она хоть скалкой мне последние мозги вышибет, я заслужил это." with dissolve
+    "Я побежал во всю свою прыть к нашему дому." with dissolve
+    window hide
+
+    scene bg dom with dissolve
+    window show
+    "Сердце бешено стучало в груди." with dissolve
+    "Вот подъезд." with dissolve
+    "Сука, почему мы высоко живём, ещё по лестнице бежать наверх!" with dissolve
+    "Так, вот квартира." with dissolve
+    play sound sfx_unlock_door_campus
+    "Дрожащими руками достаю ключ и открываю." with dissolve
+    "Не разуваясь, пробегаю в комнату." with dissolve
+    window hide
+    
+    stop music fadeout 2
+    scene bg black with dissolve
+    play sound_loop sfx_head_heartbeat fadein 2
+    
+    window show
+    "Люстра." with dissolve
+    "Держится на потолке, как обычно." with dissolve
+    "На ней…" with dissolve
+    window hide
+
+    scene anim prolog_4 with dissolve
+    $ renpy.pause(1)
+    
+    window show
+    "...лампочки и хрусталь." with dissolve
+    "Я опустил глаза вниз." with dissolve
+    window hide
+
+    scene bg kvartira with dissolve
+    show un shy sport with dissolve
+    play ambience ambience_medstation_inside_night
+    $ renpy.pause(2)
+    
+    window show
+    "Передо мной стояла удивлённая Лена." with dissolve
+    me "Привет… Лена…" with dissolve
+    "После такого спринта и резкой остановки у меня была сильная одышка." with dissolve
+    "После каждого слова я ловил ртом воздух. Я согнулся, упёршись руками в колени, чтобы отдышаться." with dissolve
+    "Лена стояла передо мной целая и невредимая." with dissolve
+    stop sound_loop fadeout 3
+    "Однако я сразу заметил красноту вокруг глаз. Ту самую, которая остаётся, когда человек плакал." with dissolve
+    "Самого страшного не произошло, это главное. Дальше пусть хоть режет своим любимым ножом, который когда-то носила с собой." with dissolve
+    "Сначала она немного не ожидала моего столь быстрого появления." with dissolve
+    window hide
+    show un angry2 sport with dspr
+    window show
+    "Но факт того, что я прошёл в комнату не разувшись не мог не вызвать у неё раздражения." with dissolve
+    play music music_list["awakening_power"] fadein 2
+    un "Так, а я не поняла, ты чего грязь с улицы в комнату несёшь? Я только пол помыла." with dissolve
+    "Мда, вот уж надумал глупостей. Из-за этого только сильнее её обидел. Лена злилась всё больше." with dissolve
+    show un angry sport with dspr
+    un "Ты меня вообще ни во что не ставишь? Вчера ушёл бухать к своим дружкам, а про меня забыл!" with dissolve
+    un "Ну, правда, нахрен эту Лену, мне же эти собутыльники важнее!" with dissolve
+    "Лена уже совсем разозлилась." with dissolve
+    un "Сегодня утром снова меня оставил, а сейчас так прибежал, что аж разуться забыл. Говори, где был?!" with dissolve
+    "Надо что-то отвечать уже." with dissolve
+    me "Я в депо пошёл…" with dissolve
+    "Ох, зря это сказал. Лену с этого просто вынесло." with dissolve
+    show un rage sport with dspr
+    un "Куда?!!" with dissolve
+    un "Опять к своим дружкам-алкашам! Тебе вчера не хватило, ты ещё хочешь?!" with dissolve
+    show unubiusport with dspr
+    "Секундная пауза. Лена набрала воздуха в лёгкие для новой очереди слов." with dissolve
+    hide unubiusport with dspr
+    un "Опохмелиться надо, да?! А то непривычно, с утра голова болит от водки!" with dissolve
+    "Твою мать, как же я вляпался. Если Лена вышла из себя, то это очень плохо." with dissolve
+    un "О, я знаю! Пошёл жаловаться своим товарищам, как его жена молодая пилит." with dissolve
+    un "Какая Лена сука. Лучше бы рот закрыла и молча полы мыла, еду готовила." with dissolve
+    un "А нам всё по барабану. Хотим – уходим хрен знает куда и бухаем." with dissolve
+    un "А потом лежим на холодной земле. Врачи же нас дурят, сказки про пневмонию рассказывают." with dissolve
+    un "А я дура, сижу на парах, потом вечером это всё учу." with dissolve
+    un "А муж у меня умный, смотри Лена, могу спокойно в ноябре ночью на улице спать." with dissolve
+    "Бедная Лена…" with dissolve
+    un "А если заболею и умру, ничего страшного. Мне на себя плевать и на других тоже. Жена будет убиваться – да плевать мне!" with dissolve
+    "Наконец, Лена уже начала сбавлять громкость. Накопленный негатив нашёл выход, и она была уже больше опустошённая, чем злая." with dissolve
+    "Сколько же она надумала." with dissolve
+    "Что я хотел сбежать и пожаловаться на неё мужикам." with dissolve
+    "Почему она так про меня думает? Я же так не делал. Как будто она на меня примеряла роль другого человека." with dissolve
+    "Но это неправильно. Я не злился на неё, я хотел перед ней извиниться. Я хотел лишь отвлечься, чтобы найти правильное решение. А в итоге…" with dissolve
+    me "Лена, я не хотел…" with dissolve
+    un "Что ты не хотел? Провести дома вечер с женой спокойно? Быть нормальным человеком ты не хотел?" with dissolve
+    "Не, ну это уже надо было останавливать." with dissolve
+    me "Не хотел я ни с кем опохмеляться с утра. И жаловаться я тоже не хотел никому на тебя!" with dissolve
+    show un angry2 sport with dspr
+    "Я немного повысил голос. Это помогло успокоить Лену, главное не переборщить." with dissolve
+    un "А зачем тогда в депо пошёл?" with dissolve
+    me "Хотел взять смену." with dissolve
+    un "Семён, ты серьёзно? Ты что у нас, герой соцтруда?" with dissolve
+    "Лена замолчала на пару секунд." with dissolve
+    un "Всё-таки сбежать хотел от меня." with dissolve
+    "Чёрт, а она права. Иначе как бегством не назовёшь." with dissolve
+    un "А что же так быстро прибежал, совесть замучила?" with dissolve
+    me "Типа того… Я хотел подумать как извиниться, пошёл погулять до Кузнечихи." with dissolve
+    me "На мосту понял, что не должен был тебя оставлять. И что надо вернуться скорее и поговорить." with dissolve
+    "Всё-таки нужно было дать понять, что я волновался за неё, поэтому прибежал, позабыв про все приличия." with dissolve
+    me "От универсама я бежал без остановки. Я испугался, что ты очень расстроишься и…" with dissolve
+    un "И что?" with dissolve
+    me "Ну, сделаешь с собой что-то плохое…" with dissolve
+    "Внезапно Лену снова задели мои слова." with dissolve
+    show un angry sport with dspr
+    un "Да больно надо! Ещё из-за него я тут буду… нет, вы подумайте, какой он уникальный и важный!" with dissolve
+    un "А ты не волнуйся, у нас незаменимых нет." with dissolve
+    stop music fadeout 3
+    window hide
+    scene bg kvartira:
+        parallel:
+            zoom 1.0 anchor(0,0)
+            ease 5 zoom 2 anchor (800,200)
+    show un shy sport at left:
+        parallel:
+            zoom 1.0 anchor(0,0)
+            ease 5 zoom 2 anchor (460,200)
+    window show
+    "В этот момент она остановилась. Я стоял в шоке от её последних слов." with dissolve
+    "Лена поняла, что сказала достаточно или даже слишком много." with dissolve
+    "Прежний напор ушёл, его место занимал дискомфорт. Как всегда в тех ситуациях, когда на эмоциях высказываешь человеку всё, что о нём думаешь." with dissolve
+    "Но в определённый момент от праведного гнева перегибаешь палку и несправедливо задеваешь человека." with dissolve
+    "И уже твоя совесть тебя мучает." with dissolve
+    window hide
+    scene bg kvartira:
+       parallel:
+            zoom 2 anchor (800,200)
+            ease 2 zoom 1 anchor (0,0)
+    show un normal sport at left:
+        parallel:
+            zoom 2 anchor (460,200)
+            ease 2 zoom 1 anchor (0,0)
+    show un normal sport
+    window show
+    un "Ладно, надоело мне это всё. Иди пол вымой. И дверь закрой нормально, не в лифте родился." with dissolve
+    "Начали с грязного пола и закончили им же." with dissolve
+    "Больше говорить было не о чем." with dissolve
+    "Я развернулся и вышел из комнаты. Разулся, пошёл в ванную, взял швабру и ведро." with dissolve
+    window hide
+
+    scene bg black with dissolve
+    play sound sfx_open_water_sink
+    $ renpy.pause(1)
+    play sound_loop sfx_water_sink_stream fadein 1
+    
+    window show
+    "Я сам себе сжёг мосты к лучшему исходу." with dissolve
+    "Если бы пошёл домой вчера, вообще этой ссоры бы не случилось." with dissolve
+    "Если бы не ушёл утром, а дождался, пока Лена проснётся, сейчас не пришлось ссориться." with dissolve
+    "Но уже нет смысла об этом сожалеть, надо обдумать наше с Леной положение." with dissolve
+    window hide
+    
+    stop sound_loop fadeout 1
+    play sound sfx_close_water_sink
+    scene bg prih with dissolve
+    
+    window show
+    "Вот уж что точно не надо делать, так это куда-то уходить без нужды и без предупреждения. Хватит с меня уходов." with dissolve
+    "Если я хочу решить проблему, надо поговорить с Леной. Но как?" with dissolve
+    "За три года отношений мы никогда так не ссорились. Я никогда не бросал Лену, а Лена никогда так на меня не срывалась." with dissolve
+    "Лене тоже плохо и это видно. Она пыталась показать, что не переживала от того, что я ушёл, но краснота на лице её выдавала." with dissolve
+    "Интересно ещё и то, что Лена верила мне. Она не кричала после моих слов что-то вроде:" with dissolve
+    window hide
+    
+    scene bg kvartira
+    show un angry2 sport
+    show prologue_dream
+    with fade
+
+    window show
+    un "А зачем тогда в депо пошёл?" with dissolve
+    me "Хотел взять смену." with dissolve
+    show un angry sport with dissolve
+    un "Что ты мне врёшь-то? Наверняка хотел им на меня пожаловаться." with dissolve
+    window hide
+    scene bg prih with dissolve
+    window show
+    "Это хороший признак." with dissolve
+    "Значит, Лена ещё может меня выслушать, поверить мне." with dissolve
+    "И она ещё верит, что я не стал алкашом, который в грош не ставит свою жену ради бутылки." with dissolve
+    "Так, а всё-таки, с чего начать разговор?" with dissolve
+    "Снова пойти извиниться? Как-то мелко." with dissolve
+    "В данной ситуации это скорее формальность." with dissolve
+    "Нужно излить друг другу душу, объяснить, почему ты так себя повёл." with dissolve
+    "Точнее, я должен объяснить, почему эта каша заварилась." with dissolve
+    "Сегодняшний уход уже объяснил более-менее. Но он произошёл из-за вчерашней ситуации." with dissolve
+    "Вот тут логика моих действий не так очевидна." with dissolve
+    "Я закончил мыть пол." with dissolve
+    play sound sfx_stomach_growl
+    "Теперь нужно было пообедать, желудок урчал." with dissolve
+    "Обычно мы с Леной обедали вместе. Сейчас это наше любимое действие может превратиться в пытку, причём для нас обоих." with dissolve
+    "Внезапно, в прихожую зашла Лена." with dissolve
+    window hide
+    show un normal sport with dissolve
+    window show
+    un "Закончил? Иди пообедай, там суп есть." with dissolve
+    me "А как же ты?" with dissolve
+    un "Я уже поела." with dissolve
+    window hide
+    show un shy sport:
+        anchor(0.5,0.5) pos(0.5,0.5)
+        ease 1 pos(-0.3,0.5)
+    window show
+    "И с этими словами она резко вышла." with dissolve
+    "Даже лица её разглядеть не успел." with dissolve
+    "По-моему, она покраснела. Только вот почему она не стала со мной обедать как обычно?" with dissolve
+    play sound sfx_open_water_sink
+    play sound_loop sfx_water_sink_stream fadein 1
+    "Я помыл руки и пошёл на кухню." with dissolve
+    window hide
+    
+    stop sound_loop fadeout 1
+    play sound sfx_close_water_sink
+    scene bg rvp_kitchen with dissolve
+    play music ya_tebya_lyublyu fadein 2
+    
+    window show
+    "Я вспомнил, как до этой ссоры старался хотя бы по мелочи помогать на кухне." with dissolve
+    "Мастером кулинарии я не был, но порезать продукты и проследить, чтобы не выкипела вода, я все же могу." with dissolve
+    "На кухне всё как обычно – холодильник, стол, стулья." with dissolve
+    "Плита, на плите кастрюля, в кастрюле супчик." with dissolve
+    "Ничего себе… моя любимая солянка. Лена сварила вчера, хотела угостить." with dissolve
+    "Тут я всё понял и чуть не разрыдался от этого." with dissolve
+    "Лена любит меня, неудачника, который работает за копейки." with dissolve
+    "Она хотела порадовать меня после рабочего дня, после тяжёлых недель работы, несмотря на то, что сама устала в тот день от учёбы." with dissolve
+    "Рядом со мной есть такой прекрасный человек, я могу жить и быть счастливым." with dissolve
+    "Что я делаю вместо этого? Пропадаю, хрен знает где, убиваю себя на морозе." with dissolve
+    "Тем самым разбивая ей сердце." with dissolve
+    "Воистину, я её недостоин. Я не просто извиниться должен, я на коленях должен перед ней ползать." with dissolve
+    "Свой любимый суп я ел с осознанием своей ничтожности." with dissolve
+    play sound sfx_open_water_sink
+    play sound_loop sfx_water_sink_stream fadein 1
+    "Закончив, я помыл за собой посуду и пошёл в комнату." with dissolve
+    window hide
+
+    stop sound_loop fadeout 1
+    play sound sfx_close_water_sink
+    stop music fadeout 2
+    scene bg kvartira with dissolve
+    play ambience ambience_medstation_inside_night
+    
+    window show
+    "Надо поговорить с Леной сейчас. Обнять её, успокоить, объясниться. Пообещать, что больше такого не повторится." with dissolve
+    "Лена сидела в комнате и читала книгу." with dissolve
+    me "Лена, я хотел…" with dissolve
+    play sound disk_ringtone
+    "Внезапно зазвонил телефон, так и не дав мне сказать нужные слова. Я поднял трубку." with dissolve
+    stop sound
+    play sound trubka
+    voice "Алло, Персунова Елена тут живёт?" #with dissolve
+    me "Да, что нужно?" with dissolve
+    voice "Позовите её к телефону." #with dissolve
+    window hide
+    show un normal sport with dissolve
+    window show
+    "Я обернулся к Лене." with dissolve
+    me "Лена, тут тебя просят к телефону." with dissolve
+    hide un normal sport with dissolve
+    "Лена подошла к телефону." with dissolve
+    "Отвечала она коротко и односложно и я не мог понять тему разговора из того, что смогу услышать." with dissolve
+    "Она недолго поговорила и положила трубку, а после этого встала и пошла одеваться." with dissolve
+    me "Ты куда?" with dissolve
+    un "Меня вызвали в институт, там помощь нужна. Срочно нужно плакат к 7 ноября нарисовать." with dissolve
+    me "Стой, а без тебя они не могут?" with dissolve
+    un "Нет, не могут. У нас в институте только несколько человек рисовать умеют. А Ленина хорошо нарисовать только у меня получится." with dissolve
+    me "Подожди, я поговорить хотел." with dissolve
+    show un normal coat with dissolve
+    un "Вечером поговорим, не переживай. Закрой за мной дверь, я ухожу." with dissolve
+    "После этих слов Лена оделась и вышла." with dissolve
+    hide un normal coat with dissolve
+    play sound sfx_close_door_1
+    "Я закрыл за ней дверь." with dissolve
+    "Вот и поговорили… теперь сиди и жди, Семён. Ты оставил Лену, теперь Лена оставила тебя." with dissolve
+    "Ох уж это мучительное ожидание… попробовал все способы занять себя – и телевизор посмотрел, и книгу почитал, и даже конспекты пописал по своей учёбе." with dissolve
+    "Лена всё никак не возвращалась. Тишина давила на меня." with dissolve
+    stop ambience fadeout 2
+    "Я вспомнил про радиолу “Вега”, стоявшую в углу. Такой проигрыватель для виниловых дисков." with dissolve
+    play music plastinki fadein 2
+    "Была и коллекция, причём попадались и западные дефицитные исполнители, типа “Divine comedy”, Питера Габриела и Стинга." with dissolve
+    scene bg kvartira
+    show black:
+        alpha 0.6
+    with dissolve
+    "Наступал вечер, я сидел у окна, слушал музыку и просто ждал её." with dissolve
+    "Ждал увидеть её фиолетовое пальто с зелёным шарфом." with dissolve
+    "Ждал её фиолетовые косички волос, плывущие к нашему подъезду." with dissolve
+    "Ждал, что она придёт ко мне слушать старые пластинки." with dissolve
+    "Я нашёл наш фотоальбом, в котором все наши фото за три года." with dissolve
+    "Все сделаны в райцентре и ни одной здесь, в Горьком." with dissolve
+    "Все как один эти фотографии навевали воспоминания. А воспоминания разрывали душу." with dissolve
+    "Здесь мы такие счастливые были." with dissolve
+    "Я не выдержал и закрыл альбом, поставив его на место." with dissolve
+    window hide
+
+    scene bg okno with dissolve
+    window show
+    "Затем я начал смотреть на окружавший нас пейзаж." with dissolve
+    "Зрелище не из приятных." with dissolve
+    "Через дорогу недостроенное кирпичное здание рядом с администрацией." with dissolve
+    "Недалеко районная поликлиника – потенциальное место работы Лены после института." with dissolve
+    window hide
+
+    scene bg universam
+    show black:
+        alpha 0.6
+    with dissolve
+    window show
+    "За ними универсам и рынок." with dissolve
+    window hide
+
+    scene bg kvartira
+    show black:
+        alpha 0.8
+    with dissolve
+    window show
+    "В итоге мне надоели западные песни, и я выключил радиолу." with dissolve
+    stop music fadeout 2
+    play ambience ambience_medstation_inside_night
+    "Наконец, я её увидел." with dissolve
+    "Время было около восьми часов вечера. Она приехала на одном из троллейбусов." with dissolve
+    "Как только она зашла в подъезд, я пошёл к двери встречать." with dissolve
+    scene bg prih with dissolve
+    play sound sfx_open_door_1
+    "Когда она поднялась, я уже открыл ей дверь." with dissolve
+    show un shy coat with dissolve
+    "Лена была слегка изумлена такой тёплой встречей, но постеснялась что-то сказать." with dissolve
+    show un normal coat with dspr
+    un "Слушай, ты поговорить хотел. Подожди немного, я устала." with dissolve
+    me "Пойдём, поужинаем. Ты пока раздевайся, я суп погрею." with dissolve
+    un "А ты без меня не ел?" with dissolve
+    me "Нет, тебя ждал." with dissolve
+    hide un normal coat with dissolve
+    "Было заметно, что Лену тронуло это." with dissolve
+    window hide
+    
+    scene bg rvp_kitchen with dissolve
+    
+    window show
+    "Через несколько минут мы оба ели суп на кухне." with dissolve
+    me "Как прошло?" with dissolve
+    show un normal sport with dissolve
+    un "Нормально, всё успели. Только устала очень." with dissolve
+    "Чёрт, опять препоны." with dissolve
+    "Наверное, нужно начать разговор сейчас. Только вот опять в нужный момент нет подходящих слов." with dissolve
+    $ renpy.pause(1.5)
+    "Так мы и доели ужин молча." with dissolve
+    window hide
+    window show
+    un "Пойду{w=0.3} полежу, совсем сил нет." with dissolve
+    window hide
+    show un normal sport:
+        anchor(0.5,0.5) pos(0.5,0.5)
+        ease 1 pos(-0.3,0.5)
+    window show
+    "И скрылась в спальне." with dissolve
+    "От этих слов я совсем расстроился." with dissolve
+    "Опять возможность решить ситуацию ускользает от меня." with dissolve
+    "Сейчас она уснёт. Будить её было как-то неприлично, человек работал." with dissolve
+    window hide
+
+    $ persistent.sprite_time = "night"
+    $ night_time
+    scene bg kvartira
+    show black:
+        alpha 0.8
+    with dissolve
+    
+    window show
+    "От внутреннего беспокойства мне спать не хотелось." with dissolve
+    scene bg okno with dissolve
+    "Я пошёл в комнату и сел за стол у окна." with dissolve
+    "Вдруг я заметил магнитофон." with dissolve
+    "А ведь я давно не слушал музыку на нём." with dissolve
+    "Хорошо, что наушники были, а то затея не имела бы смысла." with dissolve
+    "А что послушать?" with dissolve
+    "В такой момент хорошо подходило что-то лиричное, про ночь." with dissolve
+    "Руки сами нашли кассету." with dissolve
+    "Кино. Группа крови. Сторона А. Песня номер четыре." with dissolve
+    "Перед тем как нажать на кнопку, немного отвлёкся." with dissolve
+    "Помню, как купил эту кассету ещё в райцентре, как слушали её с Леной, Алисой и другими ребятами. Потом подбирали аккорды." with dissolve
+    "Кинул взгляд на гитару в углу. А ведь музыка много помогала мне, когда было трудно. Может, сейчас поможет?" with dissolve
+    "Я нажал кнопку включения песни." with dissolve
+    stop ambience fadeout 2
+    play music sp_noch fadein 2
+    "Песня пошла по проводам наушников мне в уши." with dissolve
+    "Надо разобраться в причинах вчерашнего." with dissolve
+    "Почему не пошёл после работы домой? Не хотел сидеть дома один." with dissolve
+    "Почему не тянуло домой, а хотелось посидеть подольше? Хотелось излить душу, но не видеть Лену." with dissolve
+    "Почему хотел излить душу кому-то, но не Лене? Стыдно было говорить с ней." with dissolve
+    "Ведь я считаю, что я её недостоин. Если я признаюсь ей в своих проблемах, что рискую быть уволенным, она меня бросит." with dissolve
+    "Почему она меня бросит? Она ведь всегда меня поддерживала." with dissolve
+    window hide
+
+    $ persistent.sprite_time = "day"
+    $ day_time
+    show bg kvartira
+    show un smile2 sport
+    show prologue_dream
+    with fade
+    window show
+    "Снова вспомнил, как она сказала мне, что не стыдится того, что я работаю простым водителем троллейбуса." with dissolve
+    window hide
+
+    $ persistent.sprite_time = "night"
+    $ night_time
+    scene bg okno with dissolve
+    window show
+    "Почему она любит меня? Не знаю."
+    "Здесь мои размышления зашли в тупик. Что у Лены в голове, я до конца не представлял." with dissolve
+    "Я сменил тему своих мыслей." with dissolve
+    "Почему мне не нравится окружающая меня реальность?" with dissolve
+    "Жильё, работа, личная жизнь – всё есть. Но у меня было плохое предчувствие." with dissolve
+    "Потому что я знал." with dissolve
+    "Я знал, что начнётся в ближайшие годы." with dissolve
+    "Уже через год Союз распадётся, нужно будет выживать в новой реальности." with dissolve
+    "Мне было страшно брать ответственность за нас с Леной перед неизведанным, тяжёлым временем." with dissolve
+    "Сначала я думал, этот мир достаточно сильно отличается и история в нём пошла по другому ходу." with dissolve
+    "Но всё та же перестройка встретила меня в райцентре. Всё те же невыплаты зарплат на заводе, закрытия производств." with dissolve
+    "Союз развалится под возгласы о свободе, а дальше людей будет ждать нищета, бандитизм, несправедливость и потрясения." with dissolve
+    "Если это случится, Лена сильно расстроится, а я не хочу её видеть расстроенной." with dissolve
+    "А ведь как всё начиналось хорошо. Жизнь казалась такой лёгкой, когда мы были ещё моложе и…" with dissolve
+    "Вдруг на моё плечо опустилась рука." with dissolve
+    "Я перестал вспоминать, вернулся в реальность." with dissolve
+    window hide
+    show un normal sport with dissolve
+    window show
+    "Это была Лена." with dissolve
+    stop music fadeout 3
+    play music sp_noch_minus fadein 2
+    "Я снял наушники и хотел поставить песню на паузу, но случайно нажал на кнопку перемотки." with dissolve
+    "Песня началась сначала. Было тихонько слышно, как Цой желал спокойной ночи всем, кто ложится спать." with dissolve
+    un "Чего не спишь?" with dissolve
+    me "Что-то не хочется. Задумался о жизни." with dissolve
+    un "Да уж, есть над чем подумать. Не против, если я подсяду?" with dissolve
+    me "Не против." with dissolve
+    "Я выдвинул ей стул. Лена села рядом." with dissolve
+    un "Нехорошо получилось сегодня. Ты ведь хотел извиниться за вчерашнее, а я тебя оставила." with dissolve
+    "Затем, помолчав несколько секунд, она продолжила." with dissolve
+    un "Но я всё же не понимаю, почему ты так поступил? Почему не пошёл домой как обычно?" with dissolve
+    "Я решил, что хватит с меня молчать и скрывать свои мысли от Лены. Скажу как есть, а уж дальше она делает, что хочет." with dissolve
+    me "Я ж говорю, жизнь заела." with dissolve
+    me "Зарплата маленькая, работа непрестижная. Живём в панельной однушке." with dissolve
+    "Лене не понравились мои слова." with dissolve
+    un "Что значит не престижная? Для меня нет такого понятия. Есть нужная и ненужная обществу." with dissolve
+    un "Ты возишь людей на работу и учёбу, меня в том числе. Это нужная обществу работа, значит достойная." with dissolve
+    un "Зарплата пусть маленькая, но мы же не голодаем." with dissolve
+    un "Тебе только двадцать исполнилось, поработай ещё, повысят зарплату." with dissolve
+    un "Закончи институт, в конце концов. Я вот вообще не могу работать, у меня учёба всё время занимает." with dissolve
+    un "Мне даёт вуз деньги, чтобы я не умерла с голоду, пока учусь, а ты получаешь зарплату за свой труд, полезный для общества." with dissolve
+    show un smile sport with dspr
+    un "Это огромная разница и я тебе завидую в этом." with dissolve
+    me "Да это понятно. Просто… просто мне стыдно." with dissolve
+    show un shy sport with dspr
+    "Лена удивилась." with dissolve
+    un "Перед кем?" with dissolve
+    me "Перед тобой." with dissolve
+    un "Я не понимаю. Ты работаешь, деньги в дом приносишь, учишься параллельно с этим." with dissolve
+    un "Ты у меня стыда не вызываешь… не считая вчерашнего." with dissolve
+    me "Ну как же, ты такая красавица, учишься на одни пятёрки в институте. Спортом занимаешься. А я…" with dissolve
+    "Я выдохнул. Затем тяжело продолжил." with dissolve
+    me "Давай расстанемся. Я не хочу тебя тяготить." with dissolve
+    show un shocked sport with dspr
+    "Лена испугалась моих слов. Я продолжил высказывать всё, что таилось в душе." with dissolve
+    me "Ты найдёшь себе достойного мужа." with dissolve
+    un "Я уже нашла…" with dissolve
+    me "У него будет нормальная работа, богатые родители. Он тебя обеспечит." with dissolve
+    "Внезапно Лена завелась от этих слов." with dissolve
+    show un angry sport with dspr
+    un "Я тебе что, шлюха какая-то?! Выйти замуж за деньги предлагаешь?!" with dissolve
+    un "Что я этому богатому мужу скажу, когда он штамп в паспорте увидит от нашего брака? “Ой, да сошлась с одним неудачником, он не мог меня рублями засыпать, я его бросила за это”. Да грош мне цена после этого!" with dissolve
+    show un normal sport with dspr
+    un "Всю жизнь это презирала. Всю жизнь смогла прожить в бедности, это мне не страшно. Лишь бы был человек, с которым я могу быть счастлива." with dissolve
+    me "То есть ты не хочешь меня бросить?" with dissolve
+    un "Нет, а с чего?" with dissolve
+    un "Ты молодец, что хочешь обеспечивать семью, чтобы я не бедствовала. Но не всё сразу же." with dissolve
+    un "И не надо так переживать из-за денег, мои чувства к тебе не зависят от того, сколько рублей ты в кассе получаешь." with dissolve
+    show un smile sport with dspr
+    un "Это всё остатки твоего мировоззрения от жизни в капиталистическом обществе." with dissolve
+    show un grin sport with dspr
+    "Лена перестала злиться. Немного улыбнувшись, она продолжила." with dissolve
+    un "Видимо, ты даже не представляешь, как изменил мою жизнь в лучшую сторону." with dissolve
+    un "Ты столько раз меня выручал. Ты спас меня от той тяжёлой и одинокой жизни." with dissolve
+    me "А знаешь, взаимно ведь. Я в тебя смотрю порой как в своё отражение." with dissolve
+    me "Моя жизнь до тебя тоже была одинокой. Но благодаря тебе я наконец-то понял, что такое счастье." with dissolve
+    me "Жаль только я это ценить не умею." with dissolve
+    show un shy sport with dspr
+    un "В смысле?" with dissolve
+    me "Я про вчерашнее. Я думал, я у тебя сильное отвращение вызвал, ты не захочешь жить с алкашом. Ещё и отца напомнил, прости." with dissolve
+    show un normal sport with dspr
+    un "А, это… Видно судьба у меня такая." with dissolve
+    un "Все мужчины в моей жизни спиваются. Сначала отец, теперь вот муж." with dissolve
+    un "Лучшей подруге это тоже одни несчастья принесло. И всё же, надо понять, как ты до такого дошёл." with dissolve
+    me "Ну, помнишь, в конце лета мы переехали в Горький. Ты начала учиться, а я работать, ну и тоже учиться… как бы." with dissolve
+    un "И за эти месяцы погрязли в рутине. Я должна была тебя как-то отвлечь, но сама загрузилась." with dissolve
+    show un sad sport with dspr
+    "Лена помолчала и вдруг продолжила очень грустным голосом." with dissolve
+    un "Я не думала, что так трудно будет сменить обстановку. Этот город реально не зря Горьким зовётся." with dissolve
+    un "Мне порой и страшно и неуютно здесь, всё вместе. Я же всю жизнь в райцентре прожила, не знала, каково это." with dissolve
+    un "Мы всё думали, как повезло тебе сесть на автобус и попасть в другое время. Я не знаю, как ты пережил, это же так страшно, наверное, было." with dissolve
+    me "Ну да, тяжело мне тогда было. Но главное, что это позади." with dissolve
+    window hide
+    show un sad sport:
+        anchor(0.5,0.5) pos(0.5,0.5)
+        ease 3 zoom 2.5 pos(0.0,0.8)
+    window show
+    "Я обнял Лену. Она всем видом показывала, что её нужно было поддержать." with dissolve
+    me "Хочешь, не буду пить? Вообще." with dissolve
+    window hide
+    show un smile sport:
+        anchor(0.5,0.5) pos(0.0,0.8)
+        ease 3 zoom 1.0 pos(0.5,0.5)
+    window show
+    "Лену обрадовали эти слова." with dissolve
+    un "Было бы славно." with dissolve
+    un "Но что мужикам скажешь?" with dissolve
+    me "Скажу, что перебьются." with dissolve
+    "Кто-то бы меня осудил, что я слишком подстраиваюсь под желания Лены. В данном случае это было оправдано." with dissolve
+    "Для Лены это было слишком больной темой, я готов был пойти на уступки, чтобы она была счастлива." with dissolve
+    me "Слушай, а почему ты мне поверила сегодня, когда я прибежал? Не стала сомневаться в моих словах. Я бы сам не поверил, что кто-то прибежит ради меня." with dissolve
+    show un laugh sport with dspr
+    un "Да ты врать не умеешь!" with dissolve
+    "Лена по-доброму посмеялась." with dissolve
+    show un smile sport with dspr
+    un "Это всё, что тебя тяготит?" with dissolve
+    me "Почти… ещё будущее. Помнишь, я тебе рассказывал, что в моём мире было?" with dissolve
+    show un shy sport with dspr
+    me "Лена, этот день уже близко. Не будет Союза, понимаешь?" with dissolve
+    me "И мне страшно за нас, потому что будет страшное время, я боюсь тебя потерять." with dissolve
+    show un serious sport with dspr
+    "Лена помрачнела." with dissolve
+    un "Честно, не хочу в это верить. Но ведь у нас по-другому история пошла, мы это выяснили." with dissolve
+    show un smile sport with dspr
+    un "В любом случае, я верю – что бы ни случилось, ты нас защитишь." with dissolve
+    "Я немного опешил от такой веры в меня. Лена воспользовалась паузой и сменила тему." with dissolve
+    un "Я тут ещё вспомнила, по поводу того, за кого замуж выходить. Смотрел фильм “Москва слезам не верит”?" with dissolve
+    un "Там героиня говорила – чтобы стать генеральской женой, нужно пойти замуж за лейтенанта и ездить с ним по воинским частям по всему Союзу." with dissolve
+    un "Знаешь, кому принадлежала эта квартира? Моей родственнице, да. У неё муж был генералом. Ну, сам знаешь, почётно быть генеральской женой." with dissolve
+    un "Но знала она своего генерала ещё лейтенантом. И замуж пошла за него, когда он ещё лейтенантом был." with dissolve
+    un "И жила с ним, деля невзгоды. Они вместе прошли тридцатые годы, прошли всю войну. Она ждала его из походов, поддерживала в трудную минуту." with dissolve
+    un "В сорок первом году его рота попала в окружение. Он нашёл в себе силы поднять обескровленных бойцов на прорыв. Они вырвались из вражеского кольца, и он спас ребят." with dissolve
+    un "Потому что знал, что она его ждёт. Потом дослужился до генерала." with dissolve
+    show un normal sport with dspr
+    un "Недолго он генеральские погоны носил, так как вскоре умер. Потом моя тётя переехала в эту однушку. Просторную квартиру вернула государству, сказав, что ей без мужа нет смысла занимать такую площадь." with dissolve
+    show un smile sport with dspr
+    un "Для неё эти тридцать три квадрата были концом, для нас началом." with dissolve
+    me "Я порой корю себя, что не заработал нам на квартиру и, по сути, живу на твоей площади." with dissolve
+    show un angry2 sport with dspr
+    un "Опять ты начинаешь. Тебе только двадцать исполнилось, как ты мог квартиру получить?" with dissolve
+    un "Зачем ты себя гонишь и обременяешь обязательствами, если даже я от тебя этого не требую?" with dissolve
+    un "И живёшь ты не в моей, а в нашей квартире. Я всегда поделюсь с тобой всем, что у меня есть." with dissolve
+    show un smile sport with dspr
+    un "И ты, я уверена, тоже." with dissolve
+    "С души будто гора спала. Я такого облегчения не испытывал, наверное, с того времени как помирился с Леной в Совёнке." with dissolve
+    me "Тогда прости меня, Лена. Я слишком усложнил жизнь себе и тебе, в итоге не выдержал и повёл себя по дурацки, забыв, что ты меня поддержишь." with dissolve
+    un "Ты тоже прости меня, Сёма. Я примерила на тебе воспоминания о другом человеке, хотя ты им и не являлся, и была предвзята по отношению к тебе." with dissolve
+    un "Мы с тобой ещё молоды и не застрахованы от ошибок." with dissolve
+    show un cry sport with dspr
+    "Вдруг Лена погрустнела так сильно, что казалось, готова была заплакать." with dissolve
+    un "Только, пожалуйста, не предлагай мне больше расстаться. И не уходи не предупредив. Я… мне было очень больно и грустно." with dissolve
+    un "Ты был прав. Я не выдержу, если ты меня оставишь. Я на тебя накричала, не хотела, чтобы ты пользовался моей слабостью." with dissolve
+    un "Но сейчас я понимаю, ты хороший человек и не стал бы так поступать. И вообще я такая злая была к тебе, не понимая, какую ношу ты несёшь каждый день без отдыха." with dissolve
+    me "Хорошо, не оставлю. Я думаю, эта ситуация послужит для нас уроком. Что нужно лучше прислушиваться друг к другу и не накручивать себя." with dissolve
+    show un cry_smile sport with dspr
+    un "Ты прав. Вот видишь, ты можешь извлекать уроки из ошибок, значит, ты совсем не безнадёжен." with dissolve
+    me "Обещаю, что не буду скрывать от тебя своих переживаний и не брошу тебя в трудную минуту." with dissolve
+    un "Хорошо, Сёма. Я тоже обещаю тебя поддерживать и ничего не скрывать от тебя." with dissolve
+    show un smile2 sport with dspr
+    un "Ой, Сёма, смотри, на улице снег пошёл! Скоро зима и Новый год!" with dissolve
+    "Лена светилась от счастья." with dissolve
+    show un grin sport with dspr
+    un "Повязку уже давно мог снять. Какой ты у меня рассеянный." with dissolve
+    "Точно, я про неё совсем забыл с этими думами. Лена сняла бинт и поцеловала меня в лоб." with dissolve
+    hide un grin sport with dspr
+    "Она наклонилась к уху и зашептала." with dissolve
+    un "Я горжусь тобой, Сёма." with dissolve
+    "Недопонимание между нами ушло, и наши души снова стали близки. Всё начало идти к тому, что не только души." with dissolve
+    "Вдруг я вспомнил, что у меня в наушниках до сих пор играет песня." with dissolve
+    stop music fadeout 3
+    un "А что это играет? Почему сам слушаешь, а мне не даёшь?" with dissolve
+    play music sp_noch_solo
+    "Она выдернула штекер из разъёма. И в этот момент как раз начиналось то самое каспаряновское соло на гитаре. Оно громко заиграло на всю квартиру." with dissolve
+    "От неожиданности я вскочил из-за стола. Лена резко сначала обняла меня, затем запрыгнула на меня." with dissolve
+    "Я хотел было что-то сказать, но она заняла мои губы своими…" with dissolve
+    window hide
+
+    scene bg int_house_of_un_night
+    show prologue_dream
+    with fade
+    window show
+    "Вспомнился момент из лагеря, как мы слились в экстазе в её домике." with dissolve
+    "Тогда я окончательно забыл про поиск ответов, и мне вообще было наплевать на всё, кроме Лены." with dissolve
+    "В тот вечер я сидел и любовался ею, когда она спала. Её лицо выражало тихое счастье и спокойствие." with dissolve
+    "Так спал человек, которого в душе ничего не беспокоит." with dissolve
+    "С того дня мы были крепко связаны на всю оставшуюся жизнь. Я пообещал себе не оставлять её и сделать счастливой." with dissolve
+    window hide
+    
+    scene bg ext_square_night
+    show prologue_dream
+    with fade
+    
+    window show
+    "Помню, как потом смотрел в окно на ночной лагерь." with dissolve
+    "Враждебное прежде место вдруг стало таким уютным." with dissolve
+    "Благодаря Лене целый лагерь в тот день принадлежал нам, никто не нарушал эту идиллию." with dissolve
+    "И в тот день, казалось, прошлое было абсолютно неважно, важно было лишь то, что мы с Леной нашли друг друга." with dissolve
+    "Сейчас так же. Зарплата, троллейбусы, мрачное будущее – всё это перестало что-то значить. Вся жизнь впереди, ещё успею подняться и найти хорошую работу." with dissolve
+    "А вообще, счастье не только в приличной зарплате, а в том, чтобы любить и быть любимым. Главное – быть вместе с ней и поддерживать друг друга…" with dissolve
+    window hide
+
+    scene bg kvartira
+    show black:
+        alpha 0.8
+    with dissolve
+    window show
+    "Минут через десять мы с Леной лежали на кровати и пытались отдышаться." with dissolve
+    "Это было прекрасно." with dissolve
+    "Это и было счастье." with dissolve
+    "Это и был наш рай в панельке." with dissolve
+    window hide
+    show blink
+    
+    stop music fadeout 2
+    stop ambience fadeout 2
+    play sound sp_noch_solo fadein 2
+    scene black with dissolve2
+    show credits rvp_credits:
+        xalign 0.5
+        ypos 1.3
+        linear 52.0 ypos -4.0
+    $ renpy.pause()
+    stop sound fadeout 2
+    jump rvp
+
 label b1:
     stop music fadeout 2
     $ renpy.show("black")
@@ -991,7 +2463,7 @@ label b1:
             zoom 1.05 anchor (48,27)
         parallel:
             ease 0.50 pos (0, 0)
-            ease 0.50 pos (0,25)
+            ease 0.50 pos (0,15)
         repeat
 #подумать над ходьбой
     "Мы шли вдвоём, Лена в нескольких метрах позади нас. Было слышно, как она иногда всхлипывала." with dissolve
@@ -1766,1473 +3238,3 @@ label b1:
     "Сотрудники отдельного подразделения КГБ под кодовым названием “СЦП” изъяли все записи, связанные с загадочным появлением гражданина Семёна Персунова в городе Лениноморск." with dissolve
     window hide
     jump exit
-
-label a1:
-    stop music fadeout 2
-    $ renpy.show("black")
-    $ renpy.with_statement(fade3)
-    $ renpy.pause(2.0, hard=True)
-    $ new_chapter(0, u'Рай в панельке: Сторона А.')
-    $ persistent.sprite_time = "day"
-    $ day_time
-
-    play music lyudi_nadoeli fadein 1
-    show prologue_dream
-    with fade
-    window show
-    "Последнее время мне не снятся сны."
-    "Ночи пролетают быстро, и не успеваешь отдохнуть перед новым днём. Днём, полным рутинной работы, скучной, серой действительности." with dissolve
-    "Будильник поднимет меня своим звоном, и я ни свет ни заря отправлюсь на смену. Работа, конечно, не пыльная, но довольно монотонная." with dissolve
-    window hide
-
-    scene bg kvartira
-    show unblink
-    show black:
-        alpha 0.8
-    show prologue_dream
-    with fade
-    
-    window show
-    "К вечеру смена заканчивается, и я прихожу домой в одинокую квартиру." with dissolve
-    "Она ещё не вернулась. То занятия до вечера, то тренировки." with dissolve
-    "А потом она сидит на кухне и учит свой патан и гисту." with dissolve
-    "Мне тоже надо. Я же не просто работник, а ещё и студент." with dissolve
-    "{b}Какая же это всё соковыжималка!{/b}" with dissolve
-    "Сначала работа, потом учёба. У неё очная учёба, где надо всё зубрить."  with dissolve
-    "Живём в складчину с моей маленькой зарплаты и её стипендии. От получки до получки. Вроде хватает." with dissolve
-    window hide
-
-    scene bg universam
-    show un shy coat
-    show prologue_dream
-    with fade
-    
-    window show
-    "Но копить не получается, даже порадовать себя вкусной едой выходит редко." with dissolve
-    "Хотя Лена старается изо всех сил приготовить что-то приятное для нас обоих из тех продуктов, которые мы берём в универсаме “Нагорный”." with dissolve
-    "Со всей этой учебной и рабочей деятельностью мы с Леной не находим сил и времени друг для друга." with dissolve
-    hide un shy coat with dissolve
-    "Встаём мы в разное время, потом большую часть дня проводим в разных местах, вечером тоже много сидим, каждый в своём углу. Я в комнате, она на кухне." with dissolve
-    "А ночью, обессиленные, мы ложимся спать." with dissolve
-    window hide
-
-    scene bg vasyunina
-    show prologue_dream
-    with fade
-    window show
-    "А выходные? Да всё этот чёртов график “два через два”." with dissolve
-    "То у меня выходные, у неё учёба, то наоборот." with dissolve
-    "Бывают дни, когда у нас обоих выходные, но все планы срываются – то мне позвонят идти на смену, то у неё какие-то дела." with dissolve
-    "Но вот вроде сегодня, наконец, совпало и ничто не помешает провести эти два дня вместе. Надо только эту смену оттрубить." with dissolve
-    window hide
-    
-    scene bg vasyunina with dissolve
-    $ renpy.pause(2)    
-    window show
-    "С такими мыслями я подходил к троллейбусному депо. Моему месту работы." with dissolve
-    window hide
-
-    scene bg depo with dissolve
-    window show
-    "До рассвета ещё далеко, часы на вахте показывали пять утра. Смена начинается." with dissolve
-    "Взяв листок, я иду к своему троллейбусу под номером 1480." with dissolve
-    "Проверка узлов, запуск двигателя, прогрев кабины и салона."
-    play sound_loop sfx_bus_interior_moving fadein 4
-    "Зима не за горами, начинают чувствоваться холода, но снег ещё не выпал." with dissolve
-    "Лена ещё спит, наверное." with dissolve
-    "Интересно, в этот день удастся её подвезти до института?" with dissolve
-    play sound sfx_intro_bus_engine_start
-    "Пару раз я замечал её фиолетовые хвостики через лобовое стекло и аккуратно подъезжал к ней. " with dissolve
-    "Она тоже меня видела и всегда заходила в переднюю дверь." with dissolve
-    window hide
-
-    scene bg salon
-    show un smile2 coat
-    show prologue_dream
-    with fade
-    window show
-    un "Доброе утро, Сёма!"
-    hide un smile2 coat with dissolve
-    "Но поговорить в рейсе не удавалось, опасное это дело, могу отвлечься. А я, чай, не «Окой» управляю, да и не одного себя везу." with dissolve
-    "Чёрт, местные словечки уже прилипают к моей речи. Как, например “чай”, который не в значении напитка, а как частица “всё-таки”." with dissolve
-    "Ну, вот и выезжать пора. Покидаю ворота первого депо и выхожу на маршрут." with dissolve
-    window hide
-    scene bg depo with dissolve
-    window show
-    "Довольно интересно получилось, что я вожу троллейбус. После переезда в Горький стал искать работу." with dissolve
-    "Чтобы не тратить время и деньги на дорогу, искал работу у дома. Да и Лена просила, чтобы работа была недалеко, ей так спокойнее было за меня." with dissolve
-    "Всё, что я имел – корочка слесаря и три года работы на заводе. Рядом было троллейбусное депо на улице Ивлиева. Пришёл туда и спросил, не нужны ли слесари." with dissolve
-    nd "Слесари нам не нужны. А вот водителей не хватает на семнадцатом маршруте. Если не работал, ничего страшного, у нас курсы есть, стипендию платим. Ну что, согласен?" with dissolve
-    "Пришлось согласиться. Прошёл обучение, недавно корочку получил и полноценно стал работать." with dissolve
-    "Водителям платили немного. Неудивительно, почему не хватало кадров. Лена получала столько же со стипендии, сколько я с зарплаты." with dissolve
-    "Правда ради этого ей приходилось зубрить весь материал и сдавать экзамены без права на ошибку. Даже одна четвёрка могла уменьшить ей стипендию в два раза." with dissolve
-    "А значит, уменьшала наш бюджет и приводила к нищете." with dissolve
-    "Но Лена справлялась, по крайней мере, до переезда, сдавать сессию на отлично. Хотя ради этих несчастных оценок она каждый день сидела по несколько часов и учила." with dissolve
-    window hide
-    
-    stop sound_loop fadeout 1
-    scene bg kvartira
-    show un shy sport
-    show prologue_dream
-    with fade
-
-    window show
-    "Лена однажды предложила бросить свои занятия спортом и тоже найти хоть какую-то подработку после учебы, но я наотрез отказался." with dissolve
-    "По себе знаю, как сильно это временами может давить, ведь я сам совмещаю работу и учебу." with dissolve
-    "А у Лены очная форма обучения. Тренировки для Лены — хоть какая-то отдушина в отрыве от учебы и повседневной серости, и лишать её этого я себе не позволил бы." with dissolve
-    "Хоть она под вечер и приходит уставшая, я вижу в её глазах, что ей нравятся эти занятия." with dissolve
-    "Возможно, сказалось желание Слави приучить всех к спорту, и Лена подхватила этот настрой. Пусть она будет разносторонне развита, а я заработаю нам денег." with dissolve
-    window hide
-    
-    play sound sfx_intro_bus_engine_start
-    scene bg square with dissolve
-    play sound_loop sfx_bus_interior_moving fadein 4
-    
-    window show
-    me "«Бориса Корнилова»! Следующая остановка – «Адмирала Васюнина»!" with dissolve
-    "Какая же она молодец. Не то, что я… кое-как на заочном учусь. Единственное оправдание – работа. Такие мы с ней разные. Лена посвящает себя учёбе и спорту." with dissolve
-    stop sound fadeout 2
-    "Может в принципе и одна жить, без меня. Закончит мед, будет хорошим врачом, им платят нормально." with dissolve
-    "А я так и буду троллейбус водить. Союз интеллигенции и рабочего класса." with dissolve
-    "Не всё, конечно, было так плохо. Лене в наследство досталась пусть и однокомнатная, но уютная, с хорошим убранством, квартира." with dissolve
-    "Всё же это был и своеобразный укор мне – когда нам негде было жить, спасение пришло со стороны Лены." with dissolve
-    "Я тогда не смог добыть нам нормальный кров, не считая комнаты в коммуналке, которую мы бы всё равно не потянули. Так что жильём я обеспечить нас обоих не смог." with dissolve
-    "И зачем я ей?" with dissolve
-    "В меде хоть и немного парней, но она может найти себе какого-нибудь богатого. И жить с ним не в однушке от покойной родственницы, а в многокомнатной квартире." with dissolve
-    "Порой мне кажется, что наша встреча в Совёнке была роковой случайностью." with dissolve
-    play sound sfx_intro_bus_engine_start
-    "Ей не нужен неудачник типа меня, она достойна чего-то большего." with dissolve
-    me "Остановка «Улица Адмирала Васюнина»! Следующая – «Надежды Сусловой»!" with dissolve
-    "Так ведь мало того, что она меня не бросила, она ещё поддерживает меня." with dissolve
-    window hide
-    
-    stop sound fadeout 2
-    stop sound_loop fadeout 1
-    show bg kvartira
-    show un smile2 sport
-    show prologue_dream
-    with fade
-
-    window show
-    un "Сёма, это не плохо, что ты водителем работаешь. И мне не стыдно за тебя. Ты же можешь расти в этом направлении." with dissolve
-    me "Да куда там расти, можно баранку крутить десятками лет." with dissolve
-    un "Так у тебя же руки золотые, на заводе тебя хвалили. Спроси, может, слесари нужны или ещё кто." with dissolve
-    window hide
-
-    scene bg square with dissolve
-    play sound_loop sfx_bus_interior_moving fadein 4
-    play sound sfx_intro_bus_engine_start
-    
-    window show
-    "Правильно она, конечно, это всё говорит. Вот только, боюсь, не светит мне ни повышение, ни даже эта работа в будущем." with dissolve
-    me "«Улица Надежды Сусловой»! Следующая – «Ванеева»!" with dissolve
-    "До депо уже дошли слухи о сокращении бюджета на общественный транспорт." with dissolve
-    stop sound fadeout 2
-    "Причём не просто зарплаты подрежут, но ещё и подвижной состав спишут, а персонал уволят." with dissolve
-    "Мужики на измене сидят, непонятно, кого в таком случае оставят, кого уволят." with dissolve
-    "В любом случае, меня вряд ли оставят из-за малого опыта. Меня им не жалко уволить – молодой, найду себе работу." with dissolve
-    "Не знаю, как я скажу Лене, что меня уволили. И как жить не знаю." with dissolve
-    "Хотя почему же, пойду на шабашку какую-нибудь." with dissolve
-    "И вот опять же, зачем Лене это всё?" with dissolve
-    "Муж-неудачник, получающий копейки." with dissolve
-    "Ах да, я же учусь. Только не уверен, что доучусь. В здешний политех принимать не хотели, думали, не потяну. А ведь ещё сессию сдавать скоро." with dissolve
-    play sound sfx_intro_bus_engine_start
-    "Горький – город крупный, институты тут посерьёзнее, чем там, откуда мы летом переехали." with dissolve
-    me "«Улица Ванеева»! Следующая – «Бориса Панина»!" with dissolve
-    "Раньше чуть голос не срывал, объявляя эти остановки. Сейчас научился уже говорить громко, да только толку в этом горлопанстве." with dissolve
-    window hide
-    
-    stop sound_loop fadeout 1
-    stop sound fadeout 2
-    $ renpy.pause(3)
-
-    window show
-    "Сука, опять ус слетел с провода." with dissolve
-    "Открываю дверь, подхожу к месту аварии." with dissolve
-    "Ус конечно никак не хотел ловиться, но я настаивал на том, чтобы он вернулся к своей обязанности быть проводником тока." with dissolve
-    "Работаем дальше." with dissolve
-    "Захожу в кабину и веду дальше. Впереди долгий рабочий день." with dissolve
-    window hide
-    
-    stop music fadeout 3
-    $ renpy.pause(3)
-
-    scene bg vasyunina with dissolve
-    play sound_loop sfx_bus_interior_moving fadein 4
-    play music trolleybus fadein 1   
-    window show
-    "К третьему часу дня смена закончилась." with dissolve
-    "С чувством облегчения я катил на своём электротранспорте на восток, к депо." with dissolve
-    "Смена выдалась трудной, усы слетали с проводов раза в два чаще обычного." with dissolve
-    "Один раз чуть в аварию не попал, причём по своей вине, задумался о вечере. Но это всё позади, остались считанные метры и я свободен." with dissolve
-    window hide
-    scene bg depo with dissolve
-    window show
-    "Часы в салоне показывали три часа дня. Я завёл троллейбус в гараж, провёл все необходимые процедуры по выключению машины." with dissolve
-    stop sound_loop fadeout 1
-    play ambience ambience_cold_wind_loop
-    "Затем сразу пошёл и сдал смену. Лена ещё нескоро вернётся." with dissolve
-    "Ладно, можно пока посидеть в депо и пообщаться с кем-нибудь." with dissolve
-    "Контингент в депо составлял довольно типичный пролетариат." with dissolve
-    "Три года работы на заводе, конечно, научили тому, как быть своим в их окружении, но во мне оставался домосед-интеллигент, не дававший окончательно стать рабочим классом." with dissolve
-    "С ними не поговоришь о высоком, как иногда можно было с собеседниками на имиджбордах, но у них можно было набраться житейского опыта." with dissolve
-    "Да и, можно подумать, как будто на имиджбордах мы о высоком говорили." with dissolve
-    "Вот ведь что вспомнил! Интернет, имиджборды… когда-то была жизнь в других условиях и другом времени." with dissolve
-    "Впрочем, не особо по ней скучаю." with dissolve
-    "Я сидел на стоянке и ждал других водил. С ними у меня были лучше всего отношения в депо." with dissolve
-    "Со слесарями всё было непросто – о них ходила дурная слава, что они приблатнённые раздолбаи с руками явно не из плеч." with dissolve
-    "Из-за них и приходилось мучиться, потому что делали кое-как. Вдобавок я им завидовал в душе, что они занимают должность, которую я хотел, когда устраивался в депо." with dissolve
-    "Если бы мне дали написать список того, что погубит в ближайшее время Союз, одним из первых на листе бы появилось слово из четырёх букв - “блат”." with dissolve
-    play sound sfx_intro_bus_engine_start
-    "Вдруг из-за поворота возникли ещё пара “рогатых”. Я узнал их. Это были два водителя, работавших на одном маршруте со мной." with dissolve
-    stop sound fadeout 2
-    "По сложившейся пролетарской традиции я их называл по отчеству Михалыч и Иваныч." with dissolve
-    show mh4 at left with dissolve
-    show iv at right with dissolve
-    "Первый был работягой довольно приличного вида, второй немного вызывал у меня неприязнь запущенной внешностью, но по характеру был довольно безобидным." with dissolve
-    "Через несколько минут мы уже разговаривали. После смены мы обсуждали, кто как отработал, не забывая при этом обругать слесарей." with dissolve
-    me "Ну ладно, мужики, я пойду."
-    mh4 "Погоди Семён, к нам присоединиться не желаешь?"
-    me "А куда вы собрались, к кому-то в общагу депошную? Ходили уже, неуютно там." with dissolve
-    mh4 "Да не, зачем сразу в общагу то? В гараже посидим без лишних глаз. Слесаря как раз позвали, у них выходной завтра. Дёрнем немного." with dissolve
-    me "Не знаю, мужики… я с женой уже договорился время провести, и так на выходных почти с ней не вижусь." with dissolve
-    iv "Э… ну ты чё, под каблуком в натуре, я не пойму. Успеешь к жене, мы тебя там в кандалы не закуём." with dissolve
-    "Второй водитель говорил уже немного заплетавшимся языком. На мгновение в голове возникла мысль ему зубы пересчитать, чтобы за языком следил. И когда он успел накатить?" with dissolve
-    mh4 "Иваныч, не наезжай." with dissolve
-    "Более трезвый водитель успокоил своего товарища." with dissolve
-    mh4 "Сёмыч у нас порядочный семьянин, почти не пьет, вот и стесняется. Не хочет он собачиться на ночь глядя, и сковородкой по башке получать как ты." with dissolve
-    iv "Да я…" with dissolve
-    mh4 "Все, угомонись. Семён, мы набухиваться не будем, просто немного выпьем и посидим. Немного хоть посиди, а?" with dissolve
-    me "Ну, пойдёмте тогда." with dissolve
-    window hide
-    show mh4 at left:
-        anchor(0.5,0.5) pos(0.3,0.5)
-        ease 1.5 pos(1.1,0.5)
-    show iv at right:
-        anchor(0.5,0.5) pos(0.7,0.5)
-        ease 1.5 pos(1.3,0.5)
-    stop music fadeout 4
-    stop ambience fadeout 2
-
-    play music tuman fadein 2
-    scene bg garage_int with dissolve
-    window show
-    "Последний раз пил с Алисой в августе, поминали Витю." with dissolve
-    play sound sfx_open_metal_hatch
-    "В гараже реально тепло, уютно." with dissolve
-    "Один из слесарей, который работал с восьмидесятого года и жил не в общаге, а в квартире, купил гараж и позвал на “новоселье”." with dissolve
-    "Идти далеко не пришлось – много гаражей настроили в низине за депо." with dissolve
-    "Часть города, называемая местными “нагорной”, делилась на низины, застроенными гаражами и высокими местами, на которых строились дома." with dissolve
-    "Место, где мы жили с Леной, тоже называлось Нагорным микрорайоном…" with dissolve
-    "Вечер как-то быстро пролетел. Хоть я и выпил не так много, пару рюмок, но этого было достаточно, чтобы развязать мой язык и высказать мужикам недовольство своей жизнью." with dissolve
-    "В процессе этого я потерял счёт времени." with dissolve
-    window hide
-    $ renpy.pause(2)
-    window show
-    show mh4 at left with dissolve
-    me "Да я в Лениноморске на заводе уважаемым человеком был. До старшего смены с нуля за два года дорос! А здесь баранку кручу, блин…" with dissolve
-    mh4 "Да, Семён, непростой ты судьбы человек." with dissolve
-    window hide
-    $ renpy.pause(1)
-    window show
-    "Всё проходило довольно мирно, мы втроём познакомились со слесарями. Не самые плохие люди оказались, но не всё было так просто…" with dissolve
-    show iv at right with dissolve
-    show gn_nasmeh with dissolve
-    voicegn "Семён, а что мы тебя раньше не видели в нашем кругу?" with dissolve
-    "Был у них в коллективе один мутный тип, даже имя его никак не мог запомнить. А вот он меня, похоже, знал хорошо." with dissolve
-    iv "А он у нас порядочный семьянин." with dissolve
-    "Вот придурок. Небось, у самого каждый день ссоры со своей женой, вот и завидует." with dissolve
-    voicegn "Значит вот как, жёнушка есть. А я видел тебя с ней, красивая." with dissolve
-    "Это ещё что за базар пошёл. Где он мог видеть нас?" with dissolve
-    "Хотя чему удивляться, мы с Леной часто ходили гулять до того же универсама за продуктами." with dissolve
-    voicegn "И кем она работает, продавщицей?" with dissolve
-    me "Нет, в меде учится." with dissolve
-    voicegn "Ты посмотри-ка, а водила наш с интеллигенцией водится." with dissolve
-    voicegn "И зачем ты ей? Чё она нормального мужика найти не может?" with dissolve
-    "У меня потемнело в глазах от злости." with dissolve
-    mh4 "Э, слышь, криворучка, кончай трепаться. Ты бы лучше наши тралики так чинил, как до людей докапываешься." with dissolve
-    me "Чё ты там про мою сказал?" with dissolve
-    mh4 "Сёмыч, не слушай его, он дурной, от него жена ушла просто, вот он и бесится." with dissolve
-    show gn_zloy with dspr
-    hide gn_nasmeh with dspr
-    voicegn "Да пошла она! Все они бабы сволочи, твоя тоже, наверное." with dissolve
-    voicegn "Думаешь, пока ты тут сидишь, она ждёт тебя? Ага, размечтался." with dissolve
-    show gn_smile with dspr
-    hide gn_zloy with dspr
-    voicegn "Небось уже к другому пошла развлекаться. Но лучше ко мне, я бы её без внимания не оставил." with dissolve
-    "Я вскипал от ненависти к этому ублюдку. Нужно было проучить его." with dissolve
-    me "Пойдём-ка, выйдем." with dissolve
-    scene bg garage_int:
-       parallel:
-            zoom 1.05 anchor (48,27)
-            ease 2 zoom 3 anchor (1200,1200)
-    show gn_smile:
-        anchor(0.5,0.5) pos(0.5,0.5)
-        ease 1.5 pos(1.3,0.5)
-    window hide
-    
-    stop music fadeout 2
-    $ persistent.sprite_time = "night"
-    $ night_time
-    scene bg garage_ext with dissolve
-    show gn_smile with dissolve
-    play ambience ambience_cold_wind_loop
-    play music music_list["pile"] fadein 2
-    $ renpy.pause(2)
-    
-    window show
-    "Я вышел из гаража, затем вышел он." with dissolve
-    "Больше уже ничего говорить не хотелось. Хотелось лишь одним ударом заставить его сожалеть о сказанном." with dissolve
-    window hide
-    
-    play sound sfx_armature_swish
-    hide gn_zloy with dissolve
-    play sound sfx_grate_hand_fall
-    
-    show gn_smile:
-        anchor(0.5,0.5) pos(0.5,0.5)
-        ease 1.0 pos(-0.2,0.5)
-    window show
-    "Я замахнулся, но промазал, попав по железной двери гаража. Гулкий удар по гаражу." with dissolve
-    "А он воспользовался этим, схватил меня за волосы и треснул головой об эту дверь." with dissolve
-    scene bg garage_ext:
-        zoom 1.05 anchor (48,27)
-        ease 1.5 zoom 1.5 anchor (0,300)
-    play sound sfx_grate_hand_fall
-    "Это был второй удар." with dissolve
-    "Вот же гнида, взбесил и ударил исподтишка!" with dissolve
-    show blink
-    "Я закрыл глаза от боли." with dissolve
-    "Положение моё казалось безвыходным, как вдруг рука отпустила меня." with dissolve
-    "С той стороны я услышал звуки перепалки и драки. Мужики мне помочь решили, что ли?" with dissolve
-    play sound sfx_bodyfall_1
-    "Я уже был не боец и, пройдя пару шагов, упал считать звёзды, что называется." with dissolve
-    scene anim stars_1
-    show unblink
-    stop music fadeout 2
-    "Надо было через бедро бросить, ну что же я…" with dissolve
-    "Краем глаза я увидел фигуры, похожие на милиционеров. Этого ещё не хватало." with dissolve
-    "Как же голова болит..." with dissolve
-    window hide
-
-    play music music_list["meet_me_there"] fadein 2
-    window show
-    "Лёжа у гаража, я смотрел на небо." with dissolve
-    "Было слышно возню и знакомые голоса, видимо наша доблестная милиция занималась этим хмырём. Так ему и надо." with dissolve
-    scene anim stars_3 with dissolve
-    "Хм, ноябрь, а звёзды видно." with dissolve
-    "Помню, как с Леной смотрели на них в Совёнке. Это было всего-то три года назад." with dissolve
-    "Помню, как в прошлой жизни читал в интернете про то, что любовь живёт три года. Видимо мы с Леной не исключение..." with dissolve
-    show blink
-    "Я закрыл глаза и начал вспоминать..." with dissolve
-    window hide
-
-    scene bg intro_xx
-    show prologue_dream
-    with fade
-    
-    window show
-    "Как я уснул в автобусе в тот вечер..." with dissolve
-    window hide
-
-    scene bg ext_camp_entrance_day
-    show prologue_dream
-    with fade
-    
-    window show
-    "...и проснулся в пионерлагере." with dissolve
-    window hide
-
-    scene cg epilogue_un
-    show prologue_dream
-    with fade
-    
-    window show
-    "Как познакомился с ней и остался в её мире." with dissolve
-    window hide
-
-    scene bg black
-    show prologue_dream
-    with fade
-    
-    window show
-    "Сначала я думал, что будет трудно строить новую жизнь. А оказалось, что это было ещё легко." with dissolve
-    "Это были цветочки по сравнению с настоящей взрослой жизнью, с которой я, считай, не справился." with dissolve
-    "Я не смог справиться, не смог дать ей то, что она заслуживает." with dissolve
-    "Только бы она не видела меня сейчас." with dissolve
-    "Не буду никуда вставать, буду лежать и замёрзну. Утром мужики найдут мой окоченевший труп. Сегодня как раз температура ночью ниже нуля..." with dissolve
-    window hide
-    
-    $ renpy.pause(1)
-    scene bg black with dissolve
-    
-    window show
-    "Руки коснулось что-то тёплое. Другая рука." with dissolve
-    "Взяв меня за запястье, она потянула вверх. На ощупь и по температуре очень знакомо." with dissolve
-    "Слушаясь её, я медленно приподнялся и сел." with dissolve
-    window hide
-    $ renpy.pause(0.5)
-    window show
-    "И тут я понял." with dissolve
-    window hide
-    
-    scene anim stars_1 with dissolve
-    show lena_shadow with dissolve
-    $ renpy.pause(2)
-    window show
-    "Нет, только не это." with dissolve
-    "Господи, неужели она смотрит на меня сейчас в этот момент, когда я просто опустился на самое дно?" with dissolve
-    "Я не хотел открывать глаза." with dissolve
-    "Казалось, я увижу её и умру от стыда." with dissolve
-    "До последнего я надеялся на то, что мои веки закрывают мои зрачки от кого-то другого." with dissolve
-    voiceun "Ты глаза-то открой." with dissolve
-    "Её голос." with dissolve
-    scene bg black with dissolve
-    "Всё, теперь никаких надежд. Я разлепил веки." with dissolve
-    scene anim stars_1
-    show un normal coat
-    show unblink
-    "И тут же устремился взглядом в пару зелёных глаз." with dissolve
-    "В них было много злости, разбавленной сожалением." with dissolve
-    "Было ощущение, что она видит эту картину уже далеко не в первый раз, хотя я впервые напился в гараже." with dissolve
-    "Несколько секунд мы смотрели друг другу в глаза. Её молчание было оглушающим." with dissolve
-    un "Идём домой." with dissolve
-    window hide
-    scene anim stars_3 with dissolve
-    window show
-    "В её голосе слышалась сдавленная боль и злость." with dissolve
-    "Она сейчас хотела высказать всё, что у неё на душе, но сдерживала себя. Я без промедления встал и пошёл за ней." with dissolve
-    window hide
-    scene bg dvor with dissolve
-    window show
-    "За время лежания на холодной земле я успел протрезветь и мог идти, не теряя равновесия." with dissolve
-    "Путь до дома пролегал по серым дворам между панельных домов. Ещё немного шатаясь, я следовал за ней." with dissolve
-    "Мы шли молча." with dissolve
-    "Что она думала?" with dissolve
-    "Наверное, какой я конченый и опустившийся алкаш." with dissolve
-    "Какая она дура, что тогда пошла за меня замуж." with dissolve
-    "О том, что наше счастье закончилось, только начавшись." with dissolve
-    "Всё ведь шло к этому ещё там." with dissolve
-    "Перестали платить зарплату на заводе. Перебивались заработками, потом переехали сюда." with dissolve
-    "И вот, не выдержав груза работы и учёбы, груза ответственности, я опустился на дно. Не думаю, что она меня расцелует за это." with dissolve
-    "И так всю мою жизнь нужно какие-то препятствия преодолевать, не имея за собой поддержки. Будто барахтанье в море во время шторма." with dissolve
-    "Ты сражаешься изо всех сил со стихией, но всё захлёбываешься." with dissolve
-    "В конце концов, без опоры под ногами ты теряешь последние силы и сдаёшься." with dissolve
-    window hide
-
-    stop music fadeout 2
-    scene bg dom
-    show black:
-        alpha 0.8
-    with dissolve
-
-    window show
-    "Вот и наш дом на улице Васюнина." with dissolve
-    stop ambience fadeout 2
-    "Лена сама открыла дверь в подъезд, затем в квартиру." with dissolve
-    play sound sfx_open_door_1
-    "Мы зашли внутрь, я закрыл дверь." with dissolve
-    window hide
-
-    $ persistent.sprite_time = "day"
-    $ day_time
-    play sound sfx_close_door_1
-    play ambience ambience_medstation_inside_night
-    scene bg prih with dissolve
-    show un normal coat with dissolve
-    $ renpy.pause(2)
-    window show
-    "Лена сделала пару шагов, но вдруг развернулась и посмотрела на меня." with dissolve
-    "По лицу читалось, что она была как бурлящий вулкан, который вот-вот извергнется." with dissolve
-    "Её молчание было громче всех криков." with dissolve
-    un "Семён… что это было?" with dissolve
-    "Устало сказала она. Ситуация её вымотала." with dissolve
-    me "Не знаю." with dissolve
-    un "Ладно… как сегодня поработал?" with dissolve
-    me "Нормально, смену отработал." with dissolve
-    un "Так, а дальше что было?" with dissolve
-    me "Сидел, ждал в депо, когда ты придёшь." with dissolve
-    un "Почему… ты не пошёл домой после смены… как обычно?" with dissolve
-    "Её голос был убийственно холоден и спокоен." with dissolve
-    "Однако как она ни старалась, он выдавал бурю эмоций в ней." with dissolve
-    "Ещё немного и…" with dissolve
-    me "Меня мужики позвали с ними посидеть в гараже немного." with dissolve
-    play music music_list["awakening_power"]
-    un "То есть ты хотел провести вечер с женой, но пока меня ждал, решил ещё и накатить с мужиками? И с теми успеть и со мной?" with dissolve
-    "Лена начала понемногу повышать голос." with dissolve
-    me "Ну… да." with dissolve
-    show un angry coat with dissolve
-    un "Объясни мне тогда почему я тут сидела как дура одна!" with dissolve
-    "Лена разозлилась не на шутку. Мой план провалился, и она пострадала из-за этого." with dissolve
-    un "Всегда приходил с работы раньше меня и именно когда мы хотели провести вечер вместе…" with dissolve
-    "Чёрт, сколько же я там пробыл…" with dissolve
-    un "Я уж думала, случилось ли чего на работе, в аварию попал или током ударило!" with dissolve
-    un "Позвонила в депо, сказали, что ты нормально смену отработал без происшествий." with dissolve
-    un "Позвонила в больницу. Мне сказали, не привозили им такого товарища. Я уже сижу и не знаю, что и думать!" with dissolve
-    "Твою мать…" with dissolve
-    un "А ты лежишь где-то за гаражами!" with dissolve
-    un "Тебя какой-то хмырь побил, чуть в отделение не забрали!" with dissolve
-    un "Тебе вечер не с женой, а в милиции хотелось провести?" with dissolve
-    un "Ты мне скажи одно – почему сегодня-то? Что случилось?! У тебя умер кто-то?" with dissolve
-    un "Нет же, кто у тебя мог умереть, у тебя никого кроме меня нет, мужиков ты своих пару месяцев знаешь." with dissolve
-    "Вдруг я всполыхнул, будто эти слова были искрой, взорвавший порох внутри меня. Из глубин души пошло всё раздражение, вся боль, накопившаяся за месяцы." with dissolve
-    me "Лен, я не знаю почему я так поступил, наверное потому что устал от жизни этой нелепой, от работы, на которой копейки платят, от того что у нас сил нет, и мы не говорим друг с другом как тогда, заела нас эта жизнь!" with dissolve
-    un "Тебя жизнь заела? Так почему ты всегда молчишь и ничего не говоришь?! Почему такие сюрпризы мне даришь?!" with dissolve
-    me "Я молчал, потому что не хотел расстраивать тебя." with dissolve
-    un "Зато сейчас прямо обрадовал. Очень умно – копить в себе, а потом пойти напиться и подраться." with dissolve
-    me "…" with dissolve
-    me "И ты, правда, меня ждала?" with dissolve
-    un "Конечно! А потом пошла{w=0.3} искать тебя." with dissolve
-    un "И еле успела, сидел бы сейчас в вытрезвителе со своим собутыльником!" with dissolve
-    "Вдруг вспомнились его слова..." with dissolve
-    window hide
-    
-    scene bg garage_int
-    show gn_nasmeh
-    show prologue_dream
-    with fade
-    $ renpy.pause(2)
-    
-    window show
-    voicegn "И зачем ты ей? Че она нормального мужика найти не может?" with dissolve
-    window hide
-    
-    scene bg prih with dissolve
-    show un normal coat with dissolve
-    
-    window show
-    me "Ну и дура ты, Лена. Лучше бы к другому мужику пошла. Чем меня, дурака... Бросила бы меня, и я бы там замёрз и умер." with dissolve
-    show un angry coat with dissolve
-    un "Ты совсем идиот?! Что за бред ты несёшь…" with dissolve
-    show un normal coat with dissolve
-    un "...ох, ладно, иди спать уже." with dissolve    
-    stop music fadeout 2
-    window hide
-    show un normal coat:
-        anchor(0.5,0.5) pos (0.5,0.5)
-        ease 1 pos(-0.3,0.5)
-    window show
-    "Лена, наконец, сдвинулась с места, разулась, сняла пальто и пошла по квартире." with dissolve
-    "Несмотря на мой выплеск праведного гнева на нелёгкую жизнь, она одержала верх. Правда была на её стороне." with dissolve
-    un "Да за что мне судьба такая, постоянно с алкашами жить! Чем я заслужила такое?!" with dissolve
-    "Это было уже слышно в глубине квартиры. Я остался стоять у двери." with dissolve
-    "О чём это она? Ах да, отец…" with dissolve
-    "Чёрт, похоже, я ей напомнил главный кошмар её детства." with dissolve
-    "Что будет дальше? Если она не дура, а она не дура, то развод." with dissolve
-    "Затем выселение из квартиры, потому что квартира от её родственницы." with dissolve
-    "Я, конечно, опустился, но не до такого уровня, чтобы делить не моё имущество. Соберу пожитки и пойду по миру." with dissolve
-    "Теперь в общаге депошной жить… отвратительно." with dissolve
-    "Ну, а зачем Лене такой неудачник? Она сама себя обеспечит без моей помощи. Найдёт себе достойного мужчину, при деньгах. Захочет, вообще работать не будет, сможет дома творчеством заниматься." with dissolve
-    "Я задумался – а что делать дальше? Собирать вещи?" with dissolve
-    "Она не говорила это делать. Да и куда идти, на ночь глядя." with dissolve
-    "Пойти извиняться? Конечно, надо извиниться за всё это, но она сейчас явно не намерена разговаривать." with dissolve
-    "Всё же попробую, не ложиться же просто спать." with dissolve
-    "Я тоже разулся, снял пальто и пошёл на кухню." with dissolve
-    window hide
-    scene bg rvp_kitchen with dissolve
-    window show
-    "Лена сидела за столом и пила чай." with dissolve
-    "Вид у неё был подавленный и задумчивый." with dissolve
-    show un normal sport with dissolve
-    me "Лена… ну прости меня." with dissolve
-    "Выглядело это жалко." with dissolve
-    "Я вроде и правильно сделал, но как будто для приличия." with dissolve
-    "Нужно было раскаяться по-настоящему. Не осознав причины своего проступка, я был недостоин прощения." with dissolve
-    un "Завтра поговорим ещё. А сейчас иди спать." with dissolve
-    un "А хотя стой. Встань-ка у раковины." with dissolve
-    "Лена потихоньку наклонила мою голову и нежно потрогала место удара." with dissolve
-    un "Сразу говори, как себя чувствуешь? Не тошнит? Голова не кружится? Сильно болит?" with dissolve
-    "Я помотал головой, отрицая симптомы, хотя голова гудела знатно." with dissolve
-    "Лена пристально смотрела мне в глаза. Взгляд был всё ещё сердитый, но в глубине её изумрудных глаз виднелось беспокойство." with dissolve
-    hide un normal sport with dissolve
-    "Она достала из кухонного шкафчика бутылёк с зелёнкой, бинт и вату." with dissolve
-    window hide
-    
-    play sound sfx_open_water_sink
-    $ renpy.pause(1)
-    play sound_loop sfx_water_sink_stream fadein 1
-    
-    window show
-    "Поставила мою голову под кран и помыла под холодной водой." with dissolve
-    stop sound_loop fadeout 1
-    play sound sfx_close_water_sink
-    "Выключив воду, взяла немного ваты, смочила зелёнкой и обработала ушибленное место. Затем обмотала голову бинтом." with dissolve
-    un "Теперь иди. Повязку до утра не снимай." with dissolve
-    scene bg kvartira
-    show black:
-        alpha 0.8
-    with dissolve
-    "Я поплёлся в комнату." with dissolve
-    play sound sfx_bed_squeak1
-    "Плюхнулся на диван “чебурашку”. И кто его так назвал…" with dissolve
-    window hide
-    
-    play sound_loop sfx_head_heartbeat fadein 2
-    $ renpy.pause(1)
-    
-    window show
-    "..." with dissolve
-    "Ну и денёк." with dissolve
-    "Я бы мог ещё поразмышлять на то, какой я плохой и недостоин её." with dissolve
-    "Но всё уже сказано самому себе." with dissolve
-    show blink
-    "Лучше просто провалюсь в сон и дождусь нового дня." with dissolve
-    window hide
-
-    stop sound_loop fadeout 2
-    stop ambience fadeout 2
-    $ renpy.pause(2)
-    scene bg prih with dissolve
-    play music music_list["drown"] fadein 2
-    
-    window show
-    "Наконец-то я дома, мы с Сёмой проведём эти выходные вместе. Я ему приготовлю его любимый суп, он так рад будет. Наверное, тяжёлый день выдался." with dissolve
-    window hide
-    scene bg rvp_kitchen with dissolve
-    window show
-    "Фух, устала. Надо чайник поставить, чаю попью хоть." with dissolve
-    "Куда он пропал, у него же смена должна была закончиться четыре часа назад." with dissolve
-    "Может с ним что-то случилось на работе? Надо позвонить в депо." with dissolve
-    window hide
-    $ renpy.pause(1.0)
-    window show
-    "Хм, странно, в депо сказали, он сдал смену без происшествий." with dissolve
-    window hide
-    
-    scene bg kvartira
-    show black:
-        alpha 0.8
-    with dissolve
-    
-    window show
-    un "Алло, привет, Алён. Персунов Семён, к вам такой не поступал?" with dissolve
-    al "Нет, Лен, такого товарища не было. С мужем что случилось?" with dissolve
-    un "Да сама не понимаю. Ладно, пока тогда." with dissolve
-    $ renpy.pause(1.5)
-    un "Надо пойти к нему в депо. Чай потом выпью." with dissolve
-    window hide
-
-    $ persistent.sprite_time = "night"
-    $ night_time
-    scene bg ivlieva:
-    show black:
-        alpha 0.8
-    with dissolve
-    play ambience ambience_cold_wind_loop
-    window show
-    un "Здравствуйте, а Персунов Семён сегодня на работе был?" with dissolve
-    vh "Здрасти, ну конечно. Отработал как обычно. А вы кто?" with dissolve
-    un "Меня Елена зовут, я жена его. Он пропал куда-то, домой не пришёл." with dissolve
-    vh "Ой, Лена, он ведь с мужиками пошёл. Пить будут, не иначе." with dissolve
-    un "А куда они пошли?" with dissolve
-    vh "Известно куда, в гаражи рядом с депо. Там они всегда пьянствуют." with dissolve
-    vh "И мой тоже там. Я уже милицию вызвала, пусть его в вытрезвитель отвезут. Сил моих нет больше." with dissolve
-    un "Мой так никогда не делал!" with dissolve
-    vh "Ну, раньше не делал, теперь начнёт." with dissolve
-    un "Ладно, я пойду за ним, спасибо вам." with dissolve
-    vh "Давайте, спасайте его. Один ведь непьющий на всё депо был." with dissolve
-    un "Как же так, он же не киряет обычно. Я не хочу верить в то, что он там с ними." with dissolve
-    window hide
-    scene bg garage_ext with dissolve
-    window show
-    "О боже, его кто-то бьёт." with dissolve
-    "Ой, милиция тут, вяжут этого урода." with dissolve
-    "Один к Сёме идёт. Его же сейчас тоже повяжут, надо его скорее спасать!" with dissolve
-    show mil at left with dissolve
-    un "Товарищ лейтенант, не забирайте его, пожалуйста. Я жена его, он так никогда не гулял. Отдайте мне его, я его заберу домой." with dissolve
-    mil "В отделении разберёмся, кто кому муж, кто кому жена. О, Михалыч, ты чего тут делаешь?" with dissolve
-    show mh4 at right with dissolve
-    mh4 "Алёш, здравствуй. Она правду говорит, это не ваш клиент." with dissolve
-    mh4 "Это я его позвал выпить, а оно вот как вышло." with dissolve
-    mil2 "Лёха, чё ты с ним лясы точишь, лучше помоги мне повязать второго, он какой-то буйный!" with dissolve
-    alex "Сейчас приду!" with dissolve
-    alex "Ладно, я сейчас отойду, но чтобы когда я вернулся, вас здесь не было, понятно?!" with dissolve
-    window hide
-    show mil at left:
-        ease 1 pos(-0.1,0.5)
-    window show
-    "Надо быстрее поднять Сёму и уходить, пока они заняты." with dissolve
-    window hide
-    
-    stop music fadeout 2
-    stop ambience fadeout 2
-    scene bg black
-    show prologue_dream
-    with fade
-    
-    window show
-    "Сегодня мы впервые спали раздельно, на расстоянии друг от друга." with dissolve
-    "Обычно всегда в обнимку. После трудного дня давали друг другу отдых." with dissolve
-    "К этому дню у меня уже сформировался режим сна. Ложусь в десять, встаю в четыре утра, выхожу на смену. Возвращаюсь к трём часам дня, досыпаю пару часов." with dissolve
-    "К пяти часам вечера из института приходила Лена." with dissolve
-    "Вроде привык, но сегодня мои биологические часы не стали работать." with dissolve
-    "Видимо, после алкоголя и стресса организм решил взять тайм-аут на восстановление." with dissolve
-    window hide
-
-    scene bg black with dissolve
-    scene bg kvartira
-    show unblink
-    play ambience ambience_medstation_inside_night
-    
-    window show
-    scene bg kvartira with dissolve
-    $ persistent.sprite_time = "day"
-    $ day_time
-    "Я встал с кровати в районе девяти." with dissolve
-#анимация либо вообще фразу убрать
-    "Голова гудела, но скорее от удара об дверь, чем от алкоголя…" with dissolve
-    scene bg kvartira with dissolve
-    "Лена лежала, отвернувшись от меня. Её лицо я увидел, лишь обойдя кровать." with dissolve
-    scene bg int_house_of_un_night with dissolve
-    "Помню как в тот вечер в Совёнке, когда мы остались вдвоём в лагере, я смотрел на её лицо. Тогда мы помирились, и её лицо выражало спокойствие, умиротворение, тихую радость." with dissolve
-    scene bg kvartira with dissolve
-    "Сейчас у неё на лице грусть, будто видит плохой сон." with dissolve
-    "И что мне делать в выходной, когда поругался с единственным человеком, с которым хотел провести всё свободное время?" with dissolve
-    "Просто собрать молча вещи и уйти навсегда из квартиры или из жизни?" with dissolve
-    "Оставить записку с прощальным посланием типа: “Прости, но так будет лучше для всех нас. Я недостоин тебя…” и так далее?" with dissolve
-    with hpunch
-    "Семён, не твори ерунды." with dissolve
-    "Ты был моложе, менее опытным, оказался один в незнакомом месте и времени и смог начать отношения с ней. Вы тогда поругались, а потом помирились." with dissolve
-    "Внезапно появились силы не унижать себя, не жалеть себя, а решать проблему как задачу." with dissolve
-    "Если вчера преобладали мысли Семёна до Совёнка, то сейчас, наконец, взяла верх новая личность, которая брала ответственность за свои действия." with dissolve
-    "Да я в принципе и был таким все эти три года. И всё с Леной было хорошо – мы старались провести вместе каждую свободную минуту." with dissolve
-    "Мы не сидели на месте – я её вытаскивал куда-то погулять, а она – меня." with dissolve
-    "Но жизнь в этом большом сером городе ослабила нас, мы стали меньше общаться и больше занимать всё своё внимание работой и учёбой. Из-за этого и замкнулись в себе…" with dissolve
-    "Однако Лена скоро проснётся." with dissolve
-    "Молчание будет убивать наши нервы, мы будем чувствовать себя неловко. С чего начать разговор?" with dissolve
-    "Не знаю. Пойду в депо и напрошусь на смену." with dissolve
-    "За баранкой троллейбуса придёт и решение, и нужные слова. А вот насчёт того, что со мной происходит, тоже стоит подумать." with dissolve
-    "С этими мыслями я оделся, обулся и пошлёпал в депо." with dissolve
-    stop ambience fadeout 2
-    window hide
-    #ходьба плюс зум
-    scene bg vasyunina:
-       parallel:
-            zoom 1.05 anchor (48,27)
-            ease 15 zoom 3 anchor (1900,900)
-       parallel:
-            ease 0.20 pos (0, 0)
-            ease 0.20 pos (25,25)
-            ease 0.20 pos (0, 0)
-            ease 0.20 pos (-25,25)
-            repeat
-    window show
-    "Причём реально пошлёпал, было довольно прилично луж на улице." with dissolve
-    scene bg ivlieva with dissolve
-    play ambience ambience_cold_wind_loop
-    window show
-    nd "Да ты чего, Персунов, какие смены?" with dissolve
-    me "Ну, выйти сегодня на рейс хочу. Сегодня же суббота, считай, что я решил устроить себе субботник." with dissolve
-    nd "И на чём ты выходить собрался, ударник пятилетки?" with dissolve
-    nd "Все, что на ходу, уже в рейсе, других не починили, слесари сам знаешь, как работают. Лучше бы они так пили, как работают, ну или наоборот." with dissolve
-    "Слесари вообще были бичом депо. А я с ними пил вчера." with dissolve
-    nd "А вообще, что за желание поработать? Ты вроде договаривался всё себе выходные устроить…" with dissolve
-    "Секунду было молчание." with dissolve
-    nd "Поругались что ли?" with dissolve
-    me "Ага." with dissolve
-    nd "Да не переживай, помиритесь. Иди домой, не ищи приключений себе." with dissolve
-    play music kzd fadein 2
-    "Тоже верные слова. Может не стоит убегать от проблемы в работу, всё равно она так не решится." with dissolve
-    "Однако пойду, прогуляюсь. Сразу возвращаться домой как-то скучно. Да и пока я так и не придумал, как извиниться и поговорить с Леной." with dissolve
-    "Я ещё ни разу не ходил пешком по моему маршруту. Но в какую сторону пойти? В центр идти долго и утомительно, поэтому пойду в Кузнечиху." with dissolve
-    window hide
-    scene bg kuzn with dissolve
-    window show
-    "Кузнечиха это другой микрорайон, где заканчивался мой маршрут." with dissolve
-    "Он мало чем отличается от Нагорного, такие же панельки, разве что новее. В основном девятиэтажки." with dissolve
-    window hide
-
-    scene bg ivlieva with dissolve
-    play sound sfx_intro_bus_engine_start
-
-    window show
-    "Я пошёл вниз по Ивлиева. Рядом проезжали “коллеги” на троллейбусах и автобусах, везли пассажиров на учёбу и работу." with dissolve
-    "Было бы немного иронично, если бы я пошёл работать в автобусный парк. Ведь именно автобус стал проводником сначала в тот загадочный и немного странный пионерлагерь, а затем в райцентр." with dissolve
-    "Когда-то меня отвезли, а теперь я вожу." with dissolve
-    "Зато электротранспорт меньше загрязняет воздух! – усмехнулся я." with dissolve
-    "Будто в этой стране и эпохе кому-то было дело до этого." with dissolve
-    "Только если каким-нибудь мудрым партийцам, которые одной рукой составляли директивы о развитии электротранспорта, а другой подписывали приказ о строительстве новой ТЭС." with dissolve
-    "Ведь если подумать, откуда берётся электричество для трамваев и троллейбусов?" with dissolve
-    "В основном от электростанций, которые работают на энергии сжигания угля." with dissolve
-    "Ещё неизвестно, кто больше коптит небо тогда – выхлопы машины или дым от ТЭС." with dissolve
-    "Хотя человечество освоило безопасную атомную энергию, а если ещё освоит и термояд…" with dissolve
-    "За размышлениями о судьбе энергетики, я прошёл мимо рынка, третьего микрорайона и дошёл до улицы Козицкого." with dissolve
-    "Дальше овраг, через который можно перейти по пешеходному мосту. Я дошёл до него и снова погрузился в свои думы." with dissolve
-    window hide
-    stop music fadeout 2
-    scene bg kuzn_most with dissolve
-    window show
-    play music music_list["faceless"] fadein 2
-    "Так о чём я?" with dissolve
-    "Так, стоп!" with dissolve
-    "Я опять убегаю от проблемы! Мировая энергетика сама решит, в каком направлении ей развиваться и какие источники использовать!" with dissolve
-    "А у меня есть более насущные проблемы, которые не требуют отлагательств." with dissolve
-    "Например, вчера я обидел самого дорогого мне человека. Плюнул на своё обещание ей. Так и не извинился." with dissolve
-    "И сейчас оставил в одиночестве. Я снова её бросил, как вчера." with dissolve
-    "Она, наверное, уже проснулась и не знает, где я. Ей, наверное, страшно за меня." with dissolve
-    "Я остановился на середине моста." with dissolve
-    "Слева овраг, справа овраг. Впереди дома, позади тоже." with dissolve
-    "Мой дом тоже там. Нет смысла куда-то ходить, надо прийти к Лене. Всё-таки я дурную вещь сделал, что ушёл. На обратном пути придумаю, что скажу." with dissolve
-    "Обратно я уже шёл не прогулочным шагом, а довольно быстрым." with dissolve
-    "Ох, зря я Лену оставил, она надумает себе чего-нибудь не то." with dissolve
-    "Впрочем, вещи я не собирал, так что она поймёт, что я не ушёл насовсем." with dissolve
-    "Сука, надо было записку оставить в духе: “Ушёл на работу, к вечеру вернусь”." with dissolve
-    "Куда я мог пойти, по её мнению? В универсам, в депо, просто погулять." with dissolve
-    "Вроде бы ничего такого, но я же не могу залезть ей в голову и понять, что она думает." with dissolve
-    window hide
-    
-    stop music fadeout 2
-    scene bg universam with dissolve
-    
-    window show
-    "Я проходил мимо универсама." with dissolve
-    "Может купить ей чего-нибудь вкусного?" with dissolve
-    "Полез в карман. Ну да, конечно, деньги-то я не взял. Да и не так у нас их много." with dissolve
-    "Всё-таки Лена ранимая и может надумать плохого." with dissolve
-    "Вдруг она сидит и рыдает сейчас, расстроившись от того, что я её оставил." with dissolve
-    "Или не плачет, а уже с горя…" with dissolve
-    stop ambience fadeout 2
-    play music music_list["scarytale"] fadein 2
-    "Твою мать!" with dissolve
-    "Нужно срочно бежать к ней." with dissolve
-    "Чёрт с ними со словами, лишь бы увидеть её живой." with dissolve
-    "Пусть она хоть скалкой мне последние мозги вышибет, я заслужил это." with dissolve
-    "Я побежал во всю свою прыть к нашему дому." with dissolve
-    window hide
-
-    scene bg dom with dissolve
-    window show
-    "Сердце бешено стучало в груди." with dissolve
-    "Вот подъезд." with dissolve
-    "Сука, почему мы высоко живём, ещё по лестнице бежать наверх!" with dissolve
-    "Так, вот квартира." with dissolve
-    play sound sfx_unlock_door_campus
-    "Дрожащими руками достаю ключ и открываю." with dissolve
-    "Не разуваясь, пробегаю в комнату." with dissolve
-    window hide
-    
-    stop music fadeout 2
-    scene bg black with dissolve
-    play sound_loop sfx_head_heartbeat fadein 2
-    
-    window show
-    "Люстра." with dissolve
-    "Держится на потолке, как обычно." with dissolve
-    "На ней…" with dissolve
-    window hide
-
-    scene anim prolog_4 with dissolve
-    $ renpy.pause(1)
-    
-    window show
-    "...лампочки и хрусталь." with dissolve
-    "Я опустил глаза вниз." with dissolve
-    window hide
-
-    scene bg kvartira with dissolve
-    show un shy sport with dissolve
-    play ambience ambience_medstation_inside_night
-    $ renpy.pause(2)
-    
-    window show
-    "Передо мной стояла удивлённая Лена." with dissolve
-    me "Привет… Лена…" with dissolve
-    "После такого спринта и резкой остановки у меня была сильная одышка." with dissolve
-    "После каждого слова я ловил ртом воздух. Я согнулся, упёршись руками в колени, чтобы отдышаться." with dissolve
-    "Лена стояла передо мной целая и невредимая." with dissolve
-    stop sound_loop fadeout 3
-    "Однако я сразу заметил красноту вокруг глаз. Ту самую, которая остаётся, когда человек плакал." with dissolve
-    "Самого страшного не произошло, это главное. Дальше пусть хоть режет своим любимым ножом, который когда-то носила с собой." with dissolve
-    "Сначала она немного не ожидала моего столь быстрого появления." with dissolve
-    window hide
-    show un angry2 sport with dspr
-    window show
-    "Но факт того, что я прошёл в комнату не разувшись не мог не вызвать у неё раздражения." with dissolve
-    play music music_list["awakening_power"] fadein 2
-    un "Так, а я не поняла, ты чего грязь с улицы в комнату несёшь? Я только пол помыла." with dissolve
-    "Мда, вот уж надумал глупостей. Из-за этого только сильнее её обидел. Лена злилась всё больше." with dissolve
-    show un angry sport with dspr
-    un "Ты меня вообще ни во что не ставишь? Вчера ушёл бухать к своим дружкам, а про меня забыл!" with dissolve
-    un "Ну, правда, нахрен эту Лену, мне же эти собутыльники важнее!" with dissolve
-    "Лена уже совсем разозлилась." with dissolve
-    un "Сегодня утром снова меня оставил, а сейчас так прибежал, что аж разуться забыл. Говори, где был?!" with dissolve
-    "Надо что-то отвечать уже." with dissolve
-    me "Я в депо пошёл…" with dissolve
-    "Ох, зря это сказал. Лену с этого просто вынесло." with dissolve
-    show un rage sport with dspr
-    un "Куда?!!" with dissolve
-    un "Опять к своим дружкам-алкашам! Тебе вчера не хватило, ты ещё хочешь?!" with dissolve
-    show unubiusport with dspr
-    "Секундная пауза. Лена набрала воздуха в лёгкие для новой очереди слов." with dissolve
-    hide unubiusport with dspr
-    un "Опохмелиться надо, да?! А то непривычно, с утра голова болит от водки!" with dissolve
-    "Твою мать, как же я вляпался. Если Лена вышла из себя, то это очень плохо." with dissolve
-    un "О, я знаю! Пошёл жаловаться своим товарищам, как его жена молодая пилит." with dissolve
-    un "Какая Лена сука. Лучше бы рот закрыла и молча полы мыла, еду готовила." with dissolve
-    un "А нам всё по барабану. Хотим – уходим хрен знает куда и бухаем." with dissolve
-    un "А потом лежим на холодной земле. Врачи же нас дурят, сказки про пневмонию рассказывают." with dissolve
-    un "А я дура, сижу на парах, потом вечером это всё учу." with dissolve
-    un "А муж у меня умный, смотри Лена, могу спокойно в ноябре ночью на улице спать." with dissolve
-    "Бедная Лена…" with dissolve
-    un "А если заболею и умру, ничего страшного. Мне на себя плевать и на других тоже. Жена будет убиваться – да плевать мне!" with dissolve
-    "Наконец, Лена уже начала сбавлять громкость. Накопленный негатив нашёл выход, и она была уже больше опустошённая, чем злая." with dissolve
-    "Сколько же она надумала." with dissolve
-    "Что я хотел сбежать и пожаловаться на неё мужикам." with dissolve
-    "Почему она так про меня думает? Я же так не делал. Как будто она на меня примеряла роль другого человека." with dissolve
-    "Но это неправильно. Я не злился на неё, я хотел перед ней извиниться. Я хотел лишь отвлечься, чтобы найти правильное решение. А в итоге…" with dissolve
-    me "Лена, я не хотел…" with dissolve
-    un "Что ты не хотел? Провести дома вечер с женой спокойно? Быть нормальным человеком ты не хотел?" with dissolve
-    "Не, ну это уже надо было останавливать." with dissolve
-    me "Не хотел я ни с кем опохмеляться с утра. И жаловаться я тоже не хотел никому на тебя!" with dissolve
-    show un angry2 sport with dspr
-    "Я немного повысил голос. Это помогло успокоить Лену, главное не переборщить." with dissolve
-    un "А зачем тогда в депо пошёл?" with dissolve
-    me "Хотел взять смену." with dissolve
-    un "Семён, ты серьёзно? Ты что у нас, герой соцтруда?" with dissolve
-    "Лена замолчала на пару секунд." with dissolve
-    un "Всё-таки сбежать хотел от меня." with dissolve
-    "Чёрт, а она права. Иначе как бегством не назовёшь." with dissolve
-    un "А что же так быстро прибежал, совесть замучила?" with dissolve
-    me "Типа того… Я хотел подумать как извиниться, пошёл погулять до Кузнечихи." with dissolve
-    me "На мосту понял, что не должен был тебя оставлять. И что надо вернуться скорее и поговорить." with dissolve
-    "Всё-таки нужно было дать понять, что я волновался за неё, поэтому прибежал, позабыв про все приличия." with dissolve
-    me "От универсама я бежал без остановки. Я испугался, что ты очень расстроишься и…" with dissolve
-    un "И что?" with dissolve
-    me "Ну, сделаешь с собой что-то плохое…" with dissolve
-    "Внезапно Лену снова задели мои слова." with dissolve
-    show un angry sport with dspr
-    un "Да больно надо! Ещё из-за него я тут буду… нет, вы подумайте, какой он уникальный и важный!" with dissolve
-    un "А ты не волнуйся, у нас незаменимых нет." with dissolve
-    stop music fadeout 3
-    window hide
-    scene bg kvartira:
-       parallel:
-            zoom 1.0 anchor (0,0)
-            ease 5 zoom 2 anchor (800,200)
-    show un shy sport at left:
-        parallel:
-            zoom 1.0 anchor (0,0)
-            ease 5 zoom 2 anchor (460,200)
-    window show
-    "В этот момент она остановилась. Я стоял в шоке от её последних слов." with dissolve
-    "Лена поняла, что сказала достаточно или даже слишком много." with dissolve
-    "Прежний напор ушёл, его место занимал дискомфорт. Как всегда в тех ситуациях, когда на эмоциях высказываешь человеку всё, что о нём думаешь." with dissolve
-    "Но в определённый момент от праведного гнева перегибаешь палку и несправедливо задеваешь человека." with dissolve
-    "И уже твоя совесть тебя мучает." with dissolve
-    window hide
-    scene bg kvartira:
-       parallel:
-            zoom 2 anchor (800,200)
-            ease 2 zoom 1 anchor (0,0)
-    show un normal sport at left:
-        parallel:
-            zoom 2 anchor (460,200)
-            ease 2 zoom 1 anchor (0,0)
-    show un normal sport
-    window show
-    un "Ладно, надоело мне это всё. Иди пол вымой. И дверь закрой нормально, не в лифте родился." with dissolve
-    "Начали с грязного пола и закончили им же." with dissolve
-    "Больше говорить было не о чем." with dissolve
-    "Я развернулся и вышел из комнаты. Разулся, пошёл в ванную, взял швабру и ведро." with dissolve
-    window hide
-
-    scene bg black with dissolve
-    play sound sfx_open_water_sink
-    $ renpy.pause(1)
-    play sound_loop sfx_water_sink_stream fadein 1
-    
-    window show
-    "Я сам себе сжёг мосты к лучшему исходу." with dissolve
-    "Если бы пошёл домой вчера, вообще этой ссоры бы не случилось." with dissolve
-    "Если бы не ушёл утром, а дождался, пока Лена проснётся, сейчас не пришлось ссориться." with dissolve
-    "Но уже нет смысла об этом сожалеть, надо обдумать наше с Леной положение." with dissolve
-    window hide
-    
-    stop sound_loop fadeout 1
-    play sound sfx_close_water_sink
-    scene bg prih with dissolve
-    
-    window show
-    "Вот уж что точно не надо делать, так это куда-то уходить без нужды и без предупреждения. Хватит с меня уходов." with dissolve
-    "Если я хочу решить проблему, надо поговорить с Леной. Но как?" with dissolve
-    "За три года отношений мы никогда так не ссорились. Я никогда не бросал Лену, а Лена никогда так на меня не срывалась." with dissolve
-    "Лене тоже плохо и это видно. Она пыталась показать, что не переживала от того, что я ушёл, но краснота на лице её выдавала." with dissolve
-    "Интересно ещё и то, что Лена верила мне. Она не кричала после моих слов что-то вроде:" with dissolve
-    window hide
-    
-    scene bg kvartira
-    show un angry2 sport
-    show prologue_dream
-    with fade
-
-    window show
-    un "А зачем тогда в депо пошёл?" with dissolve
-    me "Хотел взять смену." with dissolve
-    show un angry sport with dissolve
-    un "Что ты мне врёшь-то? Наверняка хотел им на меня пожаловаться." with dissolve
-    window hide
-    scene bg prih with dissolve
-    window show
-    "Это хороший признак." with dissolve
-    "Значит, Лена ещё может меня выслушать, поверить мне." with dissolve
-    "И она ещё верит, что я не стал алкашом, который в грош не ставит свою жену ради бутылки." with dissolve
-    "Так, а всё-таки, с чего начать разговор?" with dissolve
-    "Снова пойти извиниться? Как-то мелко." with dissolve
-    "В данной ситуации это скорее формальность." with dissolve
-    "Нужно излить друг другу душу, объяснить, почему ты так себя повёл." with dissolve
-    "Точнее, я должен объяснить, почему эта каша заварилась." with dissolve
-    "Сегодняшний уход уже объяснил более-менее. Но он произошёл из-за вчерашней ситуации." with dissolve
-    "Вот тут логика моих действий не так очевидна." with dissolve
-    "Я закончил мыть пол." with dissolve
-    play sound sfx_stomach_growl
-    "Теперь нужно было пообедать, желудок урчал." with dissolve
-    "Обычно мы с Леной обедали вместе. Сейчас это наше любимое действие может превратиться в пытку, причём для нас обоих." with dissolve
-    "Внезапно, в прихожую зашла Лена." with dissolve
-    window hide
-    show un normal sport with dissolve
-    window show
-    un "Закончил? Иди пообедай, там суп есть." with dissolve
-    me "А как же ты?" with dissolve
-    un "Я уже поела." with dissolve
-    window hide
-    show un shy sport:
-        anchor(0.5,0.5) pos(0.5,0.5)
-        ease 1 pos(-0.3,0.5)
-    window show
-    "И с этими словами она резко вышла." with dissolve
-    "Даже лица её разглядеть не успел." with dissolve
-    "По-моему, она покраснела. Только вот почему она не стала со мной обедать как обычно?" with dissolve
-    play sound sfx_open_water_sink
-    play sound_loop sfx_water_sink_stream fadein 1
-    "Я помыл руки и пошёл на кухню." with dissolve
-    window hide
-    
-    stop sound_loop fadeout 1
-    play sound sfx_close_water_sink
-    scene bg rvp_kitchen with dissolve
-    play music ya_tebya_lyublyu fadein 2
-    
-    window show
-    "Я вспомнил, как до этой ссоры старался хотя бы по мелочи помогать на кухне." with dissolve
-    "Мастером кулинарии я не был, но порезать продукты и проследить, чтобы не выкипела вода, я все же могу." with dissolve
-    "На кухне всё как обычно – холодильник, стол, стулья." with dissolve
-    "Плита, на плите кастрюля, в кастрюле супчик." with dissolve
-    "Ничего себе… моя любимая солянка. Лена сварила вчера, хотела угостить." with dissolve
-    "Тут я всё понял и чуть не разрыдался от этого." with dissolve
-    "Лена любит меня, неудачника, который работает за копейки." with dissolve
-    "Она хотела порадовать меня после рабочего дня, после тяжёлых недель работы, несмотря на то, что сама устала в тот день от учёбы." with dissolve
-    "Рядом со мной есть такой прекрасный человек, я могу жить и быть счастливым." with dissolve
-    "Что я делаю вместо этого? Пропадаю, хрен знает где, убиваю себя на морозе." with dissolve
-    "Тем самым разбивая ей сердце." with dissolve
-    "Воистину, я её недостоин. Я не просто извиниться должен, я на коленях должен перед ней ползать." with dissolve
-    "Свой любимый суп я ел с осознанием своей ничтожности." with dissolve
-    play sound sfx_open_water_sink
-    play sound_loop sfx_water_sink_stream fadein 1
-    "Закончив, я помыл за собой посуду и пошёл в комнату." with dissolve
-    window hide
-
-    stop sound_loop fadeout 1
-    play sound sfx_close_water_sink
-    stop music fadeout 2
-    scene bg kvartira with dissolve
-    play ambience ambience_medstation_inside_night
-    
-    window show
-    "Надо поговорить с Леной сейчас. Обнять её, успокоить, объясниться. Пообещать, что больше такого не повторится." with dissolve
-    "Лена сидела в комнате и читала книгу." with dissolve
-    me "Лена, я хотел…" with dissolve
-    play sound disk_ringtone
-    "Внезапно зазвонил телефон, так и не дав мне сказать нужные слова. Я поднял трубку." with dissolve
-    stop sound
-    play sound trubka
-    voice "Алло, Персунова Елена тут живёт?" #with dissolve
-    me "Да, что нужно?" with dissolve
-    voice "Позовите её к телефону." #with dissolve
-    window hide
-    show un normal sport with dissolve
-    window show
-    "Я обернулся к Лене." with dissolve
-    me "Лена, тут тебя просят к телефону." with dissolve
-    hide un normal sport with dissolve
-    "Лена подошла к телефону." with dissolve
-    "Отвечала она коротко и односложно и я не мог понять тему разговора из того, что смогу услышать." with dissolve
-    "Она недолго поговорила и положила трубку, а после этого встала и пошла одеваться." with dissolve
-    me "Ты куда?" with dissolve
-    un "Меня вызвали в институт, там помощь нужна. Срочно нужно плакат к 7 ноября нарисовать." with dissolve
-    me "Стой, а без тебя они не могут?" with dissolve
-    un "Нет, не могут. У нас в институте только несколько человек рисовать умеют. А Ленина хорошо нарисовать только у меня получится." with dissolve
-    me "Подожди, я поговорить хотел." with dissolve
-    show un normal coat with dissolve
-    un "Вечером поговорим, не переживай. Закрой за мной дверь, я ухожу." with dissolve
-    "После этих слов Лена оделась и вышла." with dissolve
-    hide un normal coat with dissolve
-    play sound sfx_close_door_1
-    "Я закрыл за ней дверь." with dissolve
-    "Вот и поговорили… теперь сиди и жди, Семён. Ты оставил Лену, теперь Лена оставила тебя." with dissolve
-    "Ох уж это мучительное ожидание… попробовал все способы занять себя – и телевизор посмотрел, и книгу почитал, и даже конспекты пописал по своей учёбе." with dissolve
-    "Лена всё никак не возвращалась. Тишина давила на меня." with dissolve
-    stop ambience fadeout 2
-    "Я вспомнил про радиолу “Вега”, стоявшую в углу. Такой проигрыватель для виниловых дисков." with dissolve
-    play music plastinki fadein 2
-    "Была и коллекция, причём попадались и западные дефицитные исполнители, типа “Divine comedy”, Питера Габриела и Стинга." with dissolve
-    scene bg kvartira
-    show black:
-        alpha 0.6
-    with dissolve
-    "Наступал вечер, я сидел у окна, слушал музыку и просто ждал её." with dissolve
-    "Ждал увидеть её фиолетовое пальто с зелёным шарфом." with dissolve
-    "Ждал её фиолетовые косички волос, плывущие к нашему подъезду." with dissolve
-    "Ждал, что она придёт ко мне слушать старые пластинки." with dissolve
-    "Я нашёл наш фотоальбом, в котором все наши фото за три года." with dissolve
-    "Все сделаны в райцентре и ни одной здесь, в Горьком." with dissolve
-    "Все как один эти фотографии навевали воспоминания. А воспоминания разрывали душу." with dissolve
-    "Здесь мы такие счастливые были." with dissolve
-    "Я не выдержал и закрыл альбом, поставив его на место." with dissolve
-    window hide
-
-    scene bg okno with dissolve
-    window show
-    "Затем я начал смотреть на окружавший нас пейзаж." with dissolve
-    "Зрелище не из приятных." with dissolve
-    "Через дорогу недостроенное кирпичное здание рядом с администрацией." with dissolve
-    "Недалеко районная поликлиника – потенциальное место работы Лены после института." with dissolve
-    window hide
-
-    scene bg universam
-    show black:
-        alpha 0.6
-    with dissolve
-    window show
-    "За ними универсам и рынок." with dissolve
-    window hide
-
-    scene bg kvartira
-    show black:
-        alpha 0.8
-    with dissolve
-    window show
-    "В итоге мне надоели западные песни, и я выключил радиолу." with dissolve
-    stop music fadeout 2
-    play ambience ambience_medstation_inside_night
-    "Наконец, я её увидел." with dissolve
-    "Время было около восьми часов вечера. Она приехала на одном из троллейбусов." with dissolve
-    "Как только она зашла в подъезд, я пошёл к двери встречать." with dissolve
-    scene bg prih with dissolve
-    play sound sfx_open_door_1
-    "Когда она поднялась, я уже открыл ей дверь." with dissolve
-    show un shy coat with dissolve
-    "Лена была слегка изумлена такой тёплой встречей, но постеснялась что-то сказать." with dissolve
-    show un normal coat with dspr
-    un "Слушай, ты поговорить хотел. Подожди немного, я устала." with dissolve
-    me "Пойдём, поужинаем. Ты пока раздевайся, я суп погрею." with dissolve
-    un "А ты без меня не ел?" with dissolve
-    me "Нет, тебя ждал." with dissolve
-    hide un normal coat with dissolve
-    "Было заметно, что Лену тронуло это." with dissolve
-    window hide
-    
-    scene bg rvp_kitchen with dissolve
-    
-    window show
-    "Через несколько минут мы оба ели суп на кухне." with dissolve
-    me "Как прошло?" with dissolve
-    show un normal sport with dissolve
-    un "Нормально, всё успели. Только устала очень." with dissolve
-    "Чёрт, опять препоны." with dissolve
-    "Наверное, нужно начать разговор сейчас. Только вот опять в нужный момент нет подходящих слов." with dissolve
-    $ renpy.pause(1.5)
-    "Так мы и доели ужин молча." with dissolve
-    window hide
-    window show
-    un "Пойду{w=0.3} полежу, совсем сил нет." with dissolve
-    window hide
-    show un normal sport:
-        anchor(0.5,0.5) pos(0.5,0.5)
-        ease 1 pos(-0.3,0.5)
-    window show
-    "И скрылась в спальне." with dissolve
-    "От этих слов я совсем расстроился." with dissolve
-    "Опять возможность решить ситуацию ускользает от меня." with dissolve
-    "Сейчас она уснёт. Будить её было как-то неприлично, человек работал." with dissolve
-    window hide
-
-    $ persistent.sprite_time = "night"
-    $ night_time
-    scene bg kvartira
-    show black:
-        alpha 0.8
-    with dissolve
-    
-    window show
-    "От внутреннего беспокойства мне спать не хотелось." with dissolve
-    scene bg okno with dissolve
-    "Я пошёл в комнату и сел за стол у окна." with dissolve
-    "Вдруг я заметил магнитофон." with dissolve
-    "А ведь я давно не слушал музыку на нём." with dissolve
-    "Хорошо, что наушники были, а то затея не имела бы смысла." with dissolve
-    "А что послушать?" with dissolve
-    "В такой момент хорошо подходило что-то лиричное, про ночь." with dissolve
-    "Руки сами нашли кассету." with dissolve
-    "Кино. Группа крови. Сторона А. Песня номер четыре." with dissolve
-    "Перед тем как нажать на кнопку, немного отвлёкся." with dissolve
-    "Помню, как купил эту кассету ещё в райцентре, как слушали её с Леной, Алисой и другими ребятами. Потом подбирали аккорды." with dissolve
-    "Кинул взгляд на гитару в углу. А ведь музыка много помогала мне, когда было трудно. Может, сейчас поможет?" with dissolve
-    "Я нажал кнопку включения песни." with dissolve
-    stop ambience fadeout 2
-    play music sp_noch fadein 2
-    "Песня пошла по проводам наушников мне в уши." with dissolve
-    "Надо разобраться в причинах вчерашнего." with dissolve
-    "Почему не пошёл после работы домой? Не хотел сидеть дома один." with dissolve
-    "Почему не тянуло домой, а хотелось посидеть подольше? Хотелось излить душу, но не видеть Лену." with dissolve
-    "Почему хотел излить душу кому-то, но не Лене? Стыдно было говорить с ней." with dissolve
-    "Ведь я считаю, что я её недостоин. Если я признаюсь ей в своих проблемах, что рискую быть уволенным, она меня бросит." with dissolve
-    "Почему она меня бросит? Она ведь всегда меня поддерживала." with dissolve
-    window hide
-
-    $ persistent.sprite_time = "day"
-    $ day_time
-    show bg kvartira
-    show un smile2 sport
-    show prologue_dream
-    with fade
-    window show
-    "Снова вспомнил, как она сказала мне, что не стыдится того, что я работаю простым водителем троллейбуса." with dissolve
-    window hide
-
-    $ persistent.sprite_time = "night"
-    $ night_time
-    scene bg okno with dissolve
-    window show
-    "Почему она любит меня? Не знаю."
-    "Здесь мои размышления зашли в тупик. Что у Лены в голове, я до конца не представлял." with dissolve
-    "Я сменил тему своих мыслей." with dissolve
-    "Почему мне не нравится окружающая меня реальность?" with dissolve
-    "Жильё, работа, личная жизнь – всё есть. Но у меня было плохое предчувствие." with dissolve
-    "Потому что я знал." with dissolve
-    "Я знал, что начнётся в ближайшие годы." with dissolve
-    "Уже через год Союз распадётся, нужно будет выживать в новой реальности." with dissolve
-    "Мне было страшно брать ответственность за нас с Леной перед неизведанным, тяжёлым временем." with dissolve
-    "Сначала я думал, этот мир достаточно сильно отличается и история в нём пошла по другому ходу." with dissolve
-    "Но всё та же перестройка встретила меня в райцентре. Всё те же невыплаты зарплат на заводе, закрытия производств." with dissolve
-    "Союз развалится под возгласы о свободе, а дальше людей будет ждать нищета, бандитизм, несправедливость и потрясения." with dissolve
-    "Если это случится, Лена сильно расстроится, а я не хочу её видеть расстроенной." with dissolve
-    "А ведь как всё начиналось хорошо. Жизнь казалась такой лёгкой, когда мы были ещё моложе и…" with dissolve
-    "Вдруг на моё плечо опустилась рука." with dissolve
-    "Я перестал вспоминать, вернулся в реальность." with dissolve
-    window hide
-    show un normal sport with dissolve
-    window show
-    "Это была Лена." with dissolve
-    stop music fadeout 3
-    play music sp_noch_minus fadein 2
-    "Я снял наушники и хотел поставить песню на паузу, но случайно нажал на кнопку перемотки." with dissolve
-    "Песня началась сначала. Было тихонько слышно, как Цой желал спокойной ночи всем, кто ложится спать." with dissolve
-    un "Чего не спишь?" with dissolve
-    me "Что-то не хочется. Задумался о жизни." with dissolve
-    un "Да уж, есть над чем подумать. Не против, если я подсяду?" with dissolve
-    me "Не против." with dissolve
-    "Я выдвинул ей стул. Лена села рядом." with dissolve
-    un "Нехорошо получилось сегодня. Ты ведь хотел извиниться за вчерашнее, а я тебя оставила." with dissolve
-    "Затем, помолчав несколько секунд, она продолжила." with dissolve
-    un "Но я всё же не понимаю, почему ты так поступил? Почему не пошёл домой как обычно?" with dissolve
-    "Я решил, что хватит с меня молчать и скрывать свои мысли от Лены. Скажу как есть, а уж дальше она делает, что хочет." with dissolve
-    me "Я ж говорю, жизнь заела." with dissolve
-    me "Зарплата маленькая, работа непрестижная. Живём в панельной однушке." with dissolve
-    "Лене не понравились мои слова." with dissolve
-    un "Что значит не престижная? Для меня нет такого понятия. Есть нужная и ненужная обществу." with dissolve
-    un "Ты возишь людей на работу и учёбу, меня в том числе. Это нужная обществу работа, значит достойная." with dissolve
-    un "Зарплата пусть маленькая, но мы же не голодаем." with dissolve
-    un "Тебе только двадцать исполнилось, поработай ещё, повысят зарплату." with dissolve
-    un "Закончи институт, в конце концов. Я вот вообще не могу работать, у меня учёба всё время занимает." with dissolve
-    un "Мне даёт вуз деньги, чтобы я не умерла с голоду, пока учусь, а ты получаешь зарплату за свой труд, полезный для общества." with dissolve
-    show un smile sport with dspr
-    un "Это огромная разница и я тебе завидую в этом." with dissolve
-    me "Да это понятно. Просто… просто мне стыдно." with dissolve
-    show un shy sport with dspr
-    "Лена удивилась." with dissolve
-    un "Перед кем?" with dissolve
-    me "Перед тобой." with dissolve
-    un "Я не понимаю. Ты работаешь, деньги в дом приносишь, учишься параллельно с этим." with dissolve
-    un "Ты у меня стыда не вызываешь… не считая вчерашнего." with dissolve
-    me "Ну как же, ты такая красавица, учишься на одни пятёрки в институте. Спортом занимаешься. А я…" with dissolve
-    "Я выдохнул. Затем тяжело продолжил." with dissolve
-    me "Давай расстанемся. Я не хочу тебя тяготить." with dissolve
-    show un shocked sport with dspr
-    "Лена испугалась моих слов. Я продолжил высказывать всё, что таилось в душе." with dissolve
-    me "Ты найдёшь себе достойного мужа." with dissolve
-    un "Я уже нашла…" with dissolve
-    me "У него будет нормальная работа, богатые родители. Он тебя обеспечит." with dissolve
-    "Внезапно Лена завелась от этих слов." with dissolve
-    show un angry sport with dspr
-    un "Я тебе что, шлюха какая-то?! Выйти замуж за деньги предлагаешь?!" with dissolve
-    un "Что я этому богатому мужу скажу, когда он штамп в паспорте увидит от нашего брака? “Ой, да сошлась с одним неудачником, он не мог меня рублями засыпать, я его бросила за это”. Да грош мне цена после этого!" with dissolve
-    show un normal sport with dspr
-    un "Всю жизнь это презирала. Всю жизнь смогла прожить в бедности, это мне не страшно. Лишь бы был человек, с которым я могу быть счастлива." with dissolve
-    me "То есть ты не хочешь меня бросить?" with dissolve
-    un "Нет, а с чего?" with dissolve
-    un "Ты молодец, что хочешь обеспечивать семью, чтобы я не бедствовала. Но не всё сразу же." with dissolve
-    un "И не надо так переживать из-за денег, мои чувства к тебе не зависят от того, сколько рублей ты в кассе получаешь." with dissolve
-    show un smile sport with dspr
-    un "Это всё остатки твоего мировоззрения от жизни в капиталистическом обществе." with dissolve
-    show un grin sport with dspr
-    "Лена перестала злиться. Немного улыбнувшись, она продолжила." with dissolve
-    un "Видимо, ты даже не представляешь, как изменил мою жизнь в лучшую сторону." with dissolve
-    un "Ты столько раз меня выручал. Ты спас меня от той тяжёлой и одинокой жизни." with dissolve
-    me "А знаешь, взаимно ведь. Я в тебя смотрю порой как в своё отражение." with dissolve
-    me "Моя жизнь до тебя тоже была одинокой. Но благодаря тебе я наконец-то понял, что такое счастье." with dissolve
-    me "Жаль только я это ценить не умею." with dissolve
-    show un shy sport with dspr
-    un "В смысле?" with dissolve
-    me "Я про вчерашнее. Я думал, я у тебя сильное отвращение вызвал, ты не захочешь жить с алкашом. Ещё и отца напомнил, прости." with dissolve
-    show un normal sport with dspr
-    un "А, это… Видно судьба у меня такая." with dissolve
-    un "Все мужчины в моей жизни спиваются. Сначала отец, теперь вот муж." with dissolve
-    un "Лучшей подруге это тоже одни несчастья принесло. И всё же, надо понять, как ты до такого дошёл." with dissolve
-    me "Ну, помнишь, в конце лета мы переехали в Горький. Ты начала учиться, а я работать, ну и тоже учиться… как бы." with dissolve
-    un "И за эти месяцы погрязли в рутине. Я должна была тебя как-то отвлечь, но сама загрузилась." with dissolve
-    show un sad sport with dspr
-    "Лена помолчала и вдруг продолжила очень грустным голосом." with dissolve
-    un "Я не думала, что так трудно будет сменить обстановку. Этот город реально не зря Горьким зовётся." with dissolve
-    un "Мне порой и страшно и неуютно здесь, всё вместе. Я же всю жизнь в райцентре прожила, не знала, каково это." with dissolve
-    un "Мы всё думали, как повезло тебе сесть на автобус и попасть в другое время. Я не знаю, как ты пережил, это же так страшно, наверное, было." with dissolve
-    me "Ну да, тяжело мне тогда было. Но главное, что это позади." with dissolve
-    window hide
-    show un sad sport:
-        anchor(0.5,0.5) pos(0.5,0.5)
-        ease 3 zoom 2.5 pos(0.0,0.8)
-    window show
-    "Я обнял Лену. Она всем видом показывала, что её нужно было поддержать." with dissolve
-    me "Хочешь, не буду пить? Вообще." with dissolve
-    window hide
-    show un smile sport:
-        anchor(0.5,0.5) pos(0.0,0.8)
-        ease 3 zoom 1.0 pos(0.5,0.5)
-    window show
-    "Лену обрадовали эти слова." with dissolve
-    un "Было бы славно." with dissolve
-    un "Но что мужикам скажешь?" with dissolve
-    me "Скажу, что перебьются." with dissolve
-    "Кто-то бы меня осудил, что я слишком подстраиваюсь под желания Лены. В данном случае это было оправдано." with dissolve
-    "Для Лены это было слишком больной темой, я готов был пойти на уступки, чтобы она была счастлива." with dissolve
-    me "Слушай, а почему ты мне поверила сегодня, когда я прибежал? Не стала сомневаться в моих словах. Я бы сам не поверил, что кто-то прибежит ради меня." with dissolve
-    show un laugh sport with dspr
-    un "Да ты врать не умеешь!" with dissolve
-    "Лена по-доброму посмеялась." with dissolve
-    show un smile sport with dspr
-    un "Это всё, что тебя тяготит?" with dissolve
-    me "Почти… ещё будущее. Помнишь, я тебе рассказывал, что в моём мире было?" with dissolve
-    show un shy sport with dspr
-    me "Лена, этот день уже близко. Не будет Союза, понимаешь?" with dissolve
-    me "И мне страшно за нас, потому что будет страшное время, я боюсь тебя потерять." with dissolve
-    show un serious sport with dspr
-    "Лена помрачнела." with dissolve
-    un "Честно, не хочу в это верить. Но ведь у нас по-другому история пошла, мы это выяснили." with dissolve
-    show un smile sport with dspr
-    un "В любом случае, я верю – что бы ни случилось, ты нас защитишь." with dissolve
-    "Я немного опешил от такой веры в меня. Лена воспользовалась паузой и сменила тему." with dissolve
-    un "Я тут ещё вспомнила, по поводу того, за кого замуж выходить. Смотрел фильм “Москва слезам не верит”?" with dissolve
-    un "Там героиня говорила – чтобы стать генеральской женой, нужно пойти замуж за лейтенанта и ездить с ним по воинским частям по всему Союзу." with dissolve
-    un "Знаешь, кому принадлежала эта квартира? Моей родственнице, да. У неё муж был генералом. Ну, сам знаешь, почётно быть генеральской женой." with dissolve
-    un "Но знала она своего генерала ещё лейтенантом. И замуж пошла за него, когда он ещё лейтенантом был." with dissolve
-    un "И жила с ним, деля невзгоды. Они вместе прошли тридцатые годы, прошли всю войну. Она ждала его из походов, поддерживала в трудную минуту." with dissolve
-    un "В сорок первом году его рота попала в окружение. Он нашёл в себе силы поднять обескровленных бойцов на прорыв. Они вырвались из вражеского кольца, и он спас ребят." with dissolve
-    un "Потому что знал, что она его ждёт. Потом дослужился до генерала." with dissolve
-    show un normal sport with dspr
-    un "Недолго он генеральские погоны носил, так как вскоре умер. Потом моя тётя переехала в эту однушку. Просторную квартиру вернула государству, сказав, что ей без мужа нет смысла занимать такую площадь." with dissolve
-    show un smile sport with dspr
-    un "Для неё эти тридцать три квадрата были концом, для нас началом." with dissolve
-    me "Я порой корю себя, что не заработал нам на квартиру и, по сути, живу на твоей площади." with dissolve
-    show un angry2 sport with dspr
-    un "Опять ты начинаешь. Тебе только двадцать исполнилось, как ты мог квартиру получить?" with dissolve
-    un "Зачем ты себя гонишь и обременяешь обязательствами, если даже я от тебя этого не требую?" with dissolve
-    un "И живёшь ты не в моей, а в нашей квартире. Я всегда поделюсь с тобой всем, что у меня есть." with dissolve
-    show un smile sport with dspr
-    un "И ты, я уверена, тоже." with dissolve
-    "С души будто гора спала. Я такого облегчения не испытывал, наверное, с того времени как помирился с Леной в Совёнке." with dissolve
-    me "Тогда прости меня, Лена. Я слишком усложнил жизнь себе и тебе, в итоге не выдержал и повёл себя по дурацки, забыв, что ты меня поддержишь." with dissolve
-    un "Ты тоже прости меня, Сёма. Я примерила на тебе воспоминания о другом человеке, хотя ты им и не являлся, и была предвзята по отношению к тебе." with dissolve
-    un "Мы с тобой ещё молоды и не застрахованы от ошибок." with dissolve
-    show un cry sport with dspr
-    "Вдруг Лена погрустнела так сильно, что казалось, готова была заплакать." with dissolve
-    un "Только, пожалуйста, не предлагай мне больше расстаться. И не уходи не предупредив. Я… мне было очень больно и грустно." with dissolve
-    un "Ты был прав. Я не выдержу, если ты меня оставишь. Я на тебя накричала, не хотела, чтобы ты пользовался моей слабостью." with dissolve
-    un "Но сейчас я понимаю, ты хороший человек и не стал бы так поступать. И вообще я такая злая была к тебе, не понимая, какую ношу ты несёшь каждый день без отдыха." with dissolve
-    me "Хорошо, не оставлю. Я думаю, эта ситуация послужит для нас уроком. Что нужно лучше прислушиваться друг к другу и не накручивать себя." with dissolve
-    show un cry_smile sport with dspr
-    un "Ты прав. Вот видишь, ты можешь извлекать уроки из ошибок, значит, ты совсем не безнадёжен." with dissolve
-    me "Обещаю, что не буду скрывать от тебя своих переживаний и не брошу тебя в трудную минуту." with dissolve
-    un "Хорошо, Сёма. Я тоже обещаю тебя поддерживать и ничего не скрывать от тебя." with dissolve
-    show un smile2 sport with dspr
-    un "Ой, Сёма, смотри, на улице снег пошёл! Скоро зима и Новый год!" with dissolve
-    "Лена светилась от счастья." with dissolve
-    show un grin sport with dspr
-    un "Повязку уже давно мог снять. Какой ты у меня рассеянный." with dissolve
-    "Точно, я про неё совсем забыл с этими думами. Лена сняла бинт и поцеловала меня в лоб." with dissolve
-    hide un grin sport with dspr
-    "Она наклонилась к уху и зашептала." with dissolve
-    un "Я горжусь тобой, Сёма." with dissolve
-    "Недопонимание между нами ушло, и наши души снова стали близки. Всё начало идти к тому, что не только души." with dissolve
-    "Вдруг я вспомнил, что у меня в наушниках до сих пор играет песня." with dissolve
-    stop music fadeout 3
-    un "А что это играет? Почему сам слушаешь, а мне не даёшь?" with dissolve
-    play music sp_noch_solo
-    "Она выдернула штекер из разъёма. И в этот момент как раз начиналось то самое каспаряновское соло на гитаре. Оно громко заиграло на всю квартиру." with dissolve
-    "От неожиданности я вскочил из-за стола. Лена резко сначала обняла меня, затем запрыгнула на меня." with dissolve
-    "Я хотел было что-то сказать, но она заняла мои губы своими…" with dissolve
-    window hide
-
-    scene bg int_house_of_un_night
-    show prologue_dream
-    with fade
-    window show
-    "Вспомнился момент из лагеря, как мы слились в экстазе в её домике." with dissolve
-    "Тогда я окончательно забыл про поиск ответов, и мне вообще было наплевать на всё, кроме Лены." with dissolve
-    "В тот вечер я сидел и любовался ею, когда она спала. Её лицо выражало тихое счастье и спокойствие." with dissolve
-    "Так спал человек, которого в душе ничего не беспокоит." with dissolve
-    "С того дня мы были крепко связаны на всю оставшуюся жизнь. Я пообещал себе не оставлять её и сделать счастливой." with dissolve
-    window hide
-    
-    scene bg ext_square_night
-    show prologue_dream
-    with fade
-    
-    window show
-    "Помню, как потом смотрел в окно на ночной лагерь." with dissolve
-    "Враждебное прежде место вдруг стало таким уютным." with dissolve
-    "Благодаря Лене целый лагерь в тот день принадлежал нам, никто не нарушал эту идиллию." with dissolve
-    "И в тот день, казалось, прошлое было абсолютно неважно, важно было лишь то, что мы с Леной нашли друг друга." with dissolve
-    "Сейчас так же. Зарплата, троллейбусы, мрачное будущее – всё это перестало что-то значить. Вся жизнь впереди, ещё успею подняться и найти хорошую работу." with dissolve
-    "А вообще, счастье не только в приличной зарплате, а в том, чтобы любить и быть любимым. Главное – быть вместе с ней и поддерживать друг друга…" with dissolve
-    window hide
-
-    scene bg kvartira
-    show black:
-        alpha 0.8
-    with dissolve
-    window show
-    "Минут через десять мы с Леной лежали на кровати и пытались отдышаться." with dissolve
-    "Это было прекрасно." with dissolve
-    "Это и было счастье." with dissolve
-    "Это и был наш рай в панельке." with dissolve
-    window hide
-    show blink
-    
-    stop music fadeout 2
-    stop ambience fadeout 2
-    play sound sp_noch_solo fadein 2
-    scene black with dissolve2
-    show credits rvp_credits:
-        xalign 0.5
-        ypos 1.3
-        linear 52.0 ypos -4.0
-    $ renpy.pause()
-    stop sound fadeout 2
-    jump rvp
-
-#Плавный выход из мода
-label exit:
-    stop sound fadeout 2
-    stop music fadeout 2
-    stop ambience fadeout 2
-    scene black with dissolve2
-    return
