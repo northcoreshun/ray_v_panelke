@@ -1,13 +1,15 @@
-#Версия 2.4
+#Версия 2.5
 #
+#Сторона А - добавлен фон на титры
 #замена нескольких фонов Стороны Б
 #оптимизирован спрайт lena_shadow, вместо него строчка кода
-#убраны лишние спрайты
-#организована структура rpy файла:сначала все малые блоки типа меню, а затем а1 и б1, чтобы последовательно писать код
-#добавлены префиксы в названиях файлов и в переменных
+#убраны не используемые спрайты
+#организована структура rpy файла:сначала все малые блоки типа меню, а затем a1 и b1, чтобы последовательно писать код
+#добавлены префиксы в названиях файлов и в переменных (всё кроме кастомных спрайтов и персонажей)
 
-#Обновление до 2.5:
+#Обновление до 2.6:
 #
+#Сторона А - переходы между комнатами
 #проработать хайды, заменить их на изы
 #префиксы персов
 #спрайты: оптимизировать гниду и злую лену
@@ -316,7 +318,7 @@ screen rvp_menu:
     tag menu
     modal False
     imagemap:
-        ground "shadow"
+        ground "rvp_shadow"
         hotspot((0, 0, 960, 1080)):
             hovered [Show("rvp_b", transition=Dissolve(0.5))]
             unhovered [Hide("rvp_b", transition=Dissolve(1.0))]
@@ -1134,7 +1136,7 @@ label a1:
     nd "Поругались что ли?" with dissolve
     me "Ага." with dissolve
     nd "Да не переживай, помиритесь. Иди домой, не ищи приключений себе." with dissolve
-    play music kzd fadein 2
+    play music rvp_msc_kzd fadein 2
     "Тоже верные слова. Может не стоит убегать от проблемы в работу, всё равно она так не решится." with dissolve
     "Однако пойду, прогуляюсь. Сразу возвращаться домой как-то скучно. Да и пока я так и не придумал, как извиниться и поговорить с Леной." with dissolve
     "Я ещё ни разу не ходил пешком по моему маршруту. Но в какую сторону пойти? В центр идти долго и утомительно, поэтому пойду в Кузнечиху." with dissolve
@@ -1267,7 +1269,7 @@ label a1:
     un "Опять к своим дружкам-алкашам! Тебе вчера не хватило, ты ещё хочешь?!" with dissolve
     show rvp_spr_un_ubiu with dspr
     "Секундная пауза. Лена набрала воздуха в лёгкие для новой очереди слов." with dissolve
-    show un angry sport with dspr
+    hide rvp_spr_un_ubiu with dspr
     un "Опохмелиться надо, да?! А то непривычно, с утра голова болит от водки!" with dissolve
     "Твою мать, как же я вляпался. Если Лена вышла из себя, то это очень плохо." with dissolve
     un "О, я знаю! Пошёл жаловаться своим товарищам, как его жена молодая пилит." with dissolve
@@ -1823,7 +1825,9 @@ label a1:
     stop music fadeout 2
     stop ambience fadeout 2
     play sound rvp_msc_sp_noch_solo fadein 2
-    scene black with dissolve2
+    scene bg rvp_img_universam
+    show prologue_dream
+    with fade
     show credits rvp_credits_a1:
         xalign 0.5
         ypos 1.3
@@ -2561,7 +2565,7 @@ label b1:
     window show
     "Она поцеловала меня в ту самую щёку, по которой ударила." with dissolve
 
-    scene bg rvp_img_internat with dissolve
+    scene bg rvp_img_street_lmr_night with dissolve
     show black:
         alpha 0.8
     $ set_mode_nvl()
@@ -2848,16 +2852,16 @@ label b1:
     "Лена скрылась за дверью." with dissolve
     "Я остался ждать."
     scene bg rvp_img_internat:
-        ease 5 zoom 3 anchor (500,1600)
+        ease 5 zoom 3 anchor (4000,2000)
     "Вскоре я начал смотреть на место её жительства. Не похоже на обычный дом, ограждено забором." with dissolve
-    "Наконец я прочитал название на табличке." with dissolve
+    "Наконец, я прочитал название на табличке." with dissolve
     "МИНИСТЕРСТВО ПРОСВЕЩЕНИЯ СССР" with dissolve
     "ОТДЕЛ НАРОДНОГО ОБРАЗОВАНИЯ" with dissolve
     "ИСПОЛКОМА ЛЕНИНОМОРСКОГО РАЙОННОГО СОВЕТА ДЕПУТАТОВ" with dissolve 
     "ШКОЛА-ИНТЕРНАТ №2" with dissolve
     "Что такое интернат? Это там, где дети и учатся и живут? Почему Лена и Алиса живут здесь, а не с родителями?" with dissolve
     scene bg rvp_img_internat:
-        zoom 3 anchor (500,1600)
+        zoom 3 anchor (4000,2000)
         ease 2 zoom 1 anchor (0,0)
     "Мне пришлось прервать свои размышления, так как пришла Алиса." with dissolve
     play music music_list["that_s_our_madhouse"]
@@ -2866,7 +2870,7 @@ label b1:
     dv "Опять ты пришёл!" with dissolve
     "Что за перемена с ней произошла?" with dissolve
     show dv angry pioneer2 with dissolve
-    dv "Ты что творишь? Я думала, ты нормальный парень, а ты…" with dissolve #убрал слово вчера
+    dv "Ты что творишь? Я думала, ты нормальный парень, а ты…" with dissolve
     dv "Что за лапшу ты Ленке на уши навешал! Какое ещё попадание из будущего?!" with dissolve
     me "Алис, я правда…" with dissolve 
     dv "Ты чё, Булычёва обчитался?!" with dissolve
@@ -3246,4 +3250,4 @@ label b1:
     "Меньше чем через час все документы на гражданина Персунова были готовы." with dissolve
     "Сотрудники отдельного подразделения КГБ под кодовым названием “СЦП” изъяли все записи, связанные с загадочным появлением гражданина Семёна Персунова в городе Лениноморск." with dissolve
     window hide
-    jump exit
+    jump rvp
