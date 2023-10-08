@@ -1,18 +1,23 @@
 #Версия 2.4
-#улучшены ВСЕ имевшиеся ранее анимации
-#добавлено ещё больше анимаций ходьбы и зумов, починены неработавшие ранее 
-#исправлено множество мелких недочетов в тексте
-#чуть улучшены два фона
-#добавлен новый спрайт
+#
+#замена нескольких фонов Стороны Б
+#оптимизирован спрайт lena_shadow, вместо него строчка кода
+#убраны лишние спрайты
+#организована структура rpy файла:сначала все малые блоки типа меню, а затем а1 и б1, чтобы последовательно писать код
+#добавлены префиксы в названиях файлов и в переменных
 
 #Обновление до 2.5:
+#
+#проработать хайды, заменить их на изы
+#префиксы персов
+#спрайты: оптимизировать гниду и злую лену
 #добавить th, где надо
 #в каждую часть добавить даты тоже пока хз как
 #Сторона А - перерисовать все бг
 #возможно стоит переписать диалоги, а то Семён аутист в них какой-то
 #Сторона Б - переписать диалоги, чтобы не были пластиковыми
 #412-бг:сюда бы автобус с противоположного вида
-#цг - вид из автобуса ночной
+#цг:вид из автобуса ночной
 #426 и 1536-бг:сделать вечернюю площадь
 #699-включить музон из лмр японский как в ЯОД
 #1300-заменить на появление таблички с текстом капсом, без текстбоксов ниже
@@ -41,52 +46,51 @@ init:
     $ mods["rvp"] = "Рай в панельке"
 
     #BG
-    #image bg  = "ray_v_panelke/bg/.jpg"
-    image bg zavod = "ray_v_panelke/bg/zavod.jpg"
-    image bg tsekh = "ray_v_panelke/bg/tsekh.jpg"
-    image bg kgb = "ray_v_panelke/bg/kgb.jpg"
-    image bg obschaga = "ray_v_panelke/bg/obschaga.jpg"
-    image bg obkom = "ray_v_panelke/bg/obkom.jpg"
-    image bg lenie = "ray_v_panelke/bg/lenie.jpg"
-    image bg internat_night = "ray_v_panelke/bg/internat_night.jpg"
-    image bg internat_day = "ray_v_panelke/bg/internat_day.jpg"
-    image bg int_bus_on_square = "ray_v_panelke/bg/int_bus_on_square.jpg"
-    image bg int_bus_sunset = "ray_v_panelke/bg/int_bus_sunset.jpg"
-    image bg perron = "ray_v_panelke/bg/perron.jpg"
-    image bg int_voxhall = "ray_v_panelke/bg/int_voxhall.jpg"
-    image bg square_lmr_night = "ray_v_panelke/bg/square_lmr_night.jpg"
-    image bg street_lmr_night = "ray_v_panelke/bg/street_lmr_night.jpg"
-    image bg square_lmr_day = "ray_v_panelke/bg/square_lmr_day.jpg"
+    #image bg rvp_img_ = "ray_v_panelke/bg/.jpg"
+    image bg rvp_img_zavod = "ray_v_panelke/bg/zavod.jpg"
+    image bg rvp_img_tsekh = "ray_v_panelke/bg/tsekh.jpg"
+    image bg rvp_img_kgb = "ray_v_panelke/bg/kgb.jpg"
+    image bg rvp_img_obschaga = "ray_v_panelke/bg/obschaga.jpg"
+    image bg rvp_img_obkom = "ray_v_panelke/bg/obkom.jpg"
+    image bg rvp_img_lenie = "ray_v_panelke/bg/lenie.jpg"
+    image bg rvp_img_internat = "ray_v_panelke/bg/ext_internat.jpg"
+    image bg rvp_img_int_bus_on_square = "ray_v_panelke/bg/int_bus_on_square.jpg"
+    image bg rvp_img_int_bus_sunset = "ray_v_panelke/bg/int_bus_sunset.jpg"
+    image bg rvp_img_perron = "ray_v_panelke/bg/perron.jpg"
+    image bg rvp_img_int_vokzal = "ray_v_panelke/bg/int_vokzal.jpg"
+    image bg rvp_img_square_lmr_night = "ray_v_panelke/bg/square_lmr_night.jpg"
+    image bg rvp_img_street_lmr_night = "ray_v_panelke/bg/street_lmr_night.jpg"
+    image bg rvp_img_square_lmr_day = "ray_v_panelke/bg/square_lmr_day.jpg"
 
-    image bg salon = "ray_v_panelke/bg/salon.jpg"
-    image bg depo = "ray_v_panelke/bg/depo.jpg"
-    image bg square = "ray_v_panelke/bg/square.jpg"
-    image bg universam = "ray_v_panelke/bg/universam.jpg"
-    image bg kvartira = "ray_v_panelke/bg/kvartira.jpg"
-    image bg vasyunina = "ray_v_panelke/bg/vasyunina.jpg"
-    image bg garage_int = "ray_v_panelke/bg/garage_int.jpg"
-    image bg garage_ext = "ray_v_panelke/bg/garage_ext.jpg"
-    image bg dvor = "ray_v_panelke/bg/dvor.jpg"
-    image bg dom = "ray_v_panelke/bg/dom.jpg"
-    image bg rvp_kitchen = "ray_v_panelke/bg/rvp_kitchen.jpg"
-    image bg ivlieva = "ray_v_panelke/bg/ivlieva.jpg"
-    image bg kuzn = "ray_v_panelke/bg/kuzn.jpg"
-    image bg kuzn_most = "ray_v_panelke/bg/kuzn_most.jpg"
-    image bg prih = "ray_v_panelke/bg/prih.jpg"
-    image bg okno = "ray_v_panelke/bg/okno.jpg"
+    image bg rvp_img_int_trolley = "ray_v_panelke/bg/int_trolley.jpg"
+    image bg rvp_img_ext_trolley = "ray_v_panelke/bg/ext_trolley.jpg"
+    image bg rvp_img_square = "ray_v_panelke/bg/square.jpg"
+    image bg rvp_img_universam = "ray_v_panelke/bg/universam.jpg"
+    image bg rvp_img_kvartira = "ray_v_panelke/bg/kvartira.jpg"
+    image bg rvp_img_vasyunina = "ray_v_panelke/bg/vasyunina.jpg"
+    image bg rvp_img_int_garage = "ray_v_panelke/bg/int_garage.jpg"
+    image bg rvp_img_ext_garage = "ray_v_panelke/bg/ext_garage.jpg"
+    image bg rvp_img_dvor = "ray_v_panelke/bg/dvor.jpg"
+    image bg rvp_img_dom = "ray_v_panelke/bg/dom.jpg"
+    image bg rvp_img_kitchen = "ray_v_panelke/bg/kitchen.jpg"
+    image bg rvp_img_ivlieva = "ray_v_panelke/bg/ivlieva.jpg"
+    image bg rvp_img_kuzn = "ray_v_panelke/bg/kuzn.jpg"
+    image bg rvp_img_kuzn_most = "ray_v_panelke/bg/kuzn_most.jpg"
+    image bg rvp_img_prih = "ray_v_panelke/bg/prih.jpg"
+    image bg rvp_img_okno = "ray_v_panelke/bg/okno.jpg"
 
     #CG
-    #image cg  = "ray_v_panelke/cg/.jpg"
-    image cg proj227 = "ray_v_panelke/cg/proj277.png"
-    image cg proj227_2 = "ray_v_panelke/cg/proj277_2.png"
-    image cg proj282 = "ray_v_panelke/cg/proj282.png"
+    #image cg rvp_img_ = "ray_v_panelke/cg/.jpg"
+    image cg rvp_img_un_dv = "ray_v_panelke/cg/rvp_un_dv.png"
+    image cg rvp_img_un_dv_2 = "ray_v_panelke/cg/rvp_un_dv_2.png"
+    image cg rvp_img_sproot = "ray_v_panelke/cg/rvp_sproot.png"
 
     #Персонажи
     #$  = Character (u'', color="", what_color="E2C778")
     $ dvun = Character (u'Алиса и Лена', color="DC143C", what_color="E2C778")
     $ nd = Character (u'Начальник депо', color="8B4513", what_color="E2C778")
     $ mh4 = Character (u'Михалыч', color="DC143C", what_color="E2C778")
-    $ iv = Character (u'Иваныч', color="DC143C", what_color="E2C778")
+    $ iv4 = Character (u'Иваныч', color="DC143C", what_color="E2C778")
     $ voicegn = Character (u'Слесарь', color="FFFFFF", what_color="E2C778")
     $ voiceun = Character (u'Голос', color="#B956FF", what_color="E2C778")
     $ al = Character (u'Алёна', color="FFFFFF", what_color="E2C778")
@@ -107,42 +111,42 @@ init:
     $ ks = Character (u'Кастелянша', color="#a5a5ff", what_color="E2C778",)
 
     #Музыка
-    $ lyudi_nadoeli = "ray_v_panelke/music/lyudi_nadoeli.mp3"
-    $ kzd = "ray_v_panelke/music/kzd.mp3"
-    $ ya_tebya_lyublyu = "ray_v_panelke/music/ya_tebya_lyublyu.mp3"
-    $ plastinki = "ray_v_panelke/music/plastinki.mp3"
-    $ sp_noch = "ray_v_panelke/music/sp_noch.mp3"
-    $ sp_noch_minus = "ray_v_panelke/music/sp_noch_minus.mp3"
-    $ sp_noch_solo = "ray_v_panelke/music/sp_noch_solo.mp3"
-    $ tuman = "ray_v_panelke/music/tuman.mp3"
-    $ larek = "ray_v_panelke/music/nochnoj_larek.mp3"
-    $ bomzh = "ray_v_panelke/music/bomzh.mp3"
-    $ zapomnyu = "ray_v_panelke/music/zapomnyu.mp3"
-    $ trolleybus = "ray_v_panelke/music/trolleybus.mp3"
-    #$  = "ray_v_panelke/music/.mp3"
+    #$ rvp_msc_ = "ray_v_panelke/music/.mp3"
+    $ rvp_msc_lyudi_nadoeli = "ray_v_panelke/music/lyudi_nadoeli.mp3"
+    $ rvp_msc_kzd = "ray_v_panelke/music/kzd.mp3"
+    $ rvp_msc_ya_tebya_lyublyu = "ray_v_panelke/music/ya_tebya_lyublyu.mp3"
+    $ rvp_msc_plastinki = "ray_v_panelke/music/plastinki.mp3"
+    $ rvp_msc_sp_noch = "ray_v_panelke/music/sp_noch.mp3"
+    $ rvp_msc_sp_noch_minus = "ray_v_panelke/music/sp_noch_minus.mp3"
+    $ rvp_msc_sp_noch_solo = "ray_v_panelke/music/sp_noch_solo.mp3"
+    $ rvp_msc_tuman = "ray_v_panelke/music/tuman.mp3"
+    $ rvp_msc_larek = "ray_v_panelke/music/nochnoj_larek.mp3"
+    $ rvp_msc_bomzh = "ray_v_panelke/music/bomzh.mp3"
+    $ rvp_msc_zapomnyu = "ray_v_panelke/music/zapomnyu.mp3"
+    $ rvp_msc_trolleybus = "ray_v_panelke/music/trolleybus.mp3"
 
-    #Доп.звуки
-    #$  = "ray_v_panelke/sounds/.mp3"
-    $ disk_ringtone = "ray_v_panelke/sounds/disk_ringtone.mp3"
-    $ trubka = "ray_v_panelke/sounds/trubka.mp3"
-    $ wagon = "ray_v_panelke/sounds/wagon.mp3"
+    #SFX
+    #$ rvp_sfx_ = "ray_v_panelke/sounds/.mp3"
+    $ rvp_sfx_disk_ringtone = "ray_v_panelke/sounds/disk_ringtone.mp3"
+    $ rvp_sfx_trubka = "ray_v_panelke/sounds/trubka.mp3"
+    $ rvp_sfx_wagon = "ray_v_panelke/sounds/wagon.mp3"
     
     #Титры
-    $ rvp_credits = "Спасибо за прочтение мода!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа с Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели -- за помощь с текстом.\n\n Cyber Patsan -- за помощь с кодом и передачу полезных навыков кодинга.\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы модов: 25 сентября, Я обязательно дождусь! и других авторов.\n\n Им тоже выражаю благодарность."
-    $ rvp_credits2 = "Спасибо за прочтение мода!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Помощь с фонами - Андрей Серебро\n\n Новые спрайты сделал ДАННЫЕ УДАЛЕНЫ\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы модов: 25 сентября, Я обязательно дождусь! и других авторов.\n\n Им тоже выражаю благодарность."
+    $ rvp_credits_a1 = "Спасибо за прочтение мода!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа с Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели -- за помощь с текстом.\n\n Cyber Patsan -- за помощь с кодом и передачу полезных навыков кодинга.\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы модов: 25 сентября, Я обязательно дождусь! и других авторов.\n\n Им тоже выражаю благодарность."
+    $ rvp_credits_b1 = "Спасибо за прочтение мода!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Помощь с фонами - Андрей Серебро\n\n Новые спрайты сделал ДАННЫЕ УДАЛЕНЫ\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы модов: 25 сентября, Я обязательно дождусь! и других авторов.\n\n Им тоже выражаю благодарность."
 
     #Спрайты
-    #image  = "ray_v_panelke/sprites/.png"
-    image unubiusport = "ray_v_panelke/sprites/unubiusport.png"
-    image mh4 = "ray_v_panelke/sprites/mh4.png"
-    image iv = "ray_v_panelke/sprites/iv.png"
-    image mh = "ray_v_panelke/sprites/mh.png"
-    image genda = "ray_v_panelke/sprites/genda.png"
-    image mil = "ray_v_panelke/sprites/mil.png"
-    image mil2 = "ray_v_panelke/sprites/mil2.png"
-    image gn_nasmeh = "ray_v_panelke/sprites/gn_nasmeh.png"
-    image gn_smile = "ray_v_panelke/sprites/gn_smile.png"
-    image gn_zloy = "ray_v_panelke/sprites/gn_zloy.png"
+    #image rvp_spr_ = "ray_v_panelke/sprites/.png"
+    image rvp_spr_un_ubiu = "ray_v_panelke/sprites/un_ubiu.png"
+    image rvp_spr_mh4 = "ray_v_panelke/sprites/mh4.png"
+    image rvp_spr_iv4 = "ray_v_panelke/sprites/iv4.png"
+    image rvp_spr_mh = "ray_v_panelke/sprites/mh.png"
+    image rvp_spr_genda = "ray_v_panelke/sprites/genda.png"
+    image rvp_spr_mil = "ray_v_panelke/sprites/mil.png"
+    image rvp_spr_mil2 = "ray_v_panelke/sprites/mil2.png"
+    image rvp_spr_gn_nasmeh = "ray_v_panelke/sprites/gn_nasmeh.png"
+    image rvp_spr_gn_smile = "ray_v_panelke/sprites/gn_smile.png"
+    image rvp_spr_gn_zloy = "ray_v_panelke/sprites/gn_zloy.png"
 
     #Лена
     #image un   = ConditionSwitch(
@@ -183,9 +187,9 @@ init:
     #True,im.Composite((900,1080), (0,0), "images/sprites///un__body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/_.png",(0,0), "images/sprites///.png") )
 
     image un rock pioneer2 = ConditionSwitch(
-    "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "ray_v_panelke/sprites/emot/normal/sus.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "ray_v_panelke/sprites/emot/normal/sus.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "ray_v_panelke/sprites/emot/normal/sus.png") )
+    "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "ray_v_panelke/sprites/emot/rock.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
+    "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "ray_v_panelke/sprites/emot/rock.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
+    True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "ray_v_panelke/sprites/emot/rock.png") )
 
     image un laugh pioneer2 = ConditionSwitch(
     "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_laugh.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
@@ -295,11 +299,11 @@ init:
     #Меню
     image rvp_a = "ray_v_panelke/menu/rvp_a.jpg"
     image rvp_b = "ray_v_panelke/menu/rvp_b.jpg"
-    image shadow = "ray_v_panelke/menu/shadow.png"
+    image rvp_shadow = "ray_v_panelke/menu/rvp_shadow.png"
     
 label rvp:
     scene bg black with dissolve
-    play music plastinki fadein 1
+    play music rvp_msc_plastinki fadein 1
     call screen rvp_menu
 
 screen rvp_a:
@@ -375,7 +379,7 @@ label a1:
     $ persistent.sprite_time = "day"
     $ day_time
 
-    play music lyudi_nadoeli fadein 1
+    play music rvp_msc_lyudi_nadoeli fadein 1
     show prologue_dream
     with fade
     window show
@@ -384,7 +388,7 @@ label a1:
     "Будильник поднимет меня своим звоном, и я ни свет ни заря отправлюсь на смену. Работа, конечно, не пыльная, но довольно монотонная." with dissolve
     window hide
 
-    scene bg kvartira
+    scene bg rvp_img_kvartira
     show unblink
     show black:
         alpha 0.8
@@ -401,7 +405,7 @@ label a1:
     "Живём в складчину с моей маленькой зарплаты и её стипендии. От получки до получки. Вроде хватает." with dissolve
     window hide
 
-    scene bg universam
+    scene bg rvp_img_universam
     show un shy coat
     show prologue_dream
     with fade
@@ -415,7 +419,7 @@ label a1:
     "А ночью, обессиленные, мы ложимся спать." with dissolve
     window hide
 
-    scene bg vasyunina
+    scene bg rvp_img_vasyunina
     show prologue_dream
     with fade
     window show
@@ -425,13 +429,13 @@ label a1:
     "Но вот вроде сегодня, наконец, совпало и ничто не помешает провести эти два дня вместе. Надо только эту смену оттрубить." with dissolve
     window hide
     
-    scene bg vasyunina with dissolve
+    scene bg rvp_img_vasyunina with dissolve
     $ renpy.pause(2)    
     window show
     "С такими мыслями я подходил к троллейбусному депо. Моему месту работы." with dissolve
     window hide
 
-    scene bg depo with dissolve
+    scene bg rvp_img_ext_trolley with dissolve
     window show
     "До рассвета ещё далеко, часы на вахте показывали пять утра. Смена начинается." with dissolve
     "Взяв листок, я иду к своему троллейбусу под номером 1480." with dissolve
@@ -445,7 +449,7 @@ label a1:
     "Она тоже меня видела и всегда заходила в переднюю дверь." with dissolve
     window hide
 
-    scene bg salon
+    scene bg rvp_img_int_trolley
     show un smile2 coat
     show prologue_dream
     with fade
@@ -456,7 +460,7 @@ label a1:
     "Чёрт, местные словечки уже прилипают к моей речи. Как, например “чай”, который не в значении напитка, а как частица “всё-таки”." with dissolve
     "Ну, вот и выезжать пора. Покидаю ворота первого депо и выхожу на маршрут." with dissolve
     window hide
-    scene bg depo with dissolve
+    scene bg rvp_img_ext_trolley with dissolve
     window show
     "Довольно интересно получилось, что я вожу троллейбус. После переезда в Горький стал искать работу." with dissolve
     "Чтобы не тратить время и деньги на дорогу, искал работу у дома. Да и Лена просила, чтобы работа была недалеко, ей так спокойнее было за меня." with dissolve
@@ -470,7 +474,7 @@ label a1:
     window hide
     
     stop sound_loop fadeout 1
-    scene bg kvartira
+    scene bg rvp_img_kvartira
     show un shy sport
     show prologue_dream
     with fade
@@ -484,7 +488,7 @@ label a1:
     window hide
     
     play sound sfx_intro_bus_engine_start
-    scene bg square with dissolve
+    scene bg rvp_img_square with dissolve
     play sound_loop sfx_bus_interior_moving fadein 4
     
     window show
@@ -507,7 +511,7 @@ label a1:
     
     stop sound fadeout 2
     stop sound_loop fadeout 1
-    show bg kvartira
+    show bg rvp_img_kvartira
     show un smile2 sport
     show prologue_dream
     with fade
@@ -518,7 +522,7 @@ label a1:
     un "Так у тебя же руки золотые, на заводе тебя хвалили. Спроси, может, слесари нужны или ещё кто." with dissolve
     window hide
 
-    scene bg square with dissolve
+    scene bg rvp_img_square with dissolve
     play sound_loop sfx_bus_interior_moving fadein 4
     play sound sfx_intro_bus_engine_start
     
@@ -556,16 +560,16 @@ label a1:
     stop music fadeout 3
     $ renpy.pause(3)
 
-    scene bg vasyunina with dissolve
+    scene bg rvp_img_vasyunina with dissolve
     play sound_loop sfx_bus_interior_moving fadein 4
-    play music trolleybus fadein 1   
+    play music rvp_msc_trolleybus fadein 1   
     window show
     "К третьему часу дня смена закончилась." with dissolve
     "С чувством облегчения я катил на своём электротранспорте на восток, к депо." with dissolve
     "Смена выдалась трудной, усы слетали с проводов раза в два чаще обычного." with dissolve
     "Один раз чуть в аварию не попал, причём по своей вине, задумался о вечере. Но это всё позади, остались считанные метры и я свободен." with dissolve
     window hide
-    scene bg depo with dissolve
+    scene bg rvp_img_ext_trolley with dissolve
     window show
     "Часы в салоне показывали три часа дня. Я завёл троллейбус в гараж, провёл все необходимые процедуры по выключению машины." with dissolve
     stop sound_loop fadeout 1
@@ -586,8 +590,8 @@ label a1:
     "Вдруг из-за поворота возникли ещё пара “рогатых”. Я узнал их. Это были два водителя, работавших на одном маршруте со мной." with dissolve
     stop sound fadeout 2
     "По сложившейся пролетарской традиции я их называл по отчеству Михалыч и Иваныч." with dissolve
-    show mh4 at left with dissolve
-    show iv at right with dissolve
+    show rvp_spr_mh4 at left with dissolve
+    show rvp_spr_iv4 at right with dissolve
     "Первый был работягой довольно приличного вида, второй немного вызывал у меня неприязнь запущенной внешностью, но по характеру был довольно безобидным." with dissolve
     "Через несколько минут мы уже разговаривали. После смены мы обсуждали, кто как отработал, не забывая при этом обругать слесарей." with dissolve
     me "Ну ладно, мужики, я пойду."
@@ -595,26 +599,26 @@ label a1:
     me "А куда вы собрались, к кому-то в общагу депошную? Ходили уже, неуютно там." with dissolve
     mh4 "Да не, зачем сразу в общагу то? В гараже посидим без лишних глаз. Слесаря как раз позвали, у них выходной завтра. Дёрнем немного." with dissolve
     me "Не знаю, мужики… я с женой уже договорился время провести, и так на выходных почти с ней не вижусь." with dissolve
-    iv "Э… ну ты чё, под каблуком в натуре, я не пойму. Успеешь к жене, мы тебя там в кандалы не закуём." with dissolve
+    iv4 "Э… ну ты чё, под каблуком в натуре, я не пойму. Успеешь к жене, мы тебя там в кандалы не закуём." with dissolve
     "Второй водитель говорил уже немного заплетавшимся языком. На мгновение в голове возникла мысль ему зубы пересчитать, чтобы за языком следил. И когда он успел накатить?" with dissolve
     mh4 "Иваныч, не наезжай." with dissolve
     "Более трезвый водитель успокоил своего товарища." with dissolve
     mh4 "Сёмыч у нас порядочный семьянин, почти не пьет, вот и стесняется. Не хочет он собачиться на ночь глядя, и сковородкой по башке получать как ты." with dissolve
-    iv "Да я…" with dissolve
+    iv4 "Да я…" with dissolve
     mh4 "Все, угомонись. Семён, мы набухиваться не будем, просто немного выпьем и посидим. Немного хоть посиди, а?" with dissolve
     me "Ну, пойдёмте тогда." with dissolve
     window hide
-    show mh4 at left:
+    show rvp_spr_mh4 at left:
         anchor(0.5,0.5) pos(0.3,0.5)
         ease 1.5 pos(1.1,0.5)
-    show iv at right:
+    show rvp_spr_iv4 at right:
         anchor(0.5,0.5) pos(0.7,0.5)
         ease 1.5 pos(1.3,0.5)
     stop music fadeout 4
     stop ambience fadeout 2
 
-    play music tuman fadein 2
-    scene bg garage_int with dissolve
+    play music rvp_msc_tuman fadein 2
+    scene bg rvp_img_int_garage with dissolve
     window show
     "Последний раз пил с Алисой в августе, поминали Витю." with dissolve
     play sound sfx_open_metal_hatch
@@ -628,18 +632,18 @@ label a1:
     window hide
     $ renpy.pause(2)
     window show
-    show mh4 at left with dissolve
+    show rvp_spr_mh4 at left with dissolve
     me "Да я в Лениноморске на заводе уважаемым человеком был. До старшего смены с нуля за два года дорос! А здесь баранку кручу, блин…" with dissolve
     mh4 "Да, Семён, непростой ты судьбы человек." with dissolve
     window hide
     $ renpy.pause(1)
     window show
     "Всё проходило довольно мирно, мы втроём познакомились со слесарями. Не самые плохие люди оказались, но не всё было так просто…" with dissolve
-    show iv at right with dissolve
-    show gn_nasmeh with dissolve
+    show rvp_spr_iv4 at right with dissolve
+    show rvp_spr_gn_nasmeh with dissolve
     voicegn "Семён, а что мы тебя раньше не видели в нашем кругу?" with dissolve
     "Был у них в коллективе один мутный тип, даже имя его никак не мог запомнить. А вот он меня, похоже, знал хорошо." with dissolve
-    iv "А он у нас порядочный семьянин." with dissolve
+    iv4 "А он у нас порядочный семьянин." with dissolve
     "Вот придурок. Небось, у самого каждый день ссоры со своей женой, вот и завидует." with dissolve
     voicegn "Значит вот как, жёнушка есть. А я видел тебя с ней, красивая." with dissolve
     "Это ещё что за базар пошёл. Где он мог видеть нас?" with dissolve
@@ -652,20 +656,18 @@ label a1:
     mh4 "Э, слышь, криворучка, кончай трепаться. Ты бы лучше наши тралики так чинил, как до людей докапываешься." with dissolve
     me "Чё ты там про мою сказал?" with dissolve
     mh4 "Сёмыч, не слушай его, он дурной, от него жена ушла просто, вот он и бесится." with dissolve
-    show gn_zloy with dspr
-    hide gn_nasmeh with dspr
+    show rvp_spr_gn_zloy with dspr
     voicegn "Да пошла она! Все они бабы сволочи, твоя тоже, наверное." with dissolve
     voicegn "Думаешь, пока ты тут сидишь, она ждёт тебя? Ага, размечтался." with dissolve
-    show gn_smile with dspr
-    hide gn_zloy with dspr
+    show rvp_spr_gn_smile with dspr
     voicegn "Небось уже к другому пошла развлекаться. Но лучше ко мне, я бы её без внимания не оставил." with dissolve
     "Я вскипал от ненависти к этому ублюдку. Нужно было проучить его." with dissolve
     me "Пойдём-ка, выйдем." with dissolve
-    scene bg garage_int:
+    scene bg rvp_img_int_garage:
        parallel:
             zoom 1.05 anchor (48,27)
             ease 2 zoom 3 anchor (1200,1200)
-    show gn_smile:
+    show rvp_spr_gn_smile:
         anchor(0.5,0.5) pos(0.5,0.5)
         ease 1.5 pos(1.3,0.5)
     window hide
@@ -673,8 +675,8 @@ label a1:
     stop music fadeout 2
     $ persistent.sprite_time = "night"
     $ night_time
-    scene bg garage_ext with dissolve
-    show gn_smile with dissolve
+    scene bg rvp_img_ext_garage with dissolve
+    show rvp_spr_gn_smile with dissolve
     play ambience ambience_cold_wind_loop
     play music music_list["pile"] fadein 2
     $ renpy.pause(2)
@@ -685,16 +687,15 @@ label a1:
     window hide
     
     play sound sfx_armature_swish
-    hide gn_zloy with dissolve
     play sound sfx_grate_hand_fall
     
-    show gn_smile:
+    show rvp_spr_gn_smile:
         anchor(0.5,0.5) pos(0.5,0.5)
         ease 1.0 pos(-0.2,0.5)
     window show
     "Я замахнулся, но промазал, попав по железной двери гаража. Гулкий удар по гаражу." with dissolve
     "А он воспользовался этим, схватил меня за волосы и треснул головой об эту дверь." with dissolve
-    scene bg garage_ext:
+    scene bg rvp_img_ext_garage:
         zoom 1.05 anchor (48,27)
         ease 1.5 zoom 1.5 anchor (0,300)
     play sound sfx_grate_hand_fall
@@ -805,7 +806,7 @@ label a1:
     "В её голосе слышалась сдавленная боль и злость." with dissolve
     "Она сейчас хотела высказать всё, что у неё на душе, но сдерживала себя. Я без промедления встал и пошёл за ней." with dissolve
     window hide
-    scene bg dvor with dissolve
+    scene bg rvp_img_dvor with dissolve
     window show
     "За время лежания на холодной земле я успел протрезветь и мог идти, не теряя равновесия." with dissolve
     "Путь до дома пролегал по серым дворам между панельных домов. Ещё немного шатаясь, я следовал за ней." with dissolve
@@ -823,7 +824,7 @@ label a1:
     window hide
 
     stop music fadeout 2
-    scene bg dom
+    scene bg rvp_img_dom
     show black:
         alpha 0.8
     with dissolve
@@ -840,7 +841,7 @@ label a1:
     $ day_time
     play sound sfx_close_door_1
     play ambience ambience_medstation_inside_night
-    scene bg prih with dissolve
+    scene bg rvp_img_prih with dissolve
     show un normal coat with dissolve
     $ renpy.pause(2)
     window show
@@ -889,8 +890,8 @@ label a1:
     "Вдруг вспомнились его слова..." with dissolve
     window hide
     
-    scene bg garage_int
-    show gn_nasmeh
+    scene bg rvp_img_int_garage
+    show rvp_spr_gn_nasmeh
     show prologue_dream
     with fade
     $ renpy.pause(2)
@@ -899,7 +900,7 @@ label a1:
     voicegn "И зачем ты ей? Че она нормального мужика найти не может?" with dissolve
     window hide
     
-    scene bg prih with dissolve
+    scene bg rvp_img_prih with dissolve
     show un normal coat with dissolve
     
     window show
@@ -931,7 +932,7 @@ label a1:
     "Всё же попробую, не ложиться же просто спать." with dissolve
     "Я тоже разулся, снял пальто и пошёл на кухню." with dissolve
     window hide
-    scene bg rvp_kitchen with dissolve
+    scene bg rvp_img_kitchen with dissolve
     window show
     "Лена сидела за столом и пила чай." with dissolve
     "Вид у неё был подавленный и задумчивый." with dissolve
@@ -960,7 +961,7 @@ label a1:
     play sound sfx_close_water_sink
     "Выключив воду, взяла немного ваты, смочила зелёнкой и обработала ушибленное место. Затем обмотала голову бинтом." with dissolve
     un "Теперь иди. Повязку до утра не снимай." with dissolve
-    scene bg kvartira
+    scene bg rvp_img_kvartira
     show black:
         alpha 0.8
     with dissolve
@@ -984,13 +985,13 @@ label a1:
     stop sound_loop fadeout 2
     stop ambience fadeout 2
     $ renpy.pause(2)
-    scene bg prih with dissolve
+    scene bg rvp_img_prih with dissolve
     play music music_list["drown"] fadein 2
     
     window show
     "Наконец-то я дома, мы с Сёмой проведём эти выходные вместе. Я ему приготовлю его любимый суп, он так рад будет. Наверное, тяжёлый день выдался." with dissolve
     window hide
-    scene bg rvp_kitchen with dissolve
+    scene bg rvp_img_kitchen with dissolve
     window show
     "Фух, устала. Надо чайник поставить, чаю попью хоть." with dissolve
     "Куда он пропал, у него же смена должна была закончиться четыре часа назад." with dissolve
@@ -1001,7 +1002,7 @@ label a1:
     "Хм, странно, в депо сказали, он сдал смену без происшествий." with dissolve
     window hide
     
-    scene bg kvartira
+    scene bg rvp_img_kvartira
     show black:
         alpha 0.8
     with dissolve
@@ -1016,7 +1017,7 @@ label a1:
 
     $ persistent.sprite_time = "night"
     $ night_time
-    scene bg ivlieva:
+    scene bg rvp_img_ivlieva:
     show black:
         alpha 0.8
     with dissolve
@@ -1035,22 +1036,22 @@ label a1:
     vh "Давайте, спасайте его. Один ведь непьющий на всё депо был." with dissolve
     un "Как же так, он же не киряет обычно. Я не хочу верить в то, что он там с ними." with dissolve
     window hide
-    scene bg garage_ext with dissolve
+    scene bg rvp_img_ext_garage with dissolve
     window show
     "О боже, его кто-то бьёт." with dissolve
     "Ой, милиция тут, вяжут этого урода." with dissolve
     "Один к Сёме идёт. Его же сейчас тоже повяжут, надо его скорее спасать!" with dissolve
-    show mil at left with dissolve
+    show rvp_spr_mil at left with dissolve
     un "Товарищ лейтенант, не забирайте его, пожалуйста. Я жена его, он так никогда не гулял. Отдайте мне его, я его заберу домой." with dissolve
     mil "В отделении разберёмся, кто кому муж, кто кому жена. О, Михалыч, ты чего тут делаешь?" with dissolve
-    show mh4 at right with dissolve
+    show rvp_spr_mh4 at right with dissolve
     mh4 "Алёш, здравствуй. Она правду говорит, это не ваш клиент." with dissolve
     mh4 "Это я его позвал выпить, а оно вот как вышло." with dissolve
     mil2 "Лёха, чё ты с ним лясы точишь, лучше помоги мне повязать второго, он какой-то буйный!" with dissolve
     alex "Сейчас приду!" with dissolve
     alex "Ладно, я сейчас отойду, но чтобы когда я вернулся, вас здесь не было, понятно?!" with dissolve
     window hide
-    show mil at left:
+    show rvp_spr_mil at left:
         ease 1 pos(-0.1,0.5)
     window show
     "Надо быстрее поднять Сёму и уходить, пока они заняты." with dissolve
@@ -1072,22 +1073,22 @@ label a1:
     window hide
 
     scene bg black with dissolve
-    scene bg kvartira
+    scene bg rvp_img_kvartira
     show unblink
     play ambience ambience_medstation_inside_night
     
     window show
-    scene bg kvartira with dissolve
+    scene bg rvp_img_kvartira with dissolve
     $ persistent.sprite_time = "day"
     $ day_time
     "Я встал с кровати в районе девяти." with dissolve
 #анимация либо вообще фразу убрать
     "Голова гудела, но скорее от удара об дверь, чем от алкоголя…" with dissolve
-    scene bg kvartira with dissolve
+    scene bg rvp_img_kvartira with dissolve
     "Лена лежала, отвернувшись от меня. Её лицо я увидел, лишь обойдя кровать." with dissolve
     scene bg int_house_of_un_night with dissolve
     "Помню как в тот вечер в Совёнке, когда мы остались вдвоём в лагере, я смотрел на её лицо. Тогда мы помирились, и её лицо выражало спокойствие, умиротворение, тихую радость." with dissolve
-    scene bg kvartira with dissolve
+    scene bg rvp_img_kvartira with dissolve
     "Сейчас у неё на лице грусть, будто видит плохой сон." with dissolve
     "И что мне делать в выходной, когда поругался с единственным человеком, с которым хотел провести всё свободное время?" with dissolve
     "Просто собрать молча вещи и уйти навсегда из квартиры или из жизни?" with dissolve
@@ -1108,7 +1109,7 @@ label a1:
     stop ambience fadeout 2
     window hide
     #ходьба плюс зум
-    scene bg vasyunina:
+    scene bg rvp_img_vasyunina:
        parallel:
             zoom 1.05 anchor (48,27)
             ease 15 zoom 3 anchor (1900,900)
@@ -1120,7 +1121,7 @@ label a1:
             repeat
     window show
     "Причём реально пошлёпал, было довольно прилично луж на улице." with dissolve
-    scene bg ivlieva with dissolve
+    scene bg rvp_img_ivlieva with dissolve
     play ambience ambience_cold_wind_loop
     window show
     nd "Да ты чего, Персунов, какие смены?" with dissolve
@@ -1138,13 +1139,13 @@ label a1:
     "Однако пойду, прогуляюсь. Сразу возвращаться домой как-то скучно. Да и пока я так и не придумал, как извиниться и поговорить с Леной." with dissolve
     "Я ещё ни разу не ходил пешком по моему маршруту. Но в какую сторону пойти? В центр идти долго и утомительно, поэтому пойду в Кузнечиху." with dissolve
     window hide
-    scene bg kuzn with dissolve
+    scene bg rvp_img_kuzn with dissolve
     window show
     "Кузнечиха это другой микрорайон, где заканчивался мой маршрут." with dissolve
     "Он мало чем отличается от Нагорного, такие же панельки, разве что новее. В основном девятиэтажки." with dissolve
     window hide
 
-    scene bg ivlieva with dissolve
+    scene bg rvp_img_ivlieva with dissolve
     play sound sfx_intro_bus_engine_start
 
     window show
@@ -1162,7 +1163,7 @@ label a1:
     "Дальше овраг, через который можно перейти по пешеходному мосту. Я дошёл до него и снова погрузился в свои думы." with dissolve
     window hide
     stop music fadeout 2
-    scene bg kuzn_most with dissolve
+    scene bg rvp_img_kuzn_most with dissolve
     window show
     play music music_list["faceless"] fadein 2
     "Так о чём я?" with dissolve
@@ -1184,7 +1185,7 @@ label a1:
     window hide
     
     stop music fadeout 2
-    scene bg universam with dissolve
+    scene bg rvp_img_universam with dissolve
     
     window show
     "Я проходил мимо универсама." with dissolve
@@ -1202,7 +1203,7 @@ label a1:
     "Я побежал во всю свою прыть к нашему дому." with dissolve
     window hide
 
-    scene bg dom with dissolve
+    scene bg rvp_img_dom with dissolve
     window show
     "Сердце бешено стучало в груди." with dissolve
     "Вот подъезд." with dissolve
@@ -1231,7 +1232,7 @@ label a1:
     "Я опустил глаза вниз." with dissolve
     window hide
 
-    scene bg kvartira with dissolve
+    scene bg rvp_img_kvartira with dissolve
     show un shy sport with dissolve
     play ambience ambience_medstation_inside_night
     $ renpy.pause(2)
@@ -1264,9 +1265,9 @@ label a1:
     show un rage sport with dspr
     un "Куда?!!" with dissolve
     un "Опять к своим дружкам-алкашам! Тебе вчера не хватило, ты ещё хочешь?!" with dissolve
-    show unubiusport with dspr
+    show rvp_spr_un_ubiu with dspr
     "Секундная пауза. Лена набрала воздуха в лёгкие для новой очереди слов." with dissolve
-    hide unubiusport with dspr
+    show un angry sport with dspr
     un "Опохмелиться надо, да?! А то непривычно, с утра голова болит от водки!" with dissolve
     "Твою мать, как же я вляпался. Если Лена вышла из себя, то это очень плохо." with dissolve
     un "О, я знаю! Пошёл жаловаться своим товарищам, как его жена молодая пилит." with dissolve
@@ -1307,7 +1308,7 @@ label a1:
     un "А ты не волнуйся, у нас незаменимых нет." with dissolve
     stop music fadeout 3
     window hide
-    scene bg kvartira:
+    scene bg rvp_img_kvartira:
         parallel:
             zoom 1.0 anchor(0,0)
             ease 5 zoom 2 anchor (800,200)
@@ -1322,7 +1323,7 @@ label a1:
     "Но в определённый момент от праведного гнева перегибаешь палку и несправедливо задеваешь человека." with dissolve
     "И уже твоя совесть тебя мучает." with dissolve
     window hide
-    scene bg kvartira:
+    scene bg rvp_img_kvartira:
        parallel:
             zoom 2 anchor (800,200)
             ease 2 zoom 1 anchor (0,0)
@@ -1352,7 +1353,7 @@ label a1:
     
     stop sound_loop fadeout 1
     play sound sfx_close_water_sink
-    scene bg prih with dissolve
+    scene bg rvp_img_prih with dissolve
     
     window show
     "Вот уж что точно не надо делать, так это куда-то уходить без нужды и без предупреждения. Хватит с меня уходов." with dissolve
@@ -1362,7 +1363,7 @@ label a1:
     "Интересно ещё и то, что Лена верила мне. Она не кричала после моих слов что-то вроде:" with dissolve
     window hide
     
-    scene bg kvartira
+    scene bg rvp_img_kvartira
     show un angry2 sport
     show prologue_dream
     with fade
@@ -1373,7 +1374,7 @@ label a1:
     show un angry sport with dissolve
     un "Что ты мне врёшь-то? Наверняка хотел им на меня пожаловаться." with dissolve
     window hide
-    scene bg prih with dissolve
+    scene bg rvp_img_prih with dissolve
     window show
     "Это хороший признак." with dissolve
     "Значит, Лена ещё может меня выслушать, поверить мне." with dissolve
@@ -1411,8 +1412,8 @@ label a1:
     
     stop sound_loop fadeout 1
     play sound sfx_close_water_sink
-    scene bg rvp_kitchen with dissolve
-    play music ya_tebya_lyublyu fadein 2
+    scene bg rvp_img_kitchen with dissolve
+    play music rvp_msc_ya_tebya_lyublyu fadein 2
     
     window show
     "Я вспомнил, как до этой ссоры старался хотя бы по мелочи помогать на кухне." with dissolve
@@ -1436,17 +1437,17 @@ label a1:
     stop sound_loop fadeout 1
     play sound sfx_close_water_sink
     stop music fadeout 2
-    scene bg kvartira with dissolve
+    scene bg rvp_img_kvartira with dissolve
     play ambience ambience_medstation_inside_night
     
     window show
     "Надо поговорить с Леной сейчас. Обнять её, успокоить, объясниться. Пообещать, что больше такого не повторится." with dissolve
     "Лена сидела в комнате и читала книгу." with dissolve
     me "Лена, я хотел…" with dissolve
-    play sound disk_ringtone
+    play sound rvp_sfx_disk_ringtone
     "Внезапно зазвонил телефон, так и не дав мне сказать нужные слова. Я поднял трубку." with dissolve
     stop sound
-    play sound trubka
+    play sound rvp_sfx_trubka
     voice "Алло, Персунова Елена тут живёт?" #with dissolve
     me "Да, что нужно?" with dissolve
     voice "Позовите её к телефону." #with dissolve
@@ -1475,9 +1476,9 @@ label a1:
     "Лена всё никак не возвращалась. Тишина давила на меня." with dissolve
     stop ambience fadeout 2
     "Я вспомнил про радиолу “Вега”, стоявшую в углу. Такой проигрыватель для виниловых дисков." with dissolve
-    play music plastinki fadein 2
+    play music rvp_msc_plastinki fadein 2
     "Была и коллекция, причём попадались и западные дефицитные исполнители, типа “Divine comedy”, Питера Габриела и Стинга." with dissolve
-    scene bg kvartira
+    scene bg rvp_img_kvartira
     show black:
         alpha 0.6
     with dissolve
@@ -1492,7 +1493,7 @@ label a1:
     "Я не выдержал и закрыл альбом, поставив его на место." with dissolve
     window hide
 
-    scene bg okno with dissolve
+    scene bg rvp_img_okno with dissolve
     window show
     "Затем я начал смотреть на окружавший нас пейзаж." with dissolve
     "Зрелище не из приятных." with dissolve
@@ -1500,7 +1501,7 @@ label a1:
     "Недалеко районная поликлиника – потенциальное место работы Лены после института." with dissolve
     window hide
 
-    scene bg universam
+    scene bg rvp_img_universam
     show black:
         alpha 0.6
     with dissolve
@@ -1508,7 +1509,7 @@ label a1:
     "За ними универсам и рынок." with dissolve
     window hide
 
-    scene bg kvartira
+    scene bg rvp_img_kvartira
     show black:
         alpha 0.8
     with dissolve
@@ -1519,7 +1520,7 @@ label a1:
     "Наконец, я её увидел." with dissolve
     "Время было около восьми часов вечера. Она приехала на одном из троллейбусов." with dissolve
     "Как только она зашла в подъезд, я пошёл к двери встречать." with dissolve
-    scene bg prih with dissolve
+    scene bg rvp_img_prih with dissolve
     play sound sfx_open_door_1
     "Когда она поднялась, я уже открыл ей дверь." with dissolve
     show un shy coat with dissolve
@@ -1533,7 +1534,7 @@ label a1:
     "Было заметно, что Лену тронуло это." with dissolve
     window hide
     
-    scene bg rvp_kitchen with dissolve
+    scene bg rvp_img_kitchen with dissolve
     
     window show
     "Через несколько минут мы оба ели суп на кухне." with dissolve
@@ -1560,14 +1561,14 @@ label a1:
 
     $ persistent.sprite_time = "night"
     $ night_time
-    scene bg kvartira
+    scene bg rvp_img_kvartira
     show black:
         alpha 0.8
     with dissolve
     
     window show
     "От внутреннего беспокойства мне спать не хотелось." with dissolve
-    scene bg okno with dissolve
+    scene bg rvp_img_okno with dissolve
     "Я пошёл в комнату и сел за стол у окна." with dissolve
     "Вдруг я заметил магнитофон." with dissolve
     "А ведь я давно не слушал музыку на нём." with dissolve
@@ -1581,7 +1582,7 @@ label a1:
     "Кинул взгляд на гитару в углу. А ведь музыка много помогала мне, когда было трудно. Может, сейчас поможет?" with dissolve
     "Я нажал кнопку включения песни." with dissolve
     stop ambience fadeout 2
-    play music sp_noch fadein 2
+    play music rvp_msc_sp_noch fadein 2
     "Песня пошла по проводам наушников мне в уши." with dissolve
     "Надо разобраться в причинах вчерашнего." with dissolve
     "Почему не пошёл после работы домой? Не хотел сидеть дома один." with dissolve
@@ -1593,7 +1594,7 @@ label a1:
 
     $ persistent.sprite_time = "day"
     $ day_time
-    show bg kvartira
+    show bg rvp_img_kvartira
     show un smile2 sport
     show prologue_dream
     with fade
@@ -1603,7 +1604,7 @@ label a1:
 
     $ persistent.sprite_time = "night"
     $ night_time
-    scene bg okno with dissolve
+    scene bg rvp_img_okno with dissolve
     window show
     "Почему она любит меня? Не знаю."
     "Здесь мои размышления зашли в тупик. Что у Лены в голове, я до конца не представлял." with dissolve
@@ -1626,7 +1627,7 @@ label a1:
     window show
     "Это была Лена." with dissolve
     stop music fadeout 3
-    play music sp_noch_minus fadein 2
+    play music rvp_msc_sp_noch_minus fadein 2
     "Я снял наушники и хотел поставить песню на паузу, но случайно нажал на кнопку перемотки." with dissolve
     "Песня началась сначала. Было тихонько слышно, как Цой желал спокойной ночи всем, кто ложится спать." with dissolve
     un "Чего не спишь?" with dissolve
@@ -1777,7 +1778,7 @@ label a1:
     "Вдруг я вспомнил, что у меня в наушниках до сих пор играет песня." with dissolve
     stop music fadeout 3
     un "А что это играет? Почему сам слушаешь, а мне не даёшь?" with dissolve
-    play music sp_noch_solo
+    play music rvp_msc_sp_noch_solo
     "Она выдернула штекер из разъёма. И в этот момент как раз начиналось то самое каспаряновское соло на гитаре. Оно громко заиграло на всю квартиру." with dissolve
     "От неожиданности я вскочил из-за стола. Лена резко сначала обняла меня, затем запрыгнула на меня." with dissolve
     "Я хотел было что-то сказать, но она заняла мои губы своими…" with dissolve
@@ -1807,7 +1808,7 @@ label a1:
     "А вообще, счастье не только в приличной зарплате, а в том, чтобы любить и быть любимым. Главное – быть вместе с ней и поддерживать друг друга…" with dissolve
     window hide
 
-    scene bg kvartira
+    scene bg rvp_img_kvartira
     show black:
         alpha 0.8
     with dissolve
@@ -1821,9 +1822,9 @@ label a1:
     
     stop music fadeout 2
     stop ambience fadeout 2
-    play sound sp_noch_solo fadein 2
+    play sound rvp_msc_sp_noch_solo fadein 2
     scene black with dissolve2
-    show credits rvp_credits:
+    show credits rvp_credits_a1:
         xalign 0.5
         ypos 1.3
         linear 52.0 ypos -4.0
@@ -1840,7 +1841,7 @@ label b1:
 
     $ persistent.sprite_time = "sunset"
     $ sunset_time ()
-    scene bg int_bus_sunset with dissolve
+    scene bg rvp_img_int_bus_sunset with dissolve
     play sound_loop sfx_bus_interior_moving fadein 1
     "Автобус набирал обороты. Мы с Леной сели на последние места, я уступил ей место у окна." with dissolve
     "Опять я еду в автобусе. Что же всё-таки происходит?" with dissolve
@@ -1849,7 +1850,7 @@ label b1:
     scene cg epilogue_un with dissolve
     "Снова проснулся на лавочке в Совёнке?" with dissolve
 
-    scene bg int_bus_sunset with dissolve
+    scene bg rvp_img_int_bus_sunset with dissolve
     show un smile pioneer2 with dissolve
     me "Лена, а что было до того, как я проснулся сейчас?" with dissolve
     show un rock pioneer2 with dspr
@@ -1887,7 +1888,7 @@ label b1:
     show un smile3 pioneer2 with dspr
     "Лена любезно улыбнулась мне." with dissolve
     me "У меня много вопросов. Например…" with dissolve
-    scene bg int_bus_sunset with dissolve
+    scene bg rvp_img_int_bus_sunset with dissolve
     "Мы разговорились. Лена рассказала про город и про регион, где он находится, про местные достопримечательности." with dissolve
     "Наконец, мы приехали туда. Меня встретили кварталы панельных домов. В этот момент от переизбытка информации меня снова начало клонить в сон." with dissolve
     stop sound_loop fadeout 1
@@ -1895,12 +1896,12 @@ label b1:
     scene bg black with dissolve
     $ renpy.pause(1.0)
     show unblink
-    scene bg int_bus_on_square with dissolve
+    scene bg rvp_img_int_bus_on_square with dissolve
     $ persistent.sprite_time = "night"
     $ night_time ()
     play music music_list["no_tresspassing"]
     
-    scene bg int_bus_on_square:
+    scene bg rvp_img_int_bus_on_square:
        parallel:
             zoom 1.05 anchor (48,27)
             ease 15 zoom 3 anchor (1900,900)
@@ -1912,7 +1913,7 @@ label b1:
             repeat
     "Я проснулся посреди пустого Икаруса… опять! Я в шоке рванул по салону, задыхаясь от досады, что всё повторяется снова." with dissolve
 #цг - вид из автобуса ночной
-    scene bg int_bus_on_square with dissolve
+    scene bg rvp_img_int_bus_on_square with dissolve
     
 #резкий зум на окно
     "В отчаянии я повернул голову… и, наконец, заметил, что за окном не утро, а вечер и не ворота лагеря, а незнакомая площадь." with dissolve
@@ -1929,7 +1930,7 @@ label b1:
     "Я схватил наши с Леной вещи, взял её за руку и быстро повёл к выходу." with dissolve
 
     #ходьба плюс зум
-    scene bg int_bus_on_square:
+    scene bg rvp_img_int_bus_on_square:
        parallel:
             zoom 1.05 anchor (48,27)
             ease 15 zoom 3 anchor (1900,900)
@@ -1942,7 +1943,7 @@ label b1:
     me "Лена, быстрее, на свободу!" with dissolve
     scene black with dissolve
     "И вот пол сменился ступеньками и, наконец, землёй. Из автобуса я не вышел, а буквально выпрыгнул." with dissolve
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     play ambience ambience_camp_center_night
     play sound sfx_bodyfall_1
     "Меня встретила городская площадь… и удивлённая Ольга Дмитриевна." with dissolve
@@ -1950,7 +1951,7 @@ label b1:
     show mt surprise pioneer far at center with dissolve
     me "Извините, Ольга Дмитриевна, задремали немного в дороге! Вот он я, Семён Персунов, воспитанный вами образцовый пионер, стою перед вами!" with dissolve
     mt "Умеешь ты удивить, Семён. Ладно, вот ребята поезда ждут, иди к ним." with dissolve
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     "На площади было темновато, городской вокзал освещался фонарями. К тому же вечера на юге были не очень тёмными в это время суток." with dissolve
     show sl normal pioneer far:
         anchor(0.5,0.5) pos(0.3,0.5)
@@ -1978,7 +1979,7 @@ label b1:
     me "А куда поезд?" with dissolve
     sl "В Москву, дальше разъедемся кто куда. Садись к нам, последний раз ведь вместе." with dissolve
     "Неужели всё? А я ведь уже привык к ребятам за одну неделю, а они ещё сильнее сдружились между собой за две недели смены." with dissolve
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     "Лена не сидела одна, она общалась со своей соседкой по домику ¬– Мику – и со своей подругой по библиотеке – Женей." with dissolve
     "Меня подозвал Электроник." with dissolve
     show el smile pioneer with dissolve
@@ -2039,7 +2040,7 @@ label b1:
     "Шурик дал мне листок из блокнота со своим адресом." with dissolve
     sh "Ручку тоже держи, дарю на память! И в благодарность за спасение!" with dissolve
     me "О, спасибо, а то мне писать нечем." with dissolve
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     "Дальше я подходил к ребятам и записывал их адреса. Эта неделя перевернула мою жизнь, и я хотел сохранить всё, что было с ней связано." with dissolve
     "Лагерь был величиной постоянной, на него я повлиять не мог, да и незачем. А вот дружеские связи, возникшие за эти семь дней, надо было сохранить." with dissolve
 
@@ -2050,7 +2051,7 @@ label b1:
     $ renpy.pause(1.0)
     show unblink
 
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     show sl smile pioneer with dissolve
     window show
     me "Славя, можно я тут сяду?" with dissolve
@@ -2099,7 +2100,7 @@ label b1:
     show unblink
     window show
 
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     show us smile pioneer with dissolve
     me "Ульян, ты не в обиде, что я тебе тогда перца в компот сыпанул?" with dissolve
     us "Конечно в обиде! Но шутка удачная, так что хвалю! Записывай адрес!" with dissolve
@@ -2116,7 +2117,7 @@ label b1:
     show unblink
     window show
 
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     show un smile pioneer2 at right with dissolve
     show mz smile glasses pioneer at left with dissolve
     show mi smile pioneer at center with dissolve
@@ -2155,7 +2156,7 @@ label b1:
     "И когда я уговаривал Женю, я примерил на себе совершенно нетипичную для себя, даже противоположную моему естеству роль." with dissolve
     "Будто сам себя вытягивал из кокона затворничества к людям, к обществу." with dissolve
     mz "Эй, ты чего там задумался. Семёёён?" with dissolve
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     $ persistent.sprite_time = "night"
     $ night_time
     show mz angry glasses pioneer:
@@ -2176,7 +2177,7 @@ label b1:
     hide mz normal glasses pioneer
     show un smile2 pioneer with dissolve
     "Хотя стоп, я же с Леной тогда решил сесть. Да что же не так с моей памятью…" with dissolve
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     $ persistent.sprite_time = "night"
     $ night_time
     show mz angry glasses pioneer:
@@ -2197,7 +2198,7 @@ label b1:
     show un normal pioneer2 with dspr
     un "Ну, иди. Так о чем это мы, Жень… ах да, книги. Мне нужно…" with dissolve
     
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     "Учитывая всё произошедшее, можно было понять, почему она так напряглась. Но прочитать её мысли я не мог." with dissolve
     show mi smile pioneer at right with dissolve
     show dv normal pioneer with dissolve
@@ -2232,7 +2233,7 @@ label b1:
     $ renpy.pause(1.0)
     show unblink
 
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     show mi smile pioneer at right with dissolve
     show dv normal pioneer at center with dissolve
     window show
@@ -2260,7 +2261,7 @@ label b1:
 
     scene bg black with dissolve
     $renpy.pause(1.0)
-    play sound wagon fadein 1
+    play sound rvp_sfx_wagon fadein 1
     window show
     "Поезд тронулся и поехал."
     "Уезжали по разным концам Союза, даже мира, ставшие дорогими мне меньше чем за одну неделю ребята. И встретимся ли мы когда-то ещё?" with dissolve
@@ -2268,7 +2269,7 @@ label b1:
     "Но не все меня покинули." with dissolve
     window hide
 
-    scene bg perron with dissolve
+    scene bg rvp_img_perron with dissolve
     show dv normal pioneer2:
         anchor(0.5,0.5) pos (0.3,0.5)
     with dissolve
@@ -2300,7 +2301,7 @@ label b1:
     dv "Ладно, пойдём, проводишь нас, время позднее уже." with dissolve
     stop sound fadeout 2
     play ambience ambience_camp_center_night
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     window show
     "Мы вышли с перрона на площадь." with dissolve
     show dv normal pioneer2:
@@ -2324,7 +2325,7 @@ label b1:
     window hide
     stop ambience fadeout 2
 
-    scene bg int_voxhall with dissolve
+    scene bg rvp_img_int_vokzal with dissolve
     play music music_list["drown"]
     $ persistent.sprite_time = "day"
     $ day_time
@@ -2402,7 +2403,7 @@ label b1:
     window hide
     stop music fadeout 2
 
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     play ambience ambience_camp_center_night
     window show
     $ persistent.sprite_time = "night"
@@ -2441,7 +2442,7 @@ label b1:
     show un normal pioneer2:
         ease 1 pos(-0.3,0.5)
     with dissolve
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     show un normal pioneer2 at left
     show pi normal at right
     "Черт возьми, а он всё-таки признался. Я думала, будет до последнего отрицать. И что теперь? Ленка в слезах, он тоже понурый идёт." with dissolve
@@ -2449,7 +2450,7 @@ label b1:
     "В порыве справедливого гнева я хотела, чтобы он получил по заслугам. Ну получил, и что дальше с этого?" with dissolve
     "Всё же я что-то не так сделала. Может, он и вправду полюбил её уже после." with dissolve
     "Надо с ним поговорить. Проверить, искренен ли он." with dissolve
-    scene bg street_lmr_night:
+    scene bg rvp_img_street_lmr_night:
         parallel:
             zoom 1.05 anchor (48,27)
         parallel:
@@ -2500,14 +2501,14 @@ label b1:
     "Вдруг Лена ускорила шаг и сама подошла к нам." with dissolve
     un "Ребят, стойте." with dissolve
     play music music_list["waltz_of_doubts"] fadein 2
-    scene cg proj227 with dissolve
+    scene cg rvp_img_un_dv with dissolve
     "Мы остановились в круге света под фонарём." with dissolve
     un "Я тут подумала. В общем… каждый из нас в этой ситуации в чём-то виноват." with dissolve
     un "Алиса, прости, что вчера ударила тебя и не верила до этого момента. Я очень неправильно себя повела." with dissolve
     dv "Хорошо, Лен. Я тоже не идеально себя вела." with dissolve
     dv "Да и как бы ты меня не била, другой подруги у меня нет." with dissolve
 
-    scene cg proj227_2 with dissolve
+    scene cg rvp_img_un_dv_2 with dissolve
     un "Что же до тебя, Семён…" with dissolve
     "Лена тяжело вздохнула. Я снова почувствовал на себе её взгляд." with dissolve
     un "Ты совершил глупость, но ты хотя бы признался." with dissolve
@@ -2517,7 +2518,7 @@ label b1:
     un "Но знай, если будешь вести себя как кобель, не удивляйся, что я стану сукой." with dissolve
     me "Я тебя понял, Лена." with dissolve
 
-    scene cg proj282 with dissolve
+    scene cg rvp_img_sproot with dissolve
     "Лена улыбнулась нам." with dissolve
     un "Ладно, это всё позади. На самом деле, я вас так люблю!" with dissolve
     dv "И я тебя тоже, Лена." with dissolve
@@ -2526,7 +2527,9 @@ label b1:
     window hide
     
     play ambience ambience_camp_center_evening fadein 1
-    scene bg internat_night with dissolve
+    scene bg rvp_img_internat with dissolve
+    show black:
+        alpha 0.8
     show un smile pioneer2 at left with dissolve
     show dv normal pioneer2 at right with dissolve
     "Через пару минут мы подошли к какому-то жилому зданию." with dissolve
@@ -2558,9 +2561,11 @@ label b1:
     window show
     "Она поцеловала меня в ту самую щёку, по которой ударила." with dissolve
 
-    scene bg internat_night with dissolve
+    scene bg rvp_img_internat with dissolve
+    show black:
+        alpha 0.8
     $ set_mode_nvl()
-    play music larek fadein 2
+    play music rvp_msc_larek fadein 2
     window show
     nvl clear
     "Я пошёл обратно. События давали пищу для размышлений." with dissolve
@@ -2575,11 +2580,11 @@ label b1:
     window hide
     $ set_mode_adv()
     $ renpy.pause(1.0)
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     window show
     "Вот и площадь. Пройдя её, добрался до вокзала." with dissolve
     stop ambience fadeout 1
-    scene bg int_voxhall with dissolve
+    scene bg rvp_img_int_vokzal with dissolve
     "Зашёл в зал ожидания. Ничего необычного, помещение с типичной советской плиткой и мозаикой соцреализма на стене." with dissolve
     window hide
     
@@ -2696,13 +2701,13 @@ label b1:
     stop ambience fadeout 1
 
     scene black with dissolve
-    play music bomzh fadein 1
+    play music rvp_msc_bomzh fadein 1
     window show
     voice "Просыпаемся, молодой человек."
     show unblink
-    scene bg int_voxhall
-    show mil at cleft with dissolve
-    show mil2 at cright with dissolve
+    scene bg rvp_img_int_vokzal
+    show rvp_spr_mil at cleft with dissolve
+    show rvp_spr_mil2 at cright with dissolve
     "Я открыл глаза. Этого ещё не хватало. Передо мной стоял патруль местной милиции." with dissolve
     mil "Так, кто тут у нас? Пионер, несовершеннолетний. Парень, ты что тут делаешь?" with dissolve
     me "Да мне переночевать надо." with dissolve
@@ -2712,9 +2717,9 @@ label b1:
     mil2 "Пойдём с нами, пионер. Будем выяснять, кто ты и откуда."
     window hide
     
-    scene bg lenie with dissolve
-    show mil at cleft with dissolve
-    show mil2 at cright with dissolve
+    scene bg rvp_img_lenie with dissolve
+    show rvp_spr_mil at cleft with dissolve
+    show rvp_spr_mil2 at cright with dissolve
     window show
     "Дальше началось неприятное."
     mil "Фамилия, имя, отчество."
@@ -2734,7 +2739,7 @@ label b1:
     window hide
     stop music fadeout 1
         
-    scene bg lenie with dissolve
+    scene bg rvp_img_lenie with dissolve
     play music music_list["drown"] fadein 2
     $ set_mode_nvl()
     window show
@@ -2751,8 +2756,8 @@ label b1:
     window hide
     $ set_mode_adv()
     
-    scene bg kgb with dissolve
-    show genda with dissolve
+    scene bg rvp_img_kgb with dissolve
+    show rvp_spr_genda with dissolve
     window show
     play sound sfx_carousel_squeak
     "В мою камеру зашёл мужчина. Его лицо показалось мне знакомым." with dissolve
@@ -2784,7 +2789,7 @@ label b1:
     me "Или пусть Лене отправят. Это все её сбережения, она мне их отдала, чтобы были деньги на первое время." with dissolve
     gn "Хорошо, проконтролирую." with dissolve
     me "Спасибо, товарищ Генда!" with dissolve
-    hide genda with dissolve
+    hide rvp_spr_genda with dissolve
     play sound sfx_metal_door_large_close_basement
     "Он вышел из камеры. Генда произвёл на меня впечатление местного босса. Он что-то хочет от меня? Я буду пешкой в его игре?" with dissolve
     "Повлияет ли моё откровение на Лену? Могут ли у неё начаться проблемы?" with dissolve
@@ -2813,7 +2818,7 @@ label b1:
 
     $ persistent.sprite_time="day"
     $ day_time
-    scene bg square_lmr_day with dissolve 
+    scene bg rvp_img_square_lmr_day with dissolve 
     play ambience ambience_camp_center_day fadein 1
     window show
     "Через час меня высадили на той же самой площади, куда я приехал из лагеря." with dissolve
@@ -2831,18 +2836,18 @@ label b1:
     un "Какой ужас! Тебя били? С тобой сейчас всё в порядке?" with dissolve
     show un sad pioneer2 at cleft with dissolve
     un "Пойдём, расскажешь нам с Алисой." with dissolve
-    scene bg square_lmr_day with dissolve
+    scene bg rvp_img_square_lmr_day with dissolve
     "Пока мы с Леной дошли до их дома, я рассказал, что произошло. Как меня задержала милиция, как допрашивали, как меня посетил Генда." with dissolve
     window hide
     
-    scene bg internat_day with dissolve
+    scene bg rvp_img_internat with dissolve
     show un smile pioneer2 at left with dissolve
     window show
     un "Подожди здесь, я сейчас." with dissolve
     hide un smile pioneer2 with dissolve
     "Лена скрылась за дверью." with dissolve
     "Я остался ждать."
-    scene bg internat_day:
+    scene bg rvp_img_internat:
         ease 5 zoom 3 anchor (500,1600)
     "Вскоре я начал смотреть на место её жительства. Не похоже на обычный дом, ограждено забором." with dissolve
     "Наконец я прочитал название на табличке." with dissolve
@@ -2851,7 +2856,7 @@ label b1:
     "ИСПОЛКОМА ЛЕНИНОМОРСКОГО РАЙОННОГО СОВЕТА ДЕПУТАТОВ" with dissolve 
     "ШКОЛА-ИНТЕРНАТ №2" with dissolve
     "Что такое интернат? Это там, где дети и учатся и живут? Почему Лена и Алиса живут здесь, а не с родителями?" with dissolve
-    scene bg internat_day:
+    scene bg rvp_img_internat:
         zoom 3 anchor (500,1600)
         ease 2 zoom 1 anchor (0,0)
     "Мне пришлось прервать свои размышления, так как пришла Алиса." with dissolve
@@ -2948,7 +2953,7 @@ label b1:
     "Мы доели свой завтрак, и пошли на улицу." with dissolve
     window hide
     stop ambience fadeout 1
-    scene bg internat_day with dissolve
+    scene bg rvp_img_internat with dissolve
     play ambience ambience_camp_center_day fadein 1
     show un smile pioneer2 at right with dissolve
     show dv normal pioneer2 at left with dissolve
@@ -2978,14 +2983,14 @@ label b1:
     un "Да ладно, Семён. Я уверена, что у тебя всё получится!" with dissolve
     me "Ладно, где завод-то хоть?" with dissolve
     un "Как идёшь до площади, так и иди прямо по улице. Там дойдёшь до него. Сразу узнаешь, не ошибёшься." with dissolve
-    scene bg internat_day with dissolve
+    scene bg rvp_img_internat with dissolve
     "Я пошёл в указанном направлении." with dissolve
     window hide
     
-    scene bg square_lmr_day with dissolve
+    scene bg rvp_img_square_lmr_day with dissolve
     $renpy.pause(1.0)
 
-    scene bg zavod with dissolve
+    scene bg rvp_img_zavod with dissolve
     window show
     play music music_list["tried_to_bring_it_back"] fadein 2
     "Спустя полчаса я действительно увидел громаду завода." with dissolve #поправил опечатку
@@ -3021,7 +3026,7 @@ label b1:
     $ set_mode_adv()
     window show
     "Я уже отчаялся и сам пошёл на территорию завода, но на проходной меня не хотели пускать без пропуска." with dissolve
-    show mh with dissolve
+    show rvp_spr_mh with dissolve
     "Вдруг один рабочий заинтересовался мною." with dissolve
     rb "Парень, ты чего тут стоишь?" with dissolve
     me "Да я ищу, кому помощник нужен. Мне работа нужна." with dissolve
@@ -3037,10 +3042,10 @@ label b1:
     $renpy.pause(1.0)
     "Мы снова пришли в отдел кадров. Токарь начал за меня договариваться." with dissolve
     mh "Люд, ну мне нужен помощник. Вы меня обделили тогда." with dissolve
-    scene bg zavod with dissolve
+    scene bg rvp_img_zavod with dissolve
     $renpy.pause(2.0)
     "После нескольких минут словесных баталий вопрос с моим трудоустройством был решён. Заодно и выдали временный пропуск." with dissolve
-    show mh with dissolve
+    show rvp_spr_mh with dissolve
     mh "Пошли в цех. Только бога ради, сними галстук, а то подумают, экскурсию вожу из школы." with dissolve
     me "Слушайте, тут такая незадача. Мне жить негде." with dissolve 
     mh "В смысле?" with dissolve
@@ -3048,7 +3053,7 @@ label b1:
     mh "Ну, попробуй в общагу нашу заселиться. Даю тебе час времени, пока я на обеде." with dissolve
     "Я выпросил в отделе кадров обратно то самое ходатайство от Генды." with dissolve
 
-    scene bg obschaga with dissolve
+    scene bg rvp_img_obschaga with dissolve
     "Общежитие было рядом. Комендант, посмотрев на документы и особенно на ходатайство, решила всё-таки заселить меня." with dissolve 
     "Уже скоро я получал постельное бельё." with dissolve 
     me "А куда тут одеяло вставлять?" with dissolve
@@ -3060,16 +3065,16 @@ label b1:
     "Я скинул бельё с вещами на кровать и побежал обратно на завод, там меня ждали." with dissolve
     stop music fadeout 2
 
-    scene bg tsekh with dissolve
+    scene bg rvp_img_tsekh with dissolve
     play ambience ambience_clubs_inside_day fadein 1
     "Мне выдали рабочую одежду – халат и штаны. С белой рубашкой такое сочеталось, честно говоря, не очень, но выбора у меня не было." with dissolve
-    show mh with dissolve
+    show rvp_spr_mh with dissolve
     mh "Ну вот, смотри, здесь мы работаем." with dissolve
     "Моему взору открылся просторный цех завода."
     mh "Работы много. Сегодня надо убрать мусор и разложить детали." with dissolve
     mh "Ещё надо инструменты в порядок привести. И постоянно приносить мне заготовки, я замахался ходить за ними." with dissolve
     mh "Так что вперёд и с песней!" with dissolve
-    scene bg tsekh with dissolve
+    scene bg rvp_img_tsekh with dissolve
     "Работа шла тяжело. Михаил в довольно жёстком и приказном тоне объяснял, что и куда относить, требуя от меня запоминания его инструкций с первого раза." with dissolve
     "При этом нужно было не забывать вовремя приносить ему заготовки, которые он точил." with dissolve
     "Всю вторую половину рабочего дня от обеда до конца смены я был занят физической работой. За проходную завода я вышел ужасно уставшим." with dissolve
@@ -3080,7 +3085,7 @@ label b1:
 
     $ persistent.sprite_time = "night"
     $ night_time
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     play ambience ambience_camp_center_night
     window show
     "Я уже дошёл до площади, как вдруг встретил там Алису." with dissolve
@@ -3094,14 +3099,14 @@ label b1:
     show dv surprise pioneer2:
         xcenter 0.5 ycenter 0.5
         ease 6 zoom 1.25
-    show bg square_lmr_night behind dv:
+    show bg rvp_img_square_lmr_night behind dv:
         xcenter 0.5 ycenter 0.5
         ease 6 zoom 1.25
     "Неужели он действительно не врал? И ему негде было жить. И он как-то попал сюда…" with dissolve
     "Однако, это сильно с его стороны, он не растерялся и нашёл себя здесь. И Лена правильно сделала, что поверила ему." with dissolve
     show dv surprise pioneer2:
         zoom 1.0
-    show bg square_lmr_night:
+    show bg rvp_img_square_lmr_night:
         zoom 1.0
     dv "Семён… а ты, правда, остаёшься?" with dissolve
     me "Да, а куда мне деваться?" with dissolve
@@ -3114,7 +3119,9 @@ label b1:
     dv "Да в библиотеку ходила, книгу новую взяла." with dissolve
     window hide
     
-    scene bg internat_night with dissolve
+    scene bg rvp_img_internat with dissolve
+    show black:
+        alpha 0.8
     show dv normal pioneer2 with dissolve
     window show
     "Мы дошли до интерната." with dissolve
@@ -3148,9 +3155,11 @@ label b1:
     window hide
     stop ambience fadeout 1
 
-    scene bg internat_night with dissolve
+    scene bg rvp_img_internat with dissolve
+    show black:
+        alpha 0.8
     play ambience ambience_camp_center_evening fadein 1
-    play music zapomnyu fadein 1
+    play music rvp_msc_zapomnyu fadein 1
     show un smile pioneer2 with dissolve
     window show
     "Мы вышли из столовой." with dissolve
@@ -3163,7 +3172,7 @@ label b1:
     un "Давай!" with dissolve
     window hide
     
-    scene bg square_lmr_night with dissolve
+    scene bg rvp_img_square_lmr_night with dissolve
     window show
     "Мы дошли до площади и сели на лавочке." with dissolve
     show un smile pioneer2 with dissolve
@@ -3185,8 +3194,8 @@ label b1:
     "Лена поцеловала меня на прощание, и мы разошлись. Завтра трудный день." with dissolve
     window hide
     stop ambience fadeout 1  
-    scene bg square_lmr_night with dissolve    
-    show credits rvp_credits2:
+    scene bg rvp_img_square_lmr_night with dissolve    
+    show credits rvp_credits_b1:
         xalign 0.5
         ypos 1.3
         linear 52.0 ypos -4.0
@@ -3196,7 +3205,7 @@ label b1:
     scene bg black with dissolve
     $ renpy.pause(1.5)
 
-    scene bg obkom with dissolve
+    scene bg rvp_img_obkom with dissolve
     play ambience ambience_int_cabin_day fadein 1
     play music music_list["drown"] fadein 1
     window show
@@ -3210,8 +3219,8 @@ label b1:
     window hide
     stop ambience fadeout 1
 
-    scene bg lenie with dissolve
-    show genda with dissolve
+    scene bg rvp_img_lenie with dissolve
+    show rvp_spr_genda with dissolve
     ktoto "Зачем нам его отпускать?" with dissolve
     gn "Всё нормально. Никакой он не диверсант, как вы тут думаете." with dissolve
     gn "Меня предупреждали о том, что он появится." with dissolve
