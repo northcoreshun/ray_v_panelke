@@ -1,20 +1,16 @@
-#Версия 2.5
+#Версия 2.6
+#немного отредактированы титры
+#оптимизирован спрайт un_ubiu
+#мелкие фиксы спрайтов
 #
-#Сторона А - добавлен фон на титры
-#замена нескольких фонов Стороны Б
-#оптимизирован спрайт lena_shadow, вместо него строчка кода
-#убраны не используемые спрайты
-#организована структура rpy файла:сначала все малые блоки типа меню, а затем a1 и b1, чтобы последовательно писать код
-#добавлены префиксы в названиях файлов и в переменных (всё кроме кастомных спрайтов и персонажей)
-
 #Обновление до 2.6:
-#
+#far спрайты можно заменить на normal с zoom 0.X
 #Сторона А - переходы между комнатами
 #проработать хайды, заменить их на изы
 #префиксы персов
-#спрайты: оптимизировать гниду и злую лену
+#спрайты: оптимизировать гниду
 #добавить th, где надо
-#в каждую часть добавить даты тоже пока хз как
+#в каждую часть добавить даты - черный экран, белая тонкая черта, из неё сверху и снизу выходят строки
 #Сторона А - перерисовать все бг
 #возможно стоит переписать диалоги, а то Семён аутист в них какой-то
 #Сторона Б - переписать диалоги, чтобы не были пластиковыми
@@ -36,13 +32,13 @@
 #сделать единый спрайт хниды
 #1998-звук: удара по железной двери
 #2027-цг: где Семён лежит как Гослинг/попугай Кеша
-#2081-спрайт: на темном фоне спрайт плохо выглядит, белый контур слегка виден
+#2081-спрайт: на темном фоне un_coat плохо выглядит, белый контур слегка виден
 #2112-бг:заменить двор на погружение под воду
 #2327-цг: Лена и Михалыч разговаривают с лейтом, второй мент вяжет гниду и лежит Семён
 #2640-звук: флешбека
 #2860-показать кассету анимацией снизу вверх
 #туда же-звук: вставки кассеты
-
+#
 init:
     $ config.developer = True
     $ mods["rvp"] = "Рай в панельке"
@@ -134,12 +130,12 @@ init:
     $ rvp_sfx_wagon = "ray_v_panelke/sounds/wagon.mp3"
     
     #Титры
-    $ rvp_credits_a1 = "Спасибо за прочтение мода!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа с Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели -- за помощь с текстом.\n\n Cyber Patsan -- за помощь с кодом и передачу полезных навыков кодинга.\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы модов: 25 сентября, Я обязательно дождусь! и других авторов.\n\n Им тоже выражаю благодарность."
-    $ rvp_credits_b1 = "Спасибо за прочтение мода!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Помощь с фонами - Андрей Серебро\n\n Новые спрайты сделал ДАННЫЕ УДАЛЕНЫ\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы модов: 25 сентября, Я обязательно дождусь! и других авторов.\n\n Им тоже выражаю благодарность."
+    $ rvp_credits_a1 = "Спасибо за прочтение части 1А!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа в Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели - за помощь с текстом.\n\n Cyber Patsan - за помощь с кодом и передачу полезных навыков кодинга.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
+    $ rvp_credits_b1 = "Спасибо за прочтение части 1Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Помощь с фонами - Андрей Серебро\n\n Новые спрайты в фш - Андрей Фоксаров\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n Благодарность:\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
+    $ rvp_credits_b2 = "Спасибо за прочтение части 2Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Работа в Photoshop - Дмитрий Карбюраторов"
 
     #Спрайты
     #image rvp_spr_ = "ray_v_panelke/sprites/.png"
-    image rvp_spr_un_ubiu = "ray_v_panelke/sprites/un_ubiu.png"
     image rvp_spr_mh4 = "ray_v_panelke/sprites/mh4.png"
     image rvp_spr_iv4 = "ray_v_panelke/sprites/iv4.png"
     image rvp_spr_mh = "ray_v_panelke/sprites/mh.png"
@@ -155,6 +151,11 @@ init:
     #"persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites//un/un__body.png",(0,0), "ray_v_panelke/sprites//.png",(0,0), "images/sprites///.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
     #"persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites//un/un__body.png",(0,0), "ray_v_panelke/sprites//.png",(0,0), "images/sprites///.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
     #True,im.Composite((900,1080), (0,0), "images/sprites//un/un__body.png",(0,0), "ray_v_panelke/sprites//.png",(0,0), "images/sprites//.png") )
+
+    image un ubiu sport = ConditionSwitch(
+    "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "images/sprites/normal/un/un_3_sport.png",(0,0), "ray_v_panelke/sprites/emot/un_3_ubiu.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
+    "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "images/sprites/normal/un/un_3_sport.png",(0,0), "ray_v_panelke/sprites/emot/un_3_ubiu.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
+    True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "images/sprites/normal/un/un_3_sport.png",(0,0), "ray_v_panelke/sprites/emot/un_3_ubiu.png") )
 
     #Лена в пальто
     #image un  coat = ConditionSwitch(
@@ -189,9 +190,9 @@ init:
     #True,im.Composite((900,1080), (0,0), "images/sprites///un__body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/_.png",(0,0), "images/sprites///.png") )
 
     image un rock pioneer2 = ConditionSwitch(
-    "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "ray_v_panelke/sprites/emot/rock.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "ray_v_panelke/sprites/emot/rock.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "ray_v_panelke/sprites/emot/rock.png") )
+    "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "ray_v_panelke/sprites/emot/un_1_rock.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
+    "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "ray_v_panelke/sprites/emot/un_1_rock.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
+    True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "ray_v_panelke/sprites/emot/un_1_rock.png") )
 
     image un laugh pioneer2 = ConditionSwitch(
     "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_laugh.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
@@ -207,6 +208,11 @@ init:
     "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_2.png",(0,0), "images/sprites/normal/un/un_2_sad.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
     "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_2.png",(0,0), "images/sprites/normal/un/un_2_sad.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
     True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_2.png",(0,0), "images/sprites/normal/un/un_2_sad.png") )
+
+    image un sad pioneer2 close = ConditionSwitch(
+    "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_2.png",(0,0), "images/sprites/close/un/un_2_sad.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
+    "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_2.png",(0,0), "images/sprites/close/un/un_2_sad.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
+    True,im.Composite((900,1080), (0,0), "images/sprites/close/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_2.png",(0,0), "images/sprites/close/un/un_2_sad.png") )
 
     image un smile3 pioneer2 close = ConditionSwitch(
     "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_3.png",(0,0), "images/sprites/close/un/un_3_smile3.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
@@ -232,6 +238,11 @@ init:
     "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_2.png",(0,0), "images/sprites/normal/un/un_2_scared.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
     "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_2.png",(0,0), "images/sprites/normal/un/un_2_scared.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
     True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_2.png",(0,0), "images/sprites/normal/un/un_2_scared.png") )
+
+    image un scared pioneer2 close = ConditionSwitch(
+    "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_2.png",(0,0), "images/sprites/close/un/un_2_scared.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
+    "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_2.png",(0,0), "images/sprites/close/un/un_2_scared.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
+    True,im.Composite((900,1080), (0,0), "images/sprites/close/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_2.png",(0,0), "images/sprites/close/un/un_2_scared.png") )
 
     image un shy pioneer2 = ConditionSwitch(
     "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_shy.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
@@ -781,7 +792,7 @@ label a1:
     scene anim stars_1 with dissolve
     show un normal coat:
         anchor(0.5,0.5) pos(0.5,0.5)
-        matrixcolor BrightnessMatrix (-1.0)
+        matrixcolor BrightnessMatrix(-1.0)
     with dissolve
     $ renpy.pause(2)
     window show
@@ -1267,9 +1278,9 @@ label a1:
     show un rage sport with dspr
     un "Куда?!!" with dissolve
     un "Опять к своим дружкам-алкашам! Тебе вчера не хватило, ты ещё хочешь?!" with dissolve
-    show rvp_spr_un_ubiu with dspr
+    show un ubiu sport with dspr
     "Секундная пауза. Лена набрала воздуха в лёгкие для новой очереди слов." with dissolve
-    hide rvp_spr_un_ubiu with dspr
+    show un rage sport with dspr
     un "Опохмелиться надо, да?! А то непривычно, с утра голова болит от водки!" with dissolve
     "Твою мать, как же я вляпался. Если Лена вышла из себя, то это очень плохо." with dissolve
     un "О, я знаю! Пошёл жаловаться своим товарищам, как его жена молодая пилит." with dissolve
@@ -2829,16 +2840,16 @@ label b1:
     "В городе наступило утро. Люди шли по своим делам, на работу. Один я стоял и не понимал, что мне делать." with dissolve
     "За спиной у меня был вещмешок со всем моим скромным инвентарём. Ну, я хотя бы здесь уже был." with dissolve
     "Надо найти Лену. Я обернулся в сторону и вдруг увидел её. Она сидела и читала книгу на лавочке. Как знакомо." with dissolve
-    "Я пошёл к ней. Она увидела меня, удивилась, затем обрадовалась и побежала ко мне." with dissolve
+    "Я пошёл к ней. Она увидела меня, удивилась и побежала ко мне." with dissolve
     show un sad pioneer2 far at left with dissolve
     un "Сёма, привет!" with dissolve
     show un sad pioneer2 at cleft with dissolve
     un "Куда ты пропал? Я тебя вчера весь день ждала! Я так волновалась." with dissolve
     me "Лен, такое случилось. Просто чудо какое-то, что я снова с тобой." with dissolve
     me "Я в милиции был." with dissolve
-    show un scared pioneer2 at cleft with dissolve
+    show un scared pioneer2 close at cleft with dissolve
     un "Какой ужас! Тебя били? С тобой сейчас всё в порядке?" with dissolve
-    show un sad pioneer2 at cleft with dissolve
+    show un sad pioneer2 close at cleft with dissolve
     un "Пойдём, расскажешь нам с Алисой." with dissolve
     scene bg rvp_img_square_lmr_day with dissolve
     "Пока мы с Леной дошли до их дома, я рассказал, что произошло. Как меня задержала милиция, как допрашивали, как меня посетил Генда." with dissolve
