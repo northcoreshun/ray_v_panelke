@@ -1,16 +1,16 @@
 #Версия 2.6
-#немного отредактированы титры
-#оптимизирован спрайт un_ubiu
-#мелкие фиксы спрайтов
+#отредактированы титры
+#оптимизированы оставшиеся спрайты: un_ubiu, gn_nasmeh, gn_smile, gn_zloy.
+#добавлены оригинальные анимированные тайтлы в начале каждой части и с цитированием каноничного гуд-енда с новой музыкой (Sergey Eybog - Raindrops slowed&reverb)
+#заменена бг kgb, подправлена бг square_lmr_day
 #
-#Обновление до 2.6:
+#Обновление до 2.7:
+#оптимизация звука - уменьшить размер музыки, обрезать sandr.
 #far спрайты можно заменить на normal с zoom 0.X
 #Сторона А - переходы между комнатами
 #проработать хайды, заменить их на изы
 #префиксы персов
-#спрайты: оптимизировать гниду
 #добавить th, где надо
-#в каждую часть добавить даты - черный экран, белая тонкая черта, из неё сверху и снизу выходят строки
 #Сторона А - перерисовать все бг
 #возможно стоит переписать диалоги, а то Семён аутист в них какой-то
 #Сторона Б - переписать диалоги, чтобы не были пластиковыми
@@ -29,7 +29,6 @@
 #1886-бг:добавить вид от водительского сидения
 #1894-звук:эмбиент работы в депо, что-то типа как в кружке, но более грубое.
 #у спрайта хниды резкие края у рубашки
-#сделать единый спрайт хниды
 #1998-звук: удара по железной двери
 #2027-цг: где Семён лежит как Гослинг/попугай Кеша
 #2081-спрайт: на темном фоне un_coat плохо выглядит, белый контур слегка виден
@@ -110,6 +109,7 @@ init:
 
     #Музыка
     #$ rvp_msc_ = "ray_v_panelke/music/.mp3"
+    $ rvp_msc_raindrops_sandr = "ray_v_panelke/music/raindrops_sandr.mp3"
     $ rvp_msc_lyudi_nadoeli = "ray_v_panelke/music/lyudi_nadoeli.mp3"
     $ rvp_msc_kzd = "ray_v_panelke/music/kzd.mp3"
     $ rvp_msc_ya_tebya_lyublyu = "ray_v_panelke/music/ya_tebya_lyublyu.mp3"
@@ -118,7 +118,7 @@ init:
     $ rvp_msc_sp_noch_minus = "ray_v_panelke/music/sp_noch_minus.mp3"
     $ rvp_msc_sp_noch_solo = "ray_v_panelke/music/sp_noch_solo.mp3"
     $ rvp_msc_tuman = "ray_v_panelke/music/tuman.mp3"
-    $ rvp_msc_larek = "ray_v_panelke/music/nochnoj_larek.mp3"
+    $ rvp_msc_larek = "ray_v_panelke/music/larek.mp3"
     $ rvp_msc_bomzh = "ray_v_panelke/music/bomzh.mp3"
     $ rvp_msc_zapomnyu = "ray_v_panelke/music/zapomnyu.mp3"
     $ rvp_msc_trolleybus = "ray_v_panelke/music/trolleybus.mp3"
@@ -130,9 +130,10 @@ init:
     $ rvp_sfx_wagon = "ray_v_panelke/sounds/wagon.mp3"
     
     #Титры
-    $ rvp_credits_a1 = "Спасибо за прочтение части 1А!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа в Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели - за помощь с текстом.\n\n Cyber Patsan - за помощь с кодом и передачу полезных навыков кодинга.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
-    $ rvp_credits_b1 = "Спасибо за прочтение части 1Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Помощь с фонами - Андрей Серебро\n\n Новые спрайты в фш - Андрей Фоксаров\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n Благодарность:\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
+    $ rvp_credits_ = "Спасибо за прочтение части "
     $ rvp_credits_b2 = "Спасибо за прочтение части 2Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Работа в Photoshop - Дмитрий Карбюраторов"
+    $ rvp_credits_b1 = "Спасибо за прочтение части 1Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Помощь с фонами - Андрей Серебро\n\n Новые спрайты в фш - Андрей Фоксаров\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n Благодарность:\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
+    $ rvp_credits_a1 = "Спасибо за прочтение части 1А!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа в Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели - за помощь с текстом.\n\n Cyber Patsan - за помощь с кодом и передачу полезных навыков кодинга.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
 
     #Спрайты
     #image rvp_spr_ = "ray_v_panelke/sprites/.png"
@@ -142,9 +143,15 @@ init:
     image rvp_spr_genda = "ray_v_panelke/sprites/genda.png"
     image rvp_spr_mil = "ray_v_panelke/sprites/mil.png"
     image rvp_spr_mil2 = "ray_v_panelke/sprites/mil2.png"
-    image rvp_spr_gn_nasmeh = "ray_v_panelke/sprites/gn_nasmeh.png"
-    image rvp_spr_gn_smile = "ray_v_panelke/sprites/gn_smile.png"
-    image rvp_spr_gn_zloy = "ray_v_panelke/sprites/gn_zloy.png"
+
+    #Текст
+    #image rvp_txt = "ray_v_panelke/text/.png"
+    image rvp_txt_up_b = "ray_v_panelke/text/up_b.png"
+    image rvp_txt_dn_b = "ray_v_panelke/text/dn_b.png"
+    image rvp_txt_kanon1 = "ray_v_panelke/text/kanon1.png"
+    image rvp_txt_epilogue = "ray_v_panelke/text/epilogue.png"
+    image rvp_txt_up_a = "ray_v_panelke/text/up_a.png"
+    image rvp_txt_dn_a = "ray_v_panelke/text/dn_a.png"
 
     #Лена
     #image un   = ConditionSwitch(
@@ -308,7 +315,28 @@ init:
     "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_angry.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
     "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_angry.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
     True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_angry.png") )
-    
+
+    #Гнида
+    image gn  = ConditionSwitch(
+    "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
+    "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
+    True,im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/.png") )
+
+    image gn zloy = ConditionSwitch(
+    "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_zloy.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
+    "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_zloy.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
+    True,im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_zloy.png") )
+
+    image gn smile = ConditionSwitch(
+    "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_smile.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
+    "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_smile.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
+    True,im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_smile.png") )
+
+    image gn nasmeh = ConditionSwitch(
+    "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_nasmeh.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
+    "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_nasmeh.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
+    True,im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_nasmeh.png") )
+
     #Меню
     image rvp_a = "ray_v_panelke/menu/rvp_a.jpg"
     image rvp_b = "ray_v_panelke/menu/rvp_b.jpg"
@@ -373,7 +401,9 @@ label backrooms:
     stop music fadeout 2
     stop ambience fadeout 1
     scene bg black with dissolve
-    jump exit
+
+#Анимация текста для РвП
+#label rvp_preview(text_up,text_dn):
 
 #Плавный выход из мода
 label exit:
@@ -391,8 +421,63 @@ label a1:
     $ new_chapter(0, u'Рай в панельке: Сторона А.')
     $ persistent.sprite_time = "day"
     $ day_time
+    
+    play music rvp_msc_raindrops_sandr fadein 1
+    #Вывод белой полоски
+    show white:
+        subpixel True
+        align (.5,.5)
+        easein_expo 1.5 crop (480,3,1440,3)
+    #Вывод текста
+    show rvp_txt_kanon1:
+        subpixel True
+        crop (0,0,1920,270)
+        anchor (0.,1.)
+        pos (0.,.5)
+        pause 2.
+        easein_expo 1.5 crop (0,0,1920,850)#чем больше последняя коорда, тем больше выдвигается
+    show rvp_txt_epilogue:
+        subpixel True
+        crop (0,810,1920,270)
+        anchor (0.,0.)
+        pos (0.,.5)
+        pause 2.
+        easein_expo 1.5 crop (0,270,1920,810)#чем меньше вторая коорда, тем больше выдвигается
+    #Скрытие всего
+    $ renpy.pause()
+    stop music fadeout 2
+    hide white
+    hide rvp_txt_kanon1
+    hide rvp_txt_epilogue
+    $ renpy.pause(2.0)
 
     play music rvp_msc_lyudi_nadoeli fadein 1
+    #Вывод белой полоски
+    show white:
+        subpixel True
+        align (.5,.5)
+        easein_expo 1.5 crop (480,3,1440,3)
+    #Вывод текста
+    show rvp_txt_up_a:
+        subpixel True
+        crop (0,0,1920,270)
+        anchor (0.,1.)
+        pos (0.,.5)
+        pause 2.
+        easein_expo 1.5 crop (0,0,1920,810)#чем больше последняя коорда, тем больше выдвигается
+    show rvp_txt_dn_a:
+        subpixel True
+        crop (0,810,1920,270)
+        anchor (0.,0.)
+        pos (0.,.5)
+        pause 2.
+        easein_expo 1.5 crop (0,270,1920,810)#чем меньше вторая коорда, тем больше выдвигается
+    #Скрытие всего
+    $ renpy.pause(5.0)
+    hide white
+    hide rvp_txt_up_a
+    hide rvp_txt_dn_a
+    
     show prologue_dream
     with fade
     window show
@@ -653,7 +738,7 @@ label a1:
     window show
     "Всё проходило довольно мирно, мы втроём познакомились со слесарями. Не самые плохие люди оказались, но не всё было так просто…" with dissolve
     show rvp_spr_iv4 at right with dissolve
-    show rvp_spr_gn_nasmeh with dissolve
+    show gn nasmeh with dissolve
     voicegn "Семён, а что мы тебя раньше не видели в нашем кругу?" with dissolve
     "Был у них в коллективе один мутный тип, даже имя его никак не мог запомнить. А вот он меня, похоже, знал хорошо." with dissolve
     iv4 "А он у нас порядочный семьянин." with dissolve
@@ -669,10 +754,10 @@ label a1:
     mh4 "Э, слышь, криворучка, кончай трепаться. Ты бы лучше наши тралики так чинил, как до людей докапываешься." with dissolve
     me "Чё ты там про мою сказал?" with dissolve
     mh4 "Сёмыч, не слушай его, он дурной, от него жена ушла просто, вот он и бесится." with dissolve
-    show rvp_spr_gn_zloy with dspr
+    show gn zloy with dspr
     voicegn "Да пошла она! Все они бабы сволочи, твоя тоже, наверное." with dissolve
     voicegn "Думаешь, пока ты тут сидишь, она ждёт тебя? Ага, размечтался." with dissolve
-    show rvp_spr_gn_smile with dspr
+    show gn smile with dspr
     voicegn "Небось уже к другому пошла развлекаться. Но лучше ко мне, я бы её без внимания не оставил." with dissolve
     "Я вскипал от ненависти к этому ублюдку. Нужно было проучить его." with dissolve
     me "Пойдём-ка, выйдем." with dissolve
@@ -680,7 +765,7 @@ label a1:
        parallel:
             zoom 1.05 anchor (48,27)
             ease 2 zoom 3 anchor (1200,1200)
-    show rvp_spr_gn_smile:
+    show gn smile:
         anchor(0.5,0.5) pos(0.5,0.5)
         ease 1.5 pos(1.3,0.5)
     window hide
@@ -689,7 +774,7 @@ label a1:
     $ persistent.sprite_time = "night"
     $ night_time
     scene bg rvp_img_ext_garage with dissolve
-    show rvp_spr_gn_smile with dissolve
+    show gn smile with dissolve
     play ambience ambience_cold_wind_loop
     play music music_list["pile"] fadein 2
     $ renpy.pause(2)
@@ -702,7 +787,7 @@ label a1:
     play sound sfx_armature_swish
     play sound sfx_grate_hand_fall
     
-    show rvp_spr_gn_smile:
+    show gn smile:
         anchor(0.5,0.5) pos(0.5,0.5)
         ease 1.0 pos(-0.2,0.5)
     window show
@@ -904,7 +989,7 @@ label a1:
     window hide
     
     scene bg rvp_img_int_garage
-    show rvp_spr_gn_nasmeh
+    show gn nasmeh
     show prologue_dream
     with fade
     $ renpy.pause(2)
@@ -1853,11 +1938,37 @@ label b1:
     $ renpy.with_statement(fade3)
     $ renpy.pause(2.0, hard=True)
     $ new_chapter(0, u'Рай в панельке: Сторона Б')
-
     $ persistent.sprite_time = "sunset"
     $ sunset_time ()
     scene bg rvp_img_int_bus_sunset with dissolve
     play sound_loop sfx_bus_interior_moving fadein 1
+
+    #Вывод белой полоски
+    show white:
+        subpixel True
+        align (.5,.5)
+        easein_expo 1.5 crop (480,3,1440,3)
+    #Вывод текста
+    show rvp_txt_up_b:
+        subpixel True
+        crop (0,0,1920,270)
+        anchor (0.,1.)
+        pos (0.,.5)
+        pause 2.
+        easein_expo 1.5 crop (0,0,1920,810)#чем больше последняя коорда, тем больше выдвигается
+    show rvp_txt_dn_b:
+        subpixel True
+        crop (0,810,1920,270)
+        anchor (0.,0.)
+        pos (0.,.5)
+        pause 2.
+        easein_expo 1.5 crop (0,270,1920,810)#чем меньше вторая коорда, тем больше выдвигается
+    #Скрытие всего
+    $ renpy.pause(5.0)
+    hide white
+    hide rvp_txt_up_b
+    hide rvp_txt_dn_b
+
     "Автобус набирал обороты. Мы с Леной сели на последние места, я уступил ей место у окна." with dissolve
     "Опять я еду в автобусе. Что же всё-таки происходит?" with dissolve
     scene bg int_house_of_un_night with dissolve
@@ -2840,7 +2951,7 @@ label b1:
     "В городе наступило утро. Люди шли по своим делам, на работу. Один я стоял и не понимал, что мне делать." with dissolve
     "За спиной у меня был вещмешок со всем моим скромным инвентарём. Ну, я хотя бы здесь уже был." with dissolve
     "Надо найти Лену. Я обернулся в сторону и вдруг увидел её. Она сидела и читала книгу на лавочке. Как знакомо." with dissolve
-    "Я пошёл к ней. Она увидела меня, удивилась и побежала ко мне." with dissolve
+    "Я пошёл к ней. Она увидела меня, вскочила и побежала." with dissolve
     show un sad pioneer2 far at left with dissolve
     un "Сёма, привет!" with dissolve
     show un sad pioneer2 at cleft with dissolve
