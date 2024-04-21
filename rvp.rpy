@@ -1,10 +1,10 @@
-#Версия 2.6
-#отредактированы титры
-#оптимизированы оставшиеся спрайты: un_ubiu, gn_nasmeh, gn_smile, gn_zloy.
-#добавлены оригинальные анимированные тайтлы в начале каждой части и с цитированием каноничного гуд-енда с новой музыкой (Sergey Eybog - Raindrops slowed&reverb)
-#заменена бг kgb, подправлена бг square_lmr_day
+#Версия 2.7
+#внесены мелкие правки в текст
+#замена фона в части 1А, подправлен фон int_bus_on_square
+#небольшой фикс меню
+#добавлена пасхалка
 #
-#Обновление до 2.7:
+#Обновление до 2.:
 #оптимизация звука - уменьшить размер музыки, обрезать sandr.
 #far спрайты можно заменить на normal с zoom 0.X
 #Сторона А - переходы между комнатами
@@ -50,7 +50,6 @@ init:
     image bg rvp_img_obschaga = "ray_v_panelke/bg/obschaga.jpg"
     image bg rvp_img_obkom = "ray_v_panelke/bg/obkom.jpg"
     image bg rvp_img_lenie = "ray_v_panelke/bg/lenie.jpg"
-    image bg rvp_img_internat = "ray_v_panelke/bg/ext_internat.jpg"
     image bg rvp_img_int_bus_on_square = "ray_v_panelke/bg/int_bus_on_square.jpg"
     image bg rvp_img_int_bus_sunset = "ray_v_panelke/bg/int_bus_sunset.jpg"
     image bg rvp_img_perron = "ray_v_panelke/bg/perron.jpg"
@@ -109,6 +108,7 @@ init:
 
     #Музыка
     #$ rvp_msc_ = "ray_v_panelke/music/.mp3"
+    $ rvp_msc_nv_st = "ray_v_panelke/music/nv_st.mp3"
     $ rvp_msc_raindrops_sandr = "ray_v_panelke/music/raindrops_sandr.mp3"
     $ rvp_msc_lyudi_nadoeli = "ray_v_panelke/music/lyudi_nadoeli.mp3"
     $ rvp_msc_kzd = "ray_v_panelke/music/kzd.mp3"
@@ -337,11 +337,22 @@ init:
     "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_nasmeh.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
     True,im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_nasmeh.png") )
 
+    #Фоны
+    #image  = ConditionSwitch(
+    #"persistent.sprite_time=='sunset'",im.MatrixColor("ray_v_panelke/bg/.jpg", im.matrix.tint(0.94, 0.82, 1.0)),
+    #"persistent.sprite_time=='night'",im.MatrixColor("ray_v_panelke/bg/.jpg", im.matrix.tint(0.63, 0.78, 0.82)),
+    #True,"ray_v_panelke/bg/.jpg")
+
+    image bg rvp_img_internat = ConditionSwitch(
+    "persistent.sprite_time=='sunset'",im.MatrixColor("ray_v_panelke/bg/ext_internat.jpg", im.matrix.tint(0.94, 0.82, 1.0)),
+    "persistent.sprite_time=='night'",im.MatrixColor("ray_v_panelke/bg/ext_internat.jpg", im.matrix.tint(0.63, 0.78, 0.82)),
+    True,"ray_v_panelke/bg/ext_internat.jpg")
+
     #Меню
     image rvp_a = "ray_v_panelke/menu/rvp_a.jpg"
     image rvp_b = "ray_v_panelke/menu/rvp_b.jpg"
     image rvp_shadow = "ray_v_panelke/menu/rvp_shadow.png"
-    
+
 label rvp:
     scene bg black with dissolve
     play music rvp_msc_plastinki fadein 1
@@ -397,13 +408,34 @@ label backrooms:
 #    window hide
 #    show :
 #       ease 1 pos(-0.3,0.5)
+#    $ renpy.call("rvp_preview","rvp_txt_up_a","rvp_txt_dn_a")
 
+#Фон двигается сверху вниз
+#    scene bg rvp_img_dom:
+#        pos (0,-360)
+#        linear 10.0 pos (0,0)
+#    with dissolve
+
+    image nvlogo = "ray_v_panelke/nvlogo.png"
+    image nvlogo2 = "ray_v_panelke/nvlogo2.png"
+    
+    play music rvp_msc_nv_st
+    show nvlogo2:
+        anchor(.5,.5) pos(.5,.5)
+    show nvlogo behind nvlogo2:
+        anchor(.5,.5) pos(.5,.5)
+        linear 6 rotate -900
+    with dissolve
+    $ renpy.pause(4.5)
     stop music fadeout 2
-    stop ambience fadeout 1
     scene bg black with dissolve
+    jump rvp
 
-#Анимация текста для РвП
-#label rvp_preview(text_up,text_dn):
+#Анимация текста
+label rvp_preview(text_up,text_dn):
+    show text "OK" at truecenter
+    $ renpy.pause()
+    return
 
 #Плавный выход из мода
 label exit:
@@ -511,10 +543,10 @@ label a1:
     window show
     "Но копить не получается, даже порадовать себя вкусной едой выходит редко." with dissolve
     "Хотя Лена старается изо всех сил приготовить что-то приятное для нас обоих из тех продуктов, которые мы берём в универсаме “Нагорный”." with dissolve
-    "Со всей этой учебной и рабочей деятельностью мы с Леной не находим сил и времени друг для друга." with dissolve
+    "Со всей этой учебной и рабочей деятельностью нет сил и времени друг для друга." with dissolve
     hide un shy coat with dissolve
     "Встаём мы в разное время, потом большую часть дня проводим в разных местах, вечером тоже много сидим, каждый в своём углу. Я в комнате, она на кухне." with dissolve
-    "А ночью, обессиленные, мы ложимся спать." with dissolve
+    "А ночью, обессиленные, ложимся спать." with dissolve
     window hide
 
     scene bg rvp_img_vasyunina
@@ -539,7 +571,7 @@ label a1:
     "Взяв листок, я иду к своему троллейбусу под номером 1480." with dissolve
     "Проверка узлов, запуск двигателя, прогрев кабины и салона."
     play sound_loop sfx_bus_interior_moving fadein 4
-    "Зима не за горами, начинают чувствоваться холода, но снег ещё не выпал." with dissolve
+    "Зима не за горами, чувствуются холода, но снег ещё не выпал." with dissolve
     "Лена ещё спит, наверное." with dissolve
     "Интересно, в этот день удастся её подвезти до института?" with dissolve
     play sound sfx_intro_bus_engine_start
@@ -580,9 +612,9 @@ label a1:
     window show
     "Лена однажды предложила бросить свои занятия спортом и тоже найти хоть какую-то подработку после учебы, но я наотрез отказался." with dissolve
     "По себе знаю, как сильно это временами может давить, ведь я сам совмещаю работу и учебу." with dissolve
-    "А у Лены очная форма обучения. Тренировки для Лены — хоть какая-то отдушина в отрыве от учебы и повседневной серости, и лишать её этого я себе не позволил бы." with dissolve
+    "А у Лены очная форма обучения и тренировки для неё хоть какая-то отдушина в отрыве от учебы и повседневной серости, и лишать её этого я себе не позволил бы." with dissolve
     "Хоть она под вечер и приходит уставшая, я вижу в её глазах, что ей нравятся эти занятия." with dissolve
-    "Возможно, сказалось желание Слави приучить всех к спорту, и Лена подхватила этот настрой. Пусть она будет разносторонне развита, а я заработаю нам денег." with dissolve
+    "Возможно, сказалось желание Слави приучить всех к спорту, и Лена подхватила этот настрой. Пусть она будет разносторонне развита, а я буду работать." with dissolve
     window hide
     
     play sound sfx_intro_bus_engine_start
@@ -604,7 +636,7 @@ label a1:
     play sound sfx_intro_bus_engine_start
     "Ей не нужен неудачник типа меня, она достойна чего-то большего." with dissolve
     me "Остановка «Улица Адмирала Васюнина»! Следующая – «Надежды Сусловой»!" with dissolve
-    "Так ведь мало того, что она меня не бросила, она ещё поддерживает меня." with dissolve
+    "Так ведь мало того, что она меня не бросила, она ещё и поддерживает меня." with dissolve
     window hide
     
     stop sound fadeout 2
@@ -680,12 +712,12 @@ label a1:
     "Да и, можно подумать, как будто на имиджбордах мы о высоком говорили." with dissolve
     "Вот ведь что вспомнил! Интернет, имиджборды… когда-то была жизнь в других условиях и другом времени." with dissolve
     "Впрочем, не особо по ней скучаю." with dissolve
-    "Я сидел на стоянке и ждал других водил. С ними у меня были лучше всего отношения в депо." with dissolve
+    "Я сидел на стоянке и ждал других водил. С ними у меня были наилучшие отношения в депо." with dissolve
     "Со слесарями всё было непросто – о них ходила дурная слава, что они приблатнённые раздолбаи с руками явно не из плеч." with dissolve
     "Из-за них и приходилось мучиться, потому что делали кое-как. Вдобавок я им завидовал в душе, что они занимают должность, которую я хотел, когда устраивался в депо." with dissolve
-    "Если бы мне дали написать список того, что погубит в ближайшее время Союз, одним из первых на листе бы появилось слово из четырёх букв - “блат”." with dissolve
+    "Если бы мне дали написать список того, что погубит в ближайшее время Союз, наверное, первым на листе появилось бы слово из четырёх букв - блат." with dissolve
     play sound sfx_intro_bus_engine_start
-    "Вдруг из-за поворота возникли ещё пара “рогатых”. Я узнал их. Это были два водителя, работавших на одном маршруте со мной." with dissolve
+    "Вдруг из-за поворота возникли ещё двое “рогатых”. Я узнал их. Это были два водителя, работавших на одном маршруте со мной." with dissolve
     stop sound fadeout 2
     "По сложившейся пролетарской традиции я их называл по отчеству Михалыч и Иваныч." with dissolve
     show rvp_spr_mh4 at left with dissolve
@@ -693,7 +725,7 @@ label a1:
     "Первый был работягой довольно приличного вида, второй немного вызывал у меня неприязнь запущенной внешностью, но по характеру был довольно безобидным." with dissolve
     "Через несколько минут мы уже разговаривали. После смены мы обсуждали, кто как отработал, не забывая при этом обругать слесарей." with dissolve
     me "Ну ладно, мужики, я пойду."
-    mh4 "Погоди Семён, к нам присоединиться не желаешь?"
+    mh4 "Погоди, Семён, к нам присоединиться не желаешь?"
     me "А куда вы собрались, к кому-то в общагу депошную? Ходили уже, неуютно там." with dissolve
     mh4 "Да не, зачем сразу в общагу то? В гараже посидим без лишних глаз. Слесаря как раз позвали, у них выходной завтра. Дёрнем немного." with dissolve
     me "Не знаю, мужики… я с женой уже договорился время провести, и так на выходных почти с ней не вижусь." with dissolve
@@ -755,7 +787,7 @@ label a1:
     me "Чё ты там про мою сказал?" with dissolve
     mh4 "Сёмыч, не слушай его, он дурной, от него жена ушла просто, вот он и бесится." with dissolve
     show gn zloy with dspr
-    voicegn "Да пошла она! Все они бабы сволочи, твоя тоже, наверное." with dissolve
+    voicegn "Да пошла она! Все они бабы сволочи, твоя тоже, наверняка!" with dissolve
     voicegn "Думаешь, пока ты тут сидишь, она ждёт тебя? Ага, размечтался." with dissolve
     show gn smile with dspr
     voicegn "Небось уже к другому пошла развлекаться. Но лучше ко мне, я бы её без внимания не оставил." with dissolve
@@ -916,15 +948,15 @@ label a1:
     "Всё ведь шло к этому ещё там." with dissolve
     "Перестали платить зарплату на заводе. Перебивались заработками, потом переехали сюда." with dissolve
     "И вот, не выдержав груза работы и учёбы, груза ответственности, я опустился на дно. Не думаю, что она меня расцелует за это." with dissolve
-    "И так всю мою жизнь нужно какие-то препятствия преодолевать, не имея за собой поддержки. Будто барахтанье в море во время шторма." with dissolve
+    "И так всю мою жизнь нужно какие-то препятствия преодолевать, не имея под собой опоры. Будто барахтанье в море во время шторма." with dissolve
     "Ты сражаешься изо всех сил со стихией, но всё захлёбываешься." with dissolve
     "В конце концов, без опоры под ногами ты теряешь последние силы и сдаёшься." with dissolve
     window hide
 
     stop music fadeout 2
-    scene bg rvp_img_dom
-    show black:
-        alpha 0.8
+    scene bg rvp_img_dom:
+        pos (0,-360)
+        linear 10.0 pos (0,0)
     with dissolve
 
     window show
@@ -977,7 +1009,7 @@ label a1:
     un "Ты мне скажи одно – почему сегодня-то? Что случилось?! У тебя умер кто-то?" with dissolve
     un "Нет же, кто у тебя мог умереть, у тебя никого кроме меня нет, мужиков ты своих пару месяцев знаешь." with dissolve
     "Вдруг я всполыхнул, будто эти слова были искрой, взорвавший порох внутри меня. Из глубин души пошло всё раздражение, вся боль, накопившаяся за месяцы." with dissolve
-    me "Лен, я не знаю почему я так поступил, наверное потому что устал от жизни этой нелепой, от работы, на которой копейки платят, от того что у нас сил нет, и мы не говорим друг с другом как тогда, заела нас эта жизнь!" with dissolve
+    me "Лен, я не знаю, почему я так поступил, наверное потому что устал от жизни этой нелепой, от работы, на которой копейки платят, от того что у нас сил нет, и мы не говорим друг с другом как тогда, заела нас эта жизнь!" with dissolve
     un "Тебя жизнь заела? Так почему ты всегда молчишь и ничего не говоришь?! Почему такие сюрпризы мне даришь?!" with dissolve
     me "Я молчал, потому что не хотел расстраивать тебя." with dissolve
     un "Зато сейчас прямо обрадовал. Очень умно – копить в себе, а потом пойти напиться и подраться." with dissolve
@@ -1074,7 +1106,7 @@ label a1:
     window show
     "..." with dissolve
     "Ну и денёк." with dissolve
-    "Я бы мог ещё поразмышлять на то, какой я плохой и недостоин её." with dissolve
+    "Я бы мог ещё поразмышлять о том, как я плох и недостоин её." with dissolve
     "Но всё уже сказано самому себе." with dissolve
     show blink
     "Лучше просто провалюсь в сон и дождусь нового дня." with dissolve
@@ -1154,13 +1186,13 @@ label a1:
     window show
     "Надо быстрее поднять Сёму и уходить, пока они заняты." with dissolve
     window hide
-    
+
     stop music fadeout 2
     stop ambience fadeout 2
     scene bg black
     show prologue_dream
     with fade
-    
+
     window show
     "Сегодня мы впервые спали раздельно, на расстоянии друг от друга." with dissolve
     "Обычно всегда в обнимку. После трудного дня давали друг другу отдых." with dissolve
@@ -1185,7 +1217,7 @@ label a1:
     scene bg rvp_img_kvartira with dissolve
     "Лена лежала, отвернувшись от меня. Её лицо я увидел, лишь обойдя кровать." with dissolve
     scene bg int_house_of_un_night with dissolve
-    "Помню как в тот вечер в Совёнке, когда мы остались вдвоём в лагере, я смотрел на её лицо. Тогда мы помирились, и её лицо выражало спокойствие, умиротворение, тихую радость." with dissolve
+    "Помню, как в тот вечер в Совёнке, когда мы остались вдвоём в лагере, я смотрел на неё. Тогда мы помирились, и её личико выражало спокойствие, умиротворение, тихую радость." with dissolve
     scene bg rvp_img_kvartira with dissolve
     "Сейчас у неё на лице грусть, будто видит плохой сон." with dissolve
     "И что мне делать в выходной, когда поругался с единственным человеком, с которым хотел провести всё свободное время?" with dissolve
@@ -1674,14 +1706,14 @@ label a1:
     "А что послушать?" with dissolve
     "В такой момент хорошо подходило что-то лиричное, про ночь." with dissolve
     "Руки сами нашли кассету." with dissolve
-    "Кино. Группа крови. Сторона А. Песня номер четыре." with dissolve
+    "Кино. Последний герой. Последняя песня альбома." with dissolve
     "Перед тем как нажать на кнопку, немного отвлёкся." with dissolve
-    "Помню, как купил эту кассету ещё в райцентре, как слушали её с Леной, Алисой и другими ребятами. Потом подбирали аккорды." with dissolve
+    "Помню, как мне подарила эту кассету Алиса ещё в райцентре перед самым отъездом." with dissolve
     "Кинул взгляд на гитару в углу. А ведь музыка много помогала мне, когда было трудно. Может, сейчас поможет?" with dissolve
-    "Я нажал кнопку включения песни." with dissolve
+    "Я нажал кнопку." with dissolve
     stop ambience fadeout 2
     play music rvp_msc_sp_noch fadein 2
-    "Песня пошла по проводам наушников мне в уши." with dissolve
+    "Песня пошла по проводам мне в уши." with dissolve
     "Надо разобраться в причинах вчерашнего." with dissolve
     "Почему не пошёл после работы домой? Не хотел сидеть дома один." with dissolve
     "Почему не тянуло домой, а хотелось посидеть подольше? Хотелось излить душу, но не видеть Лену." with dissolve
@@ -1725,7 +1757,7 @@ label a1:
     window show
     "Это была Лена." with dissolve
     stop music fadeout 3
-    play music rvp_msc_sp_noch_minus fadein 2
+    play music rvp_msc_sp_noch_minus noloop fadein 2
     "Я снял наушники и хотел поставить песню на паузу, но случайно нажал на кнопку перемотки." with dissolve
     "Песня началась сначала. Было тихонько слышно, как Цой желал спокойной ночи всем, кто ложится спать." with dissolve
     un "Чего не спишь?" with dissolve
@@ -1862,7 +1894,7 @@ label a1:
     show un cry_smile sport with dspr
     un "Ты прав. Вот видишь, ты можешь извлекать уроки из ошибок, значит, ты совсем не безнадёжен." with dissolve
     me "Обещаю, что не буду скрывать от тебя своих переживаний и не брошу тебя в трудную минуту." with dissolve
-    un "Хорошо, Сёма. Я тоже обещаю тебя поддерживать и ничего не скрывать от тебя." with dissolve
+    un "Хорошо, Сёма. Я тоже обещаю поддерживать и ничего не скрывать от тебя." with dissolve
     show un smile2 sport with dspr
     un "Ой, Сёма, смотри, на улице снег пошёл! Скоро зима и Новый год!" with dissolve
     "Лена светилась от счастья." with dissolve
@@ -1980,8 +2012,8 @@ label b1:
     show un smile pioneer2 with dissolve
     me "Лена, а что было до того, как я проснулся сейчас?" with dissolve
     show un rock pioneer2 with dspr
-    un "Сёма, у тебя провалы в памяти?" with dissolve
-    me "Лен, если бы ты знала, что я пережил неделю назад, небольшой провал в памяти показался бы тебе мелочью." with dissolve
+    un "У тебя память отшибло?" with dissolve
+    me "Если бы ты знала, что я пережил неделю назад, небольшой провал в памяти показался бы тебе мелочью." with dissolve
     me "Пожалуйста, расскажи, а то я уже не могу так, непонятно где, непонятно в каком году." with dissolve
     show un shy pioneer2 with dspr
     "Лена поняла, что не стоит препираться и нужно помочь." with dissolve
@@ -2630,8 +2662,8 @@ label b1:
     scene cg rvp_img_un_dv with dissolve
     "Мы остановились в круге света под фонарём." with dissolve
     un "Я тут подумала. В общем… каждый из нас в этой ситуации в чём-то виноват." with dissolve
-    un "Алиса, прости, что вчера ударила тебя и не верила до этого момента. Я очень неправильно себя повела." with dissolve
-    dv "Хорошо, Лен. Я тоже не идеально себя вела." with dissolve
+    un "Алиса, прости, что вчера ударила тебя и не верила до этого момента." with dissolve
+    dv "Хорошо, Лен." with dissolve
     dv "Да и как бы ты меня не била, другой подруги у меня нет." with dissolve
 
     scene cg rvp_img_un_dv_2 with dissolve
@@ -2651,11 +2683,9 @@ label b1:
     me "И я." with dissolve
     "Мы обняли Лену. Фонарь освещал нас сверху." with dissolve
     window hide
-    
+
     play ambience ambience_camp_center_evening fadein 1
     scene bg rvp_img_internat with dissolve
-    show black:
-        alpha 0.8
     show un smile pioneer2 at left with dissolve
     show dv normal pioneer2 at right with dissolve
     "Через пару минут мы подошли к какому-то жилому зданию." with dissolve
@@ -2688,8 +2718,6 @@ label b1:
     "Она поцеловала меня в ту самую щёку, по которой ударила." with dissolve
 
     scene bg rvp_img_street_lmr_night with dissolve
-    show black:
-        alpha 0.8
     $ set_mode_nvl()
     play music rvp_msc_larek fadein 2
     window show
@@ -3246,8 +3274,6 @@ label b1:
     window hide
     
     scene bg rvp_img_internat with dissolve
-    show black:
-        alpha 0.8
     show dv normal pioneer2 with dissolve
     window show
     "Мы дошли до интерната." with dissolve
@@ -3282,8 +3308,6 @@ label b1:
     stop ambience fadeout 1
 
     scene bg rvp_img_internat with dissolve
-    show black:
-        alpha 0.8
     play ambience ambience_camp_center_evening fadein 1
     play music rvp_msc_zapomnyu fadein 1
     show un smile pioneer2 with dissolve
@@ -3340,7 +3364,7 @@ label b1:
     ktoto "Говорит Алекс." with dissolve
     alx "Он появился." with dissolve
     gn "Неужели? Где он сейчас?" with dissolve
-    alx "В МВД сообщили, что задержали странного гражданина. Заявляет, что он из будущего. Уже в конторе даёт показания." with dissolve
+    alx "У нас задержали странного гражданина. Заявляет, что он из будущего. Передали вашим, даёт показания." with dissolve
     gn "Понял. Скоро буду." with dissolve
     window hide
     stop ambience fadeout 1
