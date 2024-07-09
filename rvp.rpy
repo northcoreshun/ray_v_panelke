@@ -1,20 +1,18 @@
-#Версия 2.7
-#внесены мелкие правки в текст
-#редактура большей части фонов в стороне А, и пары фонов в Б
-#небольшой фикс меню, добавлена пасхалка
-#
+#ГЛОБАЛЬНЫЕ ИЗМЕНЕНИЯ
+#АВТОИНИТ
+#ЛИКВИДАЦИЯ ТЕКСТБОКСОВ
+#РЕЖИССУРА АЛЮМИНИЯ
+#ГЕНЕРАТОР СПРАЙТОВ
+
 #Обновление до 2.8:
+#ЗВУК
 #оптимизация звука - уменьшить размер музыки, обрезать sandr.
-#far спрайты можно заменить на normal с zoom 0.X
+
+#far спрайты можно заменить на normal с zoom 0.X (возможно уйдёт в автоинит)
 #Сторона А - переходы между комнатами
 #проработать хайды, заменить их на изы
 #префиксы персов
-#АВТОИНИТ
-#ЛИКВИДАЦИЯ ТЕКСТБОКСОВ
 #добавить th, где надо
-#Сторона А - перерисовать часть бг
-#возможно стоит переписать диалоги, а то Семён аутист в них какой-то
-#Сторона Б - переписать диалоги, чтобы не были пластиковыми
 #412-бг:сюда бы автобус с противоположного вида
 #цг:вид из автобуса ночной
 #426 и 1536-бг:сделать вечернюю площадь
@@ -417,9 +415,90 @@ label backrooms:
 #        linear 10.0 pos (0,0)
 #    with dissolve
 
+#    play music rvp_msc_raindrops_sandr fadein 1
+
+    #Вывод белой полоски
+#    show white:
+#        subpixel True
+#        align (.5,.5)
+#        easein_expo 1.5 crop (480,3,1440,3)
+
+    #Вывод текста
+#    show rvp_txt_kanon1:
+#        subpixel True
+#        crop (0,0,1920,270)
+#        anchor (0.,1.)
+#        pos (0.,.5)
+#        pause 2.
+#        easein_expo 1.5 crop (0,0,1920,850)#чем больше последняя коорда, тем больше выдвигается
+#    show rvp_txt_epilogue:
+#        subpixel True
+#        crop (0,810,1920,270)
+#        anchor (0.,0.)
+#        pos (0.,.5)
+#        pause 2.
+#        easein_expo 1.5 crop (0,270,1920,810)#чем меньше вторая коорда, тем больше выдвигается
+
+    #Скрытие всего
+#    $ renpy.pause()
+#    stop music fadeout 2
+#    hide white
+#    hide rvp_txt_kanon1
+#    hide rvp_txt_epilogue
+#    $ renpy.pause(2.0)
+
+    play music lare4k fadein 1
+    show bg kitchen rvp with dissolve
+    show un smile uncoat rvp with dissolve
+    
+    $ ichoose_narr_center = Character (None, color="#FF4500", what_color="#FFB600", screen="ichoose_centerscrn")
+    $ ichoose_un_center = Character (u'Лена', color="#b956ff", what_color="#FFB600", screen="ichoose_centerscrn")
+
+    #Трансформы для техтбоксов
+    transform ich_trans_hoverbox:
+        alpha 0.
+        on idle:
+            ease .5 alpha 0.
+        on hover:
+            ease .25 alpha 1.
+    transform ich_trans_ltArrow:
+        alpha .25
+        on idle:
+            ease .5 alpha .25
+        on hover:
+            ease .25 alpha 1.
+    transform ich_trans_rtArrow:
+        rotate 180
+        alpha .25
+        on idle:
+            ease .5 alpha .25
+        on hover:
+            ease .25 alpha 1.
+    transform ichoose_who:
+        alpha 0.
+        easein_quad 0.25 alpha 1.
+    transform ichoose_what:
+        alpha 0.
+        easein_quad 0.25 alpha 1.
+
+    ichoose_narr_center "Текст"
+    ichoose_un_center "Текст"
+
+#    show text "{color=#FFFFFF}{size=+15}     Ажурными крестами кранов" as image1:
+#        xalign 0.7 yalign 0.1
+#    pause 0.2
+    call showtext
+    #Скрытие всего
+    $ renpy.pause()
+    stop music fadeout 2
+    hide white
+    hide image1
+    hide image2
+    $ renpy.pause(2.0)
+
     image nvlogo = "ray_v_panelke/nvlogo.png"
     image nvlogo2 = "ray_v_panelke/nvlogo2.png"
-    
+
     play music rvp_msc_nv_st
     show nvlogo2:
         anchor(.5,.5) pos(.5,.5)
@@ -431,6 +510,81 @@ label backrooms:
     stop music fadeout 2
     scene bg black with dissolve
     jump rvp
+
+label showtext:
+    play music rvp_msc_raindrops_sandr fadein 1
+    #Вывод белой полоски
+    show white:
+        subpixel True
+        align (.5,.5)
+        easein_expo 1.5 crop (480,3,1440,3)
+    #Вывод текста
+    show text "{color=#FFFFFF}{size=+15}     Текст" as image1:
+        subpixel True
+        crop (0,0,1920,100)
+        anchor (0.,1.)
+        pos (0.,.5)
+        pause 2.
+        easein_expo 1.5 crop (0,0,1920,850)#чем больше последняя коорда, тем больше выдвигается
+    show text "{color=#FFFFFF}{size=+15}     Текст" as image2:
+        subpixel True
+        crop (0,810,1920,270)
+        anchor (0.,0.)
+        pos (0.,.5)
+        pause 2.
+        easein_expo 1.5 crop (0,270,1920,810)#чем меньше вторая коорда, тем больше выдвигается
+
+screen ichoose_centerscrn:
+    frame:
+        align (.5,1.)
+        background None
+        imagebutton:
+            idle ("ray_v_panelke/accessibility_vignette.png")
+            align (.5,1.)
+            yoffset 8
+            at ich_trans_hoverbox
+            action Return()
+        imagebutton: 
+            idle "ray_v_panelke/arrow_single.png"
+            at ich_trans_ltArrow
+            anchor (.5,.5)
+            pos (.075,.9)
+            action ShowMenu("text_history")
+        imagebutton: 
+            if not config.skipping:
+                idle "ray_v_panelke/arrow_single.png" 
+            else:
+                idle "ray_v_panelke/arrow_double.png"
+            at ich_trans_rtArrow
+            anchor (.5,.5)
+            pos (.925,.9)
+            action Skip()
+    window id "window":
+        background None
+        align (.5,1.)
+        ysize 200
+        vbox:
+            align (.5,.5)
+            if who:
+                text who:
+                    id "who"
+                    font "ray_v_panelke/calibri.ttf"
+                    text_align (.5)
+                    xmaximum (1000)
+                    xalign .5
+                    size 32
+                    line_leading 8
+                    at ichoose_who
+            text what:
+                id "what"
+                font "ray_v_panelke/calibri.ttf"
+                text_align (.5)
+                xmaximum (1000)
+                outlines [(2.,"#000",0,0)]
+                xalign .5
+                size 32
+                line_leading 8
+                at ichoose_what
 
 #Анимация текста
 label rvp_preview(text_up,text_dn):
@@ -536,8 +690,12 @@ label a1:
     "Живём в складчину с моей маленькой зарплаты и её стипендии. От получки до получки. Вроде хватает." with dissolve
     window hide
 
-    scene bg rvp_img_universam
-    show un shy coat
+    scene bg rvp_img_universam:
+        align (0.0,0.0)
+        ease 1 zoom 1.05
+    show un shy coat:
+        anchor(.5,.5) pos(.1,.5) zoom 1.25
+        ease 1.5 xpos(.35)
     show prologue_dream
     with fade
     
@@ -795,11 +953,10 @@ label a1:
     "Я вскипал от ненависти к этому ублюдку. Нужно было проучить его." with dissolve
     me "Пойдём-ка, выйдем." with dissolve
     scene bg rvp_img_int_garage:
-       parallel:
-            zoom 1.05 anchor (48,27)
-            ease 2 zoom 3 anchor (1200,1200)
+        align(0.9,0.5)
+        ease 2 zoom 3
     show gn smile:
-        anchor(0.5,0.5) pos(0.5,0.5)
+        align(0.5,0.5)
         ease 1.5 pos(1.3,0.5)
     window hide
     
@@ -821,14 +978,14 @@ label a1:
     play sound sfx_grate_hand_fall
     
     show gn smile:
-        anchor(0.5,0.5) pos(0.5,0.5)
-        ease 1.0 pos(-0.2,0.5)
+        align(0.5,0.5)
+        ease 0.5 pos(-0.2,0.5)
     window show
     "Я замахнулся, но промазал, попав по железной двери гаража. Гулкий удар по гаражу." with dissolve
     "А он воспользовался этим, схватил меня за волосы и треснул головой об эту дверь." with dissolve
     scene bg rvp_img_ext_garage:
-        zoom 1.05 anchor (48,27)
-        ease 1.5 zoom 1.5 anchor (0,300)
+        align(0.3,0.5)
+        ease 1 zoom 1.5
     play sound sfx_grate_hand_fall
     "Это был второй удар." with dissolve
     "Вот же гнида, взбесил и ударил исподтишка!" with dissolve
@@ -909,8 +1066,8 @@ label a1:
 
     scene anim stars_1 with dissolve
     show un normal coat:
-        anchor(0.5,0.5) pos(0.5,0.5)
-        matrixcolor BrightnessMatrix(-1.0)
+        align(0.5,0.5)#эта команда нужна, потому что спрайт почему-то слева 
+        matrixcolor BrightnessMatrix(-1)
     with dissolve
     $ renpy.pause(2)
     window show
@@ -1044,7 +1201,7 @@ label a1:
     window hide
     show un normal coat:
         anchor(0.5,0.5) pos (0.5,0.5)
-        ease 1 pos(-0.3,0.5)
+        ease 1 pos(-0.2,0.5)
     window show
     "Лена, наконец, сдвинулась с места, разулась, сняла пальто и пошла по квартире." with dissolve
     "Несмотря на мой выплеск праведного гнева на нелёгкую жизнь, она одержала верх. Правда была на её стороне." with dissolve
@@ -1063,6 +1220,9 @@ label a1:
     "Всё же попробую, не ложиться же просто спать." with dissolve
     "Я тоже разулся, снял пальто и пошёл на кухню." with dissolve
     window hide
+    scene bg rvp_img_prih:
+        align(0.1,0.5)
+        ease 2 zoom 3
     scene bg rvp_img_kitchen with dissolve
     window show
     "Лена сидела за столом и пила чай." with dissolve
@@ -1073,12 +1233,39 @@ label a1:
     "Я вроде и правильно сделал, но как будто для приличия." with dissolve
     "Нужно было раскаяться по-настоящему. Не осознав причины своего проступка, я был недостоин прощения." with dissolve
     un "Завтра поговорим ещё. А сейчас иди спать." with dissolve
+    show un serious sport with dissolve
     un "А хотя стой. Встань-ка у раковины." with dissolve
+    scene bg rvp_img_kitchen:
+        align(0.5,0.5)
+        ease 2 zoom 1.5
+    show un serious sport:
+        align(0.5,0.3)
+        ease 2 zoom 1.5
     "Лена потихоньку наклонила мою голову и нежно потрогала место удара." with dissolve
     un "Сразу говори, как себя чувствуешь? Не тошнит? Голова не кружится? Сильно болит?" with dissolve
-    "Я помотал головой, отрицая симптомы, хотя голова гудела знатно." with dissolve
+    show bg rvp_img_kitchen:
+        align(0.5,0.5) zoom 1.5
+        ease 0.5 align(0.1,0.5) zoom 1.5
+    show un serious sport:
+        align(0.5,0.3) zoom 1.5
+        ease 0.5 align(1.2,0.3) zoom 1.5
+    $renpy.pause(0.5)
+    show bg rvp_img_kitchen:
+        align(0.1,0.5) zoom 1.5
+        ease 0.5 align(0.9,0.5) zoom 1.5
+    show un serious sport:
+        align(1.2,0.3) zoom 1.5
+        ease 0.5 align(-.2,0.3) zoom 1.5
+    $renpy.pause(0.5)
+    show bg rvp_img_kitchen:
+        align(0.9,0.5) zoom 1.5
+        ease 0.5 align(0.5,0.5) zoom 1.5
+    show un serious sport:
+        align(-.2,0.3) zoom 1.5
+        ease 0.5 align(0.5,0.3) zoom 1.5
+    $renpy.pause(0.5)
+    "Я помотал головой, отрицая симптомы, хотя голова гудела знатно."
     "Лена пристально смотрела мне в глаза. Взгляд был всё ещё сердитый, но в глубине её изумрудных глаз виднелось беспокойство." with dissolve
-    hide un normal sport with dissolve
     "Она достала из кухонного шкафчика бутылёк с зелёнкой, бинт и вату." with dissolve
     window hide
     
@@ -1091,11 +1278,16 @@ label a1:
     stop sound_loop fadeout 1
     play sound sfx_close_water_sink
     "Выключив воду, взяла немного ваты, смочила зелёнкой и обработала ушибленное место. Затем обмотала голову бинтом." with dissolve
+    show un serious sport:
+        align (.5,.3) zoom 1.5
     un "Теперь иди. Повязку до утра не снимай." with dissolve
+    scene bg rvp_img_kitchen:
+        align(0.1,0.5) zoom 1.5
+        ease 2 zoom 3
+    $renpy.pause(.5)
     scene bg rvp_img_kvartira
     show black:
         alpha 0.8
-    with dissolve
     "Я поплёлся в комнату." with dissolve
     play sound sfx_bed_squeak1
     "Плюхнулся на диван “чебурашку”. И кто его так назвал…" with dissolve
@@ -1215,11 +1407,15 @@ label a1:
     "Я встал с кровати в районе девяти." with dissolve
 #анимация либо вообще фразу убрать
     "Голова гудела, но скорее от удара об дверь, чем от алкоголя…" with dissolve
-    scene bg rvp_img_kvartira with dissolve
+    show bg rvp_img_kvartira with dissolve
     "Лена лежала, отвернувшись от меня. Её лицо я увидел, лишь обойдя кровать." with dissolve
-    scene bg int_house_of_un_night with dissolve
+    show int_house_of_un_night:
+        alpha 0.7
+    with dissolve
     "Помню, как в тот вечер в Совёнке, когда мы остались вдвоём в лагере, я смотрел на неё. Тогда мы помирились, и её личико выражало спокойствие, умиротворение, тихую радость." with dissolve
-    scene bg rvp_img_kvartira with dissolve
+    scene bg rvp_img_kvartira:
+        align(0.5,0.5) zoom 1.1
+    with dissolve
     "Сейчас у неё на лице грусть, будто видит плохой сон." with dissolve
     "И что мне делать в выходной, когда поругался с единственным человеком, с которым хотел провести всё свободное время?" with dissolve
     "Просто собрать молча вещи и уйти навсегда из квартиры или из жизни?" with dissolve
@@ -1239,17 +1435,8 @@ label a1:
     "С этими мыслями я оделся, обулся и пошлёпал в депо." with dissolve
     stop ambience fadeout 2
     window hide
-    #ходьба плюс зум
-    scene bg rvp_img_vasyunina:
-       parallel:
-            zoom 1.05 anchor (48,27)
-            ease 15 zoom 3 anchor (1900,900)
-       parallel:
-            ease 0.20 pos (0, 0)
-            ease 0.20 pos (25,25)
-            ease 0.20 pos (0, 0)
-            ease 0.20 pos (-25,25)
-            repeat
+    
+    scene bg rvp_img_vasyunina with dissolve
     window show
     "Причём реально пошлёпал, было довольно прилично луж на улице." with dissolve
     scene bg rvp_img_ivlieva with dissolve
