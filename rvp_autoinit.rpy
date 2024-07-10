@@ -27,7 +27,7 @@ init python early:
                     если равно False, ресурсы мода инициализируются в момент загрузки БЛ.
             """
             self.modID = modID
-            self.modPostfix = (" " + modPostfix if modPostfix else "")
+            self.modPostfix = ("_" + modPostfix if modPostfix else "")
             self.modFiles = []
             self.write_into_file = write_into_file
             self.modDist = self.process_distances()
@@ -473,3 +473,5 @@ init python early:
             self.process_audio()
             self.process_images()
             self.process_files()
+    
+    autoInitialization_rvp = autoInitialization("ray_v_panelke", "rvp")
