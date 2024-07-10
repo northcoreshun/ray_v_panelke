@@ -36,11 +36,12 @@
 #2640-звук: флешбека
 #2860-показать кассету анимацией снизу вверх
 #туда же-звук: вставки кассеты
-#
+
 init:
     $ config.developer = True
     $ mods["rvp"] = "Рай в панельке"
 
+<<<<<<< Updated upstream
     #BG
     #image bg rvp_img_ = "ray_v_panelke/bg/.jpg"
     image bg rvp_img_zavod = "ray_v_panelke/bg/zavod.jpg"
@@ -80,6 +81,8 @@ init:
     image cg rvp_img_un_dv_2 = "ray_v_panelke/cg/rvp_un_dv_2.png"
     image cg rvp_img_sproot = "ray_v_panelke/cg/rvp_sproot.png"
 
+=======
+>>>>>>> Stashed changes
     #Персонажи
     #$  = Character (u'', color="", what_color="E2C778")
     $ dvun = Character (u'Алиса и Лена', color="DC143C", what_color="E2C778")
@@ -104,6 +107,7 @@ init:
     $ rb = Character (u'Рабочий', color="#ff3200", what_color="E2C778",)
     $ mh = Character (u'Михаил', color="#ffaa00", what_color="E2C778",)
     $ ks = Character (u'Кастелянша', color="#a5a5ff", what_color="E2C778",)
+<<<<<<< Updated upstream
 
     #Музыка
     #$ rvp_msc_ = "ray_v_panelke/music/.mp3"
@@ -127,6 +131,8 @@ init:
     $ rvp_sfx_disk_ringtone = "ray_v_panelke/sounds/disk_ringtone.mp3"
     $ rvp_sfx_trubka = "ray_v_panelke/sounds/trubka.mp3"
     $ rvp_sfx_wagon = "ray_v_panelke/sounds/wagon.mp3"
+=======
+>>>>>>> Stashed changes
     
     #Титры
     $ rvp_credits_ = "Спасибо за прочтение части "
@@ -134,6 +140,7 @@ init:
     $ rvp_credits_b1 = "Спасибо за прочтение части 1Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Помощь с фонами - Андрей Серебро\n\n Новые спрайты в фш - Андрей Фоксаров\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n Благодарность:\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
     $ rvp_credits_a1 = "Спасибо за прочтение части 1А!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа в Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели - за помощь с текстом.\n\n Cyber Patsan - за помощь с кодом и передачу полезных навыков кодинга.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
 
+<<<<<<< Updated upstream
     #Спрайты
     #image rvp_spr_ = "ray_v_panelke/sprites/.png"
     image rvp_spr_mh4 = "ray_v_panelke/sprites/mh4.png"
@@ -352,6 +359,13 @@ init:
     image rvp_b = "ray_v_panelke/menu/rvp_b.jpg"
     image rvp_shadow = "ray_v_panelke/menu/rvp_shadow.png"
 
+=======
+    image bg internat_rvp = ConditionSwitch(
+    "persistent.sprite_time=='sunset'",im.MatrixColor("ray_v_panelke/images/bg/ext_internat.jpg", im.matrix.tint(0.94, 0.82, 1.0)),
+    "persistent.sprite_time=='night'",im.MatrixColor("ray_v_panelke/images/bg/ext_internat.jpg", im.matrix.tint(0.63, 0.78, 0.82)),
+    True,"ray_v_panelke/images/bg/ext_internat.jpg")
+
+>>>>>>> Stashed changes
 label rvp:
     scene bg black with dissolve
     play music rvp_msc_plastinki fadein 1
@@ -616,14 +630,14 @@ label a1:
         align (.5,.5)
         easein_expo 1.5 crop (480,3,1440,3)
     #Вывод текста
-    show rvp_txt_kanon1:
+    show textimg kanon_rvp:
         subpixel True
         crop (0,0,1920,270)
         anchor (0.,1.)
         pos (0.,.5)
         pause 2.
         easein_expo 1.5 crop (0,0,1920,850)#чем больше последняя коорда, тем больше выдвигается
-    show rvp_txt_epilogue:
+    show textimg epilogue_rvp as textimg2:
         subpixel True
         crop (0,810,1920,270)
         anchor (0.,0.)
@@ -634,8 +648,8 @@ label a1:
     $ renpy.pause()
     stop music fadeout 2
     hide white
-    hide rvp_txt_kanon1
-    hide rvp_txt_epilogue
+    hide textimg kanon1_rvp
+    hide textimg epilogue_rvp as textimg2
     $ renpy.pause(2.0)
 
     play music rvp_msc_lyudi_nadoeli fadein 1
@@ -645,14 +659,14 @@ label a1:
         align (.5,.5)
         easein_expo 1.5 crop (480,3,1440,3)
     #Вывод текста
-    show rvp_txt_up_a:
+    show textimg up_a_rvp:
         subpixel True
         crop (0,0,1920,270)
         anchor (0.,1.)
         pos (0.,.5)
         pause 2.
         easein_expo 1.5 crop (0,0,1920,810)#чем больше последняя коорда, тем больше выдвигается
-    show rvp_txt_dn_a:
+    show textimg dn_a_rvp as textimg2:
         subpixel True
         crop (0,810,1920,270)
         anchor (0.,0.)
@@ -662,8 +676,8 @@ label a1:
     #Скрытие всего
     $ renpy.pause(5.0)
     hide white
-    hide rvp_txt_up_a
-    hide rvp_txt_dn_a
+    hide textimg up_a_rvp
+    hide textimg dn_a_rvp as textimg2
     
     show prologue_dream
     with fade
@@ -2169,14 +2183,14 @@ label b1:
         align (.5,.5)
         easein_expo 1.5 crop (480,3,1440,3)
     #Вывод текста
-    show rvp_txt_up_b:
+    show textimg up_b_rvp:
         subpixel True
         crop (0,0,1920,270)
         anchor (0.,1.)
         pos (0.,.5)
         pause 2.
         easein_expo 1.5 crop (0,0,1920,810)#чем больше последняя коорда, тем больше выдвигается
-    show rvp_txt_dn_b:
+    show textimg dn_b_rvp as textimg2:
         subpixel True
         crop (0,810,1920,270)
         anchor (0.,0.)
@@ -2186,8 +2200,8 @@ label b1:
     #Скрытие всего
     $ renpy.pause(5.0)
     hide white
-    hide rvp_txt_up_b
-    hide rvp_txt_dn_b
+    hide textimg up_b
+    hide textimg dn_b as textimg2
 
     "Автобус набирал обороты. Мы с Леной сели на последние места, я уступил ей место у окна." with dissolve
     "Опять я еду в автобусе. Что же всё-таки происходит?" with dissolve
