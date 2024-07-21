@@ -1,17 +1,17 @@
-#ГЛОБАЛЬНЫЕ ИЗМЕНЕНИЯ
-#АВТОИНИТ
+#ГЛОБАЛЬНЫЕ ИЗМЕНЕНИЯ:
 #ЛИКВИДАЦИЯ ТЕКСТБОКСОВ
 #РЕЖИССУРА АЛЮМИНИЯ
-#ГЕНЕРАТОР СПРАЙТОВ
+#ГЕНЕРАТОР СПРАЙТОВ, ТИТРОВ
+#CAMERA
+#функция ВЕРНУТЬСЯ НАЗАД, анимация перемотки SaturationMatrix(0,0)
+#Обновление 2.8:
+#оптимизирован звук - конвертация всех треков в легкий формат ogg, один трек сокращен, ещё один заменён
+#проведена автоинициализация всех файлов
+#переработана большая часть анимаций, добавлены новые
+#обработаны оставшиеся фоны
 
-#Обновление до 2.8:
-#ЗВУК
-#оптимизация звука - уменьшить размер музыки, обрезать sandr.
-
-#far спрайты можно заменить на normal с zoom 0.X (возможно уйдёт в автоинит)
-#Сторона А - переходы между комнатами
-#проработать хайды, заменить их на изы
-#префиксы персов
+#Обновление до 2.9:
+#добить фон вокзала внутри
 #добавить th, где надо
 #412-бг:сюда бы автобус с противоположного вида
 #цг:вид из автобуса ночной
@@ -40,317 +40,13 @@
 init:
     $ config.developer = True
     $ mods["rvp"] = "Рай в панельке"
+    $ chars_define_rvp()
 
-    #BG
-    #image bg _rvp = "ray_v_panelke/images/bg/.jpg"
-    # image bg zavod_rvp = "ray_v_panelke/images/bg/zavod.jpg"
-    # image bg tsekh_rvp = "ray_v_panelke/images/bg/tsekh.jpg"
-    # image bg kgb_rvp = "ray_v_panelke/images/bg/kgb.jpg"
-    # image bg obschaga_rvp = "ray_v_panelke/images/bg/obschaga.jpg"
-    # image bg obkom_rvp = "ray_v_panelke/images/bg/obkom.jpg"
-    # image bg lenie_rvp = "ray_v_panelke/images/bg/lenie.jpg"
-    # image bg int_bus_on_square_rvp = "ray_v_panelke/images/bg/int_bus_on_square.jpg"
-    # image bg int_bus_sunset_rvp = "ray_v_panelke/images/bg/int_bus_sunset.jpg"
-    # image bg perron_rvp = "ray_v_panelke/images/bg/perron.jpg"
-    # image bg int_vokzal_rvp = "ray_v_panelke/images/bg/int_vokzal.jpg"
-    # image bg square_lmr_night_rvp = "ray_v_panelke/images/bg/square_lmr_night.jpg"
-    # image bg street_lmr_night_rvp = "ray_v_panelke/images/bg/street_lmr_night.jpg"
-    # image bg square_lmr_day_rvp = "ray_v_panelke/images/bg/square_lmr_day.jpg"
-
-    # image bg int_trolley_rvp = "ray_v_panelke/images/bg/int_trolley.jpg"
-    # image bg ext_trolley_rvp = "ray_v_panelke/images/bg/ext_trolley.jpg"
-    # image bg square_rvp = "ray_v_panelke/images/bg/square.jpg"
-    # image bg universam_rvp = "ray_v_panelke/images/bg/universam.jpg"
-    # image bg kvartira_rvp = "ray_v_panelke/images/bg/kvartira.jpg"
-    # image bg vasyunina_rvp = "ray_v_panelke/images/bg/vasyunina.jpg"
-    # image bg int_garage_rvp = "ray_v_panelke/images/bg/int_garage.jpg"
-    # image bg ext_garage_rvp = "ray_v_panelke/images/bg/ext_garage.jpg"
-    # image bg dvor_rvp = "ray_v_panelke/images/bg/dvor.jpg"
-    # image bg dom_rvp = "ray_v_panelke/images/bg/dom.jpg"
-    # image bg kitchen_rvp = "ray_v_panelke/images/bg/kitchen.jpg"
-    # image bg ivlieva_rvp = "ray_v_panelke/images/bg/ivlieva.jpg"
-    # image bg kuzn_rvp = "ray_v_panelke/images/bg/kuzn.jpg"
-    # image bg kuzn_most_rvp = "ray_v_panelke/images/bg/kuzn_most.jpg"
-    # image bg prih_rvp = "ray_v_panelke/images/bg/prih.jpg"
-    # image bg okno_rvp = "ray_v_panelke/images/bg/okno.jpg"
-
-    # #CG
-    # #image cg _rvp = "ray_v_panelke/images/cg/.jpg"
-    # image cg un_dv_rvp = "ray_v_panelke/images/cg/rvp_un_dv.png"
-    # image cg un_dv_2_rvp = "ray_v_panelke/images/cg/rvp_un_dv_2.png"
-    # image cg sproot_rvp = "ray_v_panelke/images/cg/rvp_sproot.png"
-
-    #Персонажи
-    #$  = Character (u'', color="", what_color="E2C778")
-    $ dvun = Character (u'Алиса и Лена', color="DC143C", what_color="E2C778")
-    $ nd = Character (u'Начальник депо', color="8B4513", what_color="E2C778")
-    $ mh4 = Character (u'Михалыч', color="DC143C", what_color="E2C778")
-    $ iv4 = Character (u'Иваныч', color="DC143C", what_color="E2C778")
-    $ voicegn = Character (u'Слесарь', color="FFFFFF", what_color="E2C778")
-    $ voiceun = Character (u'Голос', color="#B956FF", what_color="E2C778")
-    $ al = Character (u'Алёна', color="FFFFFF", what_color="E2C778")
-    $ vh = Character (u'Вахтерша', color="FFFFFF", what_color="E2C778")
-    $ alex = Character (u'Алексей', color="FFFFFF", what_color="E2C778")
-    $ mil = Character (u'Милиционер', color="FFFFFF", what_color="E2C778")
-    $ mil2 = Character (u'Второй милиционер', color="FFFFFF", what_color="E2C778")
-    $ sot = Character (u'Сотрудник', color="FFFFFF", what_color="E2C778", kind=nvl)
-    $ sot2 = Character (u'Второй сотрудник', color="FFFFFF", what_color="E2C778", kind=nvl)
-    $ ktoto = Character (u'???', color="16bd00", what_color="E2C778",)
-    $ alx  = Character (u'Алекс', color="16bd00", what_color="E2C778",)
-    $ of = Character (u'Офицер', color="#a5a5ff", what_color="E2C778",)
-    $ gn = Character (u'Генда', color="#ffd200", what_color="E2C778",)
-    $ muj = Character (u'Мужчина', color="#c0c0c0", what_color="E2C778",)
-    $ kd = Character (u'Кадровик', color="#4eff00", what_color="E2C778", kind=nvl)
-    $ rb = Character (u'Рабочий', color="#ff3200", what_color="E2C778",)
-    $ mh = Character (u'Михаил', color="#ffaa00", what_color="E2C778",)
-    $ ks = Character (u'Кастелянша', color="#a5a5ff", what_color="E2C778",)
-
-    #Музыка
-    #$ _rvp = "ray_v_panelke/sounds/music/.mp3"
-    # $ nv_st_rvp = "ray_v_panelke/sounds/music/nv_st.mp3"
-    # $ raindrops_sandr_rvp = "ray_v_panelke/sounds/music/raindrops_sandr.mp3"
-    # $ lyudi_nadoeli_rvp = "ray_v_panelke/sounds/music/lyudi_nadoeli.mp3"
-    # $ kzd_rvp = "ray_v_panelke/sounds/music/kzd.mp3"
-    # $ ya_tebya_lyublyu_rvp = "ray_v_panelke/sounds/music/ya_tebya_lyublyu.mp3"
-    # $ plastinki_rvp = "ray_v_panelke/sounds/music/plastinki.mp3"
-    # $ sp_noch_rvp = "ray_v_panelke/sounds/music/sp_noch.mp3"
-    # $ sp_noch_minus_rvp = "ray_v_panelke/sounds/music/sp_noch_minus.mp3"
-    # $ sp_noch_solo_rvp = "ray_v_panelke/sounds/music/sp_noch_solo.mp3"
-    # $ tuman_rvp = "ray_v_panelke/sounds/music/tuman.mp3"
-    # $ larek_rvp = "ray_v_panelke/sounds/music/larek.mp3"
-    # $ bomzh_rvp = "ray_v_panelke/sounds/music/bomzh.mp3"
-    # $ zapomnyu_rvp = "ray_v_panelke/sounds/music/zapomnyu.mp3"
-    # $ trolleybus_rvp = "ray_v_panelke/sounds/music/trolleybus.mp3"
-
-    #SFX
-    #$ _rvp = "ray_v_panelke/sounds/.mp3"
-    # $ disk_ringtone_rvp = "ray_v_panelke/sounds/disk_ringtone.mp3"
-    # $ trubka_rvp = "ray_v_panelke/sounds/trubka.mp3"
-    # $ wagon_rvp = "ray_v_panelke/sounds/wagon.mp3"
-    
     #Титры
-    $ rvp_credits_ = "Спасибо за прочтение части "
-    $ rvp_credits_b2 = "Спасибо за прочтение части 2Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Работа в Photoshop - Дмитрий Карбюраторов"
+    $ rvp_credits_ = "Спасибо за прочтение части \n\n\n\n Сценарий - northcoreshun\n\n"
+    $ rvp_credits_b2 = "Спасибо за прочтение части 2Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - northcoreshun\n\n Работа в Photoshop - By Jack\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Благодарности:\n\n Noldor - вычитка\n\n poi - автообъявление"
     $ rvp_credits_b1 = "Спасибо за прочтение части 1Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Помощь с фонами - Андрей Серебро\n\n Новые спрайты в фш - Андрей Фоксаров\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n Благодарность:\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
     $ rvp_credits_a1 = "Спасибо за прочтение части 1А!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа в Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели - за помощь с текстом.\n\n Cyber Patsan - за помощь с кодом и передачу полезных навыков кодинга.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
-
-    #Спрайты
-    #image rvp_spr_ = "ray_v_panelke/sprites/.png"
-    # image mh4_rvp = "ray_v_panelke/sprites/mh4.png"
-    # image iv4_rvp = "ray_v_panelke/sprites/iv4.png"
-    # image mh_rvp = "ray_v_panelke/sprites/mh.png"
-    # image genda_rvp = "ray_v_panelke/sprites/genda.png"
-    # image mil_rvp = "ray_v_panelke/sprites/mil.png"
-    # image mil2_rvp = "ray_v_panelke/sprites/mil2.png"
-
-    #Текст
-    #image rvp_txt = "ray_v_panelke/text/.png"
-    # image text up_b_rvp = "ray_v_panelke/images/text/up_b.png"
-    # image text dn_b_rvp = "ray_v_panelke/images/text/dn_b.png"
-    # image text kanon1_rvp = "ray_v_panelke/images/text/kanon1.png"
-    # image text epilogue_rvp = "ray_v_panelke/images/text/epilogue.png"
-    # image text up_a_rvp = "ray_v_panelke/images/text/up_a.png"
-    # image text dn_a_rvp = "ray_v_panelke/images/text/dn_a.png"
-
-    #Лена
-    #image un   = ConditionSwitch(
-    #"persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites//un/un__body.png",(0,0), "ray_v_panelke/sprites//.png",(0,0), "images/sprites///.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    #"persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites//un/un__body.png",(0,0), "ray_v_panelke/sprites//.png",(0,0), "images/sprites///.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    #True,im.Composite((900,1080), (0,0), "images/sprites//un/un__body.png",(0,0), "ray_v_panelke/sprites//.png",(0,0), "images/sprites//.png") )
-
-    # image un ubiu sport = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "images/sprites/normal/un/un_3_sport.png",(0,0), "ray_v_panelke/sprites/emot/un_3_ubiu.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "images/sprites/normal/un/un_3_sport.png",(0,0), "ray_v_panelke/sprites/emot/un_3_ubiu.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "images/sprites/normal/un/un_3_sport.png",(0,0), "ray_v_panelke/sprites/emot/un_3_ubiu.png") )
-
-    # #Лена в пальто
-    # #image un_rvp  coat = ConditionSwitch(
-    # #"persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_coat.png",(0,0), "images/sprites/normal/un/.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # #"persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_coat.png",(0,0), "images/sprites/normal/un/.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # #True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_coat.png",(0,0), "images/sprites/normal/un/.png") )
-
-    # image un_rvp shy coat = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_coat.png",(0,0), "images/sprites/normal/un/un_1_shy.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_coat.png",(0,0), "images/sprites/normal/un/un_1_shy.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_coat.png",(0,0), "images/sprites/normal/un/un_1_shy.png") )
-
-    # image un_rvp smile2 coat = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_coat.png",(0,0), "images/sprites/normal/un/un_1_smile2.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_coat.png",(0,0), "images/sprites/normal/un/un_1_smile2.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_coat.png",(0,0), "images/sprites/normal/un/un_1_smile2.png") )
-
-    # image un_rvp normal coat = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_coat.png",(0,0), "images/sprites/normal/un/un_1_normal.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_coat.png",(0,0), "images/sprites/normal/un/un_1_normal.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_coat.png",(0,0), "images/sprites/normal/un/un_1_normal.png") )
-
-    # image un_rvp angry coat = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_coat.png",(0,0), "images/sprites/normal/un/un_1_angry.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_coat.png",(0,0), "images/sprites/normal/un/un_1_angry.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_coat.png",(0,0), "images/sprites/normal/un/un_1_angry.png") )
-
-    # #Лена без галстука
-    # #image un_rvp  pioneer2 = ConditionSwitch(
-    # #"persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites///un__body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/_.png",(0,0), "images/sprites///.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # #"persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites///un__body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/_.png",(0,0), "images/sprites///.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # #True,im.Composite((900,1080), (0,0), "images/sprites///un__body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/_.png",(0,0), "images/sprites///.png") )
-
-    # image un_rvp rock pioneer2 = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "ray_v_panelke/sprites/emot/un_1_rock.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "ray_v_panelke/sprites/emot/un_1_rock.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "ray_v_panelke/sprites/emot/un_1_rock.png") )
-
-    # image un_rvp laugh pioneer2 = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_laugh.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_laugh.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_laugh.png") )
-
-    # image un_rvp sad pioneer2 far = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/far/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/f_2.png",(0,0), "images/sprites/far/un/un_2_sad.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/far/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/f_2.png",(0,0), "images/sprites/far/un/un_2_sad.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/far/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/f_2.png",(0,0), "images/sprites/far/un/un_2_sad.png") )
-
-    # image un_rvp sad pioneer2 = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_2.png",(0,0), "images/sprites/normal/un/un_2_sad.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_2.png",(0,0), "images/sprites/normal/un/un_2_sad.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_2.png",(0,0), "images/sprites/normal/un/un_2_sad.png") )
-
-    # image un_rvp sad pioneer2 close = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_2.png",(0,0), "images/sprites/close/un/un_2_sad.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_2.png",(0,0), "images/sprites/close/un/un_2_sad.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/close/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_2.png",(0,0), "images/sprites/close/un/un_2_sad.png") )
-
-    # image un_rvp smile3 pioneer2 close = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_3.png",(0,0), "images/sprites/close/un/un_3_smile3.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_3.png",(0,0), "images/sprites/close/un/un_3_smile3.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/close/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_3.png",(0,0), "images/sprites/close/un/un_3_smile3.png") )
-
-    # image un_rvp serious pioneer2 = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_serious.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_serious.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_serious.png") )
-
-    # image un_rvp grin pioneer2 = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_grin.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_grin.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_grin.png") )
-
-    # image un_rvp grin pioneer2 close = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_3.png",(0,0), "images/sprites/close/un/un_3_grin.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_3.png",(0,0), "images/sprites/close/un/un_3_grin.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/close/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_3.png",(0,0), "images/sprites/close/un/un_3_grin.png") )
-
-    # image un_rvp scared pioneer2 = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_2.png",(0,0), "images/sprites/normal/un/un_2_scared.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_2.png",(0,0), "images/sprites/normal/un/un_2_scared.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_2.png",(0,0), "images/sprites/normal/un/un_2_scared.png") )
-
-    # image un_rvp scared pioneer2 close = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_2.png",(0,0), "images/sprites/close/un/un_2_scared.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_2.png",(0,0), "images/sprites/close/un/un_2_scared.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/close/un/un_2_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_2.png",(0,0), "images/sprites/close/un/un_2_scared.png") )
-
-    # image un_rvp shy pioneer2 = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_shy.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_shy.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_shy.png") )
-
-    # image un_rvp normal pioneer2 = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_normal.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_normal.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_normal.png") )
-
-    # image un_rvp smile pioneer2 = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_smile.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_smile.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_smile.png") )
-
-    # image un_rvp smile2 pioneer2 = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_smile2.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_smile2.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_smile2.png") )
-
-    # image un_rvp smile2 pioneer2 close = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_1.png",(0,0), "images/sprites/close/un/un_1_smile2.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_1.png",(0,0), "images/sprites/close/un/un_1_smile2.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/close/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_1.png",(0,0), "images/sprites/close/un/un_1_smile2.png") )
-
-    # image un_rvp smile pioneer2 far = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/far/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/f_1.png",(0,0), "images/sprites/far/un/un_1_smile.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/far/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/f_1.png",(0,0), "images/sprites/far/un/un_1_smile.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/far/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/f_1.png",(0,0), "images/sprites/far/un/un_1_smile.png") )
-
-    # image un_rvp smile3 pioneer2 = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_smile3.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_smile3.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_smile3.png") )
-
-    # image un_rvp angry2 pioneer2 = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_angry2.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_angry2.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_angry2.png") )
-
-    # image un_rvp angry2 pioneer2 far = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/far/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/f_3.png",(0,0), "images/sprites/far/un/un_3_angry2.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/far/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/f_3.png",(0,0), "images/sprites/far/un/un_3_angry2.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/far/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/f_3.png",(0,0), "images/sprites/far/un/un_3_angry2.png") )
-
-    # image un_rvp angry2 pioneer2 close = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_3.png",(0,0), "images/sprites/close/un/un_3_angry2.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_3.png",(0,0), "images/sprites/close/un/un_3_angry2.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/close/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_3.png",(0,0), "images/sprites/close/un/un_3_angry2.png") )
-
-    # image un_rvp rage pioneer2 = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_rage.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_rage.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_3.png",(0,0), "images/sprites/normal/un/un_3_rage.png") )
-
-    # image un_rvp rage pioneer2 close = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_3.png",(0,0), "images/sprites/close/un/un_3_rage.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/close/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_3.png",(0,0), "images/sprites/close/un/un_3_rage.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/close/un/un_3_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/c_3.png",(0,0), "images/sprites/close/un/un_3_rage.png") )
-
-    # image un_rvp angry pioneer2 = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_angry.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_angry.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "images/sprites/normal/un/un_1_body.png",(0,0), "ray_v_panelke/sprites/un_bez_gal/n_1.png",(0,0), "images/sprites/normal/un/un_1_angry.png") )
-
-    # #Гнида
-    # image gn  = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/.png") )
-
-    # image gn zloy = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_zloy.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_zloy.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_zloy.png") )
-
-    # image gn smile = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_smile.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_smile.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_smile.png") )
-
-    # image gn nasmeh = ConditionSwitch(
-    # "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_nasmeh.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
-    # "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_nasmeh.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
-    # True,im.Composite((900,1080), (0,0), "ray_v_panelke/sprites/gnida.png",(0,0), "ray_v_panelke/sprites/emot/gn_nasmeh.png") )
-
-    #Фоны
-    #image  = ConditionSwitch(
-    #"persistent.sprite_time=='sunset'",im.MatrixColor("ray_v_panelke/images/bg/.jpg", im.matrix.tint(0.94, 0.82, 1.0)),
-    #"persistent.sprite_time=='night'",im.MatrixColor("ray_v_panelke/images/bg/.jpg", im.matrix.tint(0.63, 0.78, 0.82)),
-    #True,"ray_v_panelke/images/bg/.jpg")
-
-    image bg internat_rvp = ConditionSwitch(
-    "persistent.sprite_time=='sunset'",im.MatrixColor("ray_v_panelke/images/bg/ext_internat.jpg", im.matrix.tint(0.94, 0.82, 1.0)),
-    "persistent.sprite_time=='night'",im.MatrixColor("ray_v_panelke/images/bg/ext_internat.jpg", im.matrix.tint(0.63, 0.78, 0.82)),
-    True,"ray_v_panelke/images/bg/ext_internat.jpg")
-
-    #Меню
-    # image rvp_a = "ray_v_panelke/images/menu/rvp_a.jpg"
-    # image rvp_b = "ray_v_panelke/images/menu/rvp_b.jpg"
-    # image rvp_shadow = "ray_v_panelke/images/menu/rvp_shadow.png"
 
 label rvp:
     scene bg black with dissolve
@@ -407,7 +103,6 @@ label backrooms:
 #    window hide
 #    show :
 #       ease 1 pos(-0.3,0.5)
-#    $ renpy.call("rvp_preview","rvp_txt_up_a","rvp_txt_dn_a")
 
 #Фон двигается сверху вниз
 #    scene bg dom_rvp:
@@ -415,8 +110,11 @@ label backrooms:
 #        linear 10.0 pos (0,0)
 #    with dissolve
 
-#    play music raindrops_sandr_rvp fadein 1
+#Функция вызова анимации текста (в разработке)
+#    $ renpy.call("rvp_preview","rvp_txt_up_a","rvp_txt_dn_a")
 
+#Весь вывод текста и полоски
+#    play music raindrops_sandr_rvp fadein 1
     #Вывод белой полоски
 #    show white:
 #        subpixel True
@@ -424,14 +122,14 @@ label backrooms:
 #        easein_expo 1.5 crop (480,3,1440,3)
 
     #Вывод текста
-#    show rvp_txt_kanon1:
+#    show textimg _rvp:
 #        subpixel True
 #        crop (0,0,1920,270)
 #        anchor (0.,1.)
 #        pos (0.,.5)
 #        pause 2.
 #        easein_expo 1.5 crop (0,0,1920,850)#чем больше последняя коорда, тем больше выдвигается
-#    show rvp_txt_epilogue:
+#    show textimg _rvp as textimg2:
 #        subpixel True
 #        crop (0,810,1920,270)
 #        anchor (0.,0.)
@@ -443,13 +141,9 @@ label backrooms:
 #    $ renpy.pause()
 #    stop music fadeout 2
 #    hide white
-#    hide rvp_txt_kanon1
-#    hide rvp_txt_epilogue
+#    hide textimg _rvp
+#    hide textimg _rvp as textimg2
 #    $ renpy.pause(2.0)
-
-    play music larek_rvp fadein 1
-    show bg kitchen rvp with dissolve
-    show un smile uncoat rvp with dissolve
     
     $ ichoose_narr_center = Character (None, color="#FF4500", what_color="#FFB600", screen="ichoose_centerscrn")
     $ ichoose_un_center = Character (u'Лена', color="#b956ff", what_color="#FFB600", screen="ichoose_centerscrn")
@@ -484,33 +178,19 @@ label backrooms:
     ichoose_narr_center "Текст"
     ichoose_un_center "Текст"
 
-#    show text "{color=#FFFFFF}{size=+15}     Ажурными крестами кранов" as image1:
-#        xalign 0.7 yalign 0.1
-#    pause 0.2
-    call showtext
-    #Скрытие всего
-    $ renpy.pause()
-    stop music fadeout 2
-    hide white
-    hide image1
-    hide image2
-    $ renpy.pause(2.0)
-
-    image nvlogo = "ray_v_panelke/nvlogo.png"
-    image nvlogo2 = "ray_v_panelke/nvlogo2.png"
-
     play music nv_st_rvp
-    show nvlogo2:
-        anchor(.5,.5) pos(.5,.5)
-    show nvlogo behind nvlogo2:
-        anchor(.5,.5) pos(.5,.5)
+    show nvlogo2_rvp:
+        align(.5,.5)
+    show nvlogo_rvp behind nvlogo2:
+        align(.5,.5)
         linear 6 rotate -900
     with dissolve
     $ renpy.pause(4.5)
     stop music fadeout 2
     scene bg black with dissolve
-    jump rvp
-
+    call showtext
+    
+#Функция вывода превьюшки
 label showtext:
     play music raindrops_sandr_rvp fadein 1
     #Вывод белой полоски
@@ -533,28 +213,36 @@ label showtext:
         pos (0.,.5)
         pause 2.
         easein_expo 1.5 crop (0,270,1920,810)#чем меньше вторая коорда, тем больше выдвигается
+    jump rvp
+    $ renpy.pause()
+    stop music fadeout 2
+    hide white
+    hide image1
+    hide image2
+    $ renpy.pause(2.0)
 
+#Новый текстбокс
 screen ichoose_centerscrn:
     frame:
         align (.5,1.)
         background None
         imagebutton:
-            idle ("ray_v_panelke/accessibility_vignette.png")
+            idle ("ray_v_panelke/gui/accessibility_vignette.png")
             align (.5,1.)
             yoffset 8
             at ich_trans_hoverbox
             action Return()
         imagebutton: 
-            idle "ray_v_panelke/arrow_single.png"
+            idle "ray_v_panelke/gui/arrow_single.png"
             at ich_trans_ltArrow
             anchor (.5,.5)
             pos (.075,.9)
             action ShowMenu("text_history")
         imagebutton: 
             if not config.skipping:
-                idle "ray_v_panelke/arrow_single.png" 
+                idle "ray_v_panelke/gui/arrow_single.png" 
             else:
-                idle "ray_v_panelke/arrow_double.png"
+                idle "ray_v_panelke/gui/arrow_double.png"
             at ich_trans_rtArrow
             anchor (.5,.5)
             pos (.925,.9)
@@ -568,7 +256,7 @@ screen ichoose_centerscrn:
             if who:
                 text who:
                     id "who"
-                    font "ray_v_panelke/calibri.ttf"
+                    font "ray_v_panelke/gui/calibri.ttf"
                     text_align (.5)
                     xmaximum (1000)
                     xalign .5
@@ -577,7 +265,7 @@ screen ichoose_centerscrn:
                     at ichoose_who
             text what:
                 id "what"
-                font "ray_v_panelke/calibri.ttf"
+                font "ray_v_panelke/gui/calibri.ttf"
                 text_align (.5)
                 xmaximum (1000)
                 outlines [(2.,"#000",0,0)]
@@ -585,12 +273,6 @@ screen ichoose_centerscrn:
                 size 32
                 line_leading 8
                 at ichoose_what
-
-#Анимация текста
-label rvp_preview(text_up,text_dn):
-    show text "OK" at truecenter
-    $ renpy.pause()
-    return
 
 #Плавный выход из мода
 label exit:
@@ -616,14 +298,14 @@ label a1:
         align (.5,.5)
         easein_expo 1.5 crop (480,3,1440,3)
     #Вывод текста
-    show rvp_txt_kanon1:
+    show textimg kanon1_rvp:
         subpixel True
         crop (0,0,1920,270)
         anchor (0.,1.)
         pos (0.,.5)
         pause 2.
         easein_expo 1.5 crop (0,0,1920,850)#чем больше последняя коорда, тем больше выдвигается
-    show rvp_txt_epilogue:
+    show textimg epilogue_rvp as textimg2:
         subpixel True
         crop (0,810,1920,270)
         anchor (0.,0.)
@@ -634,8 +316,8 @@ label a1:
     $ renpy.pause()
     stop music fadeout 2
     hide white
-    hide rvp_txt_kanon1
-    hide rvp_txt_epilogue
+    hide textimg kanon1_rvp
+    hide textimg epilogue_rvp as textimg2
     $ renpy.pause(2.0)
 
     play music lyudi_nadoeli_rvp fadein 1
@@ -645,14 +327,14 @@ label a1:
         align (.5,.5)
         easein_expo 1.5 crop (480,3,1440,3)
     #Вывод текста
-    show rvp_txt_up_a:
+    show textimg up_a_rvp:
         subpixel True
         crop (0,0,1920,270)
         anchor (0.,1.)
         pos (0.,.5)
         pause 2.
         easein_expo 1.5 crop (0,0,1920,810)#чем больше последняя коорда, тем больше выдвигается
-    show rvp_txt_dn_a:
+    show textimg dn_a_rvp as textimg2:
         subpixel True
         crop (0,810,1920,270)
         anchor (0.,0.)
@@ -662,8 +344,8 @@ label a1:
     #Скрытие всего
     $ renpy.pause(5.0)
     hide white
-    hide rvp_txt_up_a
-    hide rvp_txt_dn_a
+    hide textimg up_a_rvp
+    hide textimg dn_a_rvp as textimg2
     
     show prologue_dream
     with fade
@@ -691,11 +373,11 @@ label a1:
     window hide
 
     scene bg universam_rvp:
-        align (0.0,0.0)
+        align(.0,.0)
         ease 1 zoom 1.05
     show un_rvp shy coat:
-        anchor(.5,.5) pos(.1,.5) zoom 1.25
-        ease 1.5 xpos(.35)
+        anchor(.5,.5) pos(.1,.5) zoom 1.25 alpha 0
+        ease 1.5 xpos(.25) alpha 1
     show prologue_dream
     with fade
     
@@ -703,7 +385,6 @@ label a1:
     "Но копить не получается, даже порадовать себя вкусной едой выходит редко." with dissolve
     "Хотя Лена старается изо всех сил приготовить что-то приятное для нас обоих из тех продуктов, которые мы берём в универсаме “Нагорный”." with dissolve
     "Со всей этой учебной и рабочей деятельностью нет сил и времени друг для друга." with dissolve
-    hide un  with dissolve
     "Встаём мы в разное время, потом большую часть дня проводим в разных местах, вечером тоже много сидим, каждый в своём углу. Я в комнате, она на кухне." with dissolve
     "А ночью, обессиленные, ложимся спать." with dissolve
     window hide
@@ -744,7 +425,10 @@ label a1:
     with fade
     window show
     un "Доброе утро, Сёма!"
-    hide un_rvp with dissolve
+    show un_rvp smile2 coat:
+        align(.5,.5)
+        ease 1 pos(.8,.5) alpha 0
+    with dissolve
     "Но поговорить в рейсе не удавалось, опасное это дело, могу отвлечься. А я, чай, не «Окой» управляю, да и не одного себя везу." with dissolve
     "Чёрт, местные словечки уже прилипают к моей речи. Как, например “чай”, который не в значении напитка, а как частица “всё-таки”." with dissolve
     "Ну, вот и выезжать пора. Покидаю ворота первого депо и выхожу на маршрут." with dissolve
@@ -898,10 +582,8 @@ label a1:
     me "Ну, пойдёмте тогда." with dissolve
     window hide
     show mh4_rvp at left:
-        anchor(0.5,0.5) pos(0.3,0.5)
         ease 1.5 pos(1.1,0.5)
     show iv4_rvp at right:
-        anchor(0.5,0.5) pos(0.7,0.5)
         ease 1.5 pos(1.3,0.5)
     stop music fadeout 4
     stop ambience fadeout 2
@@ -1066,7 +748,7 @@ label a1:
 
     scene anim stars_1 with dissolve
     show un_rvp normal coat:
-        align(0.5,0.5)#эта команда нужна, потому что спрайт почему-то слева 
+        align(.5,.5)#эта команда нужна, потому что спрайт почему-то слева 
         matrixcolor BrightnessMatrix(-1)
     with dissolve
     $ renpy.pause(2)
@@ -1113,8 +795,8 @@ label a1:
 
     stop music fadeout 2
     scene bg dom_rvp:
-        pos (0,-360)
-        linear 10.0 pos (0,0)
+        align(.0,.0)
+        linear 10.0 pos(0,-360)
     with dissolve
 
     window show
@@ -1503,7 +1185,10 @@ label a1:
     window hide
     
     stop music fadeout 2
-    scene bg universam_rvp with dissolve
+    scene bg universam_rvp:
+        align(.5,.5)
+        ease 1 zoom 1.05
+    with dissolve
     
     window show
     "Я проходил мимо универсама." with dissolve
@@ -1514,13 +1199,16 @@ label a1:
     "Или не плачет, а уже с горя…" with dissolve
     stop ambience fadeout 2
     play music music_list["scarytale"] fadein 2
+    with hpunch
     "Твою мать!" with dissolve
     "Нужно срочно бежать к ней." with dissolve
     "Чёрт с ними со словами, лишь бы увидеть её живой." with dissolve
     "Пусть она хоть скалкой мне последние мозги вышибет, я заслужил это." with dissolve
     "Я побежал во всю свою прыть к нашему дому." with dissolve
     window hide
-
+    scene bg universam_rvp:
+        align(.1,.5)
+        ease 1 zoom 1.5
     scene bg dom_rvp with dissolve
     window show
     "Сердце бешено стучало в груди." with dissolve
@@ -1529,6 +1217,8 @@ label a1:
     "Так, вот квартира." with dissolve
     play sound sfx_unlock_door_campus
     "Дрожащими руками достаю ключ и открываю." with dissolve
+    scene bg prih_rvp
+    with hpunch
     "Не разуваясь, пробегаю в комнату." with dissolve
     window hide
     
@@ -1725,8 +1415,8 @@ label a1:
     un "Я уже поела." with dissolve
     window hide
     show un shy sport:
-        anchor(0.5,0.5) pos(0.5,0.5)
-        ease 1 pos(-0.3,0.5)
+        align(.5,.5)
+        ease 1 pos(0.,.5) alpha 0
     window show
     "И с этими словами она резко вышла." with dissolve
     "Даже лица её разглядеть не успел." with dissolve
@@ -1759,7 +1449,9 @@ label a1:
     play sound_loop sfx_water_sink_stream fadein 1
     "Закончив, я помыл за собой посуду и пошёл в комнату." with dissolve
     window hide
-
+    scene bg kitchen_rvp:
+        align(0.1,0.5)
+        ease 2 zoom 3
     stop sound_loop fadeout 1
     play sound sfx_close_water_sink
     stop music fadeout 2
@@ -1849,15 +1541,17 @@ label a1:
     scene bg prih_rvp with dissolve
     play sound sfx_open_door_1
     "Когда она поднялась, я уже открыл ей дверь." with dissolve
-    show un_rvp coat with dissolve
+    show un_rvp shy coat with dissolve
     "Лена была слегка изумлена такой тёплой встречей, но постеснялась что-то сказать." with dissolve
-    show un_rvp normal coat
-    with dspr
+    show un_rvp normal coat with dspr
     un "Слушай, ты поговорить хотел. Подожди немного, я устала." with dissolve
     me "Пойдём, поужинаем. Ты пока раздевайся, я суп погрею." with dissolve
     un "А ты без меня не ел?" with dissolve
     me "Нет, тебя ждал." with dissolve
-    hide un_rvp normal coat with dissolve
+    show un_rvp shy coat:
+        align(.5,.5)
+        ease 1 pos(-.1,.5) alpha 0
+    with dissolve
     "Было заметно, что Лену тронуло это." with dissolve
     window hide
     
@@ -1877,13 +1571,16 @@ label a1:
     un "Пойду{w=0.3} полежу, совсем сил нет." with dissolve
     window hide
     show un normal sport:
-        anchor(0.5,0.5) pos(0.5,0.5)
-        ease 1 pos(-0.3,0.5)
+        align(.5,.5)
+        ease 1 pos(.0,.5) alpha 0
     window show
     "И скрылась в спальне." with dissolve
     "От этих слов я совсем расстроился." with dissolve
     "Опять возможность решить ситуацию ускользает от меня." with dissolve
     "Сейчас она уснёт. Будить её было как-то неприлично, человек работал." with dissolve
+    scene bg kitchen_rvp:
+        align(0.1,0.5)
+        ease 2 zoom 3
     window hide
 
     $ persistent.sprite_time = "night"
@@ -1954,7 +1651,7 @@ label a1:
     window show
     "Это была Лена." with dissolve
     stop music fadeout 3
-    play music sp_noch_minus_rvp noloop fadein 2
+    play music sp_noch_minus_rvp fadein 2
     "Я снял наушники и хотел поставить песню на паузу, но случайно нажал на кнопку перемотки." with dissolve
     "Песня началась сначала. Было тихонько слышно, как Цой желал спокойной ночи всем, кто ложится спать." with dissolve
     un "Чего не спишь?" with dissolve
@@ -1969,6 +1666,7 @@ label a1:
     me "Я ж говорю, жизнь заела." with dissolve
     me "Зарплата маленькая, работа непрестижная. Живём в панельной однушке." with dissolve
     "Лене не понравились мои слова." with dissolve
+    show un serious sport with dspr
     un "Что значит не престижная? Для меня нет такого понятия. Есть нужная и ненужная обществу." with dissolve
     un "Ты возишь людей на работу и учёбу, меня в том числе. Это нужная обществу работа, значит достойная." with dissolve
     un "Зарплата пусть маленькая, но мы же не голодаем." with dissolve
@@ -2002,7 +1700,7 @@ label a1:
     un "Нет, а с чего?" with dissolve
     un "Ты молодец, что хочешь обеспечивать семью, чтобы я не бедствовала. Но не всё сразу же." with dissolve
     un "И не надо так переживать из-за денег, мои чувства к тебе не зависят от того, сколько рублей ты в кассе получаешь." with dissolve
-    show un smile sport with dspr
+    show un laugh sport with dspr
     un "Это всё остатки твоего мировоззрения от жизни в капиталистическом обществе." with dissolve
     show un grin sport with dspr
     "Лена перестала злиться. Немного улыбнувшись, она продолжила." with dissolve
@@ -2027,9 +1725,10 @@ label a1:
     un "Мы всё думали, как повезло тебе сесть на автобус и попасть в другое время. Я не знаю, как ты пережил, это же так страшно, наверное, было." with dissolve
     me "Ну да, тяжело мне тогда было. Но главное, что это позади." with dissolve
     window hide
-    show un sad sport:
-        anchor(0.5,0.5) pos(0.5,0.5)
-        ease 3 zoom 2.5 pos(0.0,0.8)
+    show un cry sport:
+        align(.5,.5)
+        ease 2 xpos .25
+        ease 2 zoom 2.5 pos(.0,.8)
     window show
     "Я обнял Лену. Она всем видом показывала, что её нужно было поддержать." with dissolve
     me "Хочешь, не буду пить? Вообще." with dissolve
@@ -2098,7 +1797,10 @@ label a1:
     show un grin sport with dspr
     un "Повязку уже давно мог снять. Какой ты у меня рассеянный." with dissolve
     "Точно, я про неё совсем забыл с этими думами. Лена сняла бинт и поцеловала меня в лоб." with dissolve
-    hide un grin sport with dspr
+    show un grin sport:
+        align(.5,.5)
+        ease 2 zoom 2.5 pos(.0,.8) alpha 0
+    with dspr
     "Она наклонилась к уху и зашептала." with dissolve
     un "Я горжусь тобой, Сёма." with dissolve
     "Недопонимание между нами ушло, и наши души снова стали близки. Всё начало идти к тому, что не только души." with dissolve
@@ -2178,14 +1880,14 @@ label b1:
         align (.5,.5)
         easein_expo 1.5 crop (480,3,1440,3)
     #Вывод текста
-    show rvp_txt_up_b:
+    show textimg up_b_rvp:
         subpixel True
         crop (0,0,1920,270)
         anchor (0.,1.)
         pos (0.,.5)
         pause 2.
         easein_expo 1.5 crop (0,0,1920,810)#чем больше последняя коорда, тем больше выдвигается
-    show rvp_txt_dn_b:
+    show textimg dn_b_rvp as textimg2:
         subpixel True
         crop (0,810,1920,270)
         anchor (0.,0.)
@@ -2195,8 +1897,8 @@ label b1:
     #Скрытие всего
     $ renpy.pause(5.0)
     hide white
-    hide rvp_txt_up_b
-    hide rvp_txt_dn_b
+    hide textimg up_b_rvp
+    hide textimg dn_b_rvp as textimg2
 
     "Автобус набирал обороты. Мы с Леной сели на последние места, я уступил ей место у окна." with dissolve
     "Опять я еду в автобусе. Что же всё-таки происходит?" with dissolve
@@ -2249,13 +1951,44 @@ label b1:
     stop sound_loop fadeout 1
     show blink
     scene bg black with dissolve
-    $ renpy.pause(1.0)
+
+    play music raindrops_sandr_rvp fadein 1
+    #Вывод белой полоски
+    show white:
+        subpixel True
+        align (.5,.5)
+        easein_expo 1.5 crop (480,3,1440,3)
+
+    #Вывод текста
+    show textimg kanon2_rvp:
+        subpixel True
+        crop (0,0,1920,270)
+        anchor (0.,1.)
+        pos (0.,.5)
+        pause 2.
+        easein_expo 1.5 crop (0,0,1920,850)#чем больше последняя коорда, тем больше выдвигается
+    show textimg epilogue_rvp as textimg2:
+        subpixel True
+        crop (0,810,1920,270)
+        anchor (0.,0.)
+        pos (0.,.5)
+        pause 2.
+        easein_expo 1.5 crop (0,270,1920,810)#чем меньше вторая коорда, тем больше выдвигается
+
+    #Скрытие всего
+    $ renpy.pause()
+    stop music fadeout 2
+    hide white
+    hide textimg kanon2_rvp
+    hide textimg epilogue_rvp as textimg2
+    $ renpy.pause(2.0)
+
     show unblink
     scene bg int_bus_on_square_rvp with dissolve
     $ persistent.sprite_time = "night"
     $ night_time ()
     play music music_list["no_tresspassing"]
-    
+
     scene bg int_bus_on_square_rvp:
         parallel:
             zoom 1.05 anchor (48,27)
@@ -2266,14 +1999,17 @@ label b1:
             ease 0.20 pos (0, 0)
             ease 0.20 pos (-25,25)
             repeat
+#сделать через оффсет
     "Я проснулся посреди пустого Икаруса… опять! Я в шоке рванул по салону, задыхаясь от досады, что всё повторяется снова." with dissolve
 #цг - вид из автобуса ночной
-    scene bg int_bus_on_square_rvp with dissolve
-    
-#резкий зум на окно
+    scene bg int_bus_on_square_rvp:
+        ease 1 align(.9,.3) zoom 2
     "В отчаянии я повернул голову… и, наконец, заметил, что за окном не утро, а вечер и не ворота лагеря, а незнакомая площадь." with dissolve
 #бг - вид в автобусе на задние сиденья
-    "Я обернулся и увидел… испуганную Лену." with dissolve
+    scene bg int_bus_on_square_rvp:
+        align(.9,.3) zoom 2
+        ease 1 align(.5,.5) zoom 1
+    "Я обернулся и увидел… испуганную Лену."
     show un_rvp scared pioneer2 with dspr
     me "Лена… мы же сейчас не в Совёнке?" with dissolve
     un "Н-нет, Сёма, мы в райцентре. Т-ты в порядке?" with dissolve
@@ -2283,7 +2019,6 @@ label b1:
     mt "Ребят, ну вы там долго ещё? Автобусу уезжать надо!" with dissolve
     "Ну наконец-то!" with dissolve
     "Я схватил наши с Леной вещи, взял её за руку и быстро повёл к выходу." with dissolve
-
     #ходьба плюс зум
     scene bg int_bus_on_square_rvp:
         parallel:
@@ -2347,12 +2082,12 @@ label b1:
 
     #Приближение Электроника и выдвигание девочек
     show el smile pioneer:
-        anchor(0.5,0.5) pos(0.5,0.5)
+        align(0.5,0.5)
         ease 1.5 pos(0.3,0.7) zoom 1.25
-    show mz smile pioneer far:
+    show mz laugh pioneer far:
         anchor(0.5,0.5) pos(1.1,0.5)
         ease 1.5 pos(0.6,0.5)
-    show un_rvp smile pioneer2 far:
+    show un_rvp grin pioneer2 far:
         anchor(0.5,0.5) pos(1.3,0.5)
         ease 1.5 pos(0.8,0.5)
     window show
@@ -2364,10 +2099,10 @@ label b1:
     show el smile pioneer:
         anchor(0.5,0.5) pos(0.3,0.7) zoom 1.25
         ease 1.5 pos(0.5,0.5) zoom 1.0
-    show mz smile pioneer far:
+    show mz laugh pioneer far:
         anchor(0.5,0.5) pos(0.6,0.5)
         ease 1.5 pos(1.1,0.5)
-    show un_rvp smile pioneer2 far:
+    show un_rvp grin pioneer2 far:
         anchor(0.5,0.5) pos(0.8,0.5)
         ease 1.5 pos(1.3,0.5)
 
@@ -2383,7 +2118,7 @@ label b1:
     me "Ого, повезло вам." with dissolve
     el "Ладно, бывай, мне ещё надо кое с кем попрощаться." with dissolve
     show el smile pioneer:
-        ease 1 pos(-0.3,0.5)
+        ease 1 pos(0.,.5) alpha 0
     "Ко мне подошёл Шурик." with dissolve
     show sh smile with dissolve
     sh "Семён, спасибо, что помог выйти из подземелья. Непонятно, чем бы это всё закончилось, если бы не ты." with dissolve
@@ -2484,16 +2219,16 @@ label b1:
     me "А, ну ты иди, я через пару минут подойду, я просто с девочками поговорить хотел." with dissolve
     mi "Хорошо. Приходи к нам, мы тебе сыграем…" with dissolve
     show mi smile pioneer:
-        anchor(0.5,0.5) pos (0.5,0.5)
-        ease 2 pos(1.3,0.5)
-    "А что она хотела мне сыграть, я уже не услышал." with dissolve
+        align(0.5,0.5)
+        ease 2 pos(1.3,0.5) alpha 0
+    "А что она хотела мне сыграть, я уже не услышал."
     show un_rvp smile pioneer2:
         anchor(0.5,0.5) pos (0.7,0.5)
         ease 1 pos(0.6,0.5)
     show mz smile glasses pioneer:
         anchor(0.5,0.5) pos (0.3,0.5)
         ease 1 pos(0.4,0.5)
-    "Остались Лена и Женя. Я повернулся к ним." with dissolve
+    "Остались Лена и Женя. Я повернулся к ним."
     mz "Ну что, Семён, понравилось в лагере?" with dissolve
     "Женя выглядела нетипично весело для своего мрачного образа." with dissolve
     me "Какая-то ты весёлая для отъезда… да и вообще." with dissolve
@@ -2516,7 +2251,7 @@ label b1:
     $ night_time
     show mz angry glasses pioneer:
         anchor(0.5,0.5) pos(0.4,0.5)
-    show un_rvp smile pioneer2:
+    show un_rvp smile2 pioneer2:
         anchor(0.5,0.5) pos(0.6,0.5)
     "Я мысленно вернулся из лучшего дня смены в “здесь и сейчас”." with dissolve
     mz "Ну вот, замечтался и совсем меня не слушает." with dissolve
@@ -2532,6 +2267,7 @@ label b1:
     hide mz normal glasses pioneer
     show un smile2 pioneer with dissolve
     "Хотя стоп, я же с Леной тогда решил сесть. Да что же не так с моей памятью…" with dissolve
+    #по центру кусок бг площади вырван и под ним бг столовой и спрайт Жени и Лены 
     scene bg square_lmr_night_rvp with dissolve
     $ persistent.sprite_time = "night"
     $ night_time
@@ -2548,21 +2284,22 @@ label b1:
     me "Мику позвала, она на гитаре играет." with dissolve
     show un_rvp serious pioneer2 with dspr 
     un "С Алисой?" with dissolve
-    me "Ну да." with dissolve 
-    "Лена, прежде беззаботно сидевшая и слушавшая наш разговор, вдруг стала серьёзной. " with dissolve
+    me "Ну да." with dissolve
+#запятая после ну, а лучше троеточие
+    "Лена, прежде беззаботно сидевшая и слушавшая наш разговор, вдруг стала серьёзной." with dissolve
     show un_rvp normal pioneer2 with dspr
     un "Ну, иди. Так о чем это мы, Жень… ах да, книги. Мне нужно…" with dissolve
     
     scene bg square_lmr_night_rvp with dissolve
     "Учитывая всё произошедшее, можно было понять, почему она так напряглась. Но прочитать её мысли я не мог." with dissolve
-    show mi smile pioneer at right with dissolve
-    show dv normal pioneer with dissolve
+    show mi smile pioneer at cright with dissolve
+    show dv normal pioneer at cleft with dissolve
     "Вот и наши гитаристки." with dissolve
     mi "Вот так это играется, запиши." with dissolve
     "Алиса старательно заносила ценную информацию в блокнот. Вся страница была исписана табами, строчками, аккордами, даже схемами и комментариями." with dissolve
     mi "Ой, Семён, наконец-то ты пришёл. Что хочешь послушать?" with dissolve
     me "Эм, ну…" with dissolve
-    show dv angry pioneer2 with dissolve
+    show dv angry pioneer2 at cleft with dissolve
     dv "Семён, не до тебя сейчас. Уйди куда-нибудь." with dissolve
     "Понимаю её. Интернета нет и ещё не будет лет десять, а тут такое везение – встреча с девочкой с другой стороны железного занавеса. Да что там, другой культуры!" with dissolve
     me "А, ну если мешаю…" with dissolve
@@ -2572,7 +2309,7 @@ label b1:
     mi "Новую песню из Японии." with dissolve
     dv "А мне его присутствие мешает. Я ещё не тренировалась, и если он будет сбивать меня, ничего не выйдет." with dissolve
     me "А ты закрой глаза и представь, что меня нет." with dissolve
-    show dv grin pioneer2 with dissolve
+    show dv grin pioneer2 at cleft with dissolve
     dv "Как я буду пальцы видеть, если глаза закрою, умник?" with dissolve
     me "Ладно, не буду мешать." with dissolve
     "Они начали играть. Мику задавала темп и играла громче, Алиса старалась подыгрывать ей в такт." with dissolve
@@ -2589,19 +2326,25 @@ label b1:
     show unblink
 
     scene bg square_lmr_night_rvp with dissolve
-    show mi smile pioneer at right with dissolve
-    show dv normal pioneer at center with dissolve
+    show mi smile pioneer at cright with dissolve
+    show dv normal pioneer at cleft with dissolve
     window show
     dv "Сколько у нас ещё времени?" with dissolve
     mi "Около часа." with dissolve
     dv "Я бы не отказалась в картишки перекинуться напоследок, вы как?" with dissolve
+    show mi smile pioneer at cright:
+        align(.5,.5)
+        ease 1 pos(0.5,0.5)
+    show dv normal pioneer at cleft:
+        align(.5,.5)
+        ease 1 pos(0.7,0.5)
     show sh normal:
         anchor(0.5,0.5) pos(0.3,0.5)
     with dissolve 
     show sl normal pioneer:
         anchor(0.5,0.5) pos(0.1,0.5)
     with dissolve
-    "Мы нашли ещё ребят, колоду карт и через несколько минут уже раздавали карты на чемодане." with dissolve
+    "Мы нашли ещё ребят, колоду карт и через несколько минут уже раздавали карты на чемодане."
     show un_rvp smile pioneer2:
         anchor(0.5,0.5) pos(0.9,0.5)
     "Подошла и Лена, и тоже играла с нами." with dissolve
@@ -2615,7 +2358,7 @@ label b1:
     stop music fadeout 1
 
     scene bg black with dissolve
-    $renpy.pause(1.0)
+    $ renpy.pause(1.0)
     play sound wagon_rvp fadein 1
     window show
     "Поезд тронулся и поехал."
@@ -2750,7 +2493,7 @@ label b1:
     window hide
     show dv scared pioneer2:
         ease 1 pos(-0.3,0.5)
-    show un_rvp angry2 pioneer2:
+    show un_rvp laugh pioneer2:
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
     window show
@@ -2758,7 +2501,10 @@ label b1:
     window hide
     stop music fadeout 2
 
-    scene bg square_lmr_night_rvp with dissolve
+    scene bg square_lmr_night_rvp:
+        align(.5,.5)
+        ease 1 zoom 1.05
+    with dissolve
     play ambience ambience_camp_center_night
     window show
     $ persistent.sprite_time = "night"
@@ -2779,7 +2525,9 @@ label b1:
     "Теперь остаётся только сказать правду. Я не могу строить отношения на лжи, скрывая что-то от неё." with dissolve
     "Я тяжело вздохнул." with dissolve
     me "Да, Лена, это правда." with dissolve
-    show un_rvp angry2 pioneer2 close with dissolve
+    show un_rvp ubiu pioneer2:
+        align(.5,.5) zoom 1.25
+    with dissolve
     play sound sfx_face_slap
     $ renpy.pause(0.5)
     with hpunch
@@ -2788,6 +2536,9 @@ label b1:
     "Взмах руки Лены. Секунда. Чёткий удар ладонью прямо по щеке. Заслуженно." with dissolve
     show un_rvp rage pioneer2 close with dissolve
     un "Ну почему, Сёма, почему?!" with dissolve
+    show un_rvp ubiu pioneer2:
+        align(.5,.5) zoom 1.25
+    with dissolve
     me "Потому что был легкомысленен. Потому что не понимал, что мне нужна только ты." with dissolve
     me "Прости меня, если сможешь." with dissolve
     show un_rvp angry2 pioneer2 close with dissolve
@@ -2882,7 +2633,7 @@ label b1:
     window hide
 
     play ambience ambience_camp_center_evening fadein 1
-    scene bg internat_rvp with dissolve
+    scene bg ext_internat_rvp with dissolve
     show un_rvp smile pioneer2 at left with dissolve
     show dv normal pioneer2 at right with dissolve
     "Через пару минут мы подошли к какому-то жилому зданию." with dissolve
@@ -3140,7 +2891,9 @@ label b1:
     me "Или пусть Лене отправят. Это все её сбережения, она мне их отдала, чтобы были деньги на первое время." with dissolve
     gn "Хорошо, проконтролирую." with dissolve
     me "Спасибо, товарищ Генда!" with dissolve
-    hide genda_rvp with dissolve
+    show genda_rvp:
+        align(.5,.5)
+        ease 1 pos(1.,.5) alpha 0
     play sound sfx_metal_door_large_close_basement
     "Он вышел из камеры. Генда произвёл на меня впечатление местного босса. Он что-то хочет от меня? Я буду пешкой в его игре?" with dissolve
     "Повлияет ли моё откровение на Лену? Могут ли у неё начаться проблемы?" with dissolve
@@ -3177,6 +2930,7 @@ label b1:
     "За спиной у меня был вещмешок со всем моим скромным инвентарём. Ну, я хотя бы здесь уже был." with dissolve
     "Надо найти Лену. Я обернулся в сторону и вдруг увидел её. Она сидела и читала книгу на лавочке. Как знакомо." with dissolve
     "Я пошёл к ней. Она увидела меня, вскочила и побежала." with dissolve
+#сделать Лене футболку с юбкой
     show un_rvp sad pioneer2 far at left with dissolve
     un "Сёма, привет!" with dissolve
     show un_rvp sad pioneer2 at cleft with dissolve
@@ -3191,26 +2945,29 @@ label b1:
     "Пока мы с Леной дошли до их дома, я рассказал, что произошло. Как меня задержала милиция, как допрашивали, как меня посетил Генда." with dissolve
     window hide
     
-    scene bg internat_rvp with dissolve
+    scene bg ext_internat_rvp with dissolve
     show un_rvp smile pioneer2 at left with dissolve
     window show
     un "Подожди здесь, я сейчас." with dissolve
-    hide un_rvp smile pioneer2 with dissolve
-    "Лена скрылась за дверью." with dissolve
+    show un_rvp smile pioneer2:
+        anchor(.5,.5) pos(.3,.5)
+        ease 1 pos(.8,.5) alpha 0
+    "Лена скрылась за дверью."
     "Я остался ждать."
-    scene bg internat_rvp:
-        ease 5 zoom 3 anchor (4000,2000)
-    "Вскоре я начал смотреть на место её жительства. Не похоже на обычный дом, ограждено забором." with dissolve
+    scene bg ext_internat_rvp:
+        align(.5,.5)
+        ease 3 zoom 3 align(.9,.9)
+    "Вскоре я начал смотреть на место её жительства. Не похоже на обычный дом, ограждено забором."
     "Наконец, я прочитал название на табличке." with dissolve
     "МИНИСТЕРСТВО ПРОСВЕЩЕНИЯ СССР" with dissolve
     "ОТДЕЛ НАРОДНОГО ОБРАЗОВАНИЯ" with dissolve
     "ИСПОЛКОМА ЛЕНИНОМОРСКОГО РАЙОННОГО СОВЕТА ДЕПУТАТОВ" with dissolve 
     "ШКОЛА-ИНТЕРНАТ №2" with dissolve
     "Что такое интернат? Это там, где дети и учатся и живут? Почему Лена и Алиса живут здесь, а не с родителями?" with dissolve
-    scene bg internat_rvp:
-        zoom 3 anchor (4000,2000)
-        ease 2 zoom 1 anchor (0,0)
-    "Мне пришлось прервать свои размышления, так как пришла Алиса." with dissolve
+    scene bg ext_internat_rvp:
+        align(.9,.9) zoom 3
+        ease 3 zoom 1 align(.5,.5)
+    "Мне пришлось прервать свои размышления, так как пришла Алиса."
     play music music_list["that_s_our_madhouse"]
     show dv angry pioneer2 far with dissolve
     "Лицо её не было приветливым." with dissolve
@@ -3236,7 +2993,8 @@ label b1:
     "В этот момент вернулась Лена. Алиса её не заметила." with dissolve
     dv "У тебя ничего не получится! Ты не уведёшь у меня подругу!" with dissolve
     un "Алис, ты чего?" with dissolve
-    show dv scared pioneer2 close with dissolve
+#добавить эмоцию из 2 копейки
+    show dv surprise pioneer2 close with dissolve
     "Лена снова подкралась бесшумно и напугала Алису." with dissolve
     dv "Лена! А я тут… Вот с ним разбираюсь!" with dissolve
     show un_rvp angry pioneer2 at left with dissolve
@@ -3304,7 +3062,7 @@ label b1:
     "Мы доели свой завтрак, и пошли на улицу." with dissolve
     window hide
     stop ambience fadeout 1
-    scene bg internat_rvp with dissolve
+    scene bg ext_internat_rvp with dissolve
     play ambience ambience_camp_center_day fadein 1
     show un_rvp smile pioneer2 at right with dissolve
     show dv normal pioneer2 at left with dissolve
@@ -3325,16 +3083,17 @@ label b1:
     un "Сегодня как раз понедельник, рабочая неделя началась!" with dissolve
     "Делать нечего, пойду на неквалифицированную физическую работу." with dissolve
     me "Пойду на завод тогда. А вы где работаете?" with dissolve
-    show un_rvp laugh pioneer2 at right with dissolve
-    show dv laugh pioneer2 at left with dissolve 
+    show un_rvp laugh pioneer2 at right with dspr
+    show dv laugh pioneer2 at left with dspr
     dvun "А нигде, у нас каникулы!" with dissolve
     "Сказали девочки очень радостным голосом." with dissolve
     me "Везёт же вам." with dissolve
     show un_rvp smile pioneer2 at right with dissolve
+    show dv normal pioneer2 at left with dspr
     un "Да ладно, Семён. Я уверена, что у тебя всё получится!" with dissolve
     me "Ладно, где завод-то хоть?" with dissolve
     un "Как идёшь до площади, так и иди прямо по улице. Там дойдёшь до него. Сразу узнаешь, не ошибёшься." with dissolve
-    scene bg internat_rvp with dissolve
+    scene bg ext_internat_rvp with dissolve
     "Я пошёл в указанном направлении." with dissolve
     window hide
     
@@ -3357,7 +3116,7 @@ label b1:
     stop ambience fadeout 1
 
     play ambience ambience_int_cabin_evening fadein 1
-    $ set_mode_nvl()
+    $ set_mode_rvp(mode=nvl)
     window show
     nvl clear
     me "Здравствуйте, у вас есть работа?" with dissolve
@@ -3374,7 +3133,7 @@ label b1:
     "Прошло несколько часов бюрократических мучений. Меня отправляли из одного кабинета в другой, долго выясняли, откуда у меня бумага от столь высокопоставленного партийца." with dissolve
     "Несмотря на её наличие, мною не хотели заниматься. В конце концов, меня попросили ждать в коридоре, а затем попросту забыли." with dissolve
     window hide
-    $ set_mode_adv()
+    $ set_mode_rvp(mode=adv)
     window show
     "Я уже отчаялся и сам пошёл на территорию завода, но на проходной меня не хотели пускать без пропуска." with dissolve
     show mh_rvp with dissolve
@@ -3448,18 +3207,20 @@ label b1:
     dv "Так, ты нашёл работу? Тебя заселили куда-нибудь? Мы тебя к себе не возьмём, не думай." with dissolve
     me "Не волнуйся, на заводе нашлась работа. В общаге теперь живу." with dissolve 
     show dv surprise pioneer2:
-        xcenter 0.5 ycenter 0.5
+        align(.5,.5)
         ease 6 zoom 1.25
     show bg square_lmr_night_rvp behind dv:
-        xcenter 0.5 ycenter 0.5
+        align(.5,.5)
         ease 6 zoom 1.25
     "Неужели он действительно не врал? И ему негде было жить. И он как-то попал сюда…" with dissolve
     "Однако, это сильно с его стороны, он не растерялся и нашёл себя здесь. И Лена правильно сделала, что поверила ему." with dissolve
     show dv surprise pioneer2:
-        zoom 1.0
+        align(.5,.5) zoom 1.25
+        ease 1 zoom 1
     show bg square_lmr_night_rvp:
-        zoom 1.0
-    dv "Семён… а ты, правда, остаёшься?" with dissolve
+        align(.5,.5) zoom 1.25
+        ease 1 zoom 1
+    dv "Семён… а ты, правда, остаёшься?"
     me "Да, а куда мне деваться?" with dissolve
     show dv guilty pioneer2 with dspr
     dv "Слушай… извини тогда за то, что наехала на тебя с утра. Ну не каждый день приезжают вот так, из ниоткуда!" with dissolve
@@ -3468,14 +3229,17 @@ label b1:
     dv "Да ладно, забавная ситуация была. И у тебя всё равно выхода не было." with dissolve
     me "Рад, что ты это понимаешь. А что это у тебя?" with dissolve
     dv "Да в библиотеку ходила, книгу новую взяла." with dissolve
+    #добавить книгу в руку Алисе
     window hide
     
-    scene bg internat_rvp with dissolve
+    scene bg ext_internat_rvp with dissolve
     show dv normal pioneer2 with dissolve
     window show
     "Мы дошли до интерната." with dissolve
     dv "Ладно, я пойду Лене скажу, что ты пришёл." with dissolve
-    hide dv normal pioneer2 with dissolve
+    show dv normal pioneer2:
+        align(.5,.5)
+        ease 1 pos(1.,.5) alpha 0
     "Алиса пошла за Леной." with dissolve
     "А всё-таки я не думаю, что она это затеяла только из благородных чувств. Ведь так у Алисы снова был шанс начать со мной…" with dissolve
     "Впрочем, больно я ей нужен. Смешно, однако, я воображаю, что две таких прекрасных девушки будут биться за меня, никчёмного безработного."
@@ -3504,7 +3268,7 @@ label b1:
     window hide
     stop ambience fadeout 1
 
-    scene bg internat_rvp with dissolve
+    scene bg ext_internat_rvp with dissolve
     play ambience ambience_camp_center_evening fadein 1
     play music zapomnyu_rvp fadein 1
     show un_rvp smile pioneer2 with dissolve

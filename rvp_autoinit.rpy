@@ -141,6 +141,21 @@ init python early:
                             folder_structure = folder_structure[folder_index:] + [image_name] # Оставляем только элементы после папки folder
                             image_name_with_folder = ' '.join(folder_structure).replace('/', '').replace('\\', '') + self.modPostfix
                             image_path = os.path.relpath(image_path, renpy.loader.listdirfiles(False)[0][0]).replace(os.sep, "/")
+                            if "bg" in image_name_with_folder:
+                                image_path = """
+                                    ConditionSwitch(
+                                        "persistent.sprite_time=='sunset'",
+                                        im.MatrixColor("{0}",
+                                                        im.matrix.tint(0.94, 0.82, 1.0)
+                                                    ),
+                                        "persistent.sprite_time=='night'",
+                                        im.MatrixColor("{0}",
+                                                        im.matrix.tint(0.63, 0.78, 0.82)
+                                                    ),
+                                        True,
+                                        "{0}"
+                                    )
+                                """.format(image_path)
                             self.count_file("image", image_name_with_folder, image_path)
                 else:
                     self.process_sprites(path)
@@ -448,13 +463,16 @@ init python early:
             Если write_into_file равно True, вместо инициализации записывает ресурсы мода в отдельный файл. Для дальнейшей инициализации ресурсов мода из файла необходимо перезагрузить БЛ.
             """
             if self.write_into_file:
-                with open(self.process_mod_path() + "/autoinit_assets.rpy", "w") as log_file:
+                with open(self.process_mod_path() + "/autoinit_assets.txt", "w") as log_file:
                     log_file.write("init python:\n    ")
                     for type, file_name, file in self.modFiles:
                         if type == "sound":
                             log_file.write("%s = \"%s\"\n    " % (file_name, file))
                         elif type == "image":
-                            log_file.write("renpy.image(\"%s\", \"%s\")\n    " % (file_name, file))
+                            if "bg" in file_name:
+                                log_file.write("renpy.image(\"%s\", %s)\n    " % (file_name, file))
+                            else:
+                                log_file.write("renpy.image(\"%s\", \"%s\")\n    " % (file_name, file))
                         if type == "sprite":
                             log_file.write("renpy.image(\"%s\", %s)\n    " % (file_name, file))
             else:
@@ -462,7 +480,10 @@ init python early:
                     if type == "sound":
                         globals()[file_name] = file
                     elif type == "image":
-                        renpy.image(file_name, file)
+                        if "bg" in file_name:
+                            renpy.image(file_name, eval(file))
+                        else:
+                            renpy.image(file_name, file)
                     if type == "sprite":
                         renpy.image(file_name, eval(file))
 
