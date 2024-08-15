@@ -55,14 +55,14 @@ init python:
             ctc = "ctc_animation"
         what_color = "#FFDD7D" # Цвет текста персонажа
         drop_shadow = (2, 2) # Наложение тени на текст
-        screen = "ichoose_centerscrn"
+        #screen = "ichoose_centerscrn" #НОВЫЙ ТЕКСТБОКС ФЭЙЛЕД
         for i, j in characters_rvp.items():
             if i == "narrator":
-                gl[i] = Character(None, kind=kind, what_color=what_color, what_drop_shadow=drop_shadow, ctc=ctc, ctc_position="fixed")
+                gl[i] = Character(None, kind=kind, what_color=what_color, what_drop_shadow=drop_shadow, ctc=ctc, ctc_position="fixed")#, screen = "ichoose_centerscrn"
             elif i == "th":
-                gl[i] = Character(None, kind=kind, what_color=what_color, what_drop_shadow=drop_shadow, what_prefix="~ ", what_suffix=" ~", ctc=ctc, ctc_position="fixed")
+                gl[i] = Character(None, kind=kind, what_color=what_color, what_drop_shadow=drop_shadow, what_prefix="~ ", what_suffix=" ~", ctc=ctc, ctc_position="fixed")#, screen = "ichoose_centerscrn"
             else:
-                gl[i] = Character(j[0], kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=ctc, ctc_position="fixed")
+                gl[i] = Character(j[0], kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=ctc, ctc_position="fixed")#, screen = "ichoose_centerscrn"
                 # Добавлено дополнительное объявление персонажей, которые будут сохранять оригинальный цвет имени персонажа, но изменять его имя.
                 # Полезно, когда ГГ в моде ещё не знаком с новыми пионерами, но забивать словарь мусором не хочется.
                 # Пример использования - "new_v" - имя "Новый персонаж" меняется на "Голос", "new_pm" - "Пионер", "new_pg" - "Пионерка"
