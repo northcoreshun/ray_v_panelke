@@ -10,7 +10,6 @@
 
 #Обновление до 3.0:
 #НОВАЯ ЧАСТЬ 2Б
-#ЛИКВИДАЦИЯ ТЕКСТБОКСОВ
 #добить фон вокзала внутри
 #добавить th, где надо и докинуть в статью 'Переводим текст в мод'
 #412-бг:сюда бы автобус с противоположного вида
@@ -40,7 +39,6 @@
 init:
     $ config.developer = True
     $ mods["rvp"] = "Рай в панельке"
-    $ chars_define_rvp()
 
     #Титры
     $ rvp_credits_ = "Спасибо за прочтение части \n\n\n\n Сценарий - northcoreshun\n\n"
@@ -50,6 +48,8 @@ init:
 
 label rvp:
     scene bg black with dissolve
+    $ chars_define_rvp()
+    $ rvp_screens_save_act()
     play music plastinki_rvp fadein 1
     call screen menu_rvp
 
@@ -119,44 +119,36 @@ screen side_b_rvp:
             unhovered [Hide("b2_rvp", transition=Dissolve(1.0))]
             action [Hide("b2_rvp", transition=Dissolve(0.5)),Jump("b2")]
 
+screen rvp_say:
+    window background None id "window":
+        $ timeofday = persistent.timeofday
+        if persistent.font_size == "large":
+            imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/backward_%s.png") pos(.02,.86) action ShowMenu("text_history")
+            imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/hide_%s.png") pos(.895,.82) action HideInterface()
+            if not config.skipping:
+                imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/forward_%s.png") pos(.92,.86) action Skip()
+            else:
+                imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/fast_forward_%s.png") pos(.92,.86) action Skip()
+            text what id "what" font "ray_v_panelke/images/gui/Inter-Hewn.otf" outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align(.5) xmaximum .8 size 35 line_spacing 1
+            if who:
+                text who id "who" font "ray_v_panelke/images/gui/trafaret.ttf" outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 1
+
+        elif persistent.font_size == "small":
+            imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/backward_%s.png") pos(.02,.88) action ShowMenu("text_history")
+            imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/hide_%s.png") pos(.895,.86) action HideInterface()
+            if not config.skipping:
+                imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/forward_%s.png") pos(.92,.88) action Skip()
+            else:
+                imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/fast_forward_%s.png") pos(.92,.88) action Skip()
+            text what id "what" font "ray_v_panelke/images/gui/Inter-Hewn.otf" outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align .55 xmaximum .8 size 28 line_spacing 2
+            if who:
+                text who id "who" font "ray_v_panelke/images/gui/trafaret.ttf" outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 2
+
 label backrooms:
     stop music fadeout 2
     $ renpy.show("black")
     $ renpy.with_statement(fade3)
     $ renpy.pause(2.0, hard=True)
-
-    $ ichoose_narr_center = Character (None, color="#FF4500", what_color="#FFB600", screen="ichoose_centerscrn")
-    $ ichoose_un_center = Character (u'Лена', color="#b956ff", what_color="#FFB600", screen="ichoose_centerscrn")
-
-    #Трансформы для техтбоксов
-    transform ich_trans_hoverbox:
-        alpha 0.
-        on idle:
-            ease .5 alpha 0.
-        on hover:
-            ease .25 alpha 1.
-    transform ich_trans_ltArrow:
-        alpha .25
-        on idle:
-            ease .5 alpha .25
-        on hover:
-            ease .25 alpha 1.
-    transform ich_trans_rtArrow:
-        rotate 180
-        alpha .25
-        on idle:
-            ease .5 alpha .25
-        on hover:
-            ease .25 alpha 1.
-    transform ichoose_who:
-        alpha 0.
-        easein_quad 0.25 alpha 1.
-    transform ichoose_what:
-        alpha 0.
-        easein_quad 0.25 alpha 1.
-
-    ichoose_narr_center "Текст"
-    ichoose_un_center "Текст"
 
     play music nv_st_rvp
     show nvlogo2_rvp:
@@ -202,60 +194,6 @@ label showtext_rvp(image1,image2):
     hide image2
     $ renpy.pause(2.0)
 
-
-#Новый текстбокс
-screen ichoose_centerscrn:
-    frame:
-        align (.5,1.)
-        background None
-        imagebutton:
-            idle "gui accessibility_vignette_rvp"
-            align (.5,1.)
-            yoffset 8
-            at ich_trans_hoverbox
-            action Return()
-        imagebutton: 
-            idle "gui arrow_single_rvp"
-            at ich_trans_ltArrow
-            anchor (.5,.5)
-            pos (.075,.9)
-            action ShowMenu("text_history")
-        imagebutton: 
-            if not config.skipping:
-                idle "gui arrow_single_rvp" 
-            else:
-                idle "gui arrow_double_rvp"
-            at ich_trans_rtArrow
-            anchor (.5,.5)
-            pos (.925,.9)
-            action Skip()
-    window id "window":
-        background None
-        align (.5,1.)
-        ysize 200
-        vbox:
-            align (.5,.5)
-            if who:
-                text who:
-                    id "who"
-                    font "ray_v_panelke/images/gui/calibri.ttf"
-                    text_align (.5)
-                    xmaximum (1000)
-                    xalign .5
-                    size 32
-                    line_leading 8
-                    at ichoose_who
-            text what:
-                id "what"
-                font "ray_v_panelke/images/gui/calibri.ttf"
-                text_align (.5)
-                xmaximum (1000)
-                outlines [(2.,"#000",0,0)]
-                xalign .5
-                size 32
-                line_leading 8
-                at ichoose_what
-
 #Плавный выход из мода
 label exit:
     stop sound fadeout 2
@@ -272,7 +210,7 @@ label a1:
     $ new_chapter(0, u'Рай в панельке: Сторона А.')
     $ persistent.sprite_time = "day"
     $ day_time
-    
+
     play music raindrops_sandr_rvp fadein 1
     #Вывод белой полоски
     show white:

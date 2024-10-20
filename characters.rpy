@@ -1,24 +1,5 @@
 init -1 python:
-    characters_rvp = { # Словарь с персонажами
-        # основные
-        "narrator":[None, None],
-        "th":[None, None],
-        "me":[u"Семён", "#E1DD7D"],
-        # персонажи оригинала
-        "mi":[u"Мику", "#00DEFF"],
-        "us":[u"Ульяна", "#FF3200"],
-        "dv":[u"Алиса", "#FFAA00"],
-        "mt":[u"Ольга Дмитриевна", "#00EA32"],
-        "mz":[u"Женя", "#4A86FF"],
-        "sh":[u"Шурик", "#FFF226"],
-        "sl":[u"Славя", "#FFD200"],
-        "el":[u"Электроник", "#FFFF00"],
-        "un":[u"Лена", "#B956FF"],
-        "cs":[u"Виола", "#A5A5FF"],
-        "pi":[u"Пионер", "#E60000"],
-        "uv":[u"Юля", "#4EFF00"],
-        "voice":[u"Голос", "#e1dd7d"],
-        # новые персонажи
+    characters_rvp = { #Словарь с персонажами
         "dvun":[u"Алиса и Лена", "#DC143C"],
         "nd":[u"Начальник депо", "#8B4513"],
         "mh4":[u"Михалыч", "DC143C"],
@@ -55,14 +36,13 @@ init python:
             ctc = "ctc_animation"
         what_color = "#FFDD7D" # Цвет текста персонажа
         drop_shadow = (2, 2) # Наложение тени на текст
-        #screen = "ichoose_centerscrn" #НОВЫЙ ТЕКСТБОКС ФЭЙЛЕД
         for i, j in characters_rvp.items():
             if i == "narrator":
-                gl[i] = Character(None, kind=kind, what_color=what_color, what_drop_shadow=drop_shadow, ctc=ctc, ctc_position="fixed")#, screen = "ichoose_centerscrn"
+                gl[i] = Character(None, kind=kind, what_color=what_color, what_drop_shadow=drop_shadow, ctc=ctc, ctc_position="fixed")
             elif i == "th":
-                gl[i] = Character(None, kind=kind, what_color=what_color, what_drop_shadow=drop_shadow, what_prefix="~ ", what_suffix=" ~", ctc=ctc, ctc_position="fixed")#, screen = "ichoose_centerscrn"
+                gl[i] = Character(None, kind=kind, what_color=what_color, what_drop_shadow=drop_shadow, what_prefix="~ ", what_suffix=" ~", ctc=ctc, ctc_position="fixed")
             else:
-                gl[i] = Character(j[0], kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=ctc, ctc_position="fixed")#, screen = "ichoose_centerscrn"
+                gl[i] = Character(j[0], kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=ctc, ctc_position="fixed")
                 # Добавлено дополнительное объявление персонажей, которые будут сохранять оригинальный цвет имени персонажа, но изменять его имя.
                 # Полезно, когда ГГ в моде ещё не знаком с новыми пионерами, но забивать словарь мусором не хочется.
                 # Пример использования - "new_v" - имя "Новый персонаж" меняется на "Голос", "new_pm" - "Пионер", "new_pg" - "Пионерка"
