@@ -132,7 +132,7 @@ init python early:
             for folder in os.listdir(mod_imgs_path):
                 path = os.path.join(mod_imgs_path, folder).replace("\\", "/")
                 if os.path.isfile(path):
-                    image_name = os.path.splitext(os.path.basename(path))[0]
+                    image_name = os.path.splitext(os.path.basename(path))[0] + self.modPostfix
                     self.count_file("image", image_name, path)
                 else:
                     if folder != 'sprites':
