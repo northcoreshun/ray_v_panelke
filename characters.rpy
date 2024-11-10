@@ -1,5 +1,6 @@
 init -1 python:
     characters_rvp = { #Словарь с персонажами
+        "narrator":[None,None,nvl],
         "dvun":[u"Алиса и Лена", "#DC143C"],
         "nd":[u"Начальник депо", "#8B4513"],
         "mh4":[u"Михалыч", "DC143C"],

@@ -100,7 +100,7 @@ screen b2_rvp:
     add "cg un_roof_rvp":
         anchor(0.,0.) pos(.5,.0)
         crop (480,0,1440,1080)
-    text "Часть 2 (DEMO)" size 70 align(.8,.45) outlines [(2.,"#000",0,0)]
+    text "Часть 2" size 70 align(.8,.45) outlines [(2.,"#000",0,0)]
     add "white":
         align (.5,.5)
         crop (3,0,3,1080)
@@ -118,31 +118,6 @@ screen side_b_rvp:
             hovered [Show("b2_rvp", transition=Dissolve(0.5))]
             unhovered [Hide("b2_rvp", transition=Dissolve(1.0))]
             action [Hide("b2_rvp", transition=Dissolve(0.5)),Jump("b2")]
-
-screen rvp_say:
-    window background None id "window":
-        $ timeofday = persistent.timeofday
-        if persistent.font_size == "large":
-            imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/backward_%s.png") pos(.02,.86) action ShowMenu("text_history")
-            imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/hide_%s.png") pos(.895,.82) action HideInterface()
-            if not config.skipping:
-                imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/forward_%s.png") pos(.92,.86) action Skip()
-            else:
-                imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/fast_forward_%s.png") pos(.92,.86) action Skip()
-            text what id "what" font "ray_v_panelke/images/gui/Inter-Hewn.otf" outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align(.5) xmaximum .8 size 35 line_spacing 1
-            if who:
-                text who id "who" font "ray_v_panelke/images/gui/trafaret.ttf" outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 1
-
-        elif persistent.font_size == "small":
-            imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/backward_%s.png") pos(.02,.88) action ShowMenu("text_history")
-            imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/hide_%s.png") pos(.895,.86) action HideInterface()
-            if not config.skipping:
-                imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/forward_%s.png") pos(.92,.88) action Skip()
-            else:
-                imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/fast_forward_%s.png") pos(.92,.88) action Skip()
-            text what id "what" font "ray_v_panelke/images/gui/Inter-Hewn.otf" outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align .55 xmaximum .8 size 28 line_spacing 2
-            if who:
-                text who id "who" font "ray_v_panelke/images/gui/trafaret.ttf" outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 2
 
 label backrooms:
     stop music fadeout 2
@@ -3318,6 +3293,9 @@ label b2:
     play ambience ambience_clubs_inside_day fadein 1
     play music pesnyabezslov_rvp fadein 2
     scene bg tsekh_rvp with dissolve
+    show mh_rvp:
+        anchor(.5,.5) pos(.1,.5) zoom 1.25 alpha 0
+        ease 1.5 xpos(.25) alpha 1
     mh "Тьфу-ты! А говорил – нормально выточишь!" with dissolve
     mh "Семыч, это никуда не годится. Мне надоело за тобой брак забирать. Давай дуй в путягу. Там научат работать." with dissolve
     me "Да я же и так работаю!" with dissolve
@@ -3328,8 +3306,8 @@ label b2:
     mh "Всё, разговор окончен." with dissolve
     me "Смена, кстати, тоже." with dissolve
     mh "Так чего стоишь? Давай в раздевалку и домой. Я тебя ждать не собираюсь. Просто в цеху закрою и будешь ночевать тут, хехе." with dissolve
-    "Сказал Михаил и засмеялся при этом так неприятно." with dissolve
     scene bg tsekh_rvp with dissolve
+    "Сказал Михаил и засмеялся при этом так неприятно." with dissolve
     $ set_mode_rvp(mode=nvl)
     "Прошло две недели с моего появления в этом городе. После всех злоключений мне удалось быстро найти кров и работу, как-то устроиться на первое время."
     "Однако появилась какая-то тоска. Несмотря на то, что тут у меня появился шанс начать новую жизнь с Леной, я начинал скучать по своему родному миру."
@@ -3436,7 +3414,6 @@ label b2:
     un "Тебе не нравится?" with dissolve
     "Лена часто дышала от подъёма, но больше от волнения." with dissolve
     me "Вообще не нравится, если честно." with dissolve
-#'не нравится' заменить на 'нет'
     me "Я весь день работал, потом ты меня тащишь куда-то на крышу!" with dissolve
     show un_rvp normal pioneer2:
         align(.5,.5) zoom 1.25
@@ -3469,9 +3446,8 @@ label b2:
     un "Сейчас прыгну! И будешь свободен!" with dissolve
     show un_rvp normal pioneer2:
         align(.5,.5) zoom 1.25
-        ease .7 xpos 1.2
+        ease .7 xpos 1.2 alpha 0
     "Лена резко дернулась к краю!"
-#дёр
     scene bg roof_rvp:
         align(.5,.5) zoom 1.05
         ease .3 offset(25,25)
@@ -3479,8 +3455,6 @@ label b2:
         ease .3 offset(-25,25)
         ease .3 offset(0,0)
     "Я бросился за ней. Вроде бы мы и не стояли близко к краю, но всё решали секунды. Перехватить Лену удалось в паре метров." with dissolve
-    "Я схватил её со спины." with dissolve
-    "Ещё немного, и было бы поздно." with dissolve
     scene bg roof_rvp:
         align(.5,.5) zoom 1.05
         ease .1 xoffset 25
@@ -3489,6 +3463,8 @@ label b2:
         ease .1 xoffset 0
         pause .5
         repeat
+    "Я схватил её со спины." with dissolve
+    "Ещё немного, и было бы поздно." with dissolve
     me "Ты что творишь?!" with dissolve
     un "Пусти! Я не хочу тебе мешать жить!" with dissolve
     me "Да никому ты не мешаешь!" with dissolve
@@ -3606,7 +3582,7 @@ label b2:
     dv "Что это вообще за поведение такое? Она для тебя постаралась, не побоялась залезть на крышу. А он нос воротит, не нравится ему, видите ли!"
     dv "А если бы не спас? Я бы без лучшей подруги осталась! Да будь я там, ты бы с той крыши вслед за ней полетел!"
     me "Я бы сам за ней прыгнул. И без твоей помощи."
-    show dv sad pioneer2 with dissolve
+    show dv surprise pioneer2 with dissolve
     "Алиса слегка опешила от моего ответа."
     me "Не понимаю, зачем она так? Да, я ворчал тогда, но это не повод же сигать с крыши! Всегда же можно поговорить, я не знаю… "
     show dv normal pioneer2 with dspr
@@ -3636,9 +3612,10 @@ label b2:
     me "А у вас не так?"
     un "Нет конечно! Его арестовали и предали справедливому суду!"
     me "В моём мире… нет."
-    show un_rvp serious pioneer2 at right with dspr
+    show dv normal pioneer2 at left with dspr    
+    show un_rvp smile pioneer2 at right with dspr
     un "Да, не повезло вам. Вот и ещё одно доказательство, что Семён из другого мира."
-    show dv normal pioneer2 at left with dspr
+    show dv smile pioneer2 at left with dspr
     dv "Ой, да обманывает он тебя, Лен!"
     me "Что значит обманывает?!"
     show un_rvp normal pioneer2:
@@ -3669,6 +3646,7 @@ label b2:
     dv "Знаешь, тебе повезло."
     show dv smile pioneer2 with dspr
     dv "У меня есть то, что тебе поможет."
+    play music goroskop_rvp fadein 1
     "Алиса дала мне почитать статью… про гороскопы."
     "Тогда, в Советском Союзе, это только входило в моду, с приходом перестройки, гласности и тому подобного, и Алиса ещё не до конца понимала, что это такое."
     show dv laugh pioneer2 with dspr
@@ -3679,25 +3657,21 @@ label b2:
     dv "Ну, сам почитай."
     show dv normal pioneer2 with dspr
     "Я хотел было возразить, но решил почитать, испытывая на себе пристальный взгляд Алисы."
-
-    #начало nvl режима. Как его включить и выключать, есть код в файле шаблоны.rpy
-
-    $ set_mode_rvp(mode=nvl)
+    $ set_mode_rvp(nvl)
     window show
     "“Женщины-Львы — противоречивые натуры, сила и гордость которых входит в резонанс с сентиментальностью и потребностью в любви и восхищении."
-    "Женщина-Лев  почти на физическом уровне нуждается не просто во внимании, но в любви на грани фола, отречении, жертвенности и желании партнера раствориться в ее интересах."
+    "Женщина-Лев почти на физическом уровне нуждается не просто во внимании, но в любви на грани фола, отречении, жертвенности и желании партнера раствориться в ее интересах."
+#После Лев лишний пробел, проверить на фб
     "Желание терять голову от любви и самореализация в сильных чувствах заводят Львиц в дебри сложных отношений, где мужчине отводится единственная роль — человека, поставившего свою царственную избранницу на пьедестал."
     "В работе Львицы — настоящие профи, берущие любые высоты харизмой и трудолюбием. Большие любительницы роскоши, женщины-Львы чаще других тратят деньги на покупки, удовольствия, развлечения, уход за собой и подарки любимым."
     "Также они являются великолепными хозяйками и любительницами устраивать вечеринки и приемы, тем самым подчеркивая свой статус и умение блистать в качестве хозяйки вечера.”"
-    #конец nvl режима
-
-    $ set_mode_rvp(mode=adv)
+    $ set_mode_rvp(adv)
     dv "Ну что, согласен со мной?"
     me "Да как тебе сказать…"
     show dv normal pioneer2:
         anchor(0.5,0.5) pos (0.5,0.5)
         ease 1 pos(.25,.5)
-    show un_rvp hitr pioneer2:
+    show un_rvp rock pioneer2:
         align(.5,.5) xpos 1.2
         ease 1 xpos .7 alpha 1
     un "Что вы там нашли такого интересного?"
@@ -3715,6 +3689,7 @@ label b2:
     show dv shy pioneer2 with dspr:
         align(.2,.5)
         ease 1 pos(1.,.5) alpha 0
+    stop music fadeout 1
     "Алиса ушла с журналом, густо покраснев."
     show un_rvp normal pioneer2:
         anchor(0.5,0.5) pos (0.7,0.5)
@@ -3810,6 +3785,9 @@ label b2:
     un "Дай посмотреть!"
     "Лена взяла книгу, я прочитал название."
     "Я ожидал чего угодно, но не этого…"
+    show misc skanavi_rvp:
+        align(.5,.5) zoom 3 ypos 1.2
+        ease 1.5 ypos 1.
     "М.И.Сканави “Сборник задач по математике для поступающих в вузы”."
     "Я реально… прифигел."
     me "Тебе это зачем?"
