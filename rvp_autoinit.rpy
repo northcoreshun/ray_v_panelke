@@ -1,5 +1,5 @@
 init python early:
-    class autoInitialization:
+    class autoInitialization_rvp:
         """
         Класс для автоматической инициализации файлов мода.
         Инициализирует аудио и изображения (включая спрайты).
@@ -103,7 +103,7 @@ init python early:
             Обрабатывает аудио. Поддерживает расширения (".wav", ".mp2", ".mp3", ".ogg", ".opus")
 
             Имя аудио для вызова будет в формате:
-            [имя][ постфикс]
+            [имя][_постфикс]
 
             Пример:
             newmusic
@@ -120,7 +120,7 @@ init python early:
             Обрабатывает изображения. Поддерживает изображения в подпапках.
 
             Имя изображения для вызова будет в формате:
-            [папка] [подпапка] [имя][ постфикс]
+            [папка] [подпапка] [имя][_постфикс]
 
             Пример:
             bg background
@@ -128,37 +128,27 @@ init python early:
             bg subfolder subsubfolder background
             """
             mod_imgs_path = self.process_images_path()
+
             for folder in os.listdir(mod_imgs_path):
                 path = os.path.join(mod_imgs_path, folder).replace("\\", "/")
-                if folder != 'sprites':
-                    for root, dirs, files in os.walk(path):
-                        for file in files:
-                            image_path = os.path.join(root, file).replace("\\", "/")
-                            image_name = os.path.splitext(file)[0]
-                            relative_path = os.path.relpath(root, mod_imgs_path) # Получаем полный путь к изображению и удаляем путь к корню
-                            folder_structure = relative_path.split(os.sep) # Разделяем путь на компоненты и объединяем их в имя изображения
-                            folder_index = folder_structure.index(folder)
-                            folder_structure = folder_structure[folder_index:] + [image_name] # Оставляем только элементы после папки folder
-                            image_name_with_folder = ' '.join(folder_structure).replace('/', '').replace('\\', '') + self.modPostfix
-                            image_path = os.path.relpath(image_path, renpy.loader.listdirfiles(False)[0][0]).replace(os.sep, "/")
-                            if "bg" in image_name_with_folder:
-                                image_path = """
-                                    ConditionSwitch(
-                                        "persistent.sprite_time=='sunset'",
-                                        im.MatrixColor("{0}",
-                                                        im.matrix.tint(0.94, 0.82, 1.0)
-                                                    ),
-                                        "persistent.sprite_time=='night'",
-                                        im.MatrixColor("{0}",
-                                                        im.matrix.tint(0.63, 0.78, 0.82)
-                                                    ),
-                                        True,
-                                        "{0}"
-                                    )
-                                """.format(image_path)
-                            self.count_file("image", image_name_with_folder, image_path)
+                if os.path.isfile(path):
+                    image_name = os.path.splitext(os.path.basename(path))[0]
+                    self.count_file("image", image_name, path)
                 else:
-                    self.process_sprites(path)
+                    if folder != 'sprites':
+                        for root, dirs, files in os.walk(path):
+                            for file in files:
+                                image_path = os.path.join(root, file).replace("\\", "/")
+                                image_name = os.path.splitext(file)[0]
+                                relative_path = os.path.relpath(root, mod_imgs_path) # Получаем полный путь к изображению и удаляем путь к корню
+                                folder_structure = relative_path.split(os.sep) # Разделяем путь на компоненты и объединяем их в имя изображения
+                                folder_index = folder_structure.index(folder)
+                                folder_structure = folder_structure[folder_index:] + [image_name] # Оставляем только элементы после папки folder
+                                image_name_with_folder = ' '.join(folder_structure).replace('/', '').replace('\\', '') + self.modPostfix
+                                image_path = os.path.relpath(image_path, renpy.loader.listdirfiles(False)[0][0]).replace(os.sep, "/")
+                                self.count_file("image", image_name_with_folder, image_path)
+                    else:
+                        self.process_sprites(path)
 
         def process_sprite_clothes_emo_acc(self, emo_l, clothes_l, acc_l, who, file_body, dist):
             """Обрабатывает спрайт [тело] [эмоция] [одежда] [аксессуар]"""
@@ -170,7 +160,7 @@ init python early:
                             ConditionSwitch(
                                 "persistent.sprite_time=='sunset'",
                                 im.MatrixColor(im.Composite({0},
-                                                            (0, 0), "{1}",
+                                                            (0, 0), {1},
                                                             (0, 0), "{2}",
                                                             (0, 0), "{3}",
                                                             (0, 0), "{4}"),
@@ -178,7 +168,7 @@ init python early:
                                             ),
                                 "persistent.sprite_time=='night'",
                                 im.MatrixColor(im.Composite({0},
-                                                            (0, 0), "{1}",
+                                                            (0, 0), {1},
                                                             (0, 0), "{2}",
                                                             (0, 0), "{3}",
                                                             (0, 0), "{4}"),
@@ -186,7 +176,7 @@ init python early:
                                             ),
                                 True,
                                 im.Composite({0},
-                                            (0, 0), "{1}",
+                                            (0, 0), {1},
                                             (0, 0), "{2}",
                                             (0, 0), "{3}",
                                             (0, 0), "{4}")
@@ -210,21 +200,21 @@ init python early:
                         ConditionSwitch(
                             "persistent.sprite_time=='sunset'",
                             im.MatrixColor(im.Composite({0},
-                                                        (0, 0), "{1}",
+                                                        (0, 0), {1},
                                                         (0, 0), "{2}",
                                                         (0, 0), "{3}"),
                                             im.matrix.tint(0.94, 0.82, 1.0)
                                         ),
                             "persistent.sprite_time=='night'",
                             im.MatrixColor(im.Composite({0},
-                                                        (0, 0), "{1}",
+                                                        (0, 0), {1},
                                                         (0, 0), "{2}",
                                                         (0, 0), "{3}"),
                                             im.matrix.tint(0.63, 0.78, 0.82)
                                         ),
                             True,
                             im.Composite({0},
-                                        (0, 0), "{1}",
+                                        (0, 0), {1},
                                         (0, 0), "{2}",
                                         (0, 0), "{3}")
                         )
@@ -242,21 +232,21 @@ init python early:
                         ConditionSwitch(
                             "persistent.sprite_time=='sunset'",
                             im.MatrixColor(im.Composite({0},
-                                                        (0, 0), "{1}",
+                                                        (0, 0), {1},
                                                         (0, 0), "{2}",
                                                         (0, 0), "{3}"),
                                             im.matrix.tint(0.94, 0.82, 1.0)
                                         ),
                             "persistent.sprite_time=='night'",
                             im.MatrixColor(im.Composite({0},
-                                                        (0, 0), "{1}",
+                                                        (0, 0), {1},
                                                         (0, 0), "{2}",
                                                         (0, 0), "{3}"),
                                             im.matrix.tint(0.63, 0.78, 0.82)
                                         ),
                             True,
                             im.Composite({0},
-                                        (0, 0), "{1}",
+                                        (0, 0), {1},
                                         (0, 0), "{2}",
                                         (0, 0), "{3}")
                         )
@@ -274,21 +264,21 @@ init python early:
                         ConditionSwitch(
                             "persistent.sprite_time=='sunset'",
                             im.MatrixColor(im.Composite({0},
-                                                        (0, 0), "{1}",
+                                                        (0, 0), {1},
                                                         (0, 0), "{2}",
                                                         (0, 0), "{3}"),
                                             im.matrix.tint(0.94, 0.82, 1.0)
                                         ),
                             "persistent.sprite_time=='night'",
                             im.MatrixColor(im.Composite({0},
-                                                        (0, 0), "{1}",
+                                                        (0, 0), {1},
                                                         (0, 0), "{2}",
                                                         (0, 0), "{3}"),
                                             im.matrix.tint(0.63, 0.78, 0.82)
                                         ),
                             True,
                             im.Composite({0},
-                                        (0, 0), "{1}",
+                                        (0, 0), {1},
                                         (0, 0), "{2}",
                                         (0, 0), "{3}")
                         )
@@ -305,19 +295,19 @@ init python early:
                     ConditionSwitch(
                         "persistent.sprite_time=='sunset'",
                         im.MatrixColor(im.Composite({0},
-                                                    (0, 0), "{1}",
+                                                    (0, 0), {1},
                                                     (0, 0), "{2}"),
                                         im.matrix.tint(0.94, 0.82, 1.0)
                                     ),
                         "persistent.sprite_time=='night'",
                         im.MatrixColor(im.Composite({0},
-                                                    (0, 0), "{1}",
+                                                    (0, 0), {1},
                                                     (0, 0), "{2}"),
                                         im.matrix.tint(0.63, 0.78, 0.82)
                                     ),
                         True,
                         im.Composite({0},
-                                    (0, 0), "{1}",
+                                    (0, 0), {1},
                                     (0, 0), "{2}")
                     )
                 """.format(self.modDist[dist][1], file_body, clothes[1])
@@ -331,19 +321,19 @@ init python early:
                     ConditionSwitch(
                         "persistent.sprite_time=='sunset'",
                         im.MatrixColor(im.Composite({0},
-                                                    (0, 0), "{1}",
+                                                    (0, 0), {1},
                                                     (0, 0), "{2}"),
                                         im.matrix.tint(0.94, 0.82, 1.0)
                                     ),
                         "persistent.sprite_time=='night'",
                         im.MatrixColor(im.Composite({0},
-                                                    (0, 0), "{1}",
+                                                    (0, 0), {1},
                                                     (0, 0), "{2}"),
                                         im.matrix.tint(0.63, 0.78, 0.82)
                                     ),
                         True,
                         im.Composite({0},
-                                    (0, 0), "{1}",
+                                    (0, 0), {1},
                                     (0, 0), "{2}")
                     )
                 """.format(self.modDist[dist][1], file_body, acc[1])
@@ -357,19 +347,19 @@ init python early:
                     ConditionSwitch(
                         "persistent.sprite_time=='sunset'",
                         im.MatrixColor(im.Composite({0},
-                                                    (0, 0), "{1}",
+                                                    (0, 0), {1},
                                                     (0, 0), "{2}"),
                                         im.matrix.tint(0.94, 0.82, 1.0)
                                     ),
                         "persistent.sprite_time=='night'",
                         im.MatrixColor(im.Composite({0},
-                                                    (0, 0), "{1}",
+                                                    (0, 0), {1},
                                                     (0, 0), "{2}"),
                                         im.matrix.tint(0.63, 0.78, 0.82)
                                     ),
                         True,
                         im.Composite({0},
-                                    (0, 0), "{1}",
+                                    (0, 0), {1},
                                     (0, 0), "{2}")
                     )
                 """.format(self.modDist[dist][1], file_body, emotion[1])
@@ -382,17 +372,17 @@ init python early:
                 ConditionSwitch(
                     "persistent.sprite_time=='sunset'",
                     im.MatrixColor(im.Composite({0},
-                                                (0, 0), "{1}"),
+                                                (0, 0), {1}),
                                     im.matrix.tint(0.94, 0.82, 1.0)
                                 ),
                     "persistent.sprite_time=='night'",
                     im.MatrixColor(im.Composite({0},
-                                                (0, 0), "{1}"),
+                                                (0, 0), {1}),
                                     im.matrix.tint(0.63, 0.78, 0.82)
                                 ),
                     True,
                     im.Composite({0},
-                                (0, 0), "{1}")
+                                (0, 0), {1})
                 )
             """.format(self.modDist[dist][1], file_body)
             self.count_file("sprite", file_name, file)
@@ -401,10 +391,10 @@ init python early:
             """Обрабатывает спрайты и все их комбинации
             
             Имя спрайта для вызова будет в формате:
-            [название спрайта][ постфикс]
-            [название спрайта][ постфикс] [эмоция]
-            [название спрайта][ постфикс] [эмоция] [одежда]
-            [название спрайта][ постфикс] [эмоция] [одежда] [аксессуар]
+            [название спрайта][_постфикс]
+            [название спрайта][_постфикс] [эмоция]
+            [название спрайта][_постфикс] [эмоция] [одежда]
+            [название спрайта][_постфикс] [эмоция] [одежда] [аксессуар]
             и любые другие комбинации.
 
             Пример:
@@ -422,10 +412,10 @@ init python early:
 
                         for i in sprite_folders:
                             if 'body' in i:
-                                file_body = os.path.relpath(os.path.join(who_path_num, numb, i).replace("\\", "/"), renpy.loader.listdirfiles(False)[0][0]).replace(os.sep, "/")
+                                file_body = "\"" + str(os.path.relpath(os.path.join(who_path_num, numb, i).replace("\\", "/"), renpy.loader.listdirfiles(False)[0][0]).replace(os.sep, "/")) + "\""
                                 break
                         else:
-                            file_body = im.Alpha("images/misc/soviet_games.png", 0.0) # Заглушка, если не нашли тело
+                            file_body = 'im.Alpha("images/misc/soviet_games.png", 0.0)' # Заглушка, если не нашли тело
 
                         clothes_l = []
                         emo_l = []
@@ -463,16 +453,13 @@ init python early:
             Если write_into_file равно True, вместо инициализации записывает ресурсы мода в отдельный файл. Для дальнейшей инициализации ресурсов мода из файла необходимо перезагрузить БЛ.
             """
             if self.write_into_file:
-                with open(self.process_mod_path() + "/autoinit_assets.txt", "w") as log_file:
+                with open(self.process_mod_path() + "/autoinit_assets.rpy", "w") as log_file:
                     log_file.write("init python:\n    ")
                     for type, file_name, file in self.modFiles:
                         if type == "sound":
                             log_file.write("%s = \"%s\"\n    " % (file_name, file))
                         elif type == "image":
-                            if "bg" in file_name:
-                                log_file.write("renpy.image(\"%s\", %s)\n    " % (file_name, file))
-                            else:
-                                log_file.write("renpy.image(\"%s\", \"%s\")\n    " % (file_name, file))
+                            log_file.write("renpy.image(\"%s\", \"%s\")\n    " % (file_name, file))
                         if type == "sprite":
                             log_file.write("renpy.image(\"%s\", %s)\n    " % (file_name, file))
             else:
@@ -480,10 +467,7 @@ init python early:
                     if type == "sound":
                         globals()[file_name] = file
                     elif type == "image":
-                        if "bg" in file_name:
-                            renpy.image(file_name, eval(file))
-                        else:
-                            renpy.image(file_name, file)
+                        renpy.image(file_name, file)
                     if type == "sprite":
                         renpy.image(file_name, eval(file))
 
@@ -494,5 +478,5 @@ init python early:
             self.process_audio()
             self.process_images()
             self.process_files()
-    
-    autoInitialization_rvp = autoInitialization("ray_v_panelke", "rvp")
+        
+    autoInitialization_rvp = autoInitialization_rvp("ray_v_panelke", "rvp")

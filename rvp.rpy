@@ -2562,7 +2562,7 @@ label b1:
     "Она поцеловала меня в ту самую щёку, по которой ударила." with dissolve
 
     scene bg street_lmr_night_rvp with dissolve
-    $ set_mode_nvl()
+    $ set_mode_rvp(nvl)
     play music larek_rvp fadein 2
     window show
     nvl clear
@@ -2576,7 +2576,7 @@ label b1:
     "Да и не подростка, на самом деле…" with dissolve
     "Я шёл по улице быстрым шагом и думал об этом всём. Редкие прохожие встречались мне." with dissolve
     window hide
-    $ set_mode_adv()
+    $ set_mode_rvp()
     $ renpy.pause(1.0)
     scene bg square_lmr_night_rvp with dissolve
     window show
@@ -2589,7 +2589,7 @@ label b1:
     show blink
     scene bg black
     "Я сел на лавочку и закрыл глаза." with dissolve
-    $ set_mode_nvl()
+    $ set_mode_rvp(nvl)
     window show
     nvl clear
     "Только сейчас я почувствовал, как сильно я устал. День был слишком насыщенный и контрастный. Заснуть мешало чувство голода, сегодня я поел лишь печенья." with dissolve
@@ -2607,7 +2607,7 @@ label b1:
     nvl clear
     window hide
 
-    $ set_mode_adv()
+    $ set_mode_rvp()
     window show
     "В конце концов, от всех этих размышлений я задремал." with dissolve
     stop music fadeout 2
@@ -2739,7 +2739,7 @@ label b1:
         
     scene bg lenie_rvp with dissolve
     play music music_list["drown"] fadein 2
-    $ set_mode_nvl()
+    $ set_mode_rvp(nvl)
     window show
     nvl clear
     "Какое-то время я просидел в КПЗ, затем пришёл начальник отделения с каким-то офицером. Меня повезли в областное управление КГБ." with dissolve
@@ -2752,7 +2752,7 @@ label b1:
     "Прости меня, Лена. Я снова ошибся и наше счастье снова рушится." with dissolve
     "Казалось, что судьба моя была предрешена, как вдруг…" with dissolve
     window hide
-    $ set_mode_adv()
+    $ set_mode_rvp()
     
     scene bg kgb_rvp with dissolve
     show genda_rvp with dissolve
@@ -2798,7 +2798,7 @@ label b1:
     voice "Персунов, на выход!"
     window hide
 
-    $ set_mode_nvl()
+    $ set_mode_rvp(nvl)
     window show
     nvl clear
     play sound sfx_carousel_squeak
@@ -2813,7 +2813,7 @@ label b1:
     sot "Эх, завидую ей даже. Не то, что я сижу тут, тухну. Никакой интересной жизни." with dissolve
     "Странно, что они при мне это рассказывают. Впрочем, что мне эта информация даёт? Да и они видимо поняли, что не шпион я никакой." with dissolve
     window hide
-    $ set_mode_adv()
+    $ set_mode_rvp()
     stop music fadeout 1 
 
     $ persistent.sprite_time="day"
