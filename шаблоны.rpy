@@ -7,14 +7,18 @@ label sh:
     $ _time
 
     #Новелльный режим
-    $ set_mode_rvp(mode=nvl)
+    $ set_mode_rvp(nvl)
     window show
     nvl clear
      with dissolve
     window hide
     #Возврат в обычный режим
-    $ set_mode_rvp(mode=adv)
+    $ set_mode_rvp()
 
+    #Музыкальная пауза
+    $ renpy.notify(Щёлкните для продолжения)
+    $ renpy.pause()
+    
     #Карусель спрайтов
     show :
         anchor(0.5,0.5) pos (1.3,0.5)
@@ -108,10 +112,20 @@ label sh:
     #Смена цг
     show cg  with dissolve
 
+    #текст со своим шрифтом и цветом
+    show text {font=[rvp_font]}{color=ffdd7d}{size=100}Не забудь поставить кавычки with dissolve
+
     #Включить/выключить музыку
     play music  fadein 1
-    play music music_list[] fadein 1
+    #из оригинала
+    play music music_list[''] fadein 1
     stop music fadeout 1
+    
+    #наложить пикчу полупрозрачно
+    show :
+        alpha .7
+    with dissolve
+    hide 
 
     #Эмбиент
     play ambience  fadein 1

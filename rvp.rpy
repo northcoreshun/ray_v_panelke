@@ -3,7 +3,7 @@
 #ГЕНЕРАТОР СПРАЙТОВ, ТИТРОВ ИЗ БКРР
 #CAMERA
 #Ревизия кода, убрать старое и ненужное
-#функция ВЕРНУТЬСЯ НАЗАД, анимация перемотки SaturationMatrix(0,0)
+#функция ВЕРНУТЬСЯ НАЗАД, анимация перемотки через SaturationMatrix(0,0)
 #Обновление 2.9:
 #новое меню
 #демоверсия части 2Б
@@ -35,10 +35,13 @@
 #2640-звук: флешбека
 #2860-показать кассету анимацией снизу вверх
 #туда же-звук: вставки кассеты
+#унифицировать все флешбеки
 #
 init:
     $ config.developer = True
-    $ mods["rvp"] = "Рай в панельке"
+    $ rvp_font = "ray_v_panelke/images/gui/Inter-Hewn.otf"
+    $ rvp_font_who = "ray_v_panelke/images/gui/trafaret.ttf"
+    $ mods["rvp"] = "{font=[rvp_font_who]}Рай в панельке"
 
     #Титры
     $ rvp_credits_ = "Спасибо за прочтение части \n\n\n\n Сценарий - northcoreshun\n\n"
@@ -2210,7 +2213,6 @@ label b1:
     "Они начали играть. Мику задавала темп и играла громче, Алиса старалась подыгрывать ей в такт." with dissolve
     window hide
 
-    #Музыкальная пауза
     $ renpy.notify("Щёлкните для продолжения")
     $ renpy.pause()
     
@@ -3658,14 +3660,12 @@ label b2:
     show dv normal pioneer2 with dspr
     "Я хотел было возразить, но решил почитать, испытывая на себе пристальный взгляд Алисы."
     $ set_mode_rvp(nvl)
-    window show
     "“Женщины-Львы — противоречивые натуры, сила и гордость которых входит в резонанс с сентиментальностью и потребностью в любви и восхищении."
     "Женщина-Лев почти на физическом уровне нуждается не просто во внимании, но в любви на грани фола, отречении, жертвенности и желании партнера раствориться в ее интересах."
-#После Лев лишний пробел, проверить на фб
     "Желание терять голову от любви и самореализация в сильных чувствах заводят Львиц в дебри сложных отношений, где мужчине отводится единственная роль — человека, поставившего свою царственную избранницу на пьедестал."
     "В работе Львицы — настоящие профи, берущие любые высоты харизмой и трудолюбием. Большие любительницы роскоши, женщины-Львы чаще других тратят деньги на покупки, удовольствия, развлечения, уход за собой и подарки любимым."
     "Также они являются великолепными хозяйками и любительницами устраивать вечеринки и приемы, тем самым подчеркивая свой статус и умение блистать в качестве хозяйки вечера.”"
-    $ set_mode_rvp(adv)
+    $ set_mode_rvp()
     dv "Ну что, согласен со мной?"
     me "Да как тебе сказать…"
     show dv normal pioneer2:
@@ -3745,7 +3745,7 @@ label b2:
     un "Ну что, пойдёмте?"
     show dv surprise pioneer2 with dspr
     "Вдруг Алиса замялась."
-    dv"Ребят, вы подождите, мне надо одну книжку взять."
+    dv "Ребят, вы подождите, мне надо одну книжку взять."
     show dv surprise pioneer2 with dspr:
         align(.2,.5)
         ease 1 pos(1.,.5) alpha 0
@@ -3785,40 +3785,45 @@ label b2:
     un "Дай посмотреть!"
     "Лена взяла книгу, я прочитал название."
     "Я ожидал чего угодно, но не этого…"
-    show misc skanavi_rvp:
+    window hide
+    show skanavi_rvp:
         align(.5,.5) zoom 3 ypos 1.2
         ease 1.5 ypos 1.
-    "М.И.Сканави “Сборник задач по математике для поступающих в вузы”."
+    $ renpy.pause(1.5)
+    window show
     "Я реально… прифигел."
     me "Тебе это зачем?"
     show dv guilty pioneer2 with dspr
+    hide skanavi_rvp with dissolve
     dv "К вузу буду готовиться, представь себе."
     "Алиса. Дерзкая рыжая девочка с гитарой. Учит математику."
     me "Ого, ты любишь математику?"
     show dv laugh pioneer2 with dspr
-    dv"Да, а ещё больше люблю применять её в жизни."
+    dv "Да, а ещё больше люблю применять её в жизни."
     me "Да ну!"
-    dv"Ну а как ты думаешь, мы с тобой в первый день встретились? Просто совпадение?"
+    dv "Ну а как ты думаешь, мы с тобой в первый день встретились? Просто совпадение?"
     stop ambience fadeout 2
 
     scene bg black with dissolve
-    $ renpy.pause(1.0)
-    "9 июня 1987, лагерь Совенок"
-    $ renpy.pause(1.0)
+#    $ renpy.pause(1.0)
+#    "9 июня 1987, лагерь Совенок"
+#    $ renpy.pause(1.0)
     
     scene ext_houses_day with dissolve
+    play music music_list['my_daily_life'] fadein 1
     "Алиса спокойно гуляла по лагерю и наслаждалась летним днём"
     show un shy pioneer:
         anchor(.5,.5) pos(.1,.5) zoom 1.25 alpha 0
         ease 0.5 xpos(.25) alpha 1
-    extend", как вдруг встретила бегущую Лену."
+    extend ", как вдруг встретила бегущую Лену."
     dv "Лена, ты чего бежишь?"
     un "Там новенький приехал!"
     dv "Ого! Так ведь ворота в другой стороне!"
-    un"Так я от них и бежала!"
+    un "Так я от них и бежала!"
     dv "А чего ты?"
-    show un normal pioneer with dspr
+    show un angry pioneer with dspr
     un "Да меня эта напугала! Кузнечика в лицо мне начала пихать!"
+    show un normal pioneer with dspr
     dv "Да ладно тебе, успокойся!"
     dv "Может, к вожатой сходишь, скажешь ей, что новенький приехал."
     un "Да, пожалуй, стоит."
@@ -3826,40 +3831,51 @@ label b2:
         anchor(0.5,0.5) pos (0.25,0.5) zoom 1
         ease 1 pos(1.75,.5) alpha 0
     "Лена ушла к домику вожатой. Алиса же начала рассчитывать маршрут пионера."
+    show dv surprise pioneer2 with dissolve
+#добавить, чтобы вокруг Алисы формулы летали
     "Так, ему надо пройти до площади, затем налево. Это метров сто, затем ещё сорок. Скорость где-то 4 километра в час."
     show blink
-    $ renpy.pause(1.0)
-    scene bg black
-    "…"
+    $ renpy.pause(2.0)
     show unblink
     scene ext_houses_day with dissolve
     "Прошло время, но никакой парень не появлялся."
-    dv"Чего он там, уснул что ли?"
-    dv"Или я неправильно рассчитала."
+    show dv_rvp nenrav pioneer2 with dissolve
+    dv "Чего он там, уснул что ли?"
+    hide dv_rvp nenrav pioneer2 with dissolve
+    show dv guilty pioneer2 with dissolve
+    dv "Или я неправильно рассчитала."
+    show dv angry pioneer2 with dissolve
     "Наконец появился."
-    "За такое отклонение от её расчёта Алиса не стала церемониться и настигла Семёна со спины."
-
-
+    show dv angry pioneer2:
+        align(.5,.5)
+        ease 1 zoom 2 ypos 1.
     scene bg black with dissolve
+    "За такое отклонение от её расчёта Алиса не стала церемониться и настигла Семёна со спины."
+    stop music fadeout 1
+
     $ renpy.pause(1.0)
+    play ambience ambience_camp_center_day fadein 4
     scene bg ext_library_rvp with dissolve
-    show un_rvp laugh pioneer2 at right with dissolve:
+    show un_rvp smile pioneer2 at right with dissolve:
     show dv laugh pioneer2 at left with dissolve
     dv "Вот один из примеров."
     me "Понятно. Кстати, возможно, твой расчёт был верен, просто я, так сказать, задержался."
     dv "Это каким же образом?"
-    show un_rvp smile pioneer2 with dspr
     me "Я стоял у клубов и думал, что мне делать."
+    hide dv laugh pioneer2 with dissolve
+    show dv_rvp shy_smile pioneer2 at left with dspr
     dv "Ну вот, стоял он. Его, значит, ждут, а он стоит где-то."
     me "И как вообще, поддаётся наука?"
     dv "А что, есть сомнения?"
     me "Ну, математика, она такая… не особо женская наука."
-    show un_rvp normal pioneer2 with dspr
-    show dv normal pioneer2 with dspr
+    hide dv_rvp shy_smile with dissolve
+    show un_rvp serious pioneer2 with dspr
+    show dv angry pioneer2 at left with dspr
     "Лена и Алиса завелись от этой фразы."
     un "Что за глупые предрассудки!"
     dv "Да плевать мне, пусть думает, что хочет."
     dv "Я вот возьму, выучусь да поступлю в институт. И пусть только попробуют меня срезать на вступительных, как папу!"
+    show un_rvp normal pioneer2 with dspr
     un "Да никто намеренно твоего отца не срезал."
     dv "Да конечно, увидели фамилию и сразу начали."
     me "А фамилия у тебя действительно интересная."
@@ -3872,22 +3888,35 @@ label b2:
     dv "А вообще, мои предки вроде были революционерами. Анархистами. Царских чиновников взрывали."
     me "Не знал, что склонность взрывать по наследству передаётся."
     show dv laugh pioneer2 with dspr
+    show un_rvp grin pioneer2 with dspr
     "В этот раз шутка пришлась к месту и Алиса оценила её."
     dv "Может быть."
     show dv grin pioneer2 with dspr
+    show un_rvp smile pioneer2 with dspr
     dv "Это ещё не всё. Мой прадед был красным командиром. А его в тридцать седьмом в лагеря отправили."
+    show dv normal pioneer2 with dspr
+    show un_rvp normal pioneer2 with dspr
     dv "Дед воевал в Великую Отечественную… там ногу потерял."
     me "Да, ты говорила как-то."
-    show dv normal pioneer2 with dspr
-    show un_rvp shy pioneer2 with dspr
+    show dv surprise pioneer2 with dspr
+    show un_rvp rock pioneer2 with dspr
     "Эти слова резко удивили девочек."
     dv "Когда я такое говорила?"
     "А ведь действительно… Алиса не рассказывала. Или всё же?"
+    play music music_list['sunny_day'] fadein 1
+    show int_catacombs_living:
+        alpha .7
+    with dissolve
     "Бункер. Мы с ней вдвоём. Воспоминание того, чего не было. Но ведь оно в голове."
     me "Нет, не говорила."
+    hide int_catacombs_living with dissolve
+#сделать как в других флешбеках
+    stop music fadeout 1
     un "Может это дежавю?"
     un "Когда видишь что-то в первый раз, но чувство, будто уже видел."
     me "И чем это вызвано?"
+    show un_rvp normal pioneer2 with dspr
+    show dv normal pioneer2 with dspr
     un "Науке неизвестно."
     me "А с отцом что случилось?"
     dv "Хотел в институт поступить, а ему не дали."
@@ -3895,8 +3924,8 @@ label b2:
     show un_rvp serious pioneer2 with dspr
     un "А мне кажется, захотел бы, поступил."
     show dv sad pioneer2 with dspr
-    dv "Да что вы вообще знаешь об этом! Когда система против тебя!"
-    show un_rvp angry2 pioneer2 with dspr
+    dv "Да что ты вообще знаешь об этом! Когда система против тебя!"
+    show un_rvp angry pioneer2 with dspr
     un "Уж кое-что знаю!"
     show dv angry pioneer2 with dspr
     dv "Ты же у нас отличница, гордость класса."
@@ -3904,13 +3933,16 @@ label b2:
     me "Девочки, успокойтесь."
     show un_rvp rage pioneer2 with dspr
     show dv rage pioneer2 with dspr
-    dvun"А ты не лезь!"
+    dvun "А ты не лезь!"
     show un_rvp serious pioneer2 with dspr
     show dv angry pioneer2 with dspr
     show un_rvp normal pioneer2 with dspr
     show dv normal pioneer2 with dspr
     "Не ожидал от них такой импульсивности. Видимо, их задело за живое и какие-то давние страсти вышли наружу. То, что происходило задолго до моего попадания сюда. И мне ещё предстоит узнать, что это было."
     "Обратно мы дошли уже молча."
+    scene bg ext_internat_rvp with dissolve
+    show un_rvp normal pioneer2 at right with dspr
+    show dv normal pioneer2 at left with dspr
     dv "Ладно, пойдём мы."
     show un_rvp smile3 pioneer2 with dspr
     un "Ты иди, я догоню."
@@ -3918,17 +3950,30 @@ label b2:
     "Улыбка заиграла на лице Алисы."
     dv "Ммм, хорошо."
     show dv smile pioneer2:
-        align(.2,.5)
+        align(.3,.5)
         ease 1 pos(-.3,.5) alpha 0
     show un_rvp normal pioneer2:
-        anchor(0.5,0.5) pos (0.75,0.5)
+        anchor(0.5,0.5) pos (0.7,0.5)
         ease 1 pos(.5,.5)
+    show un_rvp serious pioneer2 with dspr
     "Мы остались с Леной вдвоём. Начался допрос."
+    show un_rvp serious pioneer2:
+        align(.5,.5)
+        ease 1 zoom 1.1
+    with dspr
     un "Откуда ты про деда Алисы знаешь?"
+    show un_rvp serious pioneer2:
+        align(.5,.5)
+        ease 1 zoom 1.2
+    with dspr
     un "Когда она тебе успела рассказать?"
     me "Лен, она мне ничего не рассказывала. Не знаю, откуда мне это ведомо."
     me "Ну, ты же видела реакцию Алисы. Она сама не понимает, откуда я это знаю."
     me "Может мне кто-то другой это рассказывал и я путаю."
+    show un_rvp serious pioneer2:
+        align(.5,.5) zoom 1.2
+        ease 1 zoom 1
+    with dspr
     un "Ох, ладно. Знаю я эту девушку уже давно. И похоже она действительно не понимает о чём речь."
     me "У меня тоже есть вопрос."
     un "Задавай."
@@ -3941,6 +3986,7 @@ label b2:
     un "Давай. Завтра снова на крышу{w=0.2}, не забудь."
     scene bg black with dissolve
     $ renpy.pause(1.0)
+    play music kryshi_rvp fadein 1
     scene bg obschaga_rvp with dissolve:
         align(.5,.5) zoom 1.05
         ease .5 offset(25,25)
@@ -3948,6 +3994,7 @@ label b2:
         ease .5 offset(-25,25)
         ease .5 offset(0,0)
         repeat
+    $ set_mode_rvp(nvl)
     "Курс истории оказался интересен. Оказалось, в этом мире после смерти Сталина история пошла несколько по иному пути."
     "На мой взгляд, этот Советский Союз оказался лучше, чем у меня."
     "Кибернетику не стали преследовать, потому что поняли её полезность в управлении огромной государственной хозяйственной машиной. Была создана невоплощённая в моём мире общегосударственная автоматизированная система, она же ОГАС. "
@@ -3956,14 +4003,20 @@ label b2:
     "Но если мой СССР был впереди планеты всей преимущественно в крупных проектах и обороне, то в этом больше внимания уделили обычным бытовым вещам типа одежды."
     "Это было заметно по купальникам у Слави, Алисы, Ульяны."
     "Коммунизм, конечно, не построили, но жить здесь было чуть получше, чуть повеселее."
-
-
+    $ set_mode_rvp()
+    stop ambience fadeout 1
+    
+    show blink
     scene bg black with dissolve
     $ renpy.pause(1.0)
-    scene bg roof_rvp with dissolve
     "Мы снова забрались на крышу многоэтажки. Лена решила немного меня поспрашивать по пройденному материалу."
+    show unblink
+    scene bg roof_rvp with dissolve
+    play ambience ambience_cold_wind_loop fadein 1
+    show un_rvp grin pioneer2:
+        anchor(.5,.5) pos(.9,.5) zoom 1.25 alpha 0
+        ease 1.5 xpos .75 alpha 1
     me "...и таким образом, под руководством товарища Китова, в Советском Союзе была построена общегосударственная автоматизированная система, позволившая более грамотно руководить производством."
-    show un_rvp smile2 pioneer2 with dissolve
     un "Молодец, Персунов. Садись, пять!"
     un "Даже в нашем городе она есть. На заводе, где ты работаешь."
     un "Знаешь, кто приехал внедрять систему? Мой папа."
@@ -3980,14 +4033,23 @@ label b2:
     un "Кстати, хорошо ты вспомнил про это… я хотела тебе кое-что показать."
     "Лена потянула руки к своей рубашке и… достала из кармана пионерский галстук, развернув перед собой."
     "Тот самый, который не надевала с тех пор как мы…"
-    un "Три конца. Символизируют связь пионерии, комсомола и партии."
+    stop music fadeout 1
+    scene bg black with dissolve
+    play sound little_dark_age_rvp fadein 2
+    queue music [kryshi_rvp]
+    $ renpy.pause(.5)
+    un "Три конца.{w=.5} Символизируют связь пионерии, комсомола и партии.{w=1}{nw}"
+    show cg un_roof_rvp:
+        zoom 5 align(.5,.5) yanchor .1
+        ease 4 yanchor .5 zoom 1
+    with dissolve    
     un "Кусочек красного знамени, доверенный нам, повязанный у нас на шее."
     un "Красного знамени, что подняли парижские коммунары, когда к их городу подошли захватчики, а буржуазные власти бросили столицу на произвол судьбы! Парижане погибали на баррикадах, но не сдавались!"
     un "Красного знамени, что подняли наши деды над рейхстагом, над логовом фашистского зверя, где принимались бесчеловечные решения стирать с лица земли целые народы! А спустя несколько дней закончилась эта самая страшная война в нашей истории."
+    show cg un_roof_2_rvp with dissolve
     un "Наш галстук это память о великих народных подвигах, о массовом героизме! Маленькое знамя, которое должен нести каждый из нас на пути к коммунизму!"
     "Лену было не узнать. Передо мной стоял совершенно не тихий человек, а пламенный оратор, выступающий перед несуществующей толпой. Ещё одна грань Лены, ранее скрываемая ею, открылась предо мной."
     "Даже меня, человека далёкого от политики, эта речь тронула. Лена вспомнила моменты не просто восстаний, но защиты своей Родины. Что-то в этом было воодушевляющее."
-    show un_rvp smile pioneer2 with dspr
     "Наконец Лена закончила свою пламенную речь и уставилась в небо, откуда ей, наверное, улыбался Ленин, просто мне не было этого видно."
     "Хм, слова “дедушка Ленин” играют новыми смыслами."
     un "Помню как нас посвящали в пионеры. Как мы произносили клятву."
@@ -4001,18 +4063,19 @@ label b2:
     un "Наконец чувствую надежную опору."
     un "Чувствую, что у меня в будущем всё будет хорошо."
     un "И всё это благодаря тебе."
+    scene bg roof_rvp with dissolve
+    show un_rvp smile pioneer2:
+        anchor(.5,.5) pos(.1,.5) zoom 1.25 alpha 0
+        ease 1.5 xpos .25 alpha 1
     "Лена посмотрела на меня счастливыми глазами."
     me "Знаешь, я ведь всё то же самое могу тебе сказать."
     me "Только ты не накручивай себя. Если тебя что-то волнует, просто скажи мне об этом."
     me "Я… безумно боюсь потерять тебя."
     un "Хорошо, Сёма."
     show un_rvp grin pioneer2:
-        anchor(0.5,0.5) pos(0.5,0.5)
-        ease 2 zoom 1.5
+        ease 2 xpos .25
+        ease 2 zoom 2.5 pos(.0,.8)
     $ renpy.pause(3.5)
-    show un_rvp grin pioneer2:
-        anchor(0.5,0.5) pos(0.5,0.5) zoom 1.5
-        ease 2 zoom 1.0
     "Мы с Леной обнялись и стояли так некоторое время. Никогда мне ещё не было так хорошо."
     $ renpy.pause(1.0)
     scene bg black with dissolve
@@ -4026,15 +4089,21 @@ label b2:
     me "Лен, а что у тебя за фамилия такая?"
     show un_rvp smile2 pioneer2 close with dspr
     un "Ой, это интересная история! Вообще-то мои предки были просто Ивановы, но когда выдавали паспорт, сделали опечатку. А новый делать отказались."
+    show anim prologue_keyboard_monitor_4:
+        alpha .7
+    with dissolve
     "Я не помнил всю клавиатуру, хотя как-то в шутку учил набор букв в линиях."
     "Фывапро… Ячсмить… Ну да, буквы “в” и “ч” стояли рядом. А раскладка букв на клавиатуре перекочевала с печатных машинок. Выходит, правду говорит."
-    show un_rvp grin pioneer2 close with dspr
+    hide anim prologue_keyboard_monitor_4
+#сделать зум на сиськи Лены
+#    show un_rvp grin pioneer2:
+#        ease 3 zoom 2
     "Пока я размышлял, я засмотрелся на Лену. Но не мог не удержаться, чтобы посмотреть не в глаза, не в лицо, а ниже. Ниже шеи. Ниже плеч. На красивые груди Лены."
     show un_rvp angry2 pioneer2 close with dspr
     "Она это заметила. Ей это не понравилось."
     un "Эй, куда смотришь?!"
     "И она завелась."
-    show un_rvp angry pioneer2 close with dspr
+    show un_rvp angry pioneer2 with dspr
     un "Сёма, мне это уже надоело. Каждый раз, когда я с тобой разговариваю, ты меня глазами раздеваешь!"
     me "Ну, Лен, у тебя она такая большая!"
     un "Что же в этом хорошего?!"
@@ -4049,6 +4118,7 @@ label b2:
     show un_rvp grin pioneer2 close with dspr
     un "Правда?"
     me "Ну конечно."
+    show un_rvp normal pioneer2 close with dspr
     un "Не тебе одному, к сожалению."
     me "В смысле?"
     show un_rvp serious pioneer2 close with dspr
@@ -4080,6 +4150,7 @@ label b2:
     "Мы помолчали пару секунд."
     un "Хорошо сходили."
     me "Да, можно туда регулярно ходить, будет нашим особенным местом."
+    show un_rvp normal pioneer2 close with dspr
     un "Угу. Местом, где я чуть не погибла."
     me "Мы. Чуть не погибли."
     show un_rvp surprise pioneer2 close with dspr
@@ -4093,15 +4164,14 @@ label b2:
     me "О, давай!"
     show un_rvp smile2 pioneer2 close with dspr
     un "Отлично, тогда до встречи!"
+    stop music fadeout 1
     scene bg black with dissolve
     $ renpy.pause(1.0)
 
-
-
-    scene bg new_rayon_rvp with dissolve
+    scene bg ext_internat_rvp with dissolve
     show un_rvp normal pioneer2 with dissolve
     "На следующий день стояла ветреная погода."
-    "Мы с Леной ждали Алису. "
+    "Мы с Леной ждали Алису."
     show un_rvp normal pioneer2:
         anchor(0.5,0.5) pos (0.5,0.5)
         ease 1 pos(.25,.5)
@@ -4111,6 +4181,7 @@ label b2:
     extend "Она вышла к нам, как в лагере – в рубашке и с оголённым животом. Лене это не понравилось."
     show un_rvp angry2 pioneer2 with dspr
     un "Обязательно было так наряжаться?"
+    play music music_list['that_s_our_madhouse'] fadein 1
     show dv grin pioneer2 with dspr
     dv "Что, завидуешь?"
     un "Да больно надо! Просто не люблю, когда с голым пузом ходят."
@@ -4142,38 +4213,56 @@ label b2:
     dv "Сиськи-то мои понравились?"
     scene bg black with dissolve
     $ renpy.pause(1.0)
-    show cg d5_dv_us_wash with dissolve
+    show cg d5_dv_us_wash:
+        zoom 1.05
     show prologue_dream
     with fade
     "Снова дежавю. На мгновение меня перенесло. Лес, поляна, та же фраза от Алисы. Но ведь…"
     un "Алиса!" with vpunch
-    scene bg new_rayon_rvp with dissolve
-    show un_rvp serious pioneer2 with dspr:
+    scene bg ext_internat_rvp:
+        zoom 1.05
+    with dissolve
+    show un_rvp rage pioneer2 with dspr:
         anchor(0.5,0.5) pos(.25,.5)
-    show dv normal pioneer with dspr:
+    show dv normal pioneer2 with dspr:
         anchor(0.5,0.5) pos (.75,0.5)
-    "Крик Лены вывел меня из воспоминаний. Дерзость Алисы меня начала раздражать и я уже сам решил сострить."
+    "Крик Лены вывел меня из воспоминаний. Дерзость Алисы меня начала раздражать, и я уже сам решил сострить."
+#перед и запятая
     me "У Лены лучше."
-    show dv guilty pioneer with dspr
+    show dv guilty pioneer2 with dspr
     show un_rvp smile3 pioneer2 with dspr
     "Алиса обиделась на мой ответ. А вот Лена была крайне довольна и взяла меня под руку."
     scene bg black with dissolve
     $ renpy.pause(1.0)
-    scene bg new_rayon_rvp with dissolve
+    scene bg new_rayon_rvp:
+        align(.5,.5) zoom 1.05
+        ease .5 offset(25,25)
+        ease .5 offset(0,0)
+        ease .5 offset(-25,25)
+        ease .5 offset(0,0)
+        repeat
+    show un_rvp smile pioneer2:
+        align(.5,.5)
+        ease .5 yoffset 0
+        ease .5 yoffset 15
+        repeat
     show un_rvp smile pioneer2 with dissolve
     "Мы пошли дальше. Алиса какое-то время шла отдельно, насупившись. Вдруг из-за спины я услышал."
     dv "Сволочь ты, Семён."
     me "В смысле?"
     show un_rvp smile pioneer2:
-        anchor(0.5,0.5) pos (0.5,0.5)
+        align(.5,.5)
         ease 1 pos(-.25,.5)
-    show dv guilty pioneer:
+    scene bg new_rayon_rvp:
+        align(.5,.5) zoom 1.05
+    with dissolve
+    show dv guilty pioneer2:
         anchor(0.5,0.5) pos (1.25,0.5)
         ease 1 pos(.5,.5)
     "Я развернулся к ней."
     dv "Обесчестил такую хорошую девушку!"
-    show dv angry pioneer:
-        anchor(0.5,0.5) pos(0.5,0.5)
+    show dv angry pioneer2:
+        align(.5,.5)
         ease 1 zoom 1.5
     with vpunch
     "Алиса накинулась на меня, замахнувшись кулаком для удара. Мне пришлось обороняться."
@@ -4183,44 +4272,47 @@ label b2:
     show un_rvp shocked pioneer2:
         anchor(0.5,0.5) pos (-0.25,0.5)
         ease 1 pos(.25,.5)
-    show dv angry pioneer:
+    show dv angry pioneer2:
         anchor(0.5,0.5) pos (.5,0.5)
         ease 1 pos(.75,.5)
     un "Алиса, блин! Не трогай Сёму, он не виноват!"
-    show dv rage pioneer with dspr
+    show dv rage pioneer2 with dspr
     dv "Да конечно!"
     "Алиса пыталась схватить меня за грудки."
     dv "Прижал там её, небось, она даже пикнуть не смогла!" with vpunch
     un "Да не так всё было!"
     dv "А как?"
     un "Отойди от него, я расскажу."
-    show dv angry pioneer:
+    show dv angry pioneer2:
         anchor(0.5,0.5) pos(.75,.5)
         ease 1 zoom 1
     show un_rvp shy pioneer2:
         anchor(0.5,0.5) pos (0.25,0.5)
         ease 1 pos(.6,.5)
     "Я отпустил Алису, она отошла от меня. Лена подскочила к Алисе и начала ей что-то шептать."
-    show dv angry pioneer with dspr
+    show dv angry pioneer2 with dspr
     "Лицо Алисы сначала изменилось на удивлённое"
     show dv grin pioneer with dspr
-    extend", затем на довольное."
-    show un_rvp shy pioneer2:
+    extend ", затем на довольное."
+    show un_rvp smile pioneer2:
         anchor(0.5,0.5) pos (0.6,0.5)
         ease 1 pos(.25,.5)
     dv "Да, Лен, даже не знаю, что тут сказать."
     dv "Но теперь ты должен на Лене жениться! Просто обязан!"
+#новая эмоция shy_smile
     "Лена улыбнулась и покраснела. Так она выглядела очень мило."
     un "Женится, Алис. Обязательно. Но попозже."
     un "Пойдёмте уже, скоро матч начнётся!"
     scene bg black with dissolve
     $ renpy.pause(1.0)
+    stop music fadeout 1
+    stop ambience fadeout 1
 
-
-    scene bg ext_playground_day with dissolve
+    scene bg ext_playground_2_rvp with dissolve
+    play ambience ambience_soccer_play_background fadein 1
     "Мы пришли на так называемый матч. По сути это ребята просто собрались поиграть, никаких полных стадионов болельщиков."
     me "Кто с кем играет?"
-    show dv normal pioneer:
+    show dv normal pioneer2:
         anchor(0.5,0.5) pos (1.2,0.5)
         ease 1 pos(.75,.5)
     show un_rvp normal pioneer2:
@@ -4228,7 +4320,7 @@ label b2:
         ease 1 pos(.25,.5)
     dv "А и Б класс против бывшего А и Б."
     me "Это как?"
-    show dv laugh pioneer with dspr
+    show dv laugh pioneer2 with dspr
     show un_rvp smile pioneer2 with dspr
     dv "Блин, ты реально будто с Луны упал."
     dv "Те, кто остались учиться и те, кто пошли в ПТУ."
@@ -4237,7 +4329,7 @@ label b2:
     dv "Блин, ты не знаешь, что такое ПТУ?"
     me "Да знаю я."
     dv "При заводе на Горького, пять. Парни пошли туда, потом будут на заводе батрачить."
-    show dv grin pioneer with dspr
+    show dv grin pioneer2 with dspr
     dv "Туда тебе и дорога, кстати."
     me "В смысле?"
     dv "В прямом! Чтобы работать, нужно выучиться!"
@@ -4245,13 +4337,14 @@ label b2:
     un "Верно говорит Алиса. В институт пока рано, нужно…"
     ktoto "Ай, больно в ноге!" with vpunch
     show un_rvp shocked pioneer2 with dspr
-    show dv scared pioneer with dspr
-    "Крик одного из футболистов прервал речь Лены. Парень подвернул ногу и не мог больше играть. Парни собрались и начали думать, на “банке” никого не было.Вдруг один из них обратился к нам."
+    show dv scared pioneer2 with dspr
+    $ renpy.notify("Сидеть на банке – ждать, когда понадобится замена в дворовом футболе.")
+    "Крик одного из футболистов прервал речь Лены. Парень подвернул ногу и не мог больше играть. Парни собрались и начали думать, на “банке” никого не было. Вдруг один из них обратился к нам."
     show un_rvp normal pioneer2 with dspr
-    show dv normal pioneer with dspr
+    show dv normal pioneer2 with dspr
     ktoto "Алис, кто с вами сидит? Он с нами может играть?"
     me "Могу!"
-    show dv normal pioneer:
+    show dv normal pioneer2:
         anchor(0.5,0.5) pos (.75,0.5)
         ease 1 pos(1.3,.5)
     show un_rvp normal pioneer2:
@@ -4272,7 +4365,7 @@ label b2:
         ease 1 pos(-.25,.5)
     un "Ладно, иди."
     "Черт, я в рубашке ещё. Ну ладно, постараюсь не запачкаться. Хотя, лучше сниму её и повешу где-нибудь."
-    scene bg ext_playground2_7dl_rvp with dissolve
+    $ set_mode_rvp(nvl)
     "– Парни, есть замена."
     "– Как зовут?"
     "– Семён."
@@ -4281,12 +4374,13 @@ label b2:
     "– Ооо, нормально!"
     "– Погодите, разомнусь только и буду готов."
     "– Ну давай, мы пока покурим."
+    $ set_mode_rvp()
 
     show blink
     $ renpy.pause(1.0)
     scene bg black with dissolve
     show unblink
-    scene bg ext_playground2_7dl_rvp with dissolve:
+    scene bg ext_playground_2_rvp with dissolve:
         align(.5,.5) zoom 1.05
         ease .25 offset(25,25)
         ease .25 offset(0,0)
@@ -4296,26 +4390,28 @@ label b2:
     "Игра шла хорошо и я смог показать навык владения мячом. Благо я вернулся в своё тело, когда ещё не произошла травма, сломавшая мою спортивную карьеру."
     "Удалось сыграть в нападении. Я находил слабые места в обороне противника, забегал за ребят, открывался для паса. Получил мяч, обходил защитников и бил по воротам."
     "Не всегда удавалось удержать мяч у себя, часто вратарь ловил его. В конце матча я снова вышел с мячом и направил его в “девятку”."
-    scene bg ext_playground2_7dl_rvp with dissolve
-    "ГООООООООЛ!"with hpunch
+    scene bg ext_playground_2_rvp with dissolve
+    "ГООООООООЛ!" with hpunch
     "Такие не бьются, да, Ульяна?"
     scene bg black with dissolve
     $ renpy.pause(1.0)
-    show cg d3_soccer with dissolve
+    show cg d3_soccer
     show prologue_dream
     with fade
     "Стоп, причём здесь Ульяна? Я же не играл с ней футбол… или…?"
-    scene bg ext_playground2_7dl_rvp with dissolve
+    scene bg ext_playground_2_rvp with dissolve
     "Со мной одна из команд смогла склонить чашу весов в свою пользу. Мы победили."
+    stop ambience fadeout 1
     "После игры ко мне подошёл парень, позвавший играть."
+#НАЙТИ УЖЕ НАКОНЕЦ ЧЕЛА
     ft "Здорово играешь."
     me "Да ну не, мог бы и лучше."
     ft "Ну, ты приходи ещё, покажешь. Меня Миша зовут."
     me "Семён."
     me "Ты со школы или с ПТУ?"
     ms "ПТУшные мы. С Дваче учились в одном классе."
-    scene bg ext_playground_day with dissolve
-    show dv normal pioneer:
+    scene bg ext_playground_2_rvp with dissolve
+    show dv normal pioneer2:
         anchor(0.5,0.5) pos (1.2,0.5)
         ease 1 pos(.75,.5)
     show un_rvp smile pioneer2:
@@ -4323,14 +4419,14 @@ label b2:
         ease 1 pos(.25,.5)
     "Я забрал рубашку и пошёл к девочкам. Алиса общалась с Мишей."
     ms "Вы знакомы с Семёном?"
-    show dv grin pioneer with dspr
+    show dv grin pioneer2 with dspr
     show un_rvp shy pioneer2 with dspr
     dv "Конечно, это Ленкин жених!"
-    show dv laugh pioneer with dspr
+    show dv laugh pioneer2 with dspr
     dv "Вешает ей лапшу на уши, что прибыл из будущего."
-    ms"Чего?"
+    ms "Чего?"
     me "Забей… потом объясню."
-    show dv smile pioneer with dspr
+    show dv smile pioneer2 with dspr
     ms "А я тебя видел на заводе кажись. Ты у токаря Михаила?"
     me "Агась."
     show un_rvp smile pioneer2 with dspr
@@ -4347,7 +4443,7 @@ label b2:
         anchor(0.5,0.5) pos (-0.25,0.5)
         ease 1 pos(.25,.5)
     un "Ой, ты так хорошо играл!"
-    show dv grin pioneer:
+    show dv grin pioneer2:
         anchor(0.5,0.5) pos (1.2,0.5)
         ease 1 pos(.75,.5)
     show un_rvp shy pioneer2 with dspr
@@ -4356,36 +4452,44 @@ label b2:
     dv "У Лены спроси."
     show un_rvp grin pioneer2 with dspr
     un "Ммм, а сама-то будто не смотрела!"
-    show dv laugh pioneer with dspr
+    show dv laugh pioneer2 with dspr
     dv "Ой, да больно надо! Ничего, Леночка, Семён в путягу поступит, будешь ходить смотреть как он в футбол играет."
     "Разговор опять грозился перерасти в перепалку, но внезапно вышел в неожиданное русло."
     show un_rvp angry2 pioneer2 with dspr
     un "В смысле футболом? А в бадминтон кто со мной будет играть?"
-    show dv grin pioneer with dspr
+    show dv grin pioneer2 with dspr
     dv "Я могу подменить Сёму и играть с тобой."
     dv "Мне несложно на самом деле."
     $ renpy.pause(1.0)
     scene bg ext_internat_rvp with dissolve
     show un_rvp smile pioneer2 with dissolve:
         anchor(0.5,0.5) pos(.25,.5)
-    show dv smile pioneer with dissolve:
+    show dv smile pioneer2 with dissolve:
         anchor(0.5,0.5) pos(.75,.5)
-    un "Ой, ты так хорошо играл!"
     "На этом мы дошли до интерната. Лена заметила."
     un "Так жарко… а давайте на пляж сходим завтра!"
     $ renpy.pause(1.0)
     scene bg black with dissolve
     $ renpy.pause(1.0)
 
-    "На следующий день"
+    show text "{font=[rvp_font]}{color=ffdd7d}{size=100}На следующий день" as image1 with dissolve
     $ renpy.pause(1.0)
-    
-    #че за фон тут юзать
+    scene bg black with dissolve
     "В последнее время жизнь изменилась."
+    show prologue_dream
+    with fade
+    show bg ext_camp_entrance_day with dissolve
+    show pi normal with dissolve
     "Всё началось с поездки в лагерь. Там появился Семён."
     "Не то чтобы он сильно поразил меня. Но было в этом парне нечто такое, чего не было у других."
     "Он не боялся меня."
     "Семён был каким-то спокойным и… взрослым для своих лет?"
+    show pi normal:
+        align(.5,.5)
+        ease 1 xpos .25
+    show un normal pioneer:
+        align(.5,.5) xpos 1. alpha 0
+        ease 1 xpos .75 alpha 1
     "Но он выбрал другую. Мою лучшую подругу Лену. Но у них не всё гладко."
     "И вообще он в лагере за мной подглядывал! Наверное я ему всё же нравлюсь…"
     "До сих пор не могу понять, стоит ли попробовать его отбить или не пытаться?"
@@ -4393,40 +4497,42 @@ label b2:
     scene bg black with dissolve
     $ renpy.pause(1.0)
 
+#сюда фоном советскую музыку
     scene bg square_lmr_day_rvp with dissolve
     "Мы встретились с девчонками на площади."
     "Алиса пришла с гитарой, упакованной в чехол."
-    show un_rvp smile pioneer2:
+    show un normal sport:
         anchor(0.5,0.5) pos (-0.25,0.5)
         ease 1 pos(.25,.5)
     un "Привет, Семён."
     me "Ты как-то не по пляжному выглядишь."
-    show un_rvp normal pioneer2 with dspr
+    show un serious sport with dspr
     un "Наверное, потому что я туда не пойду!"
     show dv smile pioneer2 with dissolve:
         anchor(0.5,0.5) pos(1.5,.5)
         ease 1 pos(.75,.5)
     dv "Лене сказали, нужно прийти помочь."
     dv "Эта дура взяла и согласилась."
-    show un_rvp serious pioneer2 with dspr
+    show un serious sport with dspr
     un "Что значит дура?! Раз попросили, значит надо прийти!"
     me "Послала бы их с такими просьбами. У тебя сегодня выходной!"
     dv "Она хочет, но не может."
+    show un normal sport with dspr
     un "Не могу…"
     me "Может, не пойдём?"
-    show un_rvp normal pioneer2 with dspr
+    show un normal sport with dspr
     un "Да ладно, идите, чего уж."
-    show un_rvp normal pioneer2:
+    show un normal sport:
         anchor(0.5,0.5) pos (0.25,0.5)
         ease 1 pos(-0.25,.5)
     show dv normal pioneer2 with dissolve
     "С этими словами Лена пошла от нас."
-    show un_rvp smile3 pioneer2:
+    show un laugh sport far:
         anchor(0.5,0.5) pos (-0.25,0.5)
         ease 1 pos(.25,.5)
     "Пройдя несколько метров, она вдруг развернулась и натянула на лицо улыбку."
     un "Желаю вам хорошо провести время!"
-    show un_rvp smile3 pioneer2:
+    show un laugh sport far:
         anchor(0.5,0.5) pos (0.25,0.5)
         ease 1 pos(-0.25,.5)
     show dv normal pioneer2:
@@ -4440,6 +4546,7 @@ label b2:
     dv "Нет, конечно."
     dv "Но дело не в том, что ей одной работать надо."
     me "А в чём?"
+    show dv normal pioneer2 with dspr
     dv "Сам подумай."
     "Ну да, конечно. Отпустила парня гулять с подругой, которая главная конкурентка."
     me "Понятно. Чего тогда отпустила?"
@@ -4448,6 +4555,7 @@ label b2:
     dv "Чего?"
     me "Хочет быть удобной для всех."
     dv "Типа того."
+    show dv smile pioneer2 with dspr
     dv "Вот я себе цену знаю и не беспокоюсь о чужом мнении."
     dv "Кстати, будь добр, понеси гитару."
     me "Нет."
@@ -4460,56 +4568,73 @@ label b2:
     scene bg black with dissolve
     $ renpy.pause(1.0)
 
-    scene bg ext_beach_day with dissolve
-    "Мы дошли до пляжа. Дальше были заплывы, во время которых Алиса мстила мне за отказ быть её “оруженосцем”. Мстила тем, что пыталась незаметно подплыть. и выпрыгнуть на меня из воды. Периодически у неё это получалось."
+    show cg d2_water_dan with dissolve
+    play ambience ambience_boat_station_day fadein 1
+    "Мы дошли до пляжа. Дальше были заплывы, во время которых Алиса мстила мне за отказ быть её “оруженосцем”. Мстила тем, что пыталась незаметно подплыть и выпрыгнуть на меня из воды. Периодически у неё это получалось."
     "Наконец, мы закончили заплыв и вышли на сушу."
-    show dv grin pioneer2:
-        anchor(0.5,0.5) pos (1.75,0.5)
-        ease 1 pos(.5,.5)
+    scene bg beach_rvp with dissolve
+    show dv smile swim:
+        anchor(.5,.5) pos(.1,.5) zoom 1.25 alpha 0
+        ease 1.5 xpos(.25) alpha 1
     dv "Всё же я не верю, что ты из будущего."
     me "Да ну, Алис, сколько говорить уже!"
     dv "Ну, хорошо, и как там живётся в будущем?"
     me "Что тебя интересует?"
     dv "Красные у власти будут?"
     me "Не будут."
-    show dv laugh pioneer2 with dspr
+    show dv laugh swim with dspr
     dv "Оу йес!"
     me "Чего радуешься?"
-    show dv smile pioneer2 with dspr
+    show dv smile swim with dspr
     dv "Известно чего! От них никакого толку. Достали уже со своим Лениным, знаменами и лозунгами. Взвейтесь… да развейтесь вы уже!"
     dv "Написали книжек, а нам сидеть за партой, учить."
     dv "Вещают про изобилие в стране, а мы голодные ходим."
     dv "Говорят про свободу, а только про партию любимую можно петь."
     me "Ну, в этом плане будущее действительно будет получше. Можно будет про что угодно петь."
-    show dv grin pioneer2 with dspr
+    show dv grin swim with dspr
     dv "И рок?"
     me "Да, и рок."
-    show dv smile pioneer2 with dspr
+    show dv smile swim with dspr
     dv "Ну так прекрасно! Жду не дождусь наступления воистину светлого будущего!"
     me "Не знаю, Алис..."
     dv "А что?"
     me "Больше попсы будет, чем всего остального."
     dv "ВИА всякие?"
     me "Угу, ВИА гра."
-    show dv laugh pioneer2 with dspr
+    show dv laugh swim with dspr
     dv "Это так группа называется?"
     "Алису рассмешило такое название."
     show dv normal pioneer2 with dspr
     dv "Кстати, раз уж мы о музыке заговорили."
     "Алиса достала гитару…"
-    show dv smile pioneer2 with dspr
+    hide dv with dissolve
+    show dv_rvp far:
+        anchor(.5,.5) pos(.1,.5) zoom 1.25 alpha 0
+        ease 1.5 xpos(.25) alpha 1
+    with dspr
     dv "Всё, музыкальная пауза!"
+    play music posledniy_geroy_rvp fadein 1
     "…и начала играть."
-    "Алиса играла знакомую мелодию из репертуара Кино. Алиса не пела, наверное потому что исполняла в довольно непростом стиле, когда не просто бьёшь по аккордам, а выдёргиваешь звуки пальцами."
-    "Песню я узнал быстро. Она была про того, чья ноша легка, но немеет рука. Про человека, что встречает рассвет за игрой в дурака и который уходит туда, где его никто не ждёт. Про последнего героя."
+    "Алиса играла знакомую мелодию из репертуара Кино."
+    "Алиса не пела — наверное потому что исполняла в довольно непростом стиле, когда не просто бьёшь по аккордам, а выдёргиваешь звуки пальцами."
+    "Песню я узнал быстро."
+    "Она была про того, чья ноша легка, но немеет рука."
+    "Про человека, что встречает рассвет за игрой в дурака и который уходит туда, где его никто не ждёт."
+    "Про последнего героя."
+    $ renpy.notify("Щёлкните для продолжения")
+    $ renpy.pause()
+
+    stop music fadeout 1
     me "Вот это как мёдом помазала!"
     me "Дай тоже поиграть, пожалуйста."
+    hide dv_rvp with dissolve
     show dv grin pioneer2 with dspr
     dv "Ну, ещё что! Не ты носил, не тебе играть."
     me "Давай на обратном пути понесу."
     show dv normal pioneer2 with dspr
     dv "Ладно, бери."
     "Я вспомнил пару песен, которые умел. Получилось неплохо, Алисе понравилось."
+    show dv smile pioneer2 with dspr
     "Даже непонятно, откуда у меня эти навыки. Будто получил их из прошлой жизни."
     "Кстати о прошедшем. Надо бы обсудить момент, который Алиса раньше рассказала, но который оставил загадки."
     me "Слушай, а зачем тебе математика?"
@@ -4520,6 +4645,7 @@ label b2:
     dv "Я знаю. Моя мама закончила консерваторию."
     dv "Выступала с концертами в областном центре, здесь."
     dv "Учителем музыки работала."
+    show dv sad pioneer2 with dspr
     dv "Но я видела, с чем ей пришлось столкнуться. Нелегко быть творческим человеком, артистом, в таком захолустье."
     dv "И закончилось всё плохо…"
     show dv cry pioneer2 with dspr
@@ -4527,15 +4653,13 @@ label b2:
     me "Алис, ты чего?"
     dv "Да вспомнила..."
     $ renpy.pause(1.0)
-    scene bg black with dissolve
-    $ renpy.pause(1.0)
-
-    "6 лет назад."
 
     scene bg black with dissolve
     $ renpy.pause(1.0)
-    show prologue_dream
-    with fade
+    show text "{font=[rvp_font]}{color=ffdd7d}{size=100}6 лет назад" with dissolve
+    $ renpy.pause(2.0)
+
+    show cg dv_run_rvp with dissolve
     "Это был майский солнечный день."
     "Ученица третьего класса Двачевская Алиса, бежала домой, сияя от счастья."
     "Взлетев по лестнице, она открыла дверь."
@@ -4568,7 +4692,7 @@ label b2:
     dv "Можно быть либо умной, либо красивой."
     dv "А я не хочу быть красивой куклой! Я и умная!"
     show dv sad pioneer2 with dspr
-    "Вот Лена и такая и такая! Вот поэтому ты её выбрал!"
+    dv "Вот Лена и такая и такая! Вот поэтому ты её выбрал!"
     me "Нет, не из-за этого!"
     dv "А почему же?"
     me "Не из-за внешности я её выбрал. Вы обе красавицы."
@@ -4584,7 +4708,7 @@ label b2:
     dv "А сейчас сколько? Тоже шестнадцать."
     me "Нет. Мне на самом деле больше."
     "Я назвал свой возраст."
-    show dv grin pioneer2 with dspr
+    show dv scared pioneer2 with dspr
     dv "Ого! Да ты уже взрослый."
     me "Большой ребёнок скорее."
     show dv normal pioneer2 with dspr
@@ -4594,12 +4718,11 @@ label b2:
     me "В своём мире уже успел закончить 11 классов, поступить в институт и уйти оттуда."
     me "И ещё успел пожить один."
     me "Меня кстати из-за математики отчислили из вуза."
-    show dv smile pioneer2 with dspr
+    show dv sad pioneer2 with dspr
     dv "Да? Как же так?"
     me "Ну не то, что отчислили. Я сам забрал документы. Надоело это всё."
     me "Учился на экономическом. Думал, что когда закончу, буду много зарабатывать."
     me "Не получилось. Преподы постоянно валили и не допускали до экзаменов."
-    show dv normal pioneer2 with dspr
     dv "Грустно."
     me "Так что подумай, нужно ли оно тебе. Не стоит идти в вуз за “корочкой”, за престижем."
     me "Занимайся тем, чем нравится."
@@ -4607,10 +4730,10 @@ label b2:
     me "Алис, я хотел бы спросить…"
     dv "Ну?"
     me "А у Лены был кто-то до меня?"
-    show dv grin pioneer2 with dspr
+    hide dv with dspr
+    show dv_rvp nenrav pioneer2 with dspr
     dv "Не поняла… что за сомнения?"
     me "Ну…"
-    show dv shy pioneer2 with dspr
     dv "Кровь была у Лены?"
     me "Ну… да."
     dv "Ну вот."
@@ -4619,6 +4742,7 @@ label b2:
     me "Смело. Как будто знала, что делать."
     me "Будто у неё был кто-то, с кем она встречалась, просто не доходило до…"
     "Несколько секунд напряженного молчания."
+    hide dv_rvp with dspr
     show dv normal pioneer2 with dspr
     dv "Нет, Сёма. Не было у неё никого. Я её знаю давно и живу с ней. Я бы знала."
     dv "А по поводу смелости… Это она такая. Если ей хочется чего-то, она возьмёт и сделает, даже если ей страшно. И я её за это уважаю."
@@ -4649,30 +4773,28 @@ label b2:
     me "Да. Вот мы с тобой отдыхаем, а она работает."
     dv "Нехорошо. Пойдём тогда к ней. Как раз дойдём, когда её смена закончится."
     show dv laugh pioneer2 with dspr
+#тут музон мб подрубить на полминуты
     dv "Как там у Вити поётся. Всё не так и всё не то, когда твоя девушка больна."
     "Верно она подметила. Лена как раз сейчас была в больнице, хотя и не болела. А я как герой той песни, тосковал по ней."
     "Мы собрали вещи и пошли к больнице, где работала Лена."
+    stop ambience fadeout 1
     $ renpy.pause(1.0)
-    scene bg black with dissolve
-    $ renpy.pause(1.0)
-    scene bg new_rayon_rvp with dissolve
+    scene bg ext_hospital_rvp with dissolve
     "Ещё какое-то время пришлось подождать. Видимо, Лена решила задержаться."
     "Я начал переживать. Вспоминая наше первое свидание на крыше, она может натворить делов."
-    show un_rvp shy pioneer2:
-        anchor(.5,.5) pos(1.2,.5)  alpha 0
+    show un normal sport:
+        anchor(.5,.5) pos(1.2,.5) alpha 0
         ease 1 xpos(.5) alpha 1
     "Наконец, Лена появилась. Вид у неё был уставший. Но её утомленное лицо озарилось улыбкой, когда она увидела меня."
+    show un smile2 sport
     un "Сёма!.."
-    show un_rvp surprise pioneer2:
-        anchor(0.5,0.5) pos(0.5,0.5)
-        ease 1.5 zoom 1.5
+    show un grin sport:
+        ease 2 xpos .25
+        ease 2 zoom 2.5 pos(.0,.8)
     $ renpy.pause(3.5)
-    show un_rvp surprise pioneer2:
-        anchor(0.5,0.5) pos(0.5,0.5) zoom 1.5
-        ease 1.5 zoom 1.0
+#подумать над эмоциями, мб сюрпрайз вернуть
     "Я быстро подошёл к ней и крепко обнял, так, что даже Лена не ожидала. С плеч будто гора упала. Мне было стыдно, что оставил Лену, а сам пошёл отдыхать."
     me "Лен, прости, что оставил тебя!"
-    show un_rvp smile pioneer2 with dspr
     un "Я и не злилась на тебя."
     me "Устала наверное."
     un "Да..."
@@ -4683,7 +4805,7 @@ label b2:
     un "Я подскажу."
     me "У вас есть в городе парк?"
     "В этот момент мы не замечали, как за нами наблюдала пара янтарных глаз."
-
+#добавить Алису со спины
     $ renpy.pause(1.0)
     scene bg black with dissolve
     $ renpy.pause(1.0)
@@ -4692,18 +4814,17 @@ label b2:
     "А я найду другого."
     $ renpy.pause(1.0)
     scene bg black with dissolve
-    
-
-    "На следующий день"
-
-    
-    scene bg black with dissolve
+    show text "{font=[rvp_font]}{color=ffdd7d}{size=100}На следующий день" with dissolve
     $ renpy.pause(1.0)
+
+    $ persistent.sprite_time = "night"
+    $ night_time
     scene bg park_rvp with dissolve
     "Мы с Леной встретились у парка вечером."
     show un_rvp smile3 pioneer2 with dissolve
     un "Так, Семён."
     un "Что там у тебя за девушка была?"
+    show un_rvp serious pioneer2 with dissolve
     un "Почему я ничего не знаю?"
     me "Откуда ты… а, понятно."
     "Вот же рыжая, всё передаёт!"
@@ -4712,20 +4833,22 @@ label b2:
     me "К тому же она в моём прежнем мире и не сможет меня достать здесь."
     show un_rvp smile pioneer2 with dspr
     un "Ну ладно… будем считать это далёким прошлым."
-    show un_rvp shy pioneer2 with dspr
+    show un_rvp grin pioneer2 with dspr
     un "Всё равно, там в лагере чувствовалась твоя… неопытность."
     "Мне стало очень неловко за это."
     me "Прости."
+    show un_rvp shy pioneer2 with dspr
     un "За что?"
     me "Ну, мужчина же должен быть опытнее девушки."
     show un_rvp smile2 pioneer2 with dspr
     un "Не переживай, для меня это неважно. Главное, что ты старался."
     un "Пойдём!"
     scene bg park1_rvp with dissolve
+#Цой Легенда
     "Мы зашли в парк."
+    show un_rvp smile pioneer2 with dspr 
     "Настало время спросить то, что я давно хотел узнать у Лены."
     me "Лен, а почему ты мне веришь?"
-    show un_rvp smile pioneer2 with dspr 
     un "Ну а почему бы и нет?"
     me "Но ведь так же не бывает, чтобы человек приехал из другого времени."
     un "Надо верить в чудеса."
@@ -4767,11 +4890,11 @@ label b2:
     un "Сём."
     "Сказала Лена прижавшись ко мне."
     un "Мне нужно тебе кое в чём признаться."
+    show un_rvp sad pioneer2 with dspr 
     un "У меня довольно тяжёлый характер. Я не умею его контролировать."
     un "Да и вообще я больная на голову."
     me "Ну чего ты…"
     un "Я знаю о чём говорю. "
-    show un_rvp sad pioneer2 with dspr 
     un "Я провела кучу времени в библиотеке, читая книги по психиатрии."
     un "И нашла у себя несколько признаков болезней."
     un "Хотя Алиса говорила, чтобы я себя не накручивала."
@@ -4839,7 +4962,7 @@ label b2:
     show un_rvp smile pioneer2 with dissolve 
     un "Кстати, как с Алисой погуляли?"
     me "Нормально."
-    show un_rvp smile3 pioneer2 with dspr 
+    show un_rvp serious pioneer2 with dspr 
     un "А что... у вас было?"
     "Лена вся напряглась, что меня почему-то позабавило. Но не стоит шутить с Леной в этом состоянии, хоть мы и не на крыше."
     me "Да ничего: поплавали, да на гитаре поиграли."
@@ -4852,7 +4975,8 @@ label b2:
     "Твёрдо сказала она."
     me "В общем, в какой-то момент, Алиса вспомнила про смерть мамы и заплакала."
     un "Ммм... "
-    show un_rvp normal pioneer2 with dspr  
+    show un_rvp normal pioneer2 with dspr    
+    $ renpy.pause(1.0)
     show un_rvp serious pioneer2 with dspr  
     "Лена на секунду отвела глаза, задумавшись. Наверное, сама вспомнила это."
     un "И что ты сделал?"
@@ -4878,13 +5002,15 @@ label b2:
     me "Слушай, ты не против, если я с Алисой на гитаре играть буду."
     show un_rvp serious pioneer2 with dspr 
     me "У меня прям хорошо получается."
+    show un_rvp grin pioneer2 with dspr 
     un "С Алисой хорошо получается?"
     me "Да и без неё."
+    show un_rvp serious pioneer2 with dspr 
     un "Зачем ты вообще меня спрашиваешь?"
     me "Ну, ты же моя девушка."
+    show un_rvp grin pioneer2 with dspr 
     un "А, ну есть такое."
     me "Даже Алиса сказала у тебя спросить."
-    show un_rvp grin pioneer2 with dspr 
     un "Ого, даже так…"
     un "Знаешь, тут такой момент. Вот как ты думаешь…"
     un "Почему я полезла к тебе в последний день в лагере?"
@@ -4926,83 +5052,84 @@ label b2:
     me "Песня из будущего."
     show un_rvp smile2 pioneer2 with dspr 
     un "Хорошая. Напишешь слова?"
-    "Да, может даже аккорды подберу."
-    show un_rvp smile pioneer2 with dspr 
+    me "Да, может даже аккорды подберу."
+    show un_rvp sad pioneer2 with dspr 
     un "Ладно, Сём, пойдём. А то уже поздно, я боюсь."
     un "В парке можно на хулиганов наткнуться."
     me "Пойдём."
     $ renpy.pause(1.0)
     scene bg black with dissolve
 
-    #***
     "Как я уже говорил, у меня есть мой наставник Михаил, моя любовь Лена и подруга Алиса."
     "Все направили меня учиться на токаря. После нескольких встреч с Мишей и его компанией футболистов я подружился с ними, преодолел своё презрительное отношение к училищу и подал документы... сразу на второй курс! Как так вышло?"
     "Чтобы поступить к Мише, я сказал, что бросил школу после окончания первого года старшей школы, потому что понял, что моё призвание - быть гордым пролетарием."
     "Переводной экзамен не составил труда -- остаточных знаний школьной программы и навыков, полученных от Михаила, хватило. Кстати, когда он узнал о моём поступлении, он принялся активно натаскивать меня, чтобы всё получилось."
-
-    scene bg black with dissolve
+    $ persistent.sprite_time = "day"
+    $ day_time
+    scene bg ext_internat_rvp with dissolve
     "Близилась осень. Лена и Алиса готовились к школе."
     un "Вот и настало время вступить в комсомол. Что думаешь, Алис?"
-    show dv smile pioneer:
+    show dv smile pioneer2:
         anchor(0.5,0.5) pos (1.2,0.5)
         ease 1 pos(.5,.5)
     dv "Думаю, что я в гробу его видала. А ты будешь вступать?"
     un "Конечно!"
-    show dv normal pioneer with dspr
+    show dv normal pioneer2 with dspr
     dv "Впрочем, может быть, мне тоже нужно."
     un "Почему?"
-    show dv grin pioneer with dspr
+    show dv grin pioneer2 with dspr
     dv "С тобой, Лена, хоть на край света."
-    show dv sad pioneer with dspr
+    show dv sad pioneer2 with dspr
     dv "Да и в институт могут не взять."
     un "Но я бы хотела не просто вступить."
     un "Я бы хотела стать комсомольским организатором класса."
-    show dv guilty pioneer with dspr
+    show dv guilty pioneer2 with dspr
     dv "Ого. Даже не знаю, Лен. Ты конечно, идейная, но не знаю… тихая для этой должности."
     un "Знаю… Но всё поменялось после лагеря."
-    show dv smile pioneer with dspr
+    show dv smile pioneer2 with dspr
     dv "Я могу выдвинуть твою кандидатуру."
     un "Нет, Алис, не надо. Мне надо самой найти смелость заявить о себе."
 
     scene bg black with dissolve
+#бг класса или переписать
     "Наконец, этот день настал. В классе собрались одноклассники Лены, подавшие в комсомол."
     ktoto "Ну и зачем мы здесь собрались?"
-    show dv normal pioneer far:
+    show dv normal pioneer2 far:
         anchor(0.5,0.5) pos (1.2,0.5)
         ease 1 pos(.5,.5)
     dv "Надо комсорга выбрать."
     dv "Кто хочет?"
     "В классе повисло молчание."
     "Лена боязно подняла руку."
-    show dv grin pioneer far with dspr
+    show dv grin pioneer2 far with dspr
     dv "Ну я как староста класса выдвину своего боевого товарища Елену Ичанову."
     "Класс загудел от возмущения."
-    show dv angry pioneer far with dspr
+    show dv angry pioneer2 far with dspr
     ktoto "Кого?"
     ktoto "Алис, с ума сошла? Ну не эту же тихоню."
     ktoto "Неча свою подружку пихать на должность."
     ktoto "По стопам пойти решила своего бати-алкаша, который в горкоме сидел?"
     un "А ну заткнулись все!"
-    show dv smile pioneer far with dspr
+    show dv smile pioneer2 far with dspr
     un "Да, я тихая! Была такой. Только теперь изменилась. И готова доказать это!"
     un "А отца моего не смейте трогать! Не вам его судить! Вы даже не представляете, через что ему пришлось пройти!"
-    show dv laugh pioneer far with dspr
+    show dv laugh pioneer2 far with dspr
     un "Если кто-то ещё про отца вякнет, без зубов останется!"
     "По классу прошёлся одобряющий гул. Лена не побоялась дать отпор на выпады в её сторону."
     ktoto "Смарите, у Ленки голос командный прорезался."
-    show dv grin pioneer far with dspr
+    show dv grin pioneer2 far with dspr
     dv "А она может!"
     ktoto "Чё, она влепила тебе?"
-    show dv angry pioneer far with dspr
+    show dv angry pioneer2 far with dspr
     dv "Не твоё дело!."
-    show dv smile pioneer far with dspr
+    show dv smile pioneer2 far with dspr
     ktoto "А что, пусть Ичанова будет. Посмотрим, как она нас ор-га-ни-зовывать будет."
     $ renpy.pause(1.0)
     scene bg black with dissolve
 
     $ renpy.pause(1.0)
     scene bg roof_rvp with dissolve
-    show dv smile pioneer with dissolve:
+    show dv smile pioneer2 with dissolve:
         anchor(0.5,0.5) pos (.75,0.5)
     show un_rvp smile pioneer2 with dissolve:
         anchor(0.5,0.5) pos (.25,0.5) 
@@ -5011,16 +5138,17 @@ label b2:
     un "Сёма, ну это то, что я очень хотела. И ты сам сказал, чтобы я общалась с людьми и не замыкалась в себе!"
     show un_rvp smile2 pioneer2 with dspr
     un "И вообще, пойдёмте на пляж, пока ещё тепло и сентябрь не наступил!"
-    show dv grin pioneer with dspr
+    show dv grin pioneer2 with dspr
     dv "Да, только зайдём сначала в библиотеку, книжки сдадим."
     me "Девчонки, стойте. У меня один вопрос."
     me "Куда поступать будете?"
     show un_rvp smile pioneer2 with dspr
     un "Я в медицинский институт."
-    show dv laugh pioneer with dspr
+    show dv laugh pioneer2 with dspr
     dv "Ну, мы не такие одарённые, звёзд с неба не хватаем. Нас и МГУ устроит."
     show un_rvp laugh pioneer2 with dspr
     un "Вот как. А я думала, звёзд с неба не хватать это бухгалтером пойти."
+    show dv angry pioneer2 with dspr
     dv "Эй, я в институт поступлю! Пошли уже, а то библиотека закроется."
     show dv smile pioneer:
         anchor(0.5,0.5) pos (.75,.5)
@@ -5039,5 +5167,7 @@ label b2:
         ease 1 pos(1.5,.5)
     "Напоследок я остановился поглядеть на вид, открывающийся с крыши."
     "Что ж, можно сказать, этот мир принял меня, и я могу жить в нём счастливо. Непростое будущее всё ещё было впереди, но пока можно расслабиться и не думать о нём."
-    "После Совёнка я понял, как важно ценить то, что имеешь, нашёл себе новых друзей и дело, которым мне хочется заниматься.
-    Заканчивалось долгое лето 87-го, которое было самым лучшим в моей жизни."
+    "После Совёнка я понял, как важно ценить то, что имеешь, нашёл себе новых друзей и дело, которым мне хочется заниматься."
+    "Заканчивалось долгое лето 87-го, которое было самым лучшим в моей жизни."
+#Кино - Кончится Лето
+#титры

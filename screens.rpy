@@ -2,9 +2,9 @@ init python:
     # Уберите из списка ненужные названия экранов, если не хотите их заменять.
     RVP_SCREENS = [
         "say",
-        "nvl"
-#        "text_history_screen",
-#        "game_menu_selector"
+        "nvl",
+        "text_history_screen",
+        "game_menu_selector"
     ]
 
     def rvp_screen_save():  # Функция сохранения экранов из оригинала.
@@ -60,9 +60,9 @@ screen rvp_say:
                 imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/forward_%s.png") pos(.92,.86) action Skip()
             else:
                 imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/fast_forward_%s.png") pos(.92,.86) action Skip()
-            text what id "what" font "ray_v_panelke/images/gui/Inter-Hewn.otf" outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align(.5) xmaximum .8 size 35 line_spacing 1
+            text what id "what" font rvp_text_font outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align(.5) xmaximum .8 size 35 line_spacing 1
             if who:
-                text who id "who" font "ray_v_panelke/images/gui/trafaret.ttf" outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 1
+                text who id "who" font rvp_font_who outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 1
 
         elif persistent.font_size == "small":
             imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/backward_%s.png") pos(.02,.88) action ShowMenu("text_history")
@@ -71,9 +71,9 @@ screen rvp_say:
                 imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/forward_%s.png") pos(.92,.88) action Skip()
             else:
                 imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/fast_forward_%s.png") pos(.92,.88) action Skip()
-            text what id "what" font "ray_v_panelke/images/gui/Inter-Hewn.otf" outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align .55 xmaximum .8 size 28 line_spacing 2
+            text what id "what" font rvp_font outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align .55 xmaximum .8 size 28 line_spacing 2
             if who:
-                text who id "who" font "ray_v_panelke/images/gui/trafaret.ttf" outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 2
+                text who id "who" font rvp_font_who outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 2
 
 screen rvp_nvl:
     $ timeofday = persistent.timeofday
@@ -86,12 +86,12 @@ screen rvp_nvl:
                     spacing 10
                 if persistent.font_size == "large":
                     if who is not None:
-                        text who id who_id font "ray_v_panelke/images/gui/trafaret.ttf" size 35
-                    text what id what_id font "ray_v_panelke/images/gui/Inter-Hewn.otf" size 35
+                        text who id who_id font rvp_font_who size 35
+                    text what id what_id font rvp_font size 35
                 elif persistent.font_size == "small":
                     if who is not None:
-                        text who id who_id font "ray_v_panelke/images/gui/trafaret.ttf" size 28
-                    text what id what_id font "ray_v_panelke/images/gui/Inter-Hewn.otf" size 28
+                        text who id who_id font rvp_font_who size 28
+                    text what id what_id font rvp_font size 28
         if items:
             vbox:
                 id "menu"
@@ -110,3 +110,70 @@ screen rvp_nvl:
         imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/forward_%s.png") xpos 1768 ypos 949 action Skip()
     else:
         imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/fast_forward_%s.png") xpos 1768 ypos 949 action Skip()
+
+screen rvp_text_history_screen:
+
+    predict False tag menu
+
+    $ xmax = 1600
+    $ xposition = 100
+
+    $ history_text_size = 21
+    $ history_name_size = 22
+
+    if persistent.font_size == "large":
+        $ history_text_size = 28
+        $ history_name_size = 29
+
+    elif persistent.font_size == "giant":
+        $ history_text_size = 36
+        $ history_name_size = 37
+
+    button style "blank_button" xpos 0 ypos 0 xfill True yfill True action Return()
+
+    window background Frame("images/gui/choice/"+persistent.timeofday+"/choice_box.png") left_padding 75 right_padding 75 bottom_padding 120 top_padding 120:
+        viewport id "text_history_screen":
+            draggable True
+            mousewheel True
+            scrollbars None
+            yinitial 1.0
+            has vbox
+            for h in _history_list:
+                if h.who:
+                    text h.who:
+                        font rvp_font_who
+                        ypos 0
+                        xpos xposition
+                        xalign 0.0
+                        size history_name_size
+                        if "color" in h.who_args:
+                            color h.who_args["color"]
+                textbutton h.what style "log_button" text_font rvp_font text_style "normal_day" text_size history_text_size action RollbackToIdentifier(h.rollback_identifier) xmaximum xmax text_hover_color "#40e138" xpos 100
+        vbar value YScrollValue("text_history_screen") bottom_bar "images/misc/none.png" top_bar "images/misc/none.png" thumb "images/gui/settings/vthumb.png" xoffset 1700
+
+screen rvp_game_menu_selector:
+    $ timeofday = persistent.timeofday
+    modal True tag menu
+    button style "blank_button" xpos 0 ypos 0 xfill True yfill True action Return()
+
+    add get_image("gui/ingame_menu/"+timeofday+"/ingame_menu.png") xalign 0.5 yalign 0.5
+    imagemap:
+        if _preferences.language == "spanish":
+            auto get_image("gui/ingame_menu/"+timeofday+"/ingame_menu_es_%s.png") xalign 0.5 yalign 0.5
+        elif _preferences.language == "italian":
+            auto get_image("gui/ingame_menu/"+timeofday+"/ingame_menu_it_%s.png") xalign 0.5 yalign 0.5
+        elif _preferences.language == "english":
+            auto get_image("gui/ingame_menu/"+timeofday+"/ingame_menu_en_%s.png") xalign 0.5 yalign 0.5
+        elif _preferences.language == "chinese":
+            auto get_image("gui/ingame_menu/"+timeofday+"/ingame_menu_ch_%s.png") xalign 0.5 yalign 0.5
+        elif _preferences.language == "french":
+            auto get_image("gui/ingame_menu/"+timeofday+"/ingame_menu_fr_%s.png") xalign 0.5 yalign 0.5
+        elif _preferences.language == "portuguese":
+            auto get_image("gui/ingame_menu/"+timeofday+"/ingame_menu_pg_%s.png") xalign 0.5 yalign 0.5
+        else:
+            auto get_image("gui/ingame_menu/"+timeofday+"/ingame_menu_%s.png") xalign 0.5 yalign 0.5
+        hotspot (0, 83, 660, 65) focus_mask None clicked MainMenu()
+        hotspot (0, 148, 660, 65) focus_mask None clicked ShowMenu('save')
+        hotspot (0, 213, 660, 65) focus_mask None clicked ShowMenu('load')
+        hotspot (0, 278, 660, 65) focus_mask None clicked (ShowMenu('preferences'), Hide('game_menu_selector'))
+        hotspot (0, 343, 660, 65) focus_mask None clicked ShowMenu('quit')
