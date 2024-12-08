@@ -11,6 +11,7 @@
 #Обновление до 3.0:
 #НОВАЯ ЧАСТЬ 2Б
 #добить фон вокзала внутри
+#анимация концов частей
 #добавить th, где надо и докинуть в статью 'Переводим текст в мод'
 #412-бг:сюда бы автобус с противоположного вида
 #цг:вид из автобуса ночной
@@ -35,7 +36,6 @@
 #2640-звук: флешбека
 #2860-показать кассету анимацией снизу вверх
 #туда же-звук: вставки кассеты
-#унифицировать все флешбеки
 #
 init:
     $ config.developer = True
@@ -44,10 +44,10 @@ init:
     $ mods["rvp"] = "{font=[rvp_font_who]}Рай в панельке"
 
     #Титры
-    $ rvp_credits_ = "Спасибо за прочтение части \n\n\n\n Сценарий - northcoreshun\n\n"
-    $ rvp_credits_b2 = "Спасибо за прочтение части 2Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - northcoreshun\n\n Работа в Photoshop - By Jack\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Благодарности:\n\n Noldor - вычитка\n\n poi - автообъявление"
-    $ rvp_credits_b1 = "Спасибо за прочтение части 1Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Помощь с фонами - Андрей Серебро\n\n Новые спрайты в фш - Андрей Фоксаров\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n Благодарность:\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
-    $ rvp_credits_a1 = "Спасибо за прочтение части 1А!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа в Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели - за помощь с текстом.\n\n Cyber Patsan - за помощь с кодом и передачу полезных навыков кодинга.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
+    $ rvp_credits_ = "{font=[rvp_font]}Спасибо за прочтение части \n\n\n\n Сценарий - northcoreshun\n\n Код - \n\n Художник - \n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
+    $ rvp_credits_b2 = "{font=[rvp_font]}Спасибо за прочтение части 2Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Квас Квасыч, northcoreshun\n\n Работа в Photoshop - northcoreshun\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Благодарности:\n\n Noldor - вычитка\n\n poi - помощь с кодом\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
+    $ rvp_credits_b1 = "{font=[rvp_font]}Спасибо за прочтение части 1Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Художник bg - Himbeere\n\n Помощь с фонами - Андрей Серебро\n\n Новые спрайты в фш - Андрей Фоксаров\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n Благодарность:\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
+    $ rvp_credits_a1 = "{font=[rvp_font]}Спасибо за прочтение части 1А!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа в Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели - за помощь с текстом.\n\n Cyber Patsan - за помощь с кодом и передачу полезных навыков кодинга.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
 
 label rvp:
     scene bg black with dissolve
@@ -2531,7 +2531,10 @@ label b1:
     window hide
 
     play ambience ambience_camp_center_evening fadein 1
-    scene bg ext_internat_rvp with dissolve
+    scene bg ext_internat_rvp
+    show black:
+        alpha .5
+#пофиксить матрикскалор у автоинита
     show un_rvp smile pioneer2 at left with dissolve
     show dv normal pioneer2 at right with dissolve
     "Через пару минут мы подошли к какому-то жилому зданию." with dissolve
@@ -3127,10 +3130,12 @@ label b1:
     dv "Да ладно, забавная ситуация была. И у тебя всё равно выхода не было." with dissolve
     me "Рад, что ты это понимаешь. А что это у тебя?" with dissolve
     dv "Да в библиотеку ходила, книгу новую взяла." with dissolve
-    #добавить книгу в руку Алисе
+#добавить книгу в руку Алисе
     window hide
     
-    scene bg ext_internat_rvp with dissolve
+    scene bg ext_internat_rvp
+    show black:
+        alpha .5
     show dv normal pioneer2 with dissolve
     window show
     "Мы дошли до интерната." with dissolve
@@ -3166,7 +3171,9 @@ label b1:
     window hide
     stop ambience fadeout 1
 
-    scene bg ext_internat_rvp with dissolve
+    scene bg ext_internat_rvp
+    show black:
+        alpha .5
     play ambience ambience_camp_center_evening fadein 1
     play music zapomnyu_rvp fadein 1
     show un_rvp smile pioneer2 with dissolve
@@ -3256,7 +3263,7 @@ label b1:
     "Сотрудники отдельного подразделения КГБ под кодовым названием “СЦП” изъяли все записи, связанные с загадочным появлением гражданина Семёна Персунова в городе Лениноморск." with dissolve
     window hide
     jump rvp
-    
+
 label b2:
     stop music fadeout 2
     $ renpy.show("black")
@@ -3266,7 +3273,7 @@ label b2:
     $ persistent.sprite_time = "day"
     $ day_time
 #  call showtext_rvp("textimg up_a_rvp","textimg dn_a_rvp")
-
+# сделать функцию или трансформ для этого
 #    $ s="""26 июня 1987 года, г. Лениноморск."""
     play ambience ambience_camp_center_day fadein 1
     scene bg ext_internat_rvp with dissolve
@@ -3294,6 +3301,7 @@ label b2:
 
     play ambience ambience_clubs_inside_day fadein 1
     play music pesnyabezslov_rvp fadein 2
+#возможно будет 4 30 минус
     scene bg tsekh_rvp with dissolve
     show mh_rvp:
         anchor(.5,.5) pos(.1,.5) zoom 1.25 alpha 0
@@ -3322,6 +3330,7 @@ label b2:
     "В общем, девяносто девять проблем, которые меня занимали и из-за которых я ходил хмурый."
     "Так было и в тот июньский день, когда я в очередной раз пошёл к Лене."
     $ set_mode_rvp(mode=adv)
+    stop ambience fadeout 1
     scene bg zavod_rvp:
         align(.5,.5) zoom 1.05
         ease .5 offset(25,25)
@@ -3393,6 +3402,7 @@ label b2:
     un "Сейчас узнаешь." with dissolve
     "Лена становилась всё взволнованнее. Я не придал этому значения, а зря." with dissolve
     stop music fadeout 2
+
     play ambience ambience_cold_wind_loop fadein 1
     scene bg roof_rvp:
         align(.0,.0)
@@ -3401,8 +3411,8 @@ label b2:
         anchor(.5,.5) pos(.1,.5) zoom 1.25 alpha 0
         ease 1.5 xpos(.25) alpha 1
     "Она достала ключ и стала открывать люк. Мы поднялись на крышу." with dissolve
-#    "Нам открылся вид на город." with dissolve
-#а где этот ваш вид??
+    "Нам открылся вид на город." with dissolve
+#а где этот ваш вид?? поработать над бг
     show un_rvp smile pioneer2:
         anchor(.5,.5) pos(.25,.5) zoom 1.25
         ease 1 xpos .5
@@ -3449,16 +3459,29 @@ label b2:
     show un_rvp normal pioneer2:
         align(.5,.5) zoom 1.25
         ease .7 xpos 1.2 alpha 0
-    "Лена резко дернулась к краю!"
+    "Лена резко дернулась к краю!{w=.3}{nw}"
     scene bg roof_rvp:
         align(.5,.5) zoom 1.05
         ease .3 offset(25,25)
         ease .3 offset(0,0)
         ease .3 offset(-25,25)
         ease .3 offset(0,0)
+    show un_rvp:
+        align(.5,.5) zoom 2 xpos .8
+        ease .2 yoffset 0
+        ease .2 yoffset 25
+        ease .2 yoffset 0
     "Я бросился за ней. Вроде бы мы и не стояли близко к краю, но всё решали секунды. Перехватить Лену удалось в паре метров." with dissolve
     scene bg roof_rvp:
         align(.5,.5) zoom 1.05
+        ease .1 xoffset 25
+        ease .1 xoffset 0
+        ease .1 xoffset -25
+        ease .1 xoffset 0
+        pause .5
+        repeat
+    show un_rvp:
+        align(.5,.5) zoom 2 xpos .8
         ease .1 xoffset 25
         ease .1 xoffset 0
         ease .1 xoffset -25
@@ -3476,13 +3499,16 @@ label b2:
     me "ДА ПРАВДА!" with dissolve
     stop music fadeout 1
     scene bg roof_rvp with dissolve
+    show un_rvp:
+        align(.5,.5) zoom 2 xpos .8
     "Крикнул я ей в ухо." with dissolve
     "Лена перестала вырываться из объятий." with dissolve
     un "Отпусти меня." with dissolve
     me "Не будешь с крыши прыгать, пущу." with dissolve
     un "Не буду." with dissolve
     "Но я не отпустил Лену. Слишком уж боялся за неё в тот момент. Развернул к себе и прижал." with dissolve
-
+    show un_rvp normal pioneer2:
+        align(.5,.5) zoom 2 xpos .8
     play music namstoboy_rvp fadein 1
 #цгшка
     me "Лен, ты чего творишь?" with dissolve
@@ -3507,7 +3533,8 @@ label b2:
     un "Сём, мне что-то плохо." with dissolve
     me "Тебе помочь? Может в больницу отвести?" with dissolve
     un "Давай просто сядем." with dissolve
-    
+    scene bg roof_rvp with dissolve
+#цгшка2
     "Мы с Леной сели на крышу. Лена устало опёрлась на меня и закрыла глаза." with dissolve
     "Прямо как тогда, на острове, когда пошли за земляникой." with dissolve
     "Так мы сидели какое-то время. Я задумался." with dissolve
@@ -3525,9 +3552,10 @@ label b2:
     me "Давай в другой раз как-нибудь, хорошо?" with dissolve
     show un_rvp smile pioneer2 with dissolve
     un "Хорошо." with dissolve
-
     stop ambience fadeout 1
     scene bg podezd_lmr_sunset_rvp with dissolve
+    $ persistent.sprite_time = "sunset"
+    $ sunset_time
     show un_rvp smile pioneer2:
         anchor(.5,.5) pos(.1,.5) zoom 1.25 alpha 0
         ease 1.5 xpos(.25) alpha 1
@@ -3568,17 +3596,21 @@ label b2:
     "Обдумывая произошедшее, на ум приходило одно." with dissolve
     "Я совершенно не понимаю Лену." with dissolve
     window hide
-#ЗАДАНИЕ: здесь надо перевести текст в читаемый для ренпая формат, прописать появления фонов, спрайтов и эмбиентов и чтобы это работало
-#в моде работает автообъявление файлов, то есть при вызове файла надо писать название файла в папке + _rvp, например roof_rvp
 
     show blink
+    $ persistent.sprite_time = "day"
+    $ day_time
     $ renpy.pause(1.0)
     scene bg black with dissolve
+    show text "{font=[rvp_font]}{color=ffdd7d}{size=100}На следующий день" as image1 with dissolve
+    $ renpy.pause(1.0)
+
     show unblink
     scene bg ext_internat_rvp with dissolve
     show dv angry pioneer2:
         align(.5,.5) xpos 0.4
     window show
+#советскую музыку из репродуктора
     dv "Конечно, ты не понимаешь её." with dissolve
     dv "Да ты вообще, похоже, девушек не понимаешь!"
     dv "Что это вообще за поведение такое? Она для тебя постаралась, не побоялась залезть на крышу. А он нос воротит, не нравится ему, видите ли!"
@@ -3598,6 +3630,7 @@ label b2:
     me "Понятно. Кстати, почему она пошла не с нами?"
     dv "Любит подольше посидеть и почитать. И пошла пораньше."
     stop ambience fadeout 1
+    scene bg ext_library_rvp with dissolve
     scene bg int_library_rvp with dissolve
     play ambience ambience_library_day fadein 4
     show dv normal pioneer2 at left with dissolve
@@ -3697,6 +3730,7 @@ label b2:
     "Мы с Леной остались вдвоём."
     un "А тебе нравится?"
     me "Что?"
+    play sound radio1330_rvp volume .5 fadein 3
     un "Делить людей на типы."
     me "Не очень, если честно. Но то что Алиса показала – тут какое-то сходство есть."
     un "Я и не отрицаю."
@@ -3760,6 +3794,7 @@ label b2:
     un "Алис, иди, мы подождём снаружи."
     stop ambience fadeout 2
     scene bg ext_library_rvp with dissolve
+#советскую музыку из репродуктора
     play ambience ambience_camp_center_day fadein 4
     show un_rvp normal pioneer2 with dissolve
     "Мы с Леной вышли из библиотеки."
@@ -3777,6 +3812,7 @@ label b2:
         anchor(0.5,0.5) pos (0.5,0.5)
         ease 1 pos(.75,.5)
     show dv normal pioneer2 at left with dissolve
+#Алиса с книжкой
     me "Что хоть взяла-то?"
     show un_rvp smile pioneer2 with dspr
     un "Неужели ту самую книгу?"
@@ -3786,6 +3822,7 @@ label b2:
     "Лена взяла книгу, я прочитал название."
     "Я ожидал чего угодно, но не этого…"
     window hide
+#получше фото сканави
     show skanavi_rvp:
         align(.5,.5) zoom 3 ypos 1.2
         ease 1.5 ypos 1.
@@ -3903,15 +3940,19 @@ label b2:
     "Эти слова резко удивили девочек."
     dv "Когда я такое говорила?"
     "А ведь действительно… Алиса не рассказывала. Или всё же?"
+    stop ambience fadeout 1
     play music music_list['sunny_day'] fadein 1
-    show int_catacombs_living:
-        alpha .7
-    with dissolve
+    scene bg int_catacombs_living
+    show dv guilty pioneer2
+    show prologue_dream
+    with fade
     "Бункер. Мы с ней вдвоём. Воспоминание того, чего не было. Но ведь оно в голове."
     me "Нет, не говорила."
-    hide int_catacombs_living with dissolve
-#сделать как в других флешбеках
+    scene bg ext_library_rvp with dissolve
+    show dv surprise pioneer2 at left with dspr
+    show un_rvp rock pioneer2 at right with dspr
     stop music fadeout 1
+    play ambience ambience_camp_center_day fadein 4
     un "Может это дежавю?"
     un "Когда видишь что-то в первый раз, но чувство, будто уже видел."
     me "И чем это вызвано?"
@@ -4085,19 +4126,23 @@ label b2:
     scene bg black with dissolve
     scene bg podezd_lmr_sunset_rvp with dissolve
     show un_rvp smile pioneer2 close with dissolve
+    stop ambience fadeout 1
+    play ambience ambience_camp_center_evening fadein 1
     "На обратном пути я решил спросить."
     me "Лен, а что у тебя за фамилия такая?"
     show un_rvp smile2 pioneer2 close with dspr
     un "Ой, это интересная история! Вообще-то мои предки были просто Ивановы, но когда выдавали паспорт, сделали опечатку. А новый делать отказались."
-    show anim prologue_keyboard_monitor_4:
-        alpha .7
-    with dissolve
+    show anim prologue_keyboard_monitor_4
+    show prologue_dream
+    with fade
     "Я не помнил всю клавиатуру, хотя как-то в шутку учил набор букв в линиях."
     "Фывапро… Ячсмить… Ну да, буквы “в” и “ч” стояли рядом. А раскладка букв на клавиатуре перекочевала с печатных машинок. Выходит, правду говорит."
-    hide anim prologue_keyboard_monitor_4
+    scene bg podezd_lmr_sunset_rvp with dissolve
+    show un_rvp smile2 pioneer2 close with dspr
 #сделать зум на сиськи Лены
 #    show un_rvp grin pioneer2:
 #        ease 3 zoom 2
+    stop music fadeout 1
     "Пока я размышлял, я засмотрелся на Лену. Но не мог не удержаться, чтобы посмотреть не в глаза, не в лицо, а ниже. Ниже шеи. Ниже плеч. На красивые груди Лены."
     show un_rvp angry2 pioneer2 close with dspr
     "Она это заметила. Ей это не понравилось."
@@ -4165,11 +4210,13 @@ label b2:
     show un_rvp smile2 pioneer2 close with dspr
     un "Отлично, тогда до встречи!"
     stop music fadeout 1
+    stop ambience fadeout 1
     scene bg black with dissolve
     $ renpy.pause(1.0)
 
     scene bg ext_internat_rvp with dissolve
     show un_rvp normal pioneer2 with dissolve
+    play ambience ambience_cold_wind_loop fadein 1
     "На следующий день стояла ветреная погода."
     "Мы с Леной ждали Алису."
     show un_rvp normal pioneer2:
@@ -4213,8 +4260,7 @@ label b2:
     dv "Сиськи-то мои понравились?"
     scene bg black with dissolve
     $ renpy.pause(1.0)
-    show cg d5_dv_us_wash:
-        zoom 1.05
+    show cg d5_dv_us_wash
     show prologue_dream
     with fade
     "Снова дежавю. На мгновение меня перенесло. Лес, поляна, та же фраза от Алисы. Но ведь…"
@@ -4299,7 +4345,7 @@ label b2:
         ease 1 pos(.25,.5)
     dv "Да, Лен, даже не знаю, что тут сказать."
     dv "Но теперь ты должен на Лене жениться! Просто обязан!"
-#новая эмоция shy_smile
+    show un_rvp shy_smile pioneer2 with dspr
     "Лена улыбнулась и покраснела. Так она выглядела очень мило."
     un "Женится, Алис. Обязательно. Но попозже."
     un "Пойдёмте уже, скоро матч начнётся!"
@@ -4393,7 +4439,6 @@ label b2:
     scene bg ext_playground_2_rvp with dissolve
     "ГООООООООЛ!" with hpunch
     "Такие не бьются, да, Ульяна?"
-    scene bg black with dissolve
     $ renpy.pause(1.0)
     show cg d3_soccer
     show prologue_dream
@@ -4402,8 +4447,9 @@ label b2:
     scene bg ext_playground_2_rvp with dissolve
     "Со мной одна из команд смогла склонить чашу весов в свою пользу. Мы победили."
     stop ambience fadeout 1
+    play ambience ambience_camp_center_day fadein 1
     "После игры ко мне подошёл парень, позвавший играть."
-#НАЙТИ УЖЕ НАКОНЕЦ ЧЕЛА
+    show misha_rvp smile sport with dissolve 
     ft "Здорово играешь."
     me "Да ну не, мог бы и лучше."
     ft "Ну, ты приходи ещё, покажешь. Меня Миша зовут."
@@ -4411,12 +4457,15 @@ label b2:
     me "Ты со школы или с ПТУ?"
     ms "ПТУшные мы. С Дваче учились в одном классе."
     scene bg ext_playground_2_rvp with dissolve
-    show dv normal pioneer2:
-        anchor(0.5,0.5) pos (1.2,0.5)
-        ease 1 pos(.75,.5)
     show un_rvp smile pioneer2:
         anchor(0.5,0.5) pos (-0.25,0.5)
         ease 1 pos(.25,.5)
+    show dv normal pioneer2:
+        anchor(0.5,0.5) pos (1.2,0.5)
+        ease 1 pos(.5,.5)
+    show misha_rvp serious sport:
+        anchor(0.5,0.5) pos (1.2,0.5)
+        ease 1 pos(.75,.5)
     "Я забрал рубашку и пошёл к девочкам. Алиса общалась с Мишей."
     ms "Вы знакомы с Семёном?"
     show dv grin pioneer2 with dspr
@@ -4427,10 +4476,12 @@ label b2:
     ms "Чего?"
     me "Забей… потом объясню."
     show dv smile pioneer2 with dspr
+    show misha_rvp laugh sport with dspr
     ms "А я тебя видел на заводе кажись. Ты у токаря Михаила?"
     me "Агась."
     show un_rvp smile pioneer2 with dspr
     dv "Миш, скажи этому дурному, чтобы к вам шёл учиться."
+    show misha_rvp smile sport with dspr
     ms "Эээ...ну поступай к нам. Играть умеешь, мы всегда рады таким."
     $ renpy.pause(1.0)
     scene bg black with dissolve
@@ -4468,6 +4519,7 @@ label b2:
         anchor(0.5,0.5) pos(.75,.5)
     "На этом мы дошли до интерната. Лена заметила."
     un "Так жарко… а давайте на пляж сходим завтра!"
+    stop ambience fadeout 1
     $ renpy.pause(1.0)
     scene bg black with dissolve
     $ renpy.pause(1.0)
@@ -4497,8 +4549,11 @@ label b2:
     scene bg black with dissolve
     $ renpy.pause(1.0)
 
-#сюда фоном советскую музыку
     scene bg square_lmr_day_rvp with dissolve
+#    play sound entuz_marsh_rvp volume 0.5 fadein 1
+    play ambience ambience_camp_center_day fadein 1
+    play sound radio15_rvp volume 0.5 fadein 1
+
     "Мы встретились с девчонками на площади."
     "Алиса пришла с гитарой, упакованной в чехол."
     show un normal sport:
@@ -4567,6 +4622,7 @@ label b2:
     $ renpy.pause(1.0)
     scene bg black with dissolve
     $ renpy.pause(1.0)
+    stop ambience fadeout 1
 
     show cg d2_water_dan with dissolve
     play ambience ambience_boat_station_day fadein 1
@@ -4653,6 +4709,7 @@ label b2:
     me "Алис, ты чего?"
     dv "Да вспомнила..."
     $ renpy.pause(1.0)
+    stop ambience fadeout 1
 
     scene bg black with dissolve
     $ renpy.pause(1.0)
@@ -4670,6 +4727,8 @@ label b2:
     $ renpy.pause(1.0)
     scene bg black with dissolve
     $ renpy.pause(1.0)
+
+    play ambience ambience_boat_station_day fadein 1
     scene bg ext_beach_day with dissolve
     show dv cry pioneer2 with dissolve
     dv "Я зашла… а там мама… в петле…"
@@ -4756,11 +4815,13 @@ label b2:
     me "А я не многие!"
     me "Да ладно, всем нам надо иногда выговориться."
     dv "Да…"
-    show dv smile pioneer2 with dspr
+    hide dv with dspr
+    show dv_rvp soft_smile pioneer2 with dspr
     "Её взгляд потеплел."
     dv "Спасибо."
     me "Обращайся."
     me "Слушай, может будем ещё собираться поиграть на гитаре?"
+    hide dv_rvp with dspr
     show dv grin pioneer2 with dspr
     "Алиса ехидно улыбнулась в ответ на мои слова."
     dv "Не у того человека ты это спрашиваешь."
@@ -4778,6 +4839,7 @@ label b2:
     "Верно она подметила. Лена как раз сейчас была в больнице, хотя и не болела. А я как герой той песни, тосковал по ней."
     "Мы собрали вещи и пошли к больнице, где работала Лена."
     stop ambience fadeout 1
+    play ambience ambience_camp_center_evening fadein 1
     $ renpy.pause(1.0)
     scene bg ext_hospital_rvp with dissolve
     "Ещё какое-то время пришлось подождать. Видимо, Лена решила задержаться."
@@ -4814,11 +4876,13 @@ label b2:
     "А я найду другого."
     $ renpy.pause(1.0)
     scene bg black with dissolve
+    play sound radio_intro_rvp fadein 1
     show text "{font=[rvp_font]}{color=ffdd7d}{size=100}На следующий день" with dissolve
     $ renpy.pause(1.0)
 
     $ persistent.sprite_time = "night"
     $ night_time
+    play ambience ambience_camp_center_night fadein 1
     scene bg park_rvp with dissolve
     "Мы с Леной встретились у парка вечером."
     show un_rvp smile3 pioneer2 with dissolve
@@ -4844,7 +4908,7 @@ label b2:
     un "Не переживай, для меня это неважно. Главное, что ты старался."
     un "Пойдём!"
     scene bg park1_rvp with dissolve
-#Цой Легенда
+    play music legenda_rvp fadein 1
     "Мы зашли в парк."
     show un_rvp smile pioneer2 with dspr 
     "Настало время спросить то, что я давно хотел узнать у Лены."
@@ -4955,6 +5019,7 @@ label b2:
     "Постояв так какое-то время, мы пошли дальше."
     $ renpy.pause(1.0)
     scene bg black with dissolve
+    stop music fadeout 1
 
     $ renpy.pause(1.0)
     scene bg ext_park_evening_rvp with dissolve
@@ -5058,14 +5123,16 @@ label b2:
     un "В парке можно на хулиганов наткнуться."
     me "Пойдём."
     $ renpy.pause(1.0)
+    stop ambience fadeout 1
     scene bg black with dissolve
 
     "Как я уже говорил, у меня есть мой наставник Михаил, моя любовь Лена и подруга Алиса."
     "Все направили меня учиться на токаря. После нескольких встреч с Мишей и его компанией футболистов я подружился с ними, преодолел своё презрительное отношение к училищу и подал документы... сразу на второй курс! Как так вышло?"
     "Чтобы поступить к Мише, я сказал, что бросил школу после окончания первого года старшей школы, потому что понял, что моё призвание - быть гордым пролетарием."
-    "Переводной экзамен не составил труда -- остаточных знаний школьной программы и навыков, полученных от Михаила, хватило. Кстати, когда он узнал о моём поступлении, он принялся активно натаскивать меня, чтобы всё получилось."
+    "Переводной экзамен не составил труда - остаточных знаний школьной программы и навыков, полученных от Михаила, хватило. Кстати, когда он узнал о моём поступлении, он принялся активно натаскивать меня, чтобы всё получилось."
     $ persistent.sprite_time = "day"
     $ day_time
+    play ambience ambience_camp_center_day fadein 1
     scene bg ext_internat_rvp with dissolve
     "Близилась осень. Лена и Алиса готовились к школе."
     un "Вот и настало время вступить в комсомол. Что думаешь, Алис?"
@@ -5089,33 +5156,42 @@ label b2:
     show dv smile pioneer2 with dspr
     dv "Я могу выдвинуть твою кандидатуру."
     un "Нет, Алис, не надо. Мне надо самой найти смелость заявить о себе."
+    stop ambience fadeout 1
 
-    scene bg black with dissolve
-#бг класса или переписать
+    scene bg class_rvp with dissolve
+    play ambience ambience_medium_crowd_outdoors fadein 1
     "Наконец, этот день настал. В классе собрались одноклассники Лены, подавшие в комсомол."
     ktoto "Ну и зачем мы здесь собрались?"
+#запятая после Ну?
     show dv normal pioneer2 far:
         anchor(0.5,0.5) pos (1.2,0.5)
         ease 1 pos(.5,.5)
     dv "Надо комсорга выбрать."
     dv "Кто хочет?"
+    stop ambience fadeout 1
     "В классе повисло молчание."
     "Лена боязно подняла руку."
     show dv grin pioneer2 far with dspr
     dv "Ну я как староста класса выдвину своего боевого товарища Елену Ичанову."
+#запятая после Ну?
+    show un shy pioneer at left with dissolve
     "Класс загудел от возмущения."
     show dv angry pioneer2 far with dspr
     ktoto "Кого?"
     ktoto "Алис, с ума сошла? Ну не эту же тихоню."
     ktoto "Неча свою подружку пихать на должность."
     ktoto "По стопам пойти решила своего бати-алкаша, который в горкоме сидел?"
+    show un angry pioneer with dspr
+    play music music_list['pile'] fadein 1
     un "А ну заткнулись все!"
     show dv smile pioneer2 far with dspr
     un "Да, я тихая! Была такой. Только теперь изменилась. И готова доказать это!"
     un "А отца моего не смейте трогать! Не вам его судить! Вы даже не представляете, через что ему пришлось пройти!"
+    show un rage pioneer with dspr
     show dv laugh pioneer2 far with dspr
     un "Если кто-то ещё про отца вякнет, без зубов останется!"
     "По классу прошёлся одобряющий гул. Лена не побоялась дать отпор на выпады в её сторону."
+    show un serious pioneer with dspr
     ktoto "Смарите, у Ленки голос командный прорезался."
     show dv grin pioneer2 far with dspr
     dv "А она может!"
@@ -5125,14 +5201,16 @@ label b2:
     show dv smile pioneer2 far with dspr
     ktoto "А что, пусть Ичанова будет. Посмотрим, как она нас ор-га-ни-зовывать будет."
     $ renpy.pause(1.0)
+    stop music fadeout 1
     scene bg black with dissolve
 
     $ renpy.pause(1.0)
     scene bg roof_rvp with dissolve
+    play ambience ambience_cold_wind_loop fadein 1
     show dv smile pioneer2 with dissolve:
-        anchor(0.5,0.5) pos (.75,0.5)
+        anchor(.5,.5) pos (.75,.5)
     show un_rvp smile pioneer2 with dissolve:
-        anchor(0.5,0.5) pos (.25,0.5) 
+        anchor(.5,.5) pos (.25,.5) 
     dv "Вот так Лена и стала комсоргом класса."
     me "Да, Лен, не хватает тебе приключений."
     un "Сёма, ну это то, что я очень хотела. И ты сам сказал, чтобы я общалась с людьми и не замыкалась в себе!"
@@ -5169,5 +5247,14 @@ label b2:
     "Что ж, можно сказать, этот мир принял меня, и я могу жить в нём счастливо. Непростое будущее всё ещё было впереди, но пока можно расслабиться и не думать о нём."
     "После Совёнка я понял, как важно ценить то, что имеешь, нашёл себе новых друзей и дело, которым мне хочется заниматься."
     "Заканчивалось долгое лето 87-го, которое было самым лучшим в моей жизни."
-#Кино - Кончится Лето
-#титры
+    stop ambience fadeout 1
+    window hide
+    play music endsummer_rvp noloop fadein 1
+    $ renpy.pause(4.0)#потом заменить на анимашку
+    show credits rvp_credits_b2:
+        xalign 0.5
+        ypos 1.3
+        linear 52.0 ypos -4.0
+    $ renpy.pause()
+    stop music fadeout 2
+    jump rvp
