@@ -60,7 +60,7 @@ screen rvp_say:
                 imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/forward_%s.png") pos(.92,.86) action Skip()
             else:
                 imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/fast_forward_%s.png") pos(.92,.86) action Skip()
-            text what id "what" font rvp_text_font outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align(.5) xmaximum .8 size 35 line_spacing 1
+            text what id "what" font rvp_font outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align(.5) xmaximum .8 size 35 line_spacing 1
             if who:
                 text who id "who" font rvp_font_who outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 1
 
