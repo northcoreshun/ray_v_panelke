@@ -3730,7 +3730,7 @@ label b2:
     "Мы с Леной остались вдвоём."
     un "А тебе нравится?"
     me "Что?"
-    play sound radio1330_rvp volume .5 fadein 3
+    play sound radio_1330_rvp volume .5 fadein 3
     un "Делить людей на типы."
     me "Не очень, если честно. Но то что Алиса показала – тут какое-то сходство есть."
     un "Я и не отрицаю."
@@ -4076,7 +4076,7 @@ label b2:
     "Тот самый, который не надевала с тех пор как мы…"
     stop music fadeout 1
     scene bg black with dissolve
-    play sound little_dark_age_rvp fadein 2
+    play music little_dark_age_rvp noloop fadein 2
     queue music [kryshi_rvp]
     $ renpy.pause(.5)
     un "Три конца.{w=.5} Символизируют связь пионерии, комсомола и партии.{w=1}{nw}"
@@ -4552,7 +4552,7 @@ label b2:
     scene bg square_lmr_day_rvp with dissolve
 #    play sound entuz_marsh_rvp volume 0.5 fadein 1
     play ambience ambience_camp_center_day fadein 1
-    play sound radio15_rvp volume 0.5 fadein 1
+    play sound radio_15_rvp volume 0.5 fadein 1
 
     "Мы встретились с девчонками на площади."
     "Алиса пришла с гитарой, упакованной в чехол."
