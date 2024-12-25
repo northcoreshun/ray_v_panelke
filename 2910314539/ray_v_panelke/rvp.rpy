@@ -49,6 +49,21 @@ init:
     $ rvp_credits_b1 = "{font=[rvp_font]}Спасибо за прочтение части 1Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Художник bg - Himbeere\n\n Помощь с фонами - Андрей Серебро\n\n Новые спрайты в фш - Андрей Фоксаров\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n Благодарность:\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
     $ rvp_credits_a1 = "{font=[rvp_font]}Спасибо за прочтение части 1А!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа в Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели - за помощь с текстом.\n\n Cyber Patsan - за помощь с кодом и передачу полезных навыков кодинга.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
 
+    transform prewew_image1:
+        subpixel True
+        crop (0,0,1920,270)
+        anchor (0.,1.)
+        pos (0.,.5)
+        pause 2.
+        easein_expo 1.5 crop (0,0,1920,810)#чем больше последняя коорда, тем больше выдвигается
+    transform prewew_image2:
+        subpixel True
+        crop (0,810,1920,270)
+        anchor (0.,0.)
+        pos (0.,.5)
+        pause 2.
+        easein_expo 1.5 crop (0,270,1920,810)#чем меньше вторая коорда, тем больше выдвигается
+
 label rvp:
     scene bg black with dissolve
     $ chars_define_rvp()
@@ -141,6 +156,7 @@ label backrooms:
     jump rvp
     
 #Функция вывода превьюшки
+
 label showtext_rvp(image1,image2):
     play music raindrops_sandr_rvp fadein 1
     #Вывод белой полоски
@@ -149,24 +165,14 @@ label showtext_rvp(image1,image2):
         align (.5,.5)
         easein_expo 1.5 crop (480,3,1440,3)
     #Вывод текста
-#    show text "{color=#FFFFFF}{size=+15}     Текст" as image1:
-    show image1:
-        subpixel True
-        crop (0,0,1920,100)
-        anchor (0.,1.)
-        pos (0.,.5)
-        pause 2.
-        easein_expo 1.5 crop (0,0,1920,850)#чем больше последняя коорда, тем больше выдвигается
-#    show text "{color=#FFFFFF}{size=+15}     Текст" as image2:
-    show image2:
-        subpixel True
-        crop (0,810,1920,270)
-        anchor (0.,0.)
-        pos (0.,.5)
-        pause 2.
-        easein_expo 1.5 crop (0,270,1920,810)#чем меньше вторая коорда, тем больше выдвигается
-    $ renpy.pause()
+    #show text "{color=#FFFFFF}{size=+15}     Текст" as image1:
+    $ renpy.show(image1, at_list=[prewew_image1])
+    #show text "{color=#FFFFFF}{size=+15}     Текст" as image2:
+    $ renpy.show(image2, at_list=[prewew_image2])
+    $ renpy.pause(1.0)
     stop music fadeout 2
+    #Скрытие всего
+    $ renpy.pause(3.0)
     hide white
     hide image1
     hide image2
@@ -3272,7 +3278,7 @@ label b2:
     $ new_chapter(0, u'Рай в панельке: Часть 2Б')
     $ persistent.sprite_time = "day"
     $ day_time
-#  call showtext_rvp("textimg up_a_rvp","textimg dn_a_rvp")
+    call showtext_rvp("textimg up_a_rvp","textimg dn_a_rvp")
 # сделать функцию или трансформ для этого
 #    $ s="""26 июня 1987 года, г. Лениноморск."""
     play ambience ambience_camp_center_day fadein 1
