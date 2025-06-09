@@ -60,9 +60,9 @@ screen rvp_say:
                 imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/forward_%s.png") pos(.92,.86) action Skip()
             else:
                 imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/fast_forward_%s.png") pos(.92,.86) action Skip()
-            text what id "what" font rvp_font outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align(.5) xmaximum .8 size 35 line_spacing 1
+            text what id "what" font font_rvp outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align(.5) xmaximum .8 size 35 line_spacing 1
             if who:
-                text who id "who" font rvp_font_who outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 1
+                text who id "who" font font_who_rvp outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 1
 
         elif persistent.font_size == "small":
             imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/backward_%s.png") pos(.02,.88) action ShowMenu("text_history")
@@ -71,9 +71,9 @@ screen rvp_say:
                 imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/forward_%s.png") pos(.92,.88) action Skip()
             else:
                 imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/fast_forward_%s.png") pos(.92,.88) action Skip()
-            text what id "what" font rvp_font outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align .55 xmaximum .8 size 28 line_spacing 2
+            text what id "what" font font_rvp outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align .55 xmaximum .8 size 28 line_spacing 2
             if who:
-                text who id "who" font rvp_font_who outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 2
+                text who id "who" font font_who_rvp outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 2
 
 screen rvp_nvl:
     $ timeofday = persistent.timeofday
@@ -86,12 +86,12 @@ screen rvp_nvl:
                     spacing 10
                 if persistent.font_size == "large":
                     if who is not None:
-                        text who id who_id font rvp_font_who size 35
-                    text what id what_id font rvp_font size 35
+                        text who id who_id font font_rvp_who size 35
+                    text what id what_id font font_rvp size 35
                 elif persistent.font_size == "small":
                     if who is not None:
-                        text who id who_id font rvp_font_who size 28
-                    text what id what_id font rvp_font size 28
+                        text who id who_id font font_rvp_who size 28
+                    text what id what_id font font_rvp size 28
         if items:
             vbox:
                 id "menu"
@@ -141,14 +141,14 @@ screen rvp_text_history_screen:
             for h in _history_list:
                 if h.who:
                     text h.who:
-                        font rvp_font_who
+                        font font_who_rvp
                         ypos 0
                         xpos xposition
                         xalign 0.0
                         size history_name_size
                         if "color" in h.who_args:
                             color h.who_args["color"]
-                textbutton h.what style "log_button" text_font rvp_font text_style "normal_day" text_size history_text_size action RollbackToIdentifier(h.rollback_identifier) xmaximum xmax text_hover_color "#40e138" xpos 100
+                textbutton h.what style "log_button" text_font font_rvp text_style "normal_day" text_size history_text_size action RollbackToIdentifier(h.rollback_identifier) xmaximum xmax text_hover_color "#40e138" xpos 100
         vbar value YScrollValue("text_history_screen") bottom_bar "images/misc/none.png" top_bar "images/misc/none.png" thumb "images/gui/settings/vthumb.png" xoffset 1700
 
 screen rvp_game_menu_selector:

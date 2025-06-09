@@ -1,6 +1,6 @@
 #ШАБЛОНЫ КОДА
 #ФАЙЛ ДЛЯ ТОГО, ЧТОБЫ ХРАНИТЬ ОСНОВНЫЕ КОДОВЫЕ КОНСТРУКЦИИ И БЫСТРО КОПИРОВАТЬ И ВСТАВЛЯТЬ
-label sh:
+python:
     """
     #Время суток - цвет спрайтов и текстбоксов
     $ persistent.sprite_time = 
@@ -16,10 +16,11 @@ label sh:
     $ set_mode_rvp()
 
     #Музыкальная пауза
+    call pause_rvp("")#Задел для функции, пока не обращаем внимания на него
     $ renpy.notify(Щёлкните для продолжения)
     $ renpy.pause()
-    
-    #Карусель спрайтов
+
+    #Карусель спрайтов - уже не используется, но оставил
     show :
         anchor(0.5,0.5) pos (1.3,0.5)
         ease 1 pos(0.5,0.5)
@@ -51,10 +52,6 @@ label sh:
         ease .5 align(-.2,.3) zoom 1.5
     $renpy.pause(.5)
 
-    #Функция вызова анимации текста (в разработке)
-    $ renpy.call(rvp_preview,rvp_txt_up_a,rvp_txt_dn_a)
-    #тут какая-то ебала с кавычками, я их убрал, а вообще они при вызове нужны в скобках
-
     #Весь вывод текста и полоски
     play music raindrops_sandr_rvp fadein 1
     #Вывод белой полоски
@@ -77,7 +74,6 @@ label sh:
         pos (0.,.5)
         pause 2.
         easein_expo 1.5 crop (0,270,1920,810)#чем меньше вторая коорда, тем больше выдвигается
-
     #Скрытие всего
     $ renpy.pause()
     stop music fadeout 2
@@ -97,7 +93,7 @@ label sh:
         ease 1.5 xpos(.25) alpha 1
 
     #Шаблон новой главы
-    #label :
+    label :
     stop music fadeout 2
     $ renpy.show(black)
     $ renpy.with_statement(fade3)
@@ -112,7 +108,7 @@ label sh:
     #Смена цг
     show cg  with dissolve
 
-    #текст со своим шрифтом и цветом
+    #Текст со своим шрифтом и цветом
     show text {font=[rvp_font]}{color=ffdd7d}{size=100}Не забудь поставить кавычки with dissolve
 
     #Включить/выключить музыку
@@ -120,8 +116,8 @@ label sh:
     #из оригинала
     play music music_list[''] fadein 1
     stop music fadeout 1
-    
-    #наложить пикчу полупрозрачно
+
+    #Наложить пикчу полупрозрачно
     show :
         alpha .7
     with dissolve
@@ -139,4 +135,24 @@ label sh:
         ease .5 offset(-25,25)
         ease .5 offset(0,0)
         repeat
+
+    #Бег плюс зум
+    scene bg int_bus_on_square_rvp:
+        align(.5,.5) zoom 1.05
+        parallel:
+            ease 5 zoom 2
+        parallel:
+            ease .3 offset(25,25)
+            ease .3 offset(0,0)
+            ease .3 offset(-25,25)
+            ease .3 offset(0,0)
+            repeat
+
+    #Моргание глазом
+    window hide
+    show blink
+    scene bg black with dissolve
+    $ renpy.pause(1.0)
+    show unblink
+    window show
     """

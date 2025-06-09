@@ -106,7 +106,7 @@ init python early:
             [имя][_постфикс]
 
             Пример:
-            newmusic
+            newmusic_rvp
             """
             audio_extensions = {".wav", ".mp2", ".mp3", ".ogg", ".opus"}
             for file in renpy.list_files():
@@ -114,7 +114,24 @@ init python early:
                     file_name = os.path.splitext(os.path.basename(file))[0] + self.modPostfix
                     if file.endswith(tuple(audio_extensions)):
                         self.count_file("sound", file_name, file)
-    
+
+        def process_font(self):
+            """
+            Обрабатывает шрифты. Поддерживает расширения (".ttf", ".otf")
+
+            Имя шрифта для вызова будет в формате:
+            [имя][_постфикс]
+
+            Пример:
+            newfont_rvp
+            """
+            font_extensions = {".ttf", ".otf"}
+            for file in renpy.list_files():
+                if self.modID in file:
+                    file_name = os.path.splitext(os.path.basename(file))[0] + self.modPostfix
+                    if file.endswith(tuple(font_extensions)):
+                        self.count_file("font", file_name, file)
+
         def process_images(self):
             """
             Обрабатывает изображения. Поддерживает изображения в подпапках.
@@ -458,6 +475,8 @@ init python early:
                     for type, file_name, file in self.modFiles:
                         if type == "sound":
                             log_file.write("%s = \"%s\"\n    " % (file_name, file))
+                        elif type == "font":
+                            log_file.write("%s = \"%s\"\n    " % (file_name, file))
                         elif type == "image":
                             log_file.write("renpy.image(\"%s\", \"%s\")\n    " % (file_name, file))
                         if type == "sprite":
@@ -465,6 +484,8 @@ init python early:
             else:
                 for type, file_name, file in self.modFiles:
                     if type == "sound":
+                        globals()[file_name] = file
+                    elif type == "font":
                         globals()[file_name] = file
                     elif type == "image":
                         renpy.image(file_name, file)
@@ -476,7 +497,8 @@ init python early:
             Инициализация ресурсов мода
             """
             self.process_audio()
+            self.process_font()
             self.process_images()
             self.process_files()
-        
+
     autoInitialization_rvp = autoInitialization_rvp("ray_v_panelke", "rvp")

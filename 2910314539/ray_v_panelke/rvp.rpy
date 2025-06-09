@@ -1,62 +1,63 @@
-#ГЛОБАЛЬНЫЕ ИЗМЕНЕНИЯ:
-#РЕЖИССУРА АЛЮМИНИЯ
-#ГЕНЕРАТОР СПРАЙТОВ, ТИТРОВ ИЗ БКРР
-#CAMERA
-#Ревизия кода, убрать старое и ненужное
-#функция ВЕРНУТЬСЯ НАЗАД, анимация перемотки через SaturationMatrix(0,0)
-#Обновление 3.0:
-#-НОВАЯ ЧАСТЬ 2Б
-#-новый фон вокзала внутри
-#-обновление экранов, кастомный интерфейс
-#-фикс автоинита
-
-#Обновление до 3.1:
-#анимация концов частей
-#добавить th, где надо и докинуть в статью 'Переводим текст в мод'
-#412-бг:сюда бы автобус с противоположного вида
-#цг:вид из автобуса ночной
-#426 и 1536-бг:сделать вечернюю площадь
-#699-включить музон из лмр японский как в ЯОД
-#1300-заменить на появление таблички с текстом капсом, без текстбоксов ниже
-#1330-цг:Семен держит Алису за руку как Кетрин в лмр
-#1405-бг:по хорошему тут надо отдельный фон, но пока его нет
-#1511-звук: рвущегося пододеяльника
-#1493-бг: комната сюда бгшку позже
-#1757-бг: при перерисовке заменить номер на 1664 и добавить рога, а то непонятно, что это троллейбус
-#1762-звук: здесь и много где добавить звук дверей, из оригинала не подходит
-#1787-бг:убрать троллейбус, заменить на многоэтажки
-#1886-бг:добавить вид от водительского сидения
-#1894-звук:эмбиент работы в депо, что-то типа как в кружке, но более грубое.
-#у спрайта хниды резкие края у рубашки
-#1998-звук: удара по железной двери
-#2027-цг: где Семён лежит как Гослинг/попугай Кеша
-#2081-спрайт: на темном фоне un_coat плохо выглядит, белый контур слегка виден
-#2112-бг:заменить двор на погружение под воду
-#2327-цг: Лена и Михалыч разговаривают с лейтом, второй мент вяжет гниду и лежит Семён
-#2640-звук: флешбека
-#2860-показать кассету анимацией снизу вверх
-#туда же-звук: вставки кассеты
-#
+python:
+    """ ГЛОБАЛЬНЫЕ ИЗМЕНЕНИЯ:
+    РЕЖИССУРА АЛЮМИНИЯ - почитать моды и подумать о применении
+    ГЕНЕРАТОР СПРАЙТОВ, ТИТРОВ ИЗ БКРР - найти в коде
+    CAMERA - понять, что даёт, подумать о применении
+    Ревизия кода - убрать старое и ненужное
+    СОХРЫ - взять кнопки по бокам (поручить Квасу)
+    Функции:
+    - showtext_rvp - показ текста из гуд енда (попросить Николаса помочь)
+    - функция ВЕРНУТЬСЯ НАЗАД, анимация перемотки через SaturationMatrix(0,0)
+    Есть тема пройтись по шаблонам и сделать кастомные функции show_rvp и scene_rvp. Это нужно для унификации анимаций фонов и спрайтов.
+    Меню:
+    - Глоссарий
+    - Музыкальная комната
+    #Обновление до 3.1:
+    #анимация концов частей
+    #добавить th, где надо и докинуть в статью 'Переводим текст в мод'
+    #412-бг:сюда бы автобус с противоположного вида
+    #цг:вид из автобуса ночной
+    #426 и 1536-бг:сделать вечернюю площадь
+    #699-включить музон из лмр японский как в ЯОД
+    #1300-заменить на появление таблички с текстом капсом, без текстбоксов ниже
+    #1330-цг:Семен держит Алису за руку как Кетрин в лмр
+    #1405-бг:по хорошему тут надо отдельный фон, но пока его нет
+    #1511-звук: рвущегося пододеяльника
+    #1493-бг: комната сюда бгшку позже
+    #1757-бг: при перерисовке заменить номер на 1664 и добавить рога, а то непонятно, что это троллейбус
+    #1762-звук: здесь и много где добавить звук дверей, из оригинала не подходит
+    #1787-бг:убрать троллейбус, заменить на многоэтажки
+    #1886-бг:добавить вид от водительского сидения
+    #1894-звук:эмбиент работы в депо, что-то типа как в кружке, но более грубое.
+    #у спрайта хниды резкие края у рубашки
+    #1998-звук: удара по железной двери
+    #2027-цг: где Семён лежит как Гослинг/попугай Кеша
+    #2081-спрайт: на темном фоне un_coat плохо выглядит, белый контур слегка виден
+    #2112-бг:заменить двор на погружение под воду
+    #2327-цг: Лена и Михалыч разговаривают с лейтом, второй мент вяжет гниду и лежит Семён
+    #2640-звук: флешбека
+    #2860-показать кассету анимацией снизу вверх
+    #туда же-звук: вставки кассеты
+    """
 init:
     $ config.developer = True
-    $ rvp_font = "ray_v_panelke/images/gui/Inter-Hewn.otf"
-    $ rvp_font_who = "ray_v_panelke/images/gui/trafaret.ttf"
-    $ mods["rvp"] = "{font=[rvp_font_who]}Рай в панельке"
+    $ mods["rvp"] = "{font=[font_who_rvp]}Рай в панельке"
 
     #Титры
-    $ rvp_credits_ = "{font=[rvp_font]}Спасибо за прочтение части \n\n\n\n Сценарий - northcoreshun\n\n Код - \n\n Художник - \n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
-    $ rvp_credits_b2 = "{font=[rvp_font]}Спасибо за прочтение части 2Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Квас Квасыч, northcoreshun\n\n Работа в Photoshop - northcoreshun\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Благодарности:\n\n Noldor - вычитка\n\n poi - помощь с кодом\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
-    $ rvp_credits_b1 = "{font=[rvp_font]}Спасибо за прочтение части 1Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Художник bg - Himbeere\n\n Помощь с фонами - Андрей Серебро\n\n Новые спрайты в фш - Андрей Фоксаров\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n Благодарность:\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
-    $ rvp_credits_a1 = "{font=[rvp_font]}Спасибо за прочтение части 1А!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа в Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели - за помощь с текстом.\n\n Cyber Patsan - за помощь с кодом и передачу полезных навыков кодинга.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
+    $ rvp_credits_ = "{font=[font_rvp]}Спасибо за прочтение части \n\n\n\n Сценарий - northcoreshun\n\n Код - \n\n Художник - \n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
+    $ rvp_credits_b2 = "{font=[font_rvp]}Спасибо за прочтение части 2Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Квас Квасыч, northcoreshun\n\n Работа в Photoshop - northcoreshun\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Благодарности:\n\n Noldor - вычитка\n\n poi - помощь с кодом\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
+    $ rvp_credits_b1 = "{font=[font_rvp]}Спасибо за прочтение части 1Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Художник bg - Himbeere\n\n Помощь с фонами - Андрей Серебро\n\n Новые спрайты в фш - Андрей Фоксаров\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n Благодарность:\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
+    $ rvp_credits_a1 = "{font=[font_rvp]}Спасибо за прочтение части 1А!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа в Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели - за помощь с текстом.\n\n Cyber Patsan - за помощь с кодом и передачу полезных навыков кодинга.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
 
-    transform prewew_image1:
+    #Анимация показа текста
+    transform prewiew_image1:
         subpixel True
         crop (0,0,1920,270)
         anchor (0.,1.)
         pos (0.,.5)
         pause 2.
         easein_expo 1.5 crop (0,0,1920,810)#чем больше последняя коорда, тем больше выдвигается
-    transform prewew_image2:
+    transform prewiew_image2:
         subpixel True
         crop (0,810,1920,270)
         anchor (0.,0.)
@@ -71,6 +72,22 @@ label rvp:
     play music plastinki_rvp fadein 1
     call screen menu_rvp
 
+#Экран меню главный
+screen menu_rvp:
+    tag menu
+    modal False
+    imagemap:
+        ground Transform("bg universam_rvp", alpha=0.1)
+        hotspot((0, 0, 960, 1080)):
+            hovered [Show("a_rvp", transition=Dissolve(0.5))]
+            unhovered [Hide("a_rvp", transition=Dissolve(1.0))]
+            action [Hide("a_rvp", transition=Dissolve(0.5)),Jump("a1")]
+        hotspot((960, 0, 1920, 1000)):
+            hovered [Show("b_rvp", transition=Dissolve(0.5))]
+            unhovered [Hide("b_rvp", transition=Dissolve(1.0))]
+            action [Hide("b_rvp", transition=Dissolve(0.5)),Show("side_b_rvp")]
+        hotspot((960, 1000, 1920, 1080)):
+            action [Jump("backrooms")]
 screen a_rvp:
     add "bg square_rvp":
         align(0.,0.)
@@ -90,22 +107,23 @@ screen b_rvp:
         crop (3,0,3,1080)
     add "un_rvp smile pioneer2" align(.5,.5)
 
-screen menu_rvp:
+#Экран Стороны А (задел)
+#screen side_a_rvp:
+
+#Экран Стороны Б
+screen side_b_rvp:
     tag menu
     modal False
     imagemap:
-        ground Transform("bg universam_rvp", alpha=0.1)
+        ground Transform("bg ext_internat_rvp", alpha=0.1)
         hotspot((0, 0, 960, 1080)):
-            hovered [Show("a_rvp", transition=Dissolve(0.5))]
-            unhovered [Hide("a_rvp", transition=Dissolve(1.0))]
-            action [Hide("a_rvp", transition=Dissolve(0.5)),Jump("a1")]
+            hovered [Show("b1_rvp", transition=Dissolve(0.5))]
+            unhovered [Hide("b1_rvp", transition=Dissolve(1.0))]
+            action [Hide("b1_rvp", transition=Dissolve(0.5)),Jump("b1")]
         hotspot((960, 0, 1920, 1000)):
-            hovered [Show("b_rvp", transition=Dissolve(0.5))]
-            unhovered [Hide("b_rvp", transition=Dissolve(1.0))]
-            action [Hide("b_rvp", transition=Dissolve(0.5)),Show("side_b_rvp")]
-        hotspot((960, 1000, 1920, 1080)):
-            action [Jump("backrooms")]
-
+            hovered [Show("b2_rvp", transition=Dissolve(0.5))]
+            unhovered [Hide("b2_rvp", transition=Dissolve(1.0))]
+            action [Hide("b2_rvp", transition=Dissolve(0.5)),Jump("b2")]
 screen b1_rvp:
     add "cg un_dv_rvp":
         align(0.,0.)
@@ -123,40 +141,26 @@ screen b2_rvp:
         align (.5,.5)
         crop (3,0,3,1080)
 
-screen side_b_rvp:
-    tag menu
-    modal False
-    imagemap:
-        ground Transform("bg ext_internat_rvp", alpha=0.1)
-        hotspot((0, 0, 960, 1080)):
-            hovered [Show("b1_rvp", transition=Dissolve(0.5))]
-            unhovered [Hide("b1_rvp", transition=Dissolve(1.0))]
-            action [Hide("b1_rvp", transition=Dissolve(0.5)),Jump("b1")]
-        hotspot((960, 0, 1920, 1000)):
-            hovered [Show("b2_rvp", transition=Dissolve(0.5))]
-            unhovered [Hide("b2_rvp", transition=Dissolve(1.0))]
-            action [Hide("b2_rvp", transition=Dissolve(0.5)),Jump("b2")]
-
+#Функция Закулисья, проверка
 label backrooms:
     stop music fadeout 2
     $ renpy.show("black")
-    $ renpy.with_statement(fade3)
-    $ renpy.pause(2.0, hard=True)
-
-    play music nv_st_rvp
-    show nvlogo2_rvp:
-        align(.5,.5)
-    show nvlogo_rvp behind nvlogo2:
-        align(.5,.5)
-        linear 6 rotate -900
-    with dissolve
-    $ renpy.pause(4.5)
-    stop music fadeout 2
-    scene bg black with dissolve
+    call showtext_rvp("textimg up_a_rvp","textimg dn_a_rvp")
+    #Пасхалко
+#    play music nv_st_rvp
+#    show nvlogo2_rvp:
+#        align(.5,.5)
+#    show nvlogo_rvp behind nvlogo2:
+#        align(.5,.5)
+#        linear 6 rotate -900
+#    with dissolve
+#    $ renpy.pause(4.5)
+#    stop music fadeout 2
+#    scene bg black with dissolve
+    $ renpy.pause()
     jump rvp
-    
-#Функция вывода превьюшки
 
+#Функция вывода превьюшки
 label showtext_rvp(image1,image2):
     play music raindrops_sandr_rvp fadein 1
     #Вывод белой полоски
@@ -164,13 +168,15 @@ label showtext_rvp(image1,image2):
         subpixel True
         align (.5,.5)
         easein_expo 1.5 crop (480,3,1440,3)
+
     #Вывод текста
     #show text "{color=#FFFFFF}{size=+15}     Текст" as image1:
-    $ renpy.show(image1, at_list=[prewew_image1])
+    $ renpy.show(image1, at_list=[prewiew_image1])
     #show text "{color=#FFFFFF}{size=+15}     Текст" as image2:
-    $ renpy.show(image2, at_list=[prewew_image2])
+    $ renpy.show(image2, at_list=[prewiew_image2])
     $ renpy.pause(1.0)
     stop music fadeout 2
+
     #Скрытие всего
     $ renpy.pause(3.0)
     hide white
@@ -486,9 +492,9 @@ label a1:
     me "Ну, пойдёмте тогда." with dissolve
     window hide
     show mh4_rvp at left:
-        ease 1.5 pos(1.1,0.5)
+        ease 1.5 pos(1.1,.5)
     show iv4_rvp at right:
-        ease 1.5 pos(1.3,0.5)
+        ease 1.5 pos(1.3,.5)
     stop music fadeout 4
     stop ambience fadeout 2
 
@@ -539,11 +545,11 @@ label a1:
     "Я вскипал от ненависти к этому ублюдку. Нужно было проучить его." with dissolve
     me "Пойдём-ка, выйдем." with dissolve
     scene bg int_garage_rvp:
-        align(0.9,0.5)
+        align(.9,.5)
         ease 2 zoom 3
     show gn_rvp smile:
-        align(0.5,0.5)
-        ease 1.5 pos(1.3,0.5)
+        align(.5,.5)
+        ease 1.5 pos(1.3,.5)
     window hide
     
     stop music fadeout 2
@@ -564,13 +570,13 @@ label a1:
     play sound sfx_grate_hand_fall
     
     show gn_rvp smile:
-        align(0.5,0.5)
-        ease 0.5 pos(-0.2,0.5)
+        align(.5,.5)
+        ease .5 pos(-.2,.5)
     window show
     "Я замахнулся, но промазал, попав по железной двери гаража. Гулкий удар по гаражу." with dissolve
     "А он воспользовался этим, схватил меня за волосы и треснул головой об эту дверь." with dissolve
     scene bg ext_garage_rvp:
-        align(0.3,0.5)
+        align(.3,.5)
         ease 1 zoom 1.5
     play sound sfx_grate_hand_fall
     "Это был второй удар." with dissolve
@@ -645,7 +651,7 @@ label a1:
     "Взяв меня за запястье, она потянула вверх. На ощупь и по температуре очень знакомо." with dissolve
     "Слушаясь её, я медленно приподнялся и сел." with dissolve
     window hide
-    $ renpy.pause(0.5)
+    $ renpy.pause(.5)
     window show
     "И тут я понял." with dissolve
     window hide
@@ -700,7 +706,7 @@ label a1:
     stop music fadeout 2
     scene bg dom_rvp:
         align(.0,.0)
-        linear 10.0 pos(0,-360)
+        linear 10.0 pos(0,-.33)
     with dissolve
 
     window show
@@ -786,8 +792,8 @@ label a1:
     stop music fadeout 2
     window hide
     show un_rvp normal coat:
-        anchor(0.5,0.5) pos (0.5,0.5)
-        ease 1 pos(-0.2,0.5)
+        align(.5,.5)
+        ease 1 pos(-.2,.5)
     window show
     "Лена, наконец, сдвинулась с места, разулась, сняла пальто и пошла по квартире." with dissolve
     "Несмотря на мой выплеск праведного гнева на нелёгкую жизнь, она одержала верх. Правда была на её стороне." with dissolve
@@ -982,25 +988,24 @@ label a1:
     window hide
 
     scene bg black with dissolve
-    scene bg kvartira_rvp
+    scene bg kvartira_rvp:
+        align(.5,.0) zoom 1.5
+        ease 2 align(.5,.5) zoom 1
     show unblink
     play ambience ambience_medstation_inside_night
-    
     window show
-    scene bg kvartira_rvp with dissolve
     $ persistent.sprite_time = "day"
     $ day_time
     "Я встал с кровати в районе девяти." with dissolve
-#анимация либо вообще фразу убрать
     "Голова гудела, но скорее от удара об дверь, чем от алкоголя…" with dissolve
     show bg kvartira_rvp with dissolve
     "Лена лежала, отвернувшись от меня. Её лицо я увидел, лишь обойдя кровать." with dissolve
     show int_house_of_un_night:
-        alpha 0.7
+        alpha .7
     with dissolve
     "Помню, как в тот вечер в Совёнке, когда мы остались вдвоём в лагере, я смотрел на неё. Тогда мы помирились, и её личико выражало спокойствие, умиротворение, тихую радость." with dissolve
     scene bg kvartira_rvp:
-        align(0.5,0.5) zoom 1.1
+        align(.5,.5) zoom 1.1
     with dissolve
     "Сейчас у неё на лице грусть, будто видит плохой сон." with dissolve
     "И что мне делать в выходной, когда поругался с единственным человеком, с которым хотел провести всё свободное время?" with dissolve
@@ -1890,23 +1895,22 @@ label b1:
     show unblink
     scene bg int_bus_on_square_rvp with dissolve
     $ persistent.sprite_time = "night"
-    $ night_time ()
+    $ night_time()
     play music music_list["no_tresspassing"]
-
-    scene bg int_bus_on_square_rvp:
+    show bg int_bus_on_square_rvp:
+        align(.5,.5) zoom 1.05
         parallel:
-            zoom 1.05 anchor (48,27)
-            ease 15 zoom 3 anchor (1900,900)
+            ease 5 zoom 2
         parallel:
-            ease 0.20 pos (0, 0)
-            ease 0.20 pos (25,25)
-            ease 0.20 pos (0, 0)
-            ease 0.20 pos (-25,25)
+            ease .3 offset(25,25)
+            ease .3 offset(0,0)
+            ease .3 offset(-25,25)
+            ease .3 offset(0,0)
             repeat
-#сделать через оффсет
     "Я проснулся посреди пустого Икаруса… опять! Я в шоке рванул по салону, задыхаясь от досады, что всё повторяется снова." with dissolve
 #цг - вид из автобуса ночной
-    scene bg int_bus_on_square_rvp:
+    show bg int_bus_on_square_rvp:
+        align(.5,.5) zoom 2
         ease 1 align(.9,.3) zoom 2
     "В отчаянии я повернул голову… и, наконец, заметил, что за окном не утро, а вечер и не ворота лагеря, а незнакомая площадь." with dissolve
 #бг - вид в автобусе на задние сиденья
@@ -1923,16 +1927,15 @@ label b1:
     mt "Ребят, ну вы там долго ещё? Автобусу уезжать надо!" with dissolve
     "Ну наконец-то!" with dissolve
     "Я схватил наши с Леной вещи, взял её за руку и быстро повёл к выходу." with dissolve
-    #бег плюс зум
     scene bg int_bus_on_square_rvp:
+        align(.5,.5) zoom 1.05
         parallel:
-            zoom 1.05 anchor (48,27)
-            ease 15 zoom 3 anchor (1900,900)
+            ease 5 zoom 2
         parallel:
-            ease 0.20 pos (0, 0)
-            ease 0.20 pos (25,25)
-            ease 0.20 pos (0, 0)
-            ease 0.20 pos (-25,25)
+            ease .3 offset(25,25)
+            ease .3 offset(0,0)
+            ease .3 offset(-25,25)
+            ease .3 offset(0,0)
             repeat
     me "Лена, быстрее, на свободу!" with dissolve
     scene black with dissolve
@@ -2038,7 +2041,6 @@ label b1:
     "Дальше я подходил к ребятам и записывал их адреса. Эта неделя перевернула мою жизнь, и я хотел сохранить всё, что было с ней связано." with dissolve
     "Лагерь был величиной постоянной, на него я повлиять не мог, да и незачем. А вот дружеские связи, возникшие за эти семь дней, надо было сохранить." with dissolve
 
-    #моргание глазом
     window hide
     show blink
     scene bg black with dissolve
@@ -2086,7 +2088,6 @@ label b1:
     sl "Да я уже там одной ногой, последний раз съездила пионером, разрешили. Ну, бывай, буду рада снова тебя встретить." with dissolve
     me "Ага, как у тех ворот." with dissolve
 
-    #моргание глазом
     window hide
     show blink
     scene bg black with dissolve
@@ -2103,7 +2104,6 @@ label b1:
     us "Ладно, бывай. И удачи с Ленкой!" with dissolve
     "И эта шкода знает…" with dissolve
 
-    #моргание глазом
     window hide
     show blink
     scene bg black with dissolve
@@ -2222,10 +2222,8 @@ label b1:
     $ renpy.notify("Щёлкните для продолжения")
     $ renpy.pause()
     
-    #моргание глазом
     show blink
     scene bg black with dissolve
-#строка выше нужна ли?
     $ renpy.pause(1.0)
     show unblink
 
@@ -3278,9 +3276,7 @@ label b2:
     $ new_chapter(0, u'Рай в панельке: Часть 2Б')
     $ persistent.sprite_time = "day"
     $ day_time
-    call showtext_rvp("textimg up_a_rvp","textimg dn_a_rvp")
-# сделать функцию или трансформ для этого
-#    $ s="""26 июня 1987 года, г. Лениноморск."""
+#сюда функцию call showtext_rvp("textimg up_a_rvp","textimg dn_a_rvp")
     play ambience ambience_camp_center_day fadein 1
     scene bg ext_internat_rvp with dissolve
     show un_rvp shy pioneer2:
@@ -3608,7 +3604,7 @@ label b2:
     $ day_time
     $ renpy.pause(1.0)
     scene bg black with dissolve
-    show text "{font=[rvp_font]}{color=ffdd7d}{size=100}На следующий день" as image1 with dissolve
+    show text "{font=[font_rvp]}{color=ffdd7d}{size=100}На следующий день" as image1 with dissolve
     $ renpy.pause(1.0)
 
     show unblink
@@ -4530,7 +4526,7 @@ label b2:
     scene bg black with dissolve
     $ renpy.pause(1.0)
 
-    show text "{font=[rvp_font]}{color=ffdd7d}{size=100}На следующий день" as image1 with dissolve
+    show text "{font=[font_rvp]}{color=ffdd7d}{size=100}На следующий день" as image1 with dissolve
     $ renpy.pause(1.0)
     scene bg black with dissolve
     "В последнее время жизнь изменилась."
@@ -4719,7 +4715,7 @@ label b2:
 
     scene bg black with dissolve
     $ renpy.pause(1.0)
-    show text "{font=[rvp_font]}{color=ffdd7d}{size=100}6 лет назад" with dissolve
+    show text "{font=[font_rvp]}{color=ffdd7d}{size=100}6 лет назад" with dissolve
     $ renpy.pause(2.0)
 
     show cg dv_run_rvp with dissolve
@@ -4883,7 +4879,7 @@ label b2:
     $ renpy.pause(1.0)
     scene bg black with dissolve
     play sound radio_intro_rvp fadein 1
-    show text "{font=[rvp_font]}{color=ffdd7d}{size=100}На следующий день" with dissolve
+    show text "{font=[font_rvp]}{color=ffdd7d}{size=100}На следующий день" with dissolve
     $ renpy.pause(1.0)
 
     $ persistent.sprite_time = "night"
