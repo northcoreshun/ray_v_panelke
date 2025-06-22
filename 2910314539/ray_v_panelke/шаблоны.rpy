@@ -109,7 +109,10 @@ python:
     show cg  with dissolve
 
     #Текст со своим шрифтом и цветом
-    show text {font=[rvp_font]}{color=ffdd7d}{size=100}Не забудь поставить кавычки with dissolve
+    show text {font=[font_rvp]}{color=ffdd7d}{size=50}Не забудь поставить кавычки with dissolve
+
+    #Вызов функции анимации текста
+    call showtext_rvp(Верхний текст,Нижний текст)
 
     #Включить/выключить музыку
     play music  fadein 1

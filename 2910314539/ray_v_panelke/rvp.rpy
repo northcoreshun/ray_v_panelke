@@ -4,16 +4,17 @@ python:
     ГЕНЕРАТОР СПРАЙТОВ, ТИТРОВ ИЗ БКРР - найти в коде
     CAMERA - понять, что даёт, подумать о применении
     Ревизия кода - убрать старое и ненужное
-    СОХРЫ - взять кнопки по бокам (поручить Квасу)
-    Функции:
-    - showtext_rvp - показ текста из гуд енда (попросить Николаса помочь)
+    СОХРЫ - взять кнопки по бокам (поручил Квасу, ждём)
+        Функции:
     - функция ВЕРНУТЬСЯ НАЗАД, анимация перемотки через SaturationMatrix(0,0)
     Есть тема пройтись по шаблонам и сделать кастомные функции show_rvp и scene_rvp. Это нужно для унификации анимаций фонов и спрайтов.
-    Меню:
+        Меню:
     - Глоссарий
     - Музыкальная комната
-    #Обновление до 3.1:
-    #анимация концов частей
+        Обновление до 3.1:
+    анимация начала частей
+    Движение за упорядочивание стиля - привести все надписи к style rvp, возможно добавить style rvp_who
+    Прочее
     #добавить th, где надо и докинуть в статью 'Переводим текст в мод'
     #412-бг:сюда бы автобус с противоположного вида
     #цг:вид из автобуса ночной
@@ -49,26 +50,27 @@ init:
     $ rvp_credits_b1 = "{font=[font_rvp]}Спасибо за прочтение части 1Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Художник bg - Himbeere\n\n Помощь с фонами - Андрей Серебро\n\n Новые спрайты в фш - Андрей Фоксаров\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n Благодарность:\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
     $ rvp_credits_a1 = "{font=[font_rvp]}Спасибо за прочтение части 1А!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа в Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели - за помощь с текстом.\n\n Cyber Patsan - за помощь с кодом и передачу полезных навыков кодинга.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
 
-    #Анимация показа текста
-    transform prewiew_image1:
-        subpixel True
-        crop (0,0,1920,270)
-        anchor (0.,1.)
-        pos (0.,.5)
-        pause 2.
-        easein_expo 1.5 crop (0,0,1920,810)#чем больше последняя коорда, тем больше выдвигается
-    transform prewiew_image2:
-        subpixel True
-        crop (0,810,1920,270)
-        anchor (0.,0.)
-        pos (0.,.5)
-        pause 2.
-        easein_expo 1.5 crop (0,270,1920,810)#чем меньше вторая коорда, тем больше выдвигается
+    #Стиль
+    $ style.rvp=Style(style.default)
+    $ style.rvp.color="#ffdd7d"
+    $ style.rvp.size=50
+    $ style.rvp.font=font_rvp
+    $ style.rvp.xalign=0.5
+    $ style.rvp.yalign=0.5
+    $ style.rvp.text_align=0.5
+    
+    #Текст-изображения
+    image uppertext = ParameterizedText(style="rvp")
+    image lowertext = ParameterizedText(style="rvp")
+init -1:
+    $ outertext_upper = "text"
+    $ outertext_lower = "text"
 
 label rvp:
     scene bg black with dissolve
     $ chars_define_rvp()
     $ rvp_screens_save_act()
+    $ persistent.sprite_time = "day"
     play music plastinki_rvp fadein 1
     call screen menu_rvp
 
@@ -81,13 +83,13 @@ screen menu_rvp:
         hotspot((0, 0, 960, 1080)):
             hovered [Show("a_rvp", transition=Dissolve(0.5))]
             unhovered [Hide("a_rvp", transition=Dissolve(1.0))]
-            action [Hide("a_rvp", transition=Dissolve(0.5)),Jump("a1")]
+            action [Hide("a_rvp", transition=Dissolve(0.5)),Jump("a1_rvp")]
         hotspot((960, 0, 1920, 1000)):
             hovered [Show("b_rvp", transition=Dissolve(0.5))]
             unhovered [Hide("b_rvp", transition=Dissolve(1.0))]
             action [Hide("b_rvp", transition=Dissolve(0.5)),Show("side_b_rvp")]
         hotspot((960, 1000, 1920, 1080)):
-            action [Jump("backrooms")]
+            action [Jump("backrooms_rvp")]
 screen a_rvp:
     add "bg square_rvp":
         align(0.,0.)
@@ -119,11 +121,11 @@ screen side_b_rvp:
         hotspot((0, 0, 960, 1080)):
             hovered [Show("b1_rvp", transition=Dissolve(0.5))]
             unhovered [Hide("b1_rvp", transition=Dissolve(1.0))]
-            action [Hide("b1_rvp", transition=Dissolve(0.5)),Jump("b1")]
+            action [Hide("b1_rvp", transition=Dissolve(0.5)),Jump("b1_rvp")]
         hotspot((960, 0, 1920, 1000)):
             hovered [Show("b2_rvp", transition=Dissolve(0.5))]
             unhovered [Hide("b2_rvp", transition=Dissolve(1.0))]
-            action [Hide("b2_rvp", transition=Dissolve(0.5)),Jump("b2")]
+            action [Hide("b2_rvp", transition=Dissolve(0.5)),Jump("b2_rvp")]
 screen b1_rvp:
     add "cg un_dv_rvp":
         align(0.,0.)
@@ -142,10 +144,10 @@ screen b2_rvp:
         crop (3,0,3,1080)
 
 #Функция Закулисья, проверка
-label backrooms:
+label backrooms_rvp:
     stop music fadeout 2
     $ renpy.show("black")
-    call showtext_rvp("textimg up_a_rvp","textimg dn_a_rvp")
+
     #Пасхалко
 #    play music nv_st_rvp
 #    show nvlogo2_rvp:
@@ -161,38 +163,44 @@ label backrooms:
     jump rvp
 
 #Функция вывода превьюшки
-label showtext_rvp(image1,image2):
+label showtext_rvp(outertext_upper,outertext_lower):
     play music raindrops_sandr_rvp fadein 1
     #Вывод белой полоски
     show white:
         subpixel True
-        align (.5,.5)
-        easein_expo 1.5 crop (480,3,1440,3)
-
+        align(.5,.5)
+        easein_expo 1.5 crop (480,0,1440,3)
     #Вывод текста
-    #show text "{color=#FFFFFF}{size=+15}     Текст" as image1:
-    $ renpy.show(image1, at_list=[prewiew_image1])
-    #show text "{color=#FFFFFF}{size=+15}     Текст" as image2:
-    $ renpy.show(image2, at_list=[prewiew_image2])
-    $ renpy.pause(1.0)
+    show uppertext outertext_upper:
+        subpixel True
+        align(.5,.5)
+        alpha 0
+        pause 2.0
+        parallel:
+            linear 0.5 alpha 1
+        parallel:
+            easein_expo 1.5 yanchor 1.0 ypos .4
+    show lowertext outertext_lower:
+        subpixel True
+        align(.5,.5)
+        alpha 0
+        pause 2.0
+        parallel:
+            linear 0.5 alpha 1
+        parallel:
+            easein_expo 1.5 yanchor 0 ypos .6
+    pause
     stop music fadeout 2
 
-    #Скрытие всего
-    $ renpy.pause(3.0)
-    hide white
-    hide image1
-    hide image2
-    $ renpy.pause(2.0)
-
-#Плавный выход из мода
-label exit:
+#Плавный выход из модаПОДКЛЮЧИТЬВМОДИЛИУБРАТЬ
+label exit_rvp:
     stop sound fadeout 2
     stop music fadeout 2
     stop ambience fadeout 2
     scene black with dissolve2
     return
 
-label a1:
+label a1_rvp:
     stop music fadeout 2
     $ renpy.show("black")
     $ renpy.with_statement(fade3)
@@ -201,62 +209,9 @@ label a1:
     $ persistent.sprite_time = "day"
     $ day_time
 
-    play music raindrops_sandr_rvp fadein 1
-    #Вывод белой полоски
-    show white:
-        subpixel True
-        align (.5,.5)
-        easein_expo 1.5 crop (480,3,1440,3)
-    #Вывод текста
-    show textimg kanon1_rvp:
-        subpixel True
-        crop (0,0,1920,270)
-        anchor (0.,1.)
-        pos (0.,.5)
-        pause 2.
-        easein_expo 1.5 crop (0,0,1920,850)#чем больше последняя коорда, тем больше выдвигается
-    show textimg epilogue_rvp as textimg2:
-        subpixel True
-        crop (0,810,1920,270)
-        anchor (0.,0.)
-        pos (0.,.5)
-        pause 2.
-        easein_expo 1.5 crop (0,270,1920,810)#чем меньше вторая коорда, тем больше выдвигается
-    #Скрытие всего
-    $ renpy.pause()
-    stop music fadeout 2
-    hide white
-    hide textimg kanon1_rvp
-    hide textimg epilogue_rvp as textimg2
-    $ renpy.pause(2.0)
-
-    play music lyudi_nadoeli_rvp fadein 1
-    #Вывод белой полоски
-    show white:
-        subpixel True
-        align (.5,.5)
-        easein_expo 1.5 crop (480,3,1440,3)
-    #Вывод текста
-    show textimg up_a_rvp:
-        subpixel True
-        crop (0,0,1920,270)
-        anchor (0.,1.)
-        pos (0.,.5)
-        pause 2.
-        easein_expo 1.5 crop (0,0,1920,810)#чем больше последняя коорда, тем больше выдвигается
-    show textimg dn_a_rvp as textimg2:
-        subpixel True
-        crop (0,810,1920,270)
-        anchor (0.,0.)
-        pos (0.,.5)
-        pause 2.
-        easein_expo 1.5 crop (0,270,1920,810)#чем меньше вторая коорда, тем больше выдвигается
-    #Скрытие всего
-    $ renpy.pause(5.0)
-    hide white
-    hide textimg up_a_rvp
-    hide textimg dn_a_rvp as textimg2
-    
+    call showtext_rvp("Сторона А. Часть 1.","г.Нижний Новгород, 2.11.1990")
+    call showtext_rvp("Частный извоз на копейке, доставшейся от тестя, много денег не приносил, и я уже был готов пойти работать вожатым в «Совёнок», как неожиданно умерла какая-то троюродная тетя двоюродной бабушки Лены, оставив ей в наследство однокомнатную квартиру где-то в центральной России. На семейном совете было принято решение переезжать.",
+                      "epilogue.rpy")    
     show prologue_dream
     with fade
     window show
@@ -1772,9 +1727,8 @@ label a1:
     stop sound fadeout 2
     jump rvp
 
-label b1:
+label b1_rvp:
     stop music fadeout 2
-    $ renpy.show("black")
     $ renpy.with_statement(fade3)
     $ renpy.pause(2.0, hard=True)
     $ new_chapter(0, u'Рай в панельке: Сторона Б')
@@ -1782,32 +1736,8 @@ label b1:
     $ sunset_time()
     scene bg int_bus_sunset_rvp with dissolve
     play sound_loop sfx_bus_interior_moving fadein 1
-
-    #Вывод белой полоски
-    show white:
-        subpixel True
-        align (.5,.5)
-        easein_expo 1.5 crop (480,3,1440,3)
-    #Вывод текста
-    show textimg up_b_rvp:
-        subpixel True
-        crop (0,0,1920,270)
-        anchor (0.,1.)
-        pos (0.,.5)
-        pause 2.
-        easein_expo 1.5 crop (0,0,1920,810)#чем больше последняя коорда, тем больше выдвигается
-    show textimg dn_b_rvp as textimg2:
-        subpixel True
-        crop (0,810,1920,270)
-        anchor (0.,0.)
-        pos (0.,.5)
-        pause 2.
-        easein_expo 1.5 crop (0,270,1920,810)#чем меньше вторая коорда, тем больше выдвигается
-    #Скрытие всего
-    $ renpy.pause(5.0)
-    hide white
-    hide textimg up_b_rvp
-    hide textimg dn_b_rvp as textimg2
+    call showtext_rvp("Сторона Б. Часть 1.","п/л «Совёнок», ??.??.19??")
+    scene bg int_bus_sunset_rvp
 
     "Автобус набирал обороты. Мы с Леной сели на последние места, я уступил ей место у окна." with dissolve
     "Опять я еду в автобусе. Что же всё-таки происходит?" with dissolve
@@ -1860,38 +1790,8 @@ label b1:
     stop sound_loop fadeout 1
     show blink
     scene bg black with dissolve
-
-    play music raindrops_sandr_rvp fadein 1
-    #Вывод белой полоски
-    show white:
-        subpixel True
-        align (.5,.5)
-        easein_expo 1.5 crop (480,3,1440,3)
-
-    #Вывод текста
-    show textimg kanon2_rvp:
-        subpixel True
-        crop (0,0,1920,270)
-        anchor (0.,1.)
-        pos (0.,.5)
-        pause 2.
-        easein_expo 1.5 crop (0,0,1920,850)#чем больше последняя коорда, тем больше выдвигается
-    show textimg epilogue_rvp as textimg2:
-        subpixel True
-        crop (0,810,1920,270)
-        anchor (0.,0.)
-        pos (0.,.5)
-        pause 2.
-        easein_expo 1.5 crop (0,270,1920,810)#чем меньше вторая коорда, тем больше выдвигается
-
-    #Скрытие всего
-    $ renpy.pause()
-    stop music fadeout 2
-    hide white
-    hide textimg kanon2_rvp
-    hide textimg epilogue_rvp as textimg2
-    $ renpy.pause(2.0)
-
+    call showtext_rvp("Кому-то это может показаться странным (а мне оно именно таким и показалось), но до райцентра мы всё-таки доехали. В автобусе меня опять разморило, и я заснул. Проснувшись, в ужасе начал бегать по салону, жадно хватая ртом воздух, но вскоре понял, что эта длинная неделя закончилась!",
+                      "epilogue.rpy")
     show unblink
     scene bg int_bus_on_square_rvp with dissolve
     $ persistent.sprite_time = "night"
@@ -3268,7 +3168,7 @@ label b1:
     window hide
     jump rvp
 
-label b2:
+label b2_rvp:
     stop music fadeout 2
     $ renpy.show("black")
     $ renpy.with_statement(fade3)
@@ -3276,7 +3176,7 @@ label b2:
     $ new_chapter(0, u'Рай в панельке: Часть 2Б')
     $ persistent.sprite_time = "day"
     $ day_time
-#сюда функцию call showtext_rvp("textimg up_a_rvp","textimg dn_a_rvp")
+    call showtext_rvp("Сторона Б. Часть 2","г.Лениноморск, 29.06.1987")
     play ambience ambience_camp_center_day fadein 1
     scene bg ext_internat_rvp with dissolve
     show un_rvp shy pioneer2:
