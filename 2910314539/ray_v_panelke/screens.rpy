@@ -6,7 +6,7 @@ init python:
         "text_history_screen",
         "game_menu_selector"
     ]
-
+    
     def rvp_screen_save():  # Функция сохранения экранов из оригинала.
         for name in RVP_SCREENS:
             renpy.display.screen.screens[
@@ -53,27 +53,36 @@ init python:
 screen rvp_say:
     window background None id "window":
         $ timeofday = persistent.timeofday
+        
+        button:
+            xpos -0.01
+            ypos -0.01
+            xsize 0.06
+            ysize 1.02
+            background None
+            hover_background Solid("#00000066")
+            action ShowMenu("text_history")
+        
+        button:
+            xpos 0.95
+            ypos -0.01
+            xsize 0.06
+            ysize 1.02
+            background None
+            hover_background Solid("#00000066")
+            action Skip()
+        
         if persistent.font_size == "large":
-            imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/backward_%s.png") pos(.02,.86) action ShowMenu("text_history")
-            imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/hide_%s.png") pos(.895,.82) action HideInterface()
-            if not config.skipping:
-                imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/forward_%s.png") pos(.92,.86) action Skip()
-            else:
-                imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/fast_forward_%s.png") pos(.92,.86) action Skip()
             text what id "what" font font_rvp outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align(.5) xmaximum .8 size 35 line_spacing 1
             if who:
                 text who id "who" font font_who_rvp outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 1
 
         elif persistent.font_size == "small":
-            imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/backward_%s.png") pos(.02,.88) action ShowMenu("text_history")
-            imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/hide_%s.png") pos(.895,.86) action HideInterface()
-            if not config.skipping:
-                imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/forward_%s.png") pos(.92,.88) action Skip()
-            else:
-                imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/fast_forward_%s.png") pos(.92,.88) action Skip()
             text what id "what" font font_rvp outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align .55 xmaximum .8 size 28 line_spacing 2
             if who:
                 text who id "who" font font_who_rvp outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 2
+        
+        imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/hide_%s.png") pos(.895,.82) action HideInterface()
 
 screen rvp_nvl:
     $ timeofday = persistent.timeofday
@@ -177,3 +186,5 @@ screen rvp_game_menu_selector:
         hotspot (0, 213, 660, 65) focus_mask None clicked ShowMenu('load')
         hotspot (0, 278, 660, 65) focus_mask None clicked (ShowMenu('preferences'), Hide('game_menu_selector'))
         hotspot (0, 343, 660, 65) focus_mask None clicked ShowMenu('quit')
+
+            
