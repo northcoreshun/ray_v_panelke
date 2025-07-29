@@ -40,6 +40,27 @@ python:
     #2860-показать кассету анимацией снизу вверх
     #туда же-звук: вставки кассеты
     """
+init -1:
+    $ outertext_upper = "text"
+    $ outertext_lower = "text"
+
+    #Стиль
+    style rvp:
+        color "#ffdd7d"
+        size 50
+        font font_rvp
+        xalign .5
+        yalign .5
+        text_align .5
+        outlines [(2.,"#000",0,0)]
+
+    style rvp_who:
+        size 50
+        font font_who_rvp
+        xalign .5
+        yalign .5
+        text_align .5
+        outlines [(2.,"#000",0,0)]
 init:
     $ config.developer = True
     $ mods["rvp"] = "{font=[font_who_rvp]}Рай в панельке"
@@ -50,21 +71,9 @@ init:
     $ rvp_credits_b1 = "{font=[font_rvp]}Спасибо за прочтение части 1Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Художник bg - Himbeere\n\n Помощь с фонами - Андрей Серебро\n\n Новые спрайты в фш - Андрей Фоксаров\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n Благодарность:\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
     $ rvp_credits_a1 = "{font=[font_rvp]}Спасибо за прочтение части 1А!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа в Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели - за помощь с текстом.\n\n Cyber Patsan - за помощь с кодом и передачу полезных навыков кодинга.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
 
-    #Стиль
-    $ style.rvp=Style(style.default)
-    $ style.rvp.color="#ffdd7d"
-    $ style.rvp.size=50
-    $ style.rvp.font=font_rvp
-    $ style.rvp.xalign=0.5
-    $ style.rvp.yalign=0.5
-    $ style.rvp.text_align=0.5
-    
     #Текст-изображения
     image uppertext = ParameterizedText(style="rvp")
     image lowertext = ParameterizedText(style="rvp")
-init -1:
-    $ outertext_upper = "text"
-    $ outertext_lower = "text"
 
 label rvp:
     scene bg black with dissolve
@@ -94,7 +103,7 @@ screen a_rvp:
     add "bg square_rvp":
         align(0.,0.)
         crop (0,0,960,1080)
-    text "Сторона А" size 70 align(.17,.3) outlines [(2.,"#000",0,0)]
+    text "Сторона А" style "rvp" size 70 align(.17,.3)
     add "white":
         align (.5,.5)
         crop (3,0,3,1080)
@@ -103,7 +112,7 @@ screen b_rvp:
     add "bg square_lmr_day_rvp":
         anchor(0.,0.) pos(.5,.0)
         crop (960,0,1920,1080)
-    text "Сторона Б" size 70 align(.8,.3) outlines [(2.,"#000",0,0)]
+    text "Сторона Б" style "rvp" size 70 align(.8,.3) outlines [(2.,"#000",0,0)]
     add "white":
         align (.5,.5)
         crop (3,0,3,1080)
@@ -130,7 +139,7 @@ screen b1_rvp:
     add "cg un_dv_rvp":
         align(0.,0.)
         crop (480,0,960,1080)
-    text "Часть 1" size 70 align(.2,.47) outlines [(2.,"#000",0,0)]
+    text "Часть 1" style "rvp" size 70 align(.2,.47)
     add "white":
         align (.5,.5)
         crop (3,0,3,1080)
@@ -138,7 +147,7 @@ screen b2_rvp:
     add "cg un_roof_rvp":
         anchor(0.,0.) pos(.5,.0)
         crop (480,0,1440,1080)
-    text "Часть 2" size 70 align(.8,.45) outlines [(2.,"#000",0,0)]
+    text "Часть 2" style "rvp" size 70 align(.8,.45)
     add "white":
         align (.5,.5)
         crop (3,0,3,1080)
@@ -1739,7 +1748,7 @@ label b1_rvp:
     play sound_loop sfx_bus_interior_moving fadein 1
     call showtext_rvp("Сторона Б. Часть 1.","п/л «Совёнок», ??.??.19??")
     scene bg int_bus_sunset_rvp
-
+#добавить тряску автобуса
     "Автобус набирал обороты. Мы с Леной сели на последние места, я уступил ей место у окна." with dissolve
     "Опять я еду в автобусе. Что же всё-таки происходит?" with dissolve
     scene bg int_house_of_un_night with dissolve
