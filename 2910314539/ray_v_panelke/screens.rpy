@@ -55,22 +55,20 @@ screen rvp_say:
         $ timeofday = persistent.timeofday
         
         button:
-            xpos 0
-            ypos 0
-            xsize 0.1 
-            ysize 1.0
-            background "gui/back_for.png"  
-            hover_background "gui/lef_tbar.png"  
+            xpos -8
+            ypos -7
+            xsize 132
+            background "gui back_for_rvp"  
+            hover_background "gui left_bar_rvp"  
             action ShowMenu("text_history")
         
         
         button:
-            xpos 0.9  
-            ypos 0
-            xsize 0.1  
-            ysize 1.0
-            background "gui/back_for.png"  
-            hover_background "gui/right_bar.png"  
+            xpos 1788
+            ypos -7
+            xsize 132
+            background "gui back_for_rvp"  
+            hover_background "gui right_bar_rvp"  
             action Skip()
         
        
