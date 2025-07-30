@@ -2724,6 +2724,13 @@ label b1_rvp:
     "Меня выпустили из камеры и повели по коридору в допросную. Я уже не знал, что им ещё рассказать, но они не стали меня допрашивать." with dissolve
     "Мне объявили, что у них нет ко мне вопросов, и они освобождают меня. А если вопросы появятся, со мной свяжутся." with dissolve
     "Мне вернули все мои вещи, запаковав их в вещмешок, отдельно вручили те самые деньги и повезли обратно в Лениноморск." with dissolve
+    window hide
+    $ set_mode_rvp()
+    stop music fadeout 1 
+    $ persistent.sprite_time="day"
+    $ day_time
+    scene cg int_car_rvp with dissolve
+    play sound_loop sfx_bus_interior_moving fadein 1
     "Во время дороги два сотрудника КГБ разговорились." with dissolve
     sot "Слушай, а как там Ирина?" with dissolve
     sot2 "Какая Ирина?" with dissolve
@@ -2731,12 +2738,8 @@ label b1_rvp:
     sot2 "А, вспомнил. А что, она за границей сейчас, в одной капстране. Больше ничего не знаю." with dissolve
     sot "Эх, завидую ей даже. Не то, что я сижу тут, тухну. Никакой интересной жизни." with dissolve
     "Странно, что они при мне это рассказывают. Впрочем, что мне эта информация даёт? Да и они видимо поняли, что не шпион я никакой." with dissolve
-    window hide
-    $ set_mode_rvp()
-    stop music fadeout 1 
+    stop sound_loop fadeout 2
 
-    $ persistent.sprite_time="day"
-    $ day_time
     scene bg square_lmr_day_rvp with dissolve 
     play ambience ambience_camp_center_day fadein 1
     window show

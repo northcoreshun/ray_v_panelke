@@ -95,11 +95,11 @@ screen rvp_nvl:
                     spacing 10
                 if persistent.font_size == "large":
                     if who is not None:
-                        text who id who_id font font_rvp_who size 35
+                        text who id who_id font font_who_rvp size 35
                     text what id what_id font font_rvp size 35
                 elif persistent.font_size == "small":
                     if who is not None:
-                        text who id who_id font font_rvp_who size 28
+                        text who id who_id font font_who_rvp size 28
                     text what id what_id font font_rvp size 28
         if items:
             vbox:
