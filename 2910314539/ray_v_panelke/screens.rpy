@@ -55,32 +55,34 @@ screen rvp_say:
         $ timeofday = persistent.timeofday
         
         button:
-            xpos -0.01
-            ypos -0.01
-            xsize 0.06
-            ysize 1.02
-            background None
-            hover_background Solid("#00000066")
+            xpos 0
+            ypos 0
+            xsize 0.1 
+            ysize 1.0
+            background "gui/back_for.png"  
+            hover_background "gui/lef_tbar.png"  
             action ShowMenu("text_history")
         
+        
         button:
-            xpos 0.95
-            ypos -0.01
-            xsize 0.06
-            ysize 1.02
-            background None
-            hover_background Solid("#00000066")
+            xpos 0.9  
+            ypos 0
+            xsize 0.1  
+            ysize 1.0
+            background "gui/back_for.png"  
+            hover_background "gui/right_bar.png"  
             action Skip()
         
+       
         if persistent.font_size == "large":
-            text what id "what" style "rvp" font font_rvp pos(.1,.865) xmaximum .8 size 35 line_spacing 1 #здесь и далее шрифт из style не подгрузился почему-то((
+            text what id "what" font font_rvp outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align(.5) xmaximum .8 size 35 line_spacing 1
             if who:
-                text who id "who" style "rvp_who" font font_who_rvp pos(.1,.82) size 35 line_spacing 1
+                text who id "who" font font_who_rvp outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 1
 
         elif persistent.font_size == "small":
-            text what id "what" style "rvp" font font_rvp pos(.1,.865) text_align .55 xmaximum .8 size 28 line_spacing 2
+            text what id "what" font font_rvp outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align .55 xmaximum .8 size 28 line_spacing 2
             if who:
-                text who id "who" style "rvp_who" font font_who_rvp pos(.1,.82) size 35 line_spacing 2
+                text who id "who" font font_who_rvp outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 2
         
         imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/hide_%s.png") pos(.895,.82) action HideInterface()
 
