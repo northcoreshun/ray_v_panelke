@@ -53,25 +53,21 @@ init python:
 screen rvp_say:
     window background None id "window":
         $ timeofday = persistent.timeofday
-        
+        padding(-1,-1) #хз почему но нужен этот отступ, ренпай багует 
         button:
-            xpos -8
-            ypos -7
-            xsize 132
-            background "gui back_for_rvp"  
-            hover_background "gui left_bar_rvp"  
+            xsize .06875
+            background "gui back_for_rvp"
+            hover_background Fixed("gui left_bar_rvp", "lefttext")
             action ShowMenu("text_history")
-        
-        
+
         button:
-            xpos 1788
-            ypos -7
-            xsize 132
-            background "gui back_for_rvp"  
-            hover_background "gui right_bar_rvp"  
+            xoffset -1
+            xalign 1.
+            xsize .06875
+            background "gui back_for_rvp"
+            hover_background Fixed("gui right_bar_rvp", "righttext")
             action Skip()
-        
-       
+
         if persistent.font_size == "large":
             text what id "what" font font_rvp outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align(.5) xmaximum .8 size 35 line_spacing 1
             if who:
@@ -113,12 +109,20 @@ screen rvp_nvl:
                     else:
                         text caption style "nvl_dialogue"
 
-    imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/backward_%s.png") pos(.043,.856) action ShowMenu("text_history")
+    button:
+        offset(-1,-1) #а тут ещё и padding не работает(( 
+        xsize .06875
+        background "gui back_for_rvp"
+        hover_background Fixed("gui left_bar_rvp", "lefttext")
+        action ShowMenu("text_history")
 
-    if not config.skipping:
-        imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/forward_%s.png") pos(.92,.879) action Skip()
-    else:
-        imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/fast_forward_%s.png") pos(.92,.879) action Skip()
+    button:
+        offset(1,-1) #а тут ещё и padding не работает(( 
+        xalign 1.
+        xsize .06875
+        background "gui back_for_rvp"
+        hover_background Fixed("gui right_bar_rvp", "righttext")
+        action Skip()
 
 screen rvp_text_history_screen:
 

@@ -13,11 +13,8 @@
     window hide
     #Возврат в обычный режим
     $ set_mode_rvp()
-
-    #Музыкальная пауза
-    call pause_rvp("")#Задел для функции, пока не обращаем внимания на него
-    $ renpy.notify(Щёлкните для продолжения)
-    $ renpy.pause()
+    
+    call pause_rvp("Текст")
 
     #Карусель спрайтов - уже не используется, но оставил
     show :
@@ -78,7 +75,7 @@
     show cg  with dissolve
 
     #Текст со своим шрифтом и цветом
-    show text {font=[font_rvp]}{color=ffdd7d}{size=50}"Текст" with dissolve #style??
+    show text "История" style "rvp" with dissolve
 
     #Вызов функции анимации текста
     call showtext_rvp(Верхний текст,Нижний текст)
