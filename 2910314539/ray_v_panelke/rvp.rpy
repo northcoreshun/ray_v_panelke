@@ -1,18 +1,19 @@
 python:
     """ ГЛОБАЛЬНЫЕ ИЗМЕНЕНИЯ:
-    РЕЖИССУРА АЛЮМИНИЯ - почитать моды и подумать о применении
     ГЕНЕРАТОР СПРАЙТОВ, ТИТРОВ ИЗ БКРР - найти в коде
     CAMERA - понять, что даёт, подумать о применении
     Ревизия кода - убрать старое и ненужное
     поработать над нотифаем, сделать новый кэкран
+        Режиссура (Алюминия):
+    - приезд Семёна и Лены в райцентр (взять из Гори)
         Функции:
-    - функция ВЕРНУТЬСЯ НАЗАД, анимация перемотки через SaturationMatrix(0,0)
+    - функция ПЕРЕМОТКА, анимация перемотки через SaturationMatrix(0,0)
     Есть тема пройтись по шаблонам и сделать кастомные функции show_rvp и scene_rvp. Это нужно для унификации анимаций фонов и спрайтов.
         Меню:
     - Глоссарий
     - Музыкальная комната
-        Обновление до 3.1:
-    анимация начала частей
+        Обновление до 3.2:
+    - Режиссура сцен
     Прочее:
     #добавить th, где надо и докинуть в статью 'Переводим текст в мод'
     #412-бг:сюда бы автобус с противоположного вида
@@ -40,6 +41,7 @@ python:
     #туда же-звук: вставки кассеты
     """
 init -1:
+    $ autoInitialization_ray_v_panelke = autoInitialization_ray_v_panelke("ray_v_panelke", "rvp", write_into_file=False)
     $ outertext_upper = "text"
     $ outertext_lower = "text"
     $ outertext_pause = "text"
@@ -154,12 +156,15 @@ screen b2_rvp:
         align (.5,.5)
         crop (3,0,3,1080)
 
+label pause_rvp(outertext_pause):
+    $ renpy.notify(outertext_pause)
+    $ renpy.pause()
+
 #Функция Закулисья, проверка
 label backrooms_rvp:
     stop music fadeout 2
     $ renpy.show("black")
     call pause_rvp("Текст")
-
     #Пасхалко
 #    play music nv_st_rvp
 #    show nvlogo2_rvp:
@@ -173,10 +178,6 @@ label backrooms_rvp:
 #    scene bg black with dissolve
     $ renpy.pause()
     jump rvp
-
-label pause_rvp(outertext_pause):
-    $ renpy.notify(outertext_pause)
-    $ renpy.pause()
 
 #Функция вывода превьюшки
 label showtext_rvp(outertext_upper,outertext_lower):
@@ -3213,35 +3214,37 @@ label b2_rvp:
     $ day_time
     call showtext_rvp("Сторона Б. Часть 2","г.Лениноморск, 29.06.1987")
     play ambience ambience_camp_center_day fadein 1
-    scene bg ext_internat_rvp with dissolve
+    scene bg ext_internat_rvp:
+        align(.5,.5) ypos .2 zoom 1.7 blur 8
+    with dissolve
     show un_rvp shy pioneer2:
-        align(.3,.5)
+        anchor(.5,.5) pos(0.,.2) zoom 1.6
+        ease 3 xpos .3
     un "Алис, я не знаю. Он какой-то грустный в последнее время. Боюсь, я ему надоела." with dissolve
+    show dv_rvp:
+        anchor(.5,.5) pos(1.,.15) zoom 2.25
+        ease 1 xpos .7
+    with dissolve
     dv "С чего ты взяла?" with dissolve
     un "Ну просто… в лагере я лезла к нему. Под руку его взяла один раз. На острове когда были, голову на плечо положила и мы заснули." with dissolve
     un "А потом я в последний день затеяла историю, что нам надо остаться вдвоём с ним. Проявляла инициативу, одним словом." with dissolve
     un "Мне кажется, это из-за меня он остался у нас. Если говорит, что приехал из другого времени." with dissolve
-    show un_rvp sad pioneer2:
-        align(.3,.5)
+    show un_rvp sad pioneer2 with dspr
     un "Неужели я его обрекла на несчастье жить здесь со мной, лишила того, что он имел?" with dissolve
     un "У него же там наверняка родители были, а я… своих не имею, да ещё у Сёмы их забрала!" with dissolve
-    show un_rvp sad pioneer2:
-        ease 1 xpos -.2
-    show dv_rvp nenrav pioneer2:
-        align(.5,.5) xpos 1.2
-        ease 1 xpos .8
+    show un_rvp sad pioneer2 with dspr
     dv "Ну, хватит, Лен. Не накручивай себя. Во-первых, это он не из-за тебя грустный ходит, возможно. Во-вторых, а зачем ты его рассказы о прошлом слушаешь?"
     dv "Как ты вообще поверила в эту историю с попаданием из будущего, непонятно." with dissolve
-    show dv normal pioneer2:
-        align(.5,.5) xpos .8
     dv "Ладно. Кажется, я могу помочь. Добавить немного романтики, так сказать." with dissolve
+    stop ambience fadeout 1
+    show bg black with dissolve
 
     play ambience ambience_clubs_inside_day fadein 1
     play music pesnyabezslov_rvp fadein 2
 #возможно будет 4 30 минус
     scene bg tsekh_rvp with dissolve
     show mh_rvp:
-        anchor(.5,.5) pos(.1,.5) zoom 1.25 alpha 0
+        anchor(.5,.5) pos(.1,.5) zoom 1.15 alpha 0
         ease 1.5 xpos(.25) alpha 1
     mh "Тьфу-ты! А говорил – нормально выточишь!" with dissolve
     mh "Семыч, это никуда не годится. Мне надоело за тобой брак забирать. Давай дуй в путягу. Там научат работать." with dissolve

@@ -1,5 +1,9 @@
 init python early:
-    class autoInitialization_rvp:
+    import time
+    import builtins
+    import os
+
+    class autoInitialization_ray_v_panelke:
         """
         Класс для автоматической инициализации файлов мода.
         Инициализирует аудио и изображения (включая спрайты).
@@ -14,6 +18,7 @@ init python early:
                 если равно True, вместо инициализации записывает ресурсы мода в отдельный файл. Для дальнейшей инициализации ресурсов мода из файла необходимо перезагрузить БЛ.
                 если равно False, ресурсы мода инициализируются в момент загрузки БЛ.
         """
+
         def __init__(self, modID, modPostfix="", write_into_file=False):
             """
             Параметры класса:
@@ -26,13 +31,131 @@ init python early:
                     если равно True, вместо инициализации записывает ресурсы мода в отдельный файл. Для дальнейшей инициализации ресурсов мода из файла необходимо перезагрузить БЛ.
                     если равно False, ресурсы мода инициализируются в момент загрузки БЛ.
             """
+
             self.modID = modID
             self.modPostfix = ("_" + modPostfix if modPostfix else "")
             self.modFiles = []
             self.write_into_file = write_into_file
+            # кэширование файлов и директорий RenPy, чтобы не вызывать renpy.list_files() и renpy.loader.listdirfiles() каждый раз
+            # да, как оказалось, это сильно сказывается на производительности
+            try:
+                self.renpyFiles = list(renpy.list_files())
+                self.renpyDirs = list(renpy.loader.listdirfiles(False))
+            except Exception as e:
+                self.renpyFiles = []
+                self.renpyDirs = []
+                self.error("Error caching RenPy files/dirs: {}".format(e))
+            self.modPath = self.process_mod_path()
+            self.modImagesPath = self.process_images_path()
             self.modDist = self.process_distances()
 
+            self.check_class_name()
+            self.check_duplicate()
+
+            self.logger_create()
+
             self.initialize()
+
+        def check_duplicate(self):
+            # Проверка на дублирование: класс с таким именем уже объявлен или объект уже создан
+            try:
+                registry = getattr(renpy.store, "_autoinit_registry", None)
+                if registry is None:
+                    registry = {"class_name_to_class_obj": {}, "initialized_class_names": set()}
+                    setattr(renpy.store, "_autoinit_registry", registry)
+
+                class_name = self.__class__.__name__
+
+                if class_name in registry.get("initialized_class_names", set()):
+                    self.error("Instance of '{}' already exists. Rename the class (change postfix).".format(class_name))
+
+                existing_cls = registry.get("class_name_to_class_obj", {}).get(class_name)
+                if existing_cls is not None and existing_cls is not self.__class__:
+                    self.error("Duplicate class name '{}' detected from another file. Rename the class postfix to include your mod folder name.".format(class_name))
+
+                registry["class_name_to_class_obj"][class_name] = self.__class__
+            except Exception as e:
+                self.error("Duplicate-name guard failed: {}".format(e))
+
+        def record_instance(self):
+            # Помечаем успешное создание объекта класса, чтобы запретить повторные инстансы того же имени
+            try:
+                registry = getattr(renpy.store, "_autoinit_registry", None)
+                if registry is not None:
+                    registry_class_name = getattr(renpy.store, "_autoinit_registry['initialized_class_names']", None)
+                    if not registry_class_name:
+                        registry.setdefault("initialized_class_names", set()).add(self.__class__.__name__)
+                    else:
+                        registry.add(self.__class__.__name__)
+                    
+            except Exception as e:
+                self.error("Failed to record instance creation: {}".format(e))
+
+        def check_class_name(self):
+            if not(self.__class__.__name__.endswith(self.modID) or self.__class__.__name__.startswith(self.modID)):
+                self.error("The auto-initialization class name ({}) must be unique and contain the mod root folder name".format(self.__class__.__name__))
+
+        def error(self, txt):
+            renpy.error(self.modID.upper() + " AUTOINITIALIZATION ERROR: {}".format(txt))
+
+        #region Функции-аналоги с отловом ошибок и с заменой "\\" на "/" для RenPy
+        def _join_path(self, *args):
+            return os.path.join(*args).replace(os.sep, "/")
+
+        def _isfile(self, path):
+            try:
+                return os.path.isfile(path)
+            except Exception as e:
+                self.error("Error checking if file '{}': {}".format(path, e))
+                return False
+
+        def _listdir(self, path):
+            try:
+                return os.listdir(path)
+            except Exception as e:
+                self.error("Error listing directory '{}': {}".format(path, e))
+                return []
+
+        def _walk(self, path):
+            try:
+                for root, dirs, files in os.walk(path):
+                    yield root, dirs, files
+            except Exception as e:
+                self.error("Error walking directory '{}': {}".format(path, e))
+                return
+
+        def _relpath(self, path, base):
+            try:
+                return os.path.relpath(path, base).replace(os.sep, "/")
+            except Exception as e:
+                self.error("Error getting relative path from '{}' to '{}': {}".format(base, path, e))
+                return path
+        #endregion Функции-аналоги с отловом ошибок и с заменой "\\" на "/" для RenPy
+
+        def logger_create(self):
+            if renpy.windows:
+                try:
+                    with builtins.open(self.modID + "Logger.txt", "w+") as logger:
+                        logger.write(self.modID.upper() + " AUTOINITIALIZATION\n")
+                except Exception as e:
+                    self.error("Error while trying to create logger: {}".format(e))
+        
+        def logger_write(self, txt):
+            if renpy.windows:
+                try:
+                    with builtins.open(self.modID + "Logger.txt", "a+") as logger:
+                        logger.write(txt + "\n")
+                except Exception as e:
+                    self.error("Error while trying to write into logger: {}".format(e))
+
+        def timer(func):
+            def wrapper(self, *args, **kwargs):
+                start = time.time()
+                result = func(self, *args, **kwargs)
+                end = time.time()
+                self.logger_write("{} took {:.2f} seconds".format(func.__name__, end - start))
+                return result
+            return wrapper
 
         def count_file(self, type, file_name, file):
             """
@@ -53,13 +176,13 @@ init python early:
 
             :return: str
             """
-            for dir, fn in renpy.loader.listdirfiles(False):
+            for dir, fn in self.renpyDirs:
                 if self.modID in fn:
-                    return os.path.join(dir, self.modID).replace("\\", "/")
+                    return os.path.join(dir, self.modID).replace(os.sep, "/")
                 else:
                     for root, dirs, files in os.walk(dir):
                         if self.modID in dirs:
-                            return os.path.join(root, self.modID).replace("\\", "/")
+                            return os.path.join(root, self.modID).replace(os.sep, "/")
 
         def process_images_path(self):
             """
@@ -67,12 +190,12 @@ init python early:
 
             :return: str
             """
-            return os.path.join(self.process_mod_path(), 'images').replace("\\", "/")
+            return self._join_path(self.modPath, 'images')
 
         def process_distances(self):
             """
             Находит путь до папки sprites, строит названия дистанций по именам внутри (для normal дистанции имя будет "", как в самом БЛ), ищет изображение в каждой из папок с дистанциями, получает размер изображения и добавляет в словарь
-            
+
             :return: dict
 
             Пример возврата функции:
@@ -83,14 +206,14 @@ init python early:
             }
             """
             folder_names = {}
-            path = os.path.join(self.process_images_path(), "sprites")
+            path = os.path.join(self.modImagesPath, "sprites")
             for name in os.listdir(path):
-                full_path = os.path.join(path, name).replace("\\", "/")
+                full_path = os.path.join(path, name).replace(os.sep, "/")
                 if os.path.isdir(full_path):
                     for root, dirs, files in os.walk(full_path):
                         for file in files:
-                            image_path = os.path.join(root, file).replace("\\", "/")
-                            image_size = renpy.image_size(image_path)
+                            relative_path = os.path.relpath(os.path.join(root, file), self.renpyDirs[0][0]).replace(os.sep, "/")
+                            image_size = renpy.image_size(relative_path)
                             folder_names[name] = (name if name != "normal" else "", image_size)
                             break
                         else:
@@ -98,6 +221,7 @@ init python early:
                         break
             return folder_names
 
+        @timer
         def process_audio(self):
             """
             Обрабатывает аудио. Поддерживает расширения (".wav", ".mp2", ".mp3", ".ogg", ".opus")
@@ -106,10 +230,10 @@ init python early:
             [имя][_постфикс]
 
             Пример:
-            newmusic_rvp
+            newmusic_mymod
             """
             audio_extensions = {".wav", ".mp2", ".mp3", ".ogg", ".opus"}
-            for file in renpy.list_files():
+            for file in self.renpyFiles:
                 if self.modID in file:
                     file_name = os.path.splitext(os.path.basename(file))[0] + self.modPostfix
                     if file.endswith(tuple(audio_extensions)):
@@ -132,6 +256,11 @@ init python early:
                     if file.endswith(tuple(font_extensions)):
                         self.count_file("font", file_name, file)
 
+        def _process_image_file(self, file_path, image_name):
+            rel_path = self._relpath(file_path, self.renpyDirs[0][0])
+            self.count_file("image", image_name, rel_path)
+
+        @timer
         def process_images(self):
             """
             Обрабатывает изображения. Поддерживает изображения в подпапках.
@@ -140,29 +269,28 @@ init python early:
             [папка] [подпапка] [имя][_постфикс]
 
             Пример:
-            bg background
-            bg subfolder background
-            bg subfolder subsubfolder background
+            bg background_mymod
+            bg subfolder background_mymod
+            bg subfolder subsubfolder background_mymod
             """
-            mod_imgs_path = self.process_images_path()
-
-            for folder in os.listdir(mod_imgs_path):
-                path = os.path.join(mod_imgs_path, folder).replace("\\", "/")
-                if os.path.isfile(path):
+            for folder in self._listdir(self.modImagesPath):
+                path = os.path.join(self.modImagesPath, folder).replace(os.sep, "/")
+                if self._isfile(path):
                     image_name = os.path.splitext(os.path.basename(path))[0] + self.modPostfix
                     self.count_file("image", image_name, path)
                 else:
                     if folder != 'sprites':
-                        for root, dirs, files in os.walk(path):
+                        for root, dirs, files in self._walk(path):
                             for file in files:
+
                                 image_path = os.path.join(root, file).replace("\\", "/")
                                 image_name = os.path.splitext(file)[0]
-                                relative_path = os.path.relpath(root, mod_imgs_path) # Получаем полный путь к изображению и удаляем путь к корню
+                                relative_path = os.path.relpath(root, self.modImagesPath) # Получаем полный путь к изображению и удаляем путь к корню
                                 folder_structure = relative_path.split(os.sep) # Разделяем путь на компоненты и объединяем их в имя изображения
                                 folder_index = folder_structure.index(folder)
                                 folder_structure = folder_structure[folder_index:] + [image_name] # Оставляем только элементы после папки folder
                                 image_name_with_folder = ' '.join(folder_structure).replace('/', '').replace('\\', '') + self.modPostfix
-                                image_path = os.path.relpath(image_path, renpy.loader.listdirfiles(False)[0][0]).replace(os.sep, "/")
+                                image_path = os.path.relpath(image_path, self.renpyDirs[0][0]).replace(os.sep, "/")
                                 self.count_file("image", image_name_with_folder, image_path)
                     else:
                         self.process_sprites(path)
@@ -404,9 +532,10 @@ init python early:
             """.format(self.modDist[dist][1], file_body)
             self.count_file("sprite", file_name, file)
 
+        @timer
         def process_sprites(self, path):
             """Обрабатывает спрайты и все их комбинации
-            
+
             Имя спрайта для вызова будет в формате:
             [название спрайта][_постфикс]
             [название спрайта][_постфикс] [эмоция]
@@ -415,21 +544,21 @@ init python early:
             и любые другие комбинации.
 
             Пример:
-            dv
-            dv normal
-            dv normal sport
-            dv normal sport jewelry
+            dv_mymod
+            dv_mymod normal
+            dv_mymod normal sport
+            dv_mymod normal sport jewelry
             """
             for dist in os.listdir(path):
-                who_path = os.path.join(path, dist).replace("\\", "/")
+                who_path = os.path.join(path, dist).replace(os.sep, "/")
                 for who in os.listdir(who_path):
-                    who_path_num = os.path.join(who_path, who).replace("\\", "/")
+                    who_path_num = os.path.join(who_path, who).replace(os.sep, "/")
                     for numb in os.listdir(who_path_num):
-                        sprite_folders = os.listdir(os.path.join(who_path_num, numb).replace("\\", "/"))
+                        sprite_folders = os.listdir(os.path.join(who_path_num, numb).replace(os.sep, "/"))
 
                         for i in sprite_folders:
                             if 'body' in i:
-                                file_body = "\"" + str(os.path.relpath(os.path.join(who_path_num, numb, i).replace("\\", "/"), renpy.loader.listdirfiles(False)[0][0]).replace(os.sep, "/")) + "\""
+                                file_body = "\"" + str(os.path.relpath(os.path.join(who_path_num, numb, i).replace(os.sep, "/"), self.renpyDirs[0][0]).replace(os.sep, "/")) + "\""
                                 break
                         else:
                             file_body = 'im.Alpha("images/misc/soviet_games.png", 0.0)' # Заглушка, если не нашли тело
@@ -439,13 +568,13 @@ init python early:
                         acc_l = []
 
                         if 'clothes' in sprite_folders:
-                            clothes_l = [(os.path.splitext(clothes)[0].split('_'+numb+"_", 1)[-1], os.path.relpath(os.path.join(who_path_num, numb, 'clothes', clothes).replace("\\", "/"), renpy.loader.listdirfiles(False)[0][0]).replace(os.sep, "/")) for clothes in os.listdir(os.path.join(who_path_num, numb, 'clothes'))]
+                            clothes_l = [(os.path.splitext(clothes)[0].split('_'+numb+"_", 1)[-1], os.path.relpath(os.path.join(who_path_num, numb, 'clothes', clothes).replace(os.sep, "/"), self.renpyDirs[0][0]).replace(os.sep, "/")) for clothes in os.listdir(os.path.join(who_path_num, numb, 'clothes'))]
 
                         if 'emo' in sprite_folders:
-                            emo_l = [(os.path.splitext(emo)[0].split('_'+numb+"_", 1)[-1], os.path.relpath(os.path.join(who_path_num, numb, 'emo', emo).replace("\\", "/"), renpy.loader.listdirfiles(False)[0][0]).replace(os.sep, "/")) for emo in os.listdir(os.path.join(who_path_num, numb, 'emo'))]
+                            emo_l = [(os.path.splitext(emo)[0].split('_'+numb+"_", 1)[-1], os.path.relpath(os.path.join(who_path_num, numb, 'emo', emo).replace(os.sep, "/"), self.renpyDirs[0][0]).replace(os.sep, "/")) for emo in os.listdir(os.path.join(who_path_num, numb, 'emo'))]
 
                         if 'acc' in sprite_folders:
-                            acc_l = [(os.path.splitext(acc)[0].split('_'+numb+"_", 1)[-1], os.path.relpath(os.path.join(who_path_num, numb, 'acc', acc).replace("\\", "/"), renpy.loader.listdirfiles(False)[0][0]).replace(os.sep, "/")) for acc in os.listdir(os.path.join(who_path_num, numb, 'acc'))]
+                            acc_l = [(os.path.splitext(acc)[0].split('_'+numb+"_", 1)[-1], os.path.relpath(os.path.join(who_path_num, numb, 'acc', acc).replace(os.sep, "/"), self.renpyDirs[0][0]).replace(os.sep, "/")) for acc in os.listdir(os.path.join(who_path_num, numb, 'acc'))]
 
                         self.process_sprite(who, file_body, dist)
                         if clothes_l and emo_l and acc_l:
@@ -470,7 +599,7 @@ init python early:
             Если write_into_file равно True, вместо инициализации записывает ресурсы мода в отдельный файл. Для дальнейшей инициализации ресурсов мода из файла необходимо перезагрузить БЛ.
             """
             if self.write_into_file:
-                with open(self.process_mod_path() + "/autoinit_assets.rpy", "w") as log_file:
+                with builtins.open(self.modPath + "/autoinit_assets.rpy", "w") as log_file:
                     log_file.write("init python:\n    ")
                     for type, file_name, file in self.modFiles:
                         if type == "sound":
@@ -491,14 +620,13 @@ init python early:
                         renpy.image(file_name, file)
                     if type == "sprite":
                         renpy.image(file_name, eval(file))
-
+        @timer
         def initialize(self):
             """
-            Инициализация ресурсов мода
+            Инициализация ресурсов мода и запись создания объекта класса
             """
             self.process_audio()
             self.process_font()
             self.process_images()
             self.process_files()
-
-    autoInitialization_rvp = autoInitialization_rvp("ray_v_panelke", "rvp")
+            self.record_instance()
