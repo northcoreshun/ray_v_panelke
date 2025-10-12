@@ -69,14 +69,14 @@ screen rvp_say:
             action Skip()
 
         if persistent.font_size == "large":
-            text what id "what" font font_rvp outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align(.5) xmaximum .8 size 35 line_spacing 1
+            text what id "what" font font_rvp outlines [(3,'#000',0,0)] color "#ffdd7d" pos(.1,.865) text_align(.5) xmaximum .8 size 35 line_spacing 1
             if who:
-                text who id "who" font font_who_rvp outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 1
-
+                text who id "who" font font_who_rvp outlines [(2,'#000',0,0)] pos(.1,.82) size 35 line_spacing 1
+#style почему-то не работает тут
         elif persistent.font_size == "small":
-            text what id "what" font font_rvp outlines [(2, '#000', 0, 0)] color "#ffdd7d" pos(.1,.865) text_align .55 xmaximum .8 size 28 line_spacing 2
+            text what id "what" font font_rvp outlines [(3,'#000',0,0)] color "#ffdd7d" pos(.1,.865) text_align .55 xmaximum .8 size 28 line_spacing 2
             if who:
-                text who id "who" font font_who_rvp outlines [(2, '#000', 0, 0)] pos(.1,.82) size 35 line_spacing 2
+                text who id "who" font font_who_rvp outlines [(2,'#000',0,0)] pos(.1,.82) size 35 line_spacing 2
         
         imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/hide_%s.png") pos(.895,.82) action HideInterface()
 

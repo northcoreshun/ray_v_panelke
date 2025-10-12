@@ -1,6 +1,60 @@
 #ШАБЛОНЫ КОДА
 #ФАЙЛ ДЛЯ ТОГО, ЧТОБЫ ХРАНИТЬ ОСНОВНЫЕ КОДОВЫЕ КОНСТРУКЦИИ И БЫСТРО КОПИРОВАТЬ И ВСТАВЛЯТЬ
 
+    #Зум на спрайты при рассмотрении персонажа
+    scene bg square_lmr_night_rvp:
+        subpixel True
+        truecenter
+        anchor(.5,.5) pos(.2,.2) zoom 3 blur 5
+        ease 7 xpos -.2
+    show dv normal pioneer2:
+        subpixel True
+        anchor(.5,.5) pos(.3,.7) zoom 1.7
+        ease 7 xpos .3
+    show mi smile pioneer:
+        subpixel True
+        anchor(.5,.5) pos(.5,.7) zoom 1.7
+        ease 7 xpos .8
+    #Обратный процесс
+    show bg square_lmr_night_rvp:
+        subpixel True
+        truecenter
+        anchor(.5,.5) pos(-.2,.2) zoom 3 blur 5
+        ease 1.5 pos(.5,.5) zoom 1
+    show dv_rvp far:
+        anchor(.5,.5) pos(.3,.7) zoom 1.7
+        ease 1.5 zoom 1 ypos .5
+    show mi smile pioneer:
+        anchor(.5,.5) pos(.8,.7) zoom 1.7
+        ease 1.5 zoom 1 ypos .5
+
+    #Появление спрайта за спиной с поворотом
+    show un_rvp smile pioneer2:
+        align(.5,.5) ypos .9 zoom 1.6
+        ease 2 xpos .6 rotate 10
+    show mt surprise pioneer:
+        anchor(.5,.5) pos(.4,.8) zoom 1.6
+    #Новая ходьба, с качением
+    scene bg square_lmr_day_rvp:
+        align(.5,.5) zoom 1.1 #почему-то 1.05 не хватает
+        parallel:
+            ease .5 offset(0,0) rotate(0)
+            ease .5 offset(25,25) rotate(.35)
+            ease .5 offset(0,0) rotate(0)
+            ease .5 offset(-25,25) rotate(-.35)
+            repeat
+    with dissolve
+    #Новый бег, с качением
+    scene bg int_bus_on_square_rvp:
+        parallel:
+            zoom 1.05 align(.5,.5)
+            ease 10 zoom 2 anchor(.5,.5)
+        parallel:
+            ease .25 offset(0,0) rotate(0)
+            ease .25 offset(25,25) rotate(.35)
+            ease .25 offset(0,0) rotate(0)
+            ease .25 offset(-25,25) rotate(-.35)
+            repeat
     #Время суток - цвет спрайтов и текстбоксов
     $ persistent.sprite_time = 
     $ _time
@@ -105,7 +159,7 @@
         ease .5 offset(0,0)
         repeat
 
-    #Бег плюс зум
+    #Старый бег плюс зум
     scene bg int_bus_on_square_rvp:
         align(.5,.5) zoom 1.05
         parallel:
