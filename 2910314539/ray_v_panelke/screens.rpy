@@ -24,7 +24,7 @@ init python:
                 ("rvp_" + name, None)
             ]
 
-    def rvp_screens_diact():  # Функция обратной замены.
+    def rvp_screens_deact():  # Функция обратной замены.
         # Пытаемся заменить экраны.
         try:
             config.window_title = u"Бесконечное лето"
@@ -185,10 +185,17 @@ screen rvp_game_menu_selector:
             auto get_image("gui/ingame_menu/"+timeofday+"/ingame_menu_pg_%s.png") align(.5,.5)
         else:
             auto get_image("gui/ingame_menu/"+timeofday+"/ingame_menu_%s.png") align(.5,.5)
-        hotspot (0, 83, 660, 65) focus_mask None clicked MainMenu()
+        hotspot (0, 83, 660, 65) focus_mask None clicked Show("rvp_main_menu_confirm", transition = dissolve)
         hotspot (0, 148, 660, 65) focus_mask None clicked ShowMenu('save')
-        hotspot (0, 213, 660, 65) focus_mask None clicked ShowMenu('load')
         hotspot (0, 278, 660, 65) focus_mask None clicked (ShowMenu('preferences'), Hide('game_menu_selector'))
         hotspot (0, 343, 660, 65) focus_mask None clicked ShowMenu('quit')
+    text "Отключено" style "rvp"
 
-            
+screen rvp_main_menu_confirm:
+
+    modal True
+
+    add get_image("gui/o_rly/base.png")
+    text u"Вы действительно хотите выйти в главное меню?\nНесохраненные данные будут потеряны." text_align .5 align(.5,.46) color "#64483c" font header_font size 30
+    textbutton u'Да' text_size 60 style "log_button" text_style "settings_link" align(.3,.65) action [Function(rvp_screens_deact), MainMenu(confirm=False)]
+    textbutton u'Нет' text_size 60 style "log_button" text_style "settings_link" align(.7,.65) action Return()
