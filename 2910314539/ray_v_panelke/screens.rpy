@@ -6,7 +6,9 @@ init python:
         "text_history_screen",
         "game_menu_selector"
     ]
-    
+    rvp_screens_on = False #Переменная отображает, включены ли экраны РвП
+    deact = False
+
     def rvp_screen_save():  # Функция сохранения экранов из оригинала.
         for name in RVP_SCREENS:
             renpy.display.screen.screens[
@@ -15,6 +17,8 @@ init python:
 
     def rvp_screen_act():  # Функция замены экранов из оригинала на собственные.
         config.window_title = u"Рай в панельке"  # Здесь вводите название Вашего мода.
+        global rvp_screens_on
+        rvp_screens_on = True
         for (
             name
         ) in (
@@ -26,29 +30,35 @@ init python:
 
     def rvp_screens_deact():  # Функция обратной замены.
         # Пытаемся заменить экраны.
+        global rvp_screens_on
         try:
             config.window_title = u"Бесконечное лето"
+            rvp_screens_on = False
             for name in RVP_SCREENS:
                 renpy.display.screen.screens[(name, None)] = renpy.display.screen.screens[
                     ("rvp_old_" + name, None)
                 ]
         except:  # Если возникают ошибки, то мы выходим из игры, чтобы избежать Traceback
             renpy.quit()
-    # Функция для автоматического включения кастомного интерфейса при загрузке сохранения с названием Вашего мода
-    def rvp_activate_after_load():
-        global save_name
-        if "Рай в панельке" in save_name:
-            rvp_screen_save()
-            rvp_screen_act()
-
-    # Добавляем функцию в Callback
-    config.after_load_callbacks.append(rvp_activate_after_load)
 
     # Объединяем функцию сохранения экранов и замены в одну.
     def rvp_screens_save_act():
         rvp_screen_save()
         rvp_screen_act()
 
+    # Функция для автоматического включения кастомного интерфейса при загрузке сохранения с названием Вашего мода
+    def rvp_activate_after_load():
+        global rvp_screens_on
+        global save_name
+        global deact
+        if "Рай в панельке" in save_name and not rvp_screens_on:
+            rvp_screens_save_act()
+        if "Рай в панельке" not in save_name and rvp_screens_on:
+            deact = True # Вот это не происходит, хотя должно
+            rvp_screens_deact()
+
+    # Добавляем функцию в Callback
+    config.after_load_callbacks.append(rvp_activate_after_load)
 
 screen rvp_say:
     window background None id "window":
@@ -187,9 +197,10 @@ screen rvp_game_menu_selector:
             auto get_image("gui/ingame_menu/"+timeofday+"/ingame_menu_%s.png") align(.5,.5)
         hotspot (0, 83, 660, 65) focus_mask None clicked Show("rvp_main_menu_confirm", transition = dissolve)
         hotspot (0, 148, 660, 65) focus_mask None clicked ShowMenu('save')
+        hotspot (0, 213, 660, 65) focus_mask None clicked ShowMenu('load')
         hotspot (0, 278, 660, 65) focus_mask None clicked (ShowMenu('preferences'), Hide('game_menu_selector'))
         hotspot (0, 343, 660, 65) focus_mask None clicked ShowMenu('quit')
-    text "Отключено" style "rvp"
+#    text "Отключено" style "rvp"
 
 screen rvp_main_menu_confirm:
 
