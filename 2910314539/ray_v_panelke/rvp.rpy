@@ -48,7 +48,7 @@ python:
     #А чтобы уже залить на гит нужно снова создать папку ray_v_panelke и добавить в нее 2910314539\ray_v_panelke
     
 init -1:
-    $ autoInitialization_ray_v_panelke = autoInitialization_ray_v_panelke("ray_v_panelke", "rvp", write_into_file=False)
+    $ autoInit_ray_v_panelke = autoInitialization_ray_v_panelke("ray_v_panelke", "rvp", write_into_file=False)
     $ outertext_upper = "text"
     $ outertext_lower = "text"
     $ outertext_pause = "text"
