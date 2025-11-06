@@ -43,7 +43,7 @@ python:
     #туда же-звук: вставки кассеты
     """
 init -1:
-    $ autoInitialization_ray_v_panelke = autoInitialization_ray_v_panelke("ray_v_panelke", "rvp", write_into_file=False)
+    $ autoInit_ray_v_panelke = autoInitialization_ray_v_panelke("ray_v_panelke", "rvp", write_into_file=False)
     $ outertext_upper = "text"
     $ outertext_lower = "text"
     $ outertext_pause = "text"
