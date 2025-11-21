@@ -3,6 +3,7 @@ python:
     ГЕНЕРАТОР СПРАЙТОВ, ТИТРОВ ИЗ БКРР - найти в коде
     CAMERA - понять, что даёт, подумать о применении
     Ревизия кода - убрать старое и ненужное
+    допроставить всем _rvp
     поработать над нотифаем, сделать новый кэкран
         Режиссура (Алюминия):
     -Часть 1А
@@ -96,6 +97,9 @@ init:
         "cg d5_boat"
         .25
         repeat
+    image un_dv_12_rvp:
+        "cg un_dv_rvp"
+        "cg un_dv_2_rvp"
     image ext_internat_rvp_night = Transform("bg ext_internat_rvp", matrixcolor=TintMatrix(Color(hls=(0.63, 0.78, 0.82))))
 #    image = ConditionSwitch("persistent.sprite_time=='sunset'",im.MatrixColor("/bg/.jpg", im.matrix.tint(0.94, 0.82, 1.0)),"persistent.sprite_time=='night'",im.MatrixColor("/bg/.jpg", im.matrix.tint(0.63, 0.78, 0.82)),True,"/bg/.jpg")
 label rvp:
@@ -2532,8 +2536,7 @@ label b1_rvp:
     un "Алиса, прости, что вчера ударила тебя и не верила до этого момента." with dissolve
     dv "Хорошо, Лен." with dissolve
     dv "Да и как бы ты меня не била, другой подруги у меня нет." with dissolve
-#вырезать лицо Лены, второй фон донам
-    scene cg un_dv_2_rvp with dissolve
+    show un_dv_12_rvp with dspr
     un "Что же до тебя, Семён…" with dissolve
     "Лена тяжело вздохнула. Я снова почувствовал на себе её взгляд." with dissolve
     un "Ты совершил глупость, но ты хотя бы признался." with dissolve
