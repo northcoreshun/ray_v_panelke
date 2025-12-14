@@ -44,7 +44,7 @@ python:
     #туда же-звук: вставки кассеты
     """
 init -1:
-    $ autoInit_ray_v_panelke = autoInitialization_ray_v_panelke("ray_v_panelke", "rvp", write_into_file=True)
+    $ autoInit_ray_v_panelke = autoInitialization_ray_v_panelke("ray_v_panelke", "rvp", write_into_file=False)
     $ outertext_upper = "text"
     $ outertext_lower = "text"
     $ outertext_pause = "text"
@@ -256,6 +256,9 @@ label showtext_rvp(outertext_upper,outertext_lower):
         parallel:
             easein_expo 1.5 yanchor 0 ypos .6
     pause
+    hide white
+    hide uppertext
+    hide lowertext
     stop music fadeout 2
     return
 
