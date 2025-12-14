@@ -44,7 +44,7 @@ python:
     #туда же-звук: вставки кассеты
     """
 init -1:
-    $ autoInit_ray_v_panelke = autoInitialization_ray_v_panelke("ray_v_panelke", "rvp", write_into_file=False)
+    $ autoInit_ray_v_panelke = autoInitialization_ray_v_panelke("ray_v_panelke", "rvp", write_into_file=True)
     $ outertext_upper = "text"
     $ outertext_lower = "text"
     $ outertext_pause = "text"
@@ -5553,7 +5553,6 @@ label a2_rvp:
     scene bg black with dissolve
     stop music fadeout 1
     jump rvp
-
 
 label pogodite_poka:
     stop music fadeout 2
