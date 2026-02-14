@@ -19,11 +19,11 @@ init -1 python:
         "uv":[u"Юля", "#4EFF00"],
         "voice":[u"Голос", "#e1dd7d"],
         # новые персонажи
-#        define mira_astromod = Character("{gradient_astromod=#2d9ed8-#24bc8d}Мира{/gradient_astromod}", what_style = "normal_day")
         "dvun":[u"Алиса и Лена", "#B956FF"], #цвет, какой бы ни был, не убирать, иначе при любом персонаже выдаст трейс
         "nd":[u"Начальник депо", "#8B4513"],
         "mh4":[u"Михалыч", "DC143C"],
         "iv4":[u"Иваныч", "DC143C"],
+#войсы можно заменить на фичу Хикканова
         "voicegn":[u"Слесарь", "FFFFFF"],
         "voiceun":[u"Голос", "#B956FF"],
         "al":[u"Алёна", "FFFFFF"],
@@ -63,9 +63,6 @@ init python:
                 gl[i] = Character(None, kind=kind, what_color=what_color, what_drop_shadow=drop_shadow, ctc=ctc, ctc_position="fixed")
             elif i == "th":
                 gl[i] = Character(None, kind=kind, what_color=what_color, what_drop_shadow=drop_shadow, what_prefix="~ ", what_suffix=" ~", ctc=ctc, ctc_position="fixed")
-#специальное исключение для градиента, пока не работает
-            elif i == "dvun":
-                gl[i] = Character("{gradient_astromod=#ffa500-#8b00ff}"+j[0]+"{/gradient_astromod}", kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=ctc, ctc_position="fixed")
             else:
                 gl[i] = Character(j[0], kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=ctc, ctc_position="fixed")
                 # Добавлено дополнительное объявление персонажей, которые будут сохранять оригинальный цвет имени персонажа, но изменять его имя.
@@ -74,6 +71,9 @@ init python:
                 gl[i+"_v"] = Character(u"Голос", kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=ctc, ctc_position="fixed")
                 gl[i+"_pm"] = Character(u"Пионер", kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=ctc, ctc_position="fixed")
                 gl[i+"_pg"] = Character(u"Пионерка", kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=ctc, ctc_position="fixed")
+                # Ещё одно доп.объявление: градиент от оранжевого к фиолетовому, пока что имеет смысл только для одновременных реплик Алисы и Лены, потом мб добавлю регулировку цвета
+                # Возможно для регулировки нужно будет добавить второй словарь
+                gl[i+"_grad"] = Character("{gradient_rvp=#ffa500-#8b00ff}"+j[0]+"{/gradient_rvp}", kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=ctc, ctc_position="fixed")
             if renpy.mobile:
                 colors[i] = {'night': j[1], 'sunset': j[1], 'day': j[1], 'prolog': j[1]}
                 names[i] = j[0]
@@ -106,7 +106,7 @@ init python:
             else:
                 set_mode_adv()
 
-    def color_gradient_astromod(color_1, color_2, range, index):
+    def color_gradient_rvp(color_1, color_2, range, index):
         if index == 0:
             return color_1
         if range == index:
@@ -115,7 +115,7 @@ init python:
         end_col = Color(color_2)
         return start_col.interpolate(end_col, index * 1.0/range).hexcode
 
-    def gradient_tag_astromod(tag, argument, contents):
+    def gradient_tag_rvp(tag, argument, contents):
         new_list = [ ]
         if argument == "":
             return
@@ -137,7 +137,7 @@ init python:
                     if char == ' ':
                         new_list.append((renpy.TEXT_TEXT, ' '))
                         continue
-                    new_list.append((renpy.TEXT_TAG, "color=" + color_gradient_astromod(col_1, col_2, count, my_index)))
+                    new_list.append((renpy.TEXT_TAG, "color=" + color_gradient_rvp(col_1, col_2, count, my_index)))
                     new_list.append((renpy.TEXT_TEXT, char))
                     new_list.append((renpy.TEXT_TAG, "/color"))
                     my_index += 1
@@ -145,4 +145,4 @@ init python:
                 new_list.append((kind,text))
         return new_list
 
-    config.custom_text_tags["gradient_astromod"] = gradient_tag_astromod
+    config.custom_text_tags["gradient_rvp"] = gradient_tag_rvp

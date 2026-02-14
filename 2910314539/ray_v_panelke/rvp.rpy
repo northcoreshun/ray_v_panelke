@@ -76,12 +76,17 @@ init:
     $ rvp_credits_a1 = "{font=[font_rvp]}Спасибо за прочтение части 1А!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа в Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели - за помощь с текстом.\n\n Cyber Patsan - за помощь с кодом и передачу полезных навыков кодинга.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
 
     #Текст-изображения
+    #Для анимаций
     image uppertext = ParameterizedText(style="rvp")
     image lowertext = ParameterizedText(style="rvp")
+    #Для кнопок слева и справа
     image lefttext = Text("История",style="rvp",vertical=True)
     image righttext = Text("Пропуск",style="rvp",vertical=True)
+    #Текст реплик вне текстбокса БУДЕТ ИЗМЕНЁН
     image screentext_left = ParameterizedText(style="rvp",textalign=.0,size=40)
     image screentext_right = ParameterizedText(style="rvp",textalign=1.,size=40)
+    #Текст по центру экрана
+    image centertext = ParameterizedText(style="rvp")
 
     #Зацикленная карусель изображений
     image cycled_cg:
@@ -98,6 +103,10 @@ init:
     #Изображения, изменённые через matrixcolor
     image ext_internat_rvp_night = Transform("bg ext_internat_rvp", matrixcolor=TintMatrix(Color(hls=(0.63, 0.78, 0.82))))
 #    image = ConditionSwitch("persistent.sprite_time=='sunset'",im.MatrixColor("/bg/.jpg", im.matrix.tint(0.94, 0.82, 1.0)),"persistent.sprite_time=='night'",im.MatrixColor("/bg/.jpg", im.matrix.tint(0.63, 0.78, 0.82)),True,"/bg/.jpg")
+    #Зазумленные изображения
+    image okno_night_zoom_rvp = Transform("bg okno_night_rvp", zoom=.35)
+    image okno_day_zoom_rvp = Transform("bg okno_day_rvp", zoom=.35)
+
 label rvp:
     scene bg black with dissolve
     $ chars_define_rvp()
@@ -126,7 +135,7 @@ screen a_rvp:
     add "bg square_rvp":
         align(0.,0.)
         crop (0,0,960,1080)
-    text "Сторона А" style "rvp" size 70 align(.17,.3)
+    text "Сторона А" style "rvp" size 70 anchor(.5,.5) pos(.25,.3)
     add "white":
         align (.5,.5)
         crop (3,0,3,1080)
@@ -135,7 +144,7 @@ screen b_rvp:
     add "bg square_lmr_day_rvp":
         anchor(0.,0.) pos(.5,.0)
         crop (960,0,1920,1080)
-    text "Сторона Б" style "rvp" size 70 align(.8,.3)
+    text "Сторона Б" style "rvp" size 70 anchor(.5,.5) pos(.75,.3)
     add "white":
         align (.5,.5)
         crop (3,0,3,1080)
@@ -146,7 +155,7 @@ screen side_a_rvp:
     tag menu
     modal False
     imagemap:
-        ground Transform("bg kvartira_rvp", alpha=0.1)
+        ground Transform("bg bedroom_rvp", alpha=0.1)
         hotspot((0, 0, 960, 1080)):
             hovered [Show("a1_rvp", transition=Dissolve(0.5))]
             unhovered [Hide("a1_rvp", transition=Dissolve(1.0))]
@@ -160,15 +169,15 @@ screen a1_rvp:
 #надо цг, но для части 1А нет
         align(0.,0.)
         crop (480,0,960,1080)
-    text "Часть 1" style "rvp" size 70 align(.2,.47)
+    text "Часть 1" style "rvp" size 70 anchor(.5,.5) pos(.25,.5)
     add "white":
         align (.5,.5)
         crop (3,0,3,1080)
 screen a2_rvp:
     add "cg balkon balkon_0_rvp":
-        anchor(0.,0.) pos(.5,.0)
+        align(0.,0.) xpos .5
         crop (480,0,1440,1080)
-    text "Часть 2(ДЕМО)" style "rvp" size 70 align(.8,.45)
+    text "Часть 2" style "rvp" size 70 anchor(.5,.5) pos(.75,.5)
     add "white":
         align (.5,.5)
         crop (3,0,3,1080)
@@ -191,15 +200,15 @@ screen b1_rvp:
     add "cg un_dv pic1_rvp":
         align(0.,0.)
         crop (480,0,960,1080)
-    text "Часть 1" style "rvp" size 70 align(.2,.47)
+    text "Часть 1" style "rvp" size 70 anchor(.5,.5) pos(.25,.5)
     add "white":
         align (.5,.5)
         crop (3,0,3,1080)
 screen b2_rvp:
     add "cg un_roof pic1_rvp":
-        anchor(0.,0.) pos(.5,.0)
+        align(0.,0.) xpos .5
         crop (480,0,1440,1080)
-    text "Часть 2" style "rvp" size 70 align(.8,.45)
+    text "Часть 2" style "rvp" size 70 anchor(.5,.5) pos(.75,.45) #чуть повыше середины для красоты
     add "white":
         align (.5,.5)
         crop (3,0,3,1080)
@@ -213,6 +222,7 @@ label pause_rvp(outertext_pause):
 label backrooms_rvp:
     stop music fadeout 2
     $ renpy.show("black")
+    dvun_grad "Текст"
     call pause_rvp("Текст")
     #Пасхалко
 #    play music nv_st_rvp
@@ -291,7 +301,7 @@ label a1_rvp:
     $ renpy.show("black")
     $ renpy.with_statement(fade3)
     $ renpy.pause(2.0, hard=True)
-    $ new_chapter(0, u'Рай в панельке: Сторона А.')
+    $ new_chapter(0, u'Рай в панельке: Часть 1А')
     $ persistent.sprite_time = "day"
     $ day_time
 
@@ -307,7 +317,7 @@ label a1_rvp:
     "Будильник поднимет меня своим звоном, и я ни свет ни заря отправлюсь на смену. Работа, конечно, не пыльная, но довольно монотонная." with dissolve
     window hide
 
-    scene bg kvartira_rvp
+    scene bg prih_rvp
     show unblink
     show black:
         alpha 0.8
@@ -399,7 +409,7 @@ label a1_rvp:
     window hide
     
     stop sound_loop fadeout 1
-    scene bg kvartira_rvp
+    scene bg bedroom_rvp
     show un shy sport
     show prologue_dream
     with fade
@@ -436,7 +446,7 @@ label a1_rvp:
     
     stop sound fadeout 2
     stop sound_loop fadeout 1
-    show bg kvartira_rvp
+    show bg bedroom_rvp
     show un smile2 sport
     show prologue_dream
     with fade
@@ -919,10 +929,15 @@ label a1_rvp:
         align(0.1,0.5) zoom 1.5
         ease 2 zoom 3
     $renpy.pause(.5)
-    scene bg kvartira_rvp
+    scene bg bedroom_rvp
     show black:
         alpha 0.8
     "Я поплёлся в комнату." with dissolve
+    scene bg bedroom_rvp:
+        align(0.2, 0.5)
+        ease .5 zoom 2
+    show black:
+        alpha 0.8
     play sound sfx_bed_squeak1
     "Плюхнулся на диван “чебурашку”. И кто его так назвал…" with dissolve
     window hide
@@ -959,7 +974,7 @@ label a1_rvp:
     "Хм, странно, в депо сказали, он сдал смену без происшествий." with dissolve
     window hide
     
-    scene bg kvartira_rvp
+    scene bg bedroom_rvp
     show black:
         alpha 0.8
     with dissolve
@@ -1031,7 +1046,7 @@ label a1_rvp:
     window hide
 
     scene bg black with dissolve
-    scene bg kvartira_rvp:
+    scene bg bedroom_rvp:
         align(.5,.0) zoom 1.5
         ease 2 align(.5,.5) zoom 1
     show unblink
@@ -1041,13 +1056,13 @@ label a1_rvp:
     $ day_time
     "Я встал с кровати в районе девяти." with dissolve
     "Голова гудела, но скорее от удара об дверь, чем от алкоголя…" with dissolve
-    show bg kvartira_rvp with dissolve
+    show bg bedroom_rvp with dissolve
     "Лена лежала, отвернувшись от меня. Её лицо я увидел, лишь обойдя кровать." with dissolve
     show int_house_of_un_night:
         alpha .7
     with dissolve
     "Помню, как в тот вечер в Совёнке, когда мы остались вдвоём в лагере, я смотрел на неё. Тогда мы помирились, и её личико выражало спокойствие, умиротворение, тихую радость." with dissolve
-    scene bg kvartira_rvp:
+    scene bg bedroom_rvp:
         align(.5,.5) zoom 1.1
     with dissolve
     "Сейчас у неё на лице грусть, будто видит плохой сон." with dissolve
@@ -1194,7 +1209,9 @@ label a1_rvp:
     "Я опустил глаза вниз." with dissolve
     window hide
 
-    scene bg kvartira_rvp with dissolve
+    scene bg bedroom_reverse_rvp:
+        align(0.5, 0.5) zoom 1.7
+    with dissolve
     show un shy sport with dissolve
     play ambience ambience_medstation_inside_night
     $ renpy.pause(2)
@@ -1278,15 +1295,12 @@ label a1_rvp:
     un "А ты не волнуйся, у нас незаменимых нет." with dissolve
     stop music fadeout 3
     window hide
-#хуйня какая-то с параллел, подумать
-    scene bg kvartira_rvp:
-        parallel:
-            zoom 1.0 anchor(0,0)
-            ease 5 zoom 2 anchor (800,200)
-    show un shy sport at left:
-        parallel:
-            zoom 1.0 anchor(0,0)
-            ease 5 zoom 2 anchor (460,200)
+    scene bg bedroom_reverse_rvp:
+        zoom 1.7 align(0.5, 0.5)
+        ease 5 zoom 2
+    show un shy sport:
+        zoom 1.0 align(0.5, 0.5)
+        ease 5 zoom 2 align(0.5, 0.25)
     window show
     "В этот момент она остановилась. Я стоял в шоке от её последних слов." with dissolve
     "Лена поняла, что сказала достаточно или даже слишком много." with dissolve
@@ -1294,15 +1308,12 @@ label a1_rvp:
     "Но в определённый момент от праведного гнева перегибаешь палку и несправедливо задеваешь человека." with dissolve
     "И уже твоя совесть тебя мучает." with dissolve
     window hide
-    scene bg kvartira_rvp:
-        parallel:
-            zoom 2 anchor (800,200)
-            ease 2 zoom 1 anchor (0,0)
-    show un normal sport at left:
-        parallel:
-            zoom 2 anchor (460,200)
-            ease 2 zoom 1 anchor (0,0)
-    show un normal sport
+    scene bg bedroom_reverse_rvp:
+        zoom 2 align(0.5, 0.5)
+        ease 2 zoom 1.7
+    show un normal sport:
+        zoom 2 align(0.5, 0.25)
+        ease 2 zoom 1 align(0.5, 0.5)
     window show
     un "Ладно, надоело мне это всё. Иди пол вымой. И дверь закрой нормально, не в лифте родился." with dissolve
     "Начали с грязного пола и закончили им же." with dissolve
@@ -1334,7 +1345,8 @@ label a1_rvp:
     "Интересно ещё и то, что Лена верила мне. Она не кричала после моих слов что-то вроде:" with dissolve
     window hide
     
-    scene bg kvartira_rvp
+    scene bg bedroom_reverse_rvp:
+        align(0.5, 0.5) zoom 1.7
     show un angry2 sport
     show prologue_dream
     with fade
@@ -1410,7 +1422,7 @@ label a1_rvp:
     stop sound_loop fadeout 1
     play sound sfx_close_water_sink
     stop music fadeout 2
-    scene bg kvartira_rvp with dissolve
+    scene bg bedroom_rvp with dissolve
     play ambience ambience_medstation_inside_night
     
     window show
@@ -1431,6 +1443,7 @@ label a1_rvp:
     me "Лена, тут тебя просят к телефону." with dissolve
     hide un normal sport with dissolve
     "Лена подошла к телефону." with dissolve
+#не смогу а смог
     "Отвечала она коротко и односложно и я не мог понять тему разговора из того, что смогу услышать." with dissolve
     "Она недолго поговорила и положила трубку, а после этого встала и пошла одеваться." with dissolve
     me "Ты куда?" with dissolve
@@ -1438,6 +1451,7 @@ label a1_rvp:
     me "Стой, а без тебя они не могут?" with dissolve
     un "Нет, не могут. У нас в институте только несколько человек рисовать умеют. А Ленина хорошо нарисовать только у меня получится." with dissolve
     me "Подожди, я поговорить хотел." with dissolve
+    scene bg prih_rvp with dissolve
     show un_rvp normal coat with dissolve
     un "Вечером поговорим, не переживай. Закрой за мной дверь, я ухожу." with dissolve
     "После этих слов Лена оделась и вышла." with dissolve
@@ -1445,13 +1459,14 @@ label a1_rvp:
     play sound sfx_close_door_1
     "Я закрыл за ней дверь." with dissolve
     "Вот и поговорили… теперь сиди и жди, Семён. Ты оставил Лену, теперь Лена оставила тебя." with dissolve
+    scene bg bedroom_rvp with dissolve
     "Ох уж это мучительное ожидание… попробовал все способы занять себя – и телевизор посмотрел, и книгу почитал, и даже конспекты пописал по своей учёбе." with dissolve
     "Лена всё никак не возвращалась. Тишина давила на меня." with dissolve
     stop ambience fadeout 2
     "Я вспомнил про радиолу “Вега”, стоявшую в углу. Такой проигрыватель для виниловых дисков." with dissolve
     play music plastinki_rvp fadein 2
     "Была и коллекция, причём попадались и западные дефицитные исполнители, типа “Divine comedy”, Питера Габриела и Стинга." with dissolve
-    scene bg kvartira_rvp
+    scene bg bedroom_rvp
     show black:
         alpha 0.6
     with dissolve
@@ -1466,7 +1481,7 @@ label a1_rvp:
     "Я не выдержал и закрыл альбом, поставив его на место." with dissolve
     window hide
 
-    scene bg okno_rvp with dissolve
+    scene okno_day_zoom_rvp with dissolve
     window show
     "Затем я начал смотреть на окружавший нас пейзаж." with dissolve
     "Зрелище не из приятных." with dissolve
@@ -1482,7 +1497,7 @@ label a1_rvp:
     "За ними универсам и рынок." with dissolve
     window hide
 
-    scene bg kvartira_rvp
+    scene bg bedroom_rvp
     show black:
         alpha 0.8
     with dissolve
@@ -1540,14 +1555,14 @@ label a1_rvp:
 
     $ persistent.sprite_time = "night"
     $ night_time
-    scene bg kvartira_rvp
+    scene bg bedroom_rvp
     show black:
         alpha 0.8
     with dissolve
     
     window show
     "От внутреннего беспокойства мне спать не хотелось." with dissolve
-    scene bg okno_rvp with dissolve
+    scene okno_night_zoom_rvp with dissolve
     "Я пошёл в комнату и сел за стол у окна." with dissolve
     "Вдруг я заметил магнитофон." with dissolve
     "А ведь я давно не слушал музыку на нём." with dissolve
@@ -1573,7 +1588,7 @@ label a1_rvp:
 
     $ persistent.sprite_time = "day"
     $ day_time
-    show bg kvartira_rvp
+    show bg bedroom_rvp
     show un smile2 sport
     show prologue_dream
     with fade
@@ -1581,9 +1596,9 @@ label a1_rvp:
     "Снова вспомнил, как она сказала мне, что не стыдится того, что я работаю простым водителем троллейбуса." with dissolve
     window hide
 
+    scene okno_night_zoom_rvp with dissolve
     $ persistent.sprite_time = "night"
     $ night_time
-    scene bg okno_rvp with dissolve
     window show
     "Почему она любит меня? Не знаю."
     "Здесь мои размышления зашли в тупик. Что у Лены в голове, я до конца не представлял." with dissolve
@@ -1795,7 +1810,7 @@ label a1_rvp:
     "А вообще, счастье не только в приличной зарплате, а в том, чтобы любить и быть любимым. Главное – быть вместе с ней и поддерживать друг друга…" with dissolve
     window hide
 
-    scene bg kvartira_rvp
+    scene bg bedroom_rvp
     show black:
         alpha 0.8
     with dissolve
@@ -1825,7 +1840,7 @@ label b1_rvp:
     stop music fadeout 2
     $ renpy.with_statement(fade3)
     $ renpy.pause(2.0, hard=True)
-    $ new_chapter(0, u'Рай в панельке: Сторона Б')
+    $ new_chapter(0, u'Рай в панельке: Часть 1Б')
     $ persistent.sprite_time = "sunset"
     $ sunset_time()
     scene bg int_bus_sunset_rvp with dissolve
@@ -3100,7 +3115,7 @@ label b1_rvp:
     show un_rvp laugh pioneer2 at right
     show dv laugh pioneer2 at left
     with dspr
-    dvun "А нигде, у нас каникулы!" with dissolve
+    dvun_grad "А нигде, у нас каникулы!" with dissolve
     "Сказали девочки очень радостным голосом." with dissolve
     me "Везёт же вам." with dissolve
     show un_rvp smile pioneer2 at right with dissolve
@@ -4115,7 +4130,7 @@ label b2_rvp:
     me "Девочки, успокойтесь."
     show un_rvp rage pioneer2 with dspr
     show dv rage pioneer2 with dspr
-    dvun "А ты не лезь!"
+    dvun_grad "А ты не лезь!"
     show un_rvp serious pioneer2 with dspr
     show dv angry pioneer2 with dspr
     show un_rvp normal pioneer2 with dspr
@@ -5408,18 +5423,362 @@ label a2_rvp:
     $ renpy.show("black")
     $ renpy.with_statement(fade3)
     $ renpy.pause(2.0, hard=True)
-    $ new_chapter(0, u'Рай в панельке: Сторона А.')
+    $ new_chapter(0, u'Рай в панельке: Часть 2А')
+    $ persistent.sprite_time = "night"
+    $ night_time
+    call showtext_rvp("Сторона А. Часть 2","")
+    play ambience ambience_medstation_inside_night fadein 1
+    scene cg in_bed bed_rvp
+    show cg in_bed un_1_rvp as un1
+    show cg in_bed me_1_rvp as me1
+    with dissolve
+    un "И зачем ты в драку полез?" with dissolve
+    me "Он надо мной насмехался."
+    me "Говорил, я тебя недостоин. И что хочет тебя."
+    un "И ты его решил за это {cps=15}поби-и-ить.{/cps}"
+    "Последнее слово Лена растянула, не скрывая удовольствия."
+    "Догадываюсь, что в ней происходила борьба. Она продолжала “воспитывать” меня, придерживаясь принципа, что конфликты надо решать словами."
+    "Но я не мог не заметить – ей приятно, что мне не наплевать."
+    un "Сёма, ну зачем драку делать? Мог бы послать и уйти."
+    "Говорила Лена и вместе с тем ласкала меня."
+    me "Ну, главное, всё хорошо закончилось."
+    un "Да. Давай спать. Завтра целый день проведём вместе и никуда не пойдём. Еда есть, в «Нагорный» не надо."
+    me "Чем займёмся?"
+    un "Ничем. Будем просто лежать вместе. И общаться."
+    scene bg black with dissolve
+    stop ambience fadeout 1
+    pause 1.5
+
+    $ persistent.sprite_time = "sunset"
+    $ sunset_time
+    play ambience ambience_medstation_inside_night fadein 1
+    scene bg kitchen_rvp with dissolve
+    show un serious sport with dissolve
+    "Однако лёгким выходной не оказался."
+    "Буря произошла после обеда, когда мы разговаривали о том, как жить дальше."
+    scene bg kitchen_rvp:
+        align(0.5,0.5)
+        ease 2 zoom 1.5
+    show un serious sport:
+        align(0.5,0.3)
+        ease 2 zoom 1.5
+    un "Вот ты переживаешь из-за работы, а вообще-то, если отучишься, работа будет совсем другая."
+    show un shy sport with dissolve
+    "Вдруг Лена затихла на несколько секунд."
+    un "Сёма. А как у тебя с учёбой?"
+    me "Да… нормально."
+    "Я соврал, ведь учёбу на заочном я немного запустил. Ленился писать конспекты и разбирать весь материал."
+    un "Ну, если ты не против, я гляну, что там у тебя."
+    scene bg black with dissolve
+    "Спустя пару минут я стоял как школьник на картине “Опять двойка”."
+    pause 1
+    scene bg kitchen_rvp with dissolve
+    show un angry sport with dissolve
+    "Лена отчитывала меня. Ей, отличнице, это казалось чем-то немыслимым."
+    un "Сёма, я не поняла! Где конспект за… да это месяц назад было!"
+    un "Ты так ноешь, что у тебя нет перспектив. Но вот же, тебе дают возможность получить образование! Стать достойным меня, как ты сам говоришь."
+    un "И что ты делаешь для этого? Ни-че-го!"
+    show un angry sport:
+        align(.5,.5)
+        ease .5 pos(.2,.5) alpha 0
+    pause 1
+    scene bg kitchen_rvp:
+        align(0.6,0.8)
+        ease 2 zoom 1.5
+    "Пришлось безотлагательно сесть за учёбу. Два часа я писал конспект по самому запущенному предмету."
+    "Выходной был подпорчен снова. Хотелось конечно обвинить Лену – ну взялся бы за дело завтра!"
+    "Но нет, я довёл до этой ситуации."
+    "И вновь продолжается бой. Бой за нашу счастливую жизнь."
+    $ persistent.sprite_time = "sunset"
+    $ sunset_time
+    pause 0.5
+    show un smile sport with dissolve:
+        align(0.95,0.3) zoom 1.5 xzoom -1
+    "Через пару часов ко мне подошла Лена."
+    un "Думаю, хватит на сегодня. Пойдём полежим."
+    pause 1
+    scene cg in_bed bed_rvp
+    show cg in_bed un_1_rvp as un1
+    show cg in_bed me_1_rvp as me1
+    with dissolve
+    $ persistent.sprite_time = "night"
+    $ night_time
+    "Уже в кровати она продолжила."
+    un "Я не хотела у тебя забирать выходной. Просто с учёбой нельзя откладывать."
+    un "Меня спасает то, что я учусь каждый день. Так есть возможность сдать на «пятёрку»."
+    me "Мне на «пятёрку» не нужно. Вечерникам же стипендию не платят."
+    un "Да, но… Да какая стипендия?! Не будешь учить, тебя отчислят!"
+    un "Что, думаешь за день всё выучишь? Так у тебя работа! Нельзя за рулём отвлекаться."
+    un "В общем, Сём. Всё как в песне – экзамен нельзя на арапа сдавать. Займись учёбой сам, чтобы я не стояла над тобой."
+    scene bg black with dissolve
+    stop ambience fadeout 1
+
+    scene bg ext_trolley_rvp with dissolve
+    play ambience ambience_cold_wind_loop fadein 1
+    "Утром понедельника я пошёл на свою горячо любимую работу."
+#убрал лишнее слово собутыльников
+    "Встретил своих собутыльников. Пожалуй, теперь уже бывших."
+    show mh4_rvp at left with dissolve
+    show iv4_rvp at right with dissolve
+    mh4 "Здравствуй, Семён."
+    mh4 "Ты как?"
+    me "Нормально."
+    me "Слушай, я там у вас водку пил. Больше не буду. Вот, возьми рубль как оплату."
+    mh4 "Да ты чо б.., с дубу рухнул! Оставь себе. Тебя угощали, а ты дурак ходишь тут вернуть хочешь. Это невежливо в конце концов."
+    me "А про жену мою сплетничать вежливо?"
+    me "Об гараж меня лицом возить, что, вежливо?"
+    me "Я просто не хочу быть обязанным этим придуркам. Особенно этому…"
+    mh4 "Ладно, но рубль себе оставь. Всё равно не позовут больше."
+    iv4 "Мне отдай, нужнее будет."
+    mh4"Не давай, он пропьёт."
+    iv4 "И че, вам жалко что ли?"
+    "Мы улыбнулись."
+    mh4 "Э-хе-хе, ладно. С женой-то как?"
+    me "Непросто. Но помирились."
+    mh4 "Это главное. Ты её береги, она у тебя хорошая."
+    pause 1.5
+    scene bg black with dissolve
+    "На душе стало полегче. Хорошо, что поговорили нормально хоть."
+    stop ambience fadeout 1
+
     $ persistent.sprite_time = "day"
     $ day_time
+    play ambience ambience_medstation_inside_night fadein 1
+    scene bg bedroom_rvp with dissolve
+    #show black:
+        #alpha 0.4
+    #un smile
+    "И снова потянулись одинаковые дни. Однако теперь Лена взяла меня на контроль, и я подтягивал учёбу. Каждый день – конспекты, задачи." with dissolve
+    show un smile2 sport with dissolve
+    "Перед сном – краткий пересказ выученного Лене."
+    un "Это хорошая методика, чтобы запомнить. Не поймёшь материал, пока не расскажешь другому."
+    un "Ещё вечером надо учить перед сном, утром всё лучше в голове вспоминается. Так наш мозг устроен."
+    un "Я девочкам в группе всегда пересказываю лекции на следующий день, чтобы не отставали."
+    show un smile sport:
+        align(.5,.5)
+        ease .5 pos(.2,.5) alpha 0
+    pause 0.5
+    scene bg televisor_rvp:
+        align(.5,.5) blur 5
+    show un2_rvp:
+        align(.5,.5) pos (.2,.8)
+    with dissolve
+    play music kletka_rvp fadein 1
+    "Скоро наступил праздник. Праздник, из-за которого Лена оставила меня тогда наедине со своими мыслями."
+    "7 ноября. День Октябрьской Революции."
+    "В детстве остались лишь очень старые воспоминания, как я смотрел на парад. И вот всё пошло по-новой."
+    "В тот день я поймал ощущение, будто снова проживаю то время, но во взрослом состоянии."
+    show centertext "7 ноября 1990 года состоялся последний парад в истории СССР, посвящённый Дню Октябрьской Революции." with dissolve
+    $ renpy.pause()
+    hide centertext with dissolve
+    "Лена увлечённо смотрела парад и праздничные передачи. Даже как-то подозрительно молчала, будто ещё и думала о чём-то своём."
+    #дрожащие буквы
+    "{cps=15}Я даже не видел её лица в тот момент.{\cps=15}"
+    "Мы не обсуждали это. Я просто ловил момент и смотрел, как страна постепенно уходит в историю."
+    "Мысли ворочались в голове."
+    "Скоро девяностые. Нужно было что-то делать. Но я не знаю. Я погрузился в спокойную жизнь, в бытовуху. Так жить приятнее, в этой жизни есть Лена."
+    "Нужен был запасной план. Но у меня нет знакомых, которые будут строить бизнес. Я – простой водитель."
+    "Мысли увязали и захлёбывались, не приводя к какому-то итогу."
+    "Хрен с ним, подумаю потом. Не завтра же страна развалится. Ещё годик простоит."
+    stop music fadeout 1
+    window hide
+    pause 1
+    scene bg black with dissolve
 
+    $ persistent.sprite_time = "sunset"
+    $ sunset_time
+    pause 1
+    scene bg bedroom_rvp with dissolve
+    "Выходные – время не только для того, чтобы нежиться в постели. Но и для полезной деятельности типа уборки."
+    "Мы с Леной убирали весь наш однокомнатный дворец."
+    "Когда мы уже закончили с пылью на полках и мебели и настала очередь пола, мне резко стало лень."
+    me "Лена, можно я отдохну?"
+    show un serious sport with dissolve
+    un "Сёма, ты отлыниваешь!"
+    me "Давай ты веником подметёшь везде. А я потом полы протру."
+    un "А почему я первая?"
+    me "Дамы вперёд."
+    show un angry sport with dissolve
+    un "Ах ты!.. "
+    show un normal sport with dspr
+    extend "Ну ладно, пусть так."
+    un "Ну, вы мужики, конечно…"
+    me "Вы, женщины, к этой работе лучше приспособлены."
+    show un angry sport with dissolve
+    un "Что за глупость! Нас просто так воспитывают!"
+    me "Не просто же так…"
+    un "Сёма, мы это уже обсуждали! Это пережитки времён эксплуатации!"
+    pause 1
+    scene bg black with dissolve
+
+    #тут цг планируется
+    $ persistent.sprite_time = "sunset"
+    $ sunset_time
+    pause 1
+    scene bg bedroom_rvp:
+        align(.5,.5)
+        ease 1 anchor(.6,.5) zoom 2
+    with dissolve
+    "Спустя полчаса Лена, довольная своей работой, царственно лежала на кровати и смотрела, как я убираюсь. Даже успела организовать себе чай с бутербродами!"
+    show un grin sport:
+        align(.5, .5) xpos -.1
+        ease 1 xpos .05 rotate 30
+    with dspr
+    un "Вот там в углу пройдись ещё. Не помыл нормально по-моему."
+    show un laugh sport with dspr
+    un "Вот, молодец! Заканчивай быстрее, я тебе бутербродов оставила. Но они могут не дождаться тебя, хи-хи!"
+    "Наконец, я закончил с уборкой, убрал весь инвентарь и лёг к Лене. Она меня угостила чаем с бутербродами, а потом мы снова нежились под одеялом."
+    pause 1
+    scene bg black with dissolve
+
+    pause 1
+    scene bg bedroom_rvp with dissolve
+    show un shy sport with dissolve
+    "Один раз у нас произошёл смешной случай. Меня снова понесло на самобичевание."
+    me "Лен, я тебя не достоин. Тебе нужен более обеспеченный мужчина."
+    un "Да, Сём…"
+    "Тихо сказала Лена."
+    "Стоп, что??"
+    scene bg bedroom_rvp:
+        zoom 1 align(0.5, 0.5)
+        ease 5 zoom 2
+    show un evil_smile sport at left:
+        zoom 1.0 align(0.5, 0.5)
+        ease 5 zoom 2 align(0.5, 0.25)
+    un "Я так подумала."
+    un "Смысл быть с каким-то нытиком, который не хочет расти."
+    "Лена сверкнула глазами и скривила лицо в злобной улыбке."
+    un "Ты прав, мне нужен более уверенный в себе мужик, который будет меня обеспечивать."
+    un "Я уже присмотрела одного, на своём курсе."
+    "Да ну нет… неужели. Мой кошмар стал реальностью."
+    show blink
+    pause 1
+    "Лена. Выбрала. Другого."
+    "Я в шоке сел на кровать. Лена подошла и обняла меня." with vpunch
+    show unblink
+    scene bg bedroom_rvp:
+        subpixel True
+        truecenter
+        anchor(.5,.5) pos(.5,.7) zoom 3 blur 5
+        ease 35 xpos 1.5
+    show un sad sport:
+        subpixel True
+        anchor(.5,.5) pos(.5,.8) zoom 2
+        ease 20 xpos .33
+    un "Сёма, прости, я пошутила! Просто ты достал уже со своим нытьём…"
+    me "То есть нет никакого однокурсника?"
+    un "Нет, конечно!"
+    me "Ладно… но это было… жёстко."
+    pause 1.0
+    scene bg black with dissolve
+
+    scene bg prih_rvp with dissolve:
+        align(0.35,0.5)
+        ease 2 zoom 1.5
+    show un smile sport:
+        align(0.4,0.3)
+        ease 2 zoom 1.5
+    "На следующий день Лена, красовавшись своей талией перед зеркалом, заявила:"
+    hide un with dissolve
+    show un_rvp hitr sport:
+        align(0.4,0.3) zoom 1.5
+    with dissolve
+    un "Сём, мне кажется, я толстая."
+    "Теперь уже я ухмыльнулся. Лена успела понять, что я задумал."
+    hide un_rvp
+    show un_rvp ubiu sport with dspr:
+        align(0.4,0.3) zoom 1.5
+    un "Нет, не смей!"
+    me "Что?"
+    hide un_rvp
+    show un laugh sport with dspr:
+        align(0.4,0.3) zoom 1.5
+    hide un_rvp
+    "Я не мог сдержать улыбки. Лена тоже."
+    un "Вот ты какой…"
+    me " Какой?"
+    show un smile sport with dspr
+    un "Мстительный! Я ему помочь хотела, а он…"
+    un "Да, метод был радикальный, но действенный!"
+    "А ведь реально подействовало. Когда я ныл, на самом деле я хотел, чтобы Лена меня пожалела. А тут меня жёстко «обломали» и правильно сделали."
+    scene bg black with dissolve
+    pause 1.0
+    "После того случая желание ныть пропало надолго. Лена тоже перестала так “ненавязчиво” выпрашивать комплименты."
+    pause 1.0
+    scene bg black with dissolve
+
+    scene bg kitchen_rvp with dissolve:
+        align(0.2,0.8) zoom 1.5
+    "Мы с Леной “подбивали бюджет” – считали, сколько и на что денег ушло в месяце."
+    "Обычно с этим проблем не было. Благо выработали привычку записывать все расходы."
+    "Лена переносила их из своей записной книжки на лист. Оставалось посчитать эту неделю."
+    pause 0.5
+    show un normal sport with dissolve:
+        align(0.95,0.3) zoom 1.5 xzoom -1
+    un "Значит, смотри. У нас оставалось тридцать рублей."
+    un "Квартплата – два восемьдесят, за воду – рубль восемьдесят, за свет – рубль, за отопление – рубль пятьдесят четыре, за газ – шестьдесят копеек, да за радио – полрубля."
+    un "Итого восемь двадцать четыре."
+    un "Это я оплатила три дня назад."
+    un "Дальше, вот у меня записано по дням. Пять двадцать я потратила в выходные, ходила на рынок."
+    un "Два рубля потратила сегодня, должно быть четырнадцать пятьдесят шесть."
+    "Я пересчитал при ней деньги. Но почему-то… тринадцать шестьдесят шесть?"
+    me "Не сходится. Девяносто копеек не хватает."
+    "Лена почему-то сильно напряглась."
+    show un smile2 sport with dissolve
+    un "Не знаю… может что-то ещё купила. Неужели забыла записать?"
+    "Лена как-то странно улыбнулась, будто невпопад. Недостача звучит не очень смешно."
+    "Мы вписали, сколько имели на самом деле, поправив расходы. Тем не менее… странно."
+    window hide
+    pause 1.0
+    scene bg black with dissolve
+
+    #здесь артецкий у Вадим Зы попросить... потом это сделаю
+    pause 1
+    scene bg bedroom_rvp with dissolve
+    "Один раз я увлёкся учёбой и не заметил, что надо было спать. Об этом мне напомнила Лена – подошла и обняла сзади."
+    un "Сёма, я тебя жду."
+    me "Ленусик, подожди ещё минут пятнадцать."
+    "Лена пришла снова. И была настойчивей."
+    un "Всё, Сёма, время вышло. Надо было заниматься, а не ворон считать."
+    un "У нас в интернате например после отбоя нельзя было уроки делать. Ходили по комнатам и проверяли. Не успел – сам виноват."
+    "Лена пыталась вырвать у меня из рук тетрадь, но я не сдавался."
+    un "В принципе, можно и на стуле. Хотя сломать можно. Ну, Сёма сам и будет чинить."
+    "Лена просунула ногу, чтобы сесть мне на колени. Я наконец сдался. Пришлось закончить с учёбой и переместиться на кровать. Прямо с Леной."
+    pause .5
+    scene bg black with dissolve
+    pause .5
+    "Вот ведь упрямая."
+    pause 1.0
+    scene bg black with dissolve
+    
+    pause 1.0
+    scene bg black with dissolve
+    "Я лежал и никак не мог уснуть. Я слышал звук от потолка в тишине. Будто большой подшипник катали по бетонной плите."
+    "Мы же на последнем этаже живём, у нас даже чердака нет. Что это?"
+    "Лена, кажется, уснула. А я думал о нашей с ней жизни."
+    "Коммунизм – рай на всей земле, у нас рай на тридцати трёх квадратах этой однушки. С каждого по способностям, каждому по потребностям."
+    "Мы делаем всё, на что способны и стараемся удовлетворить все потребности друг друга."
+    "В раю все ходили голыми. Мы сейчас с Леной тоже в таком состоянии."
+    "Ну прямо таки Адам и Ева. Будет ли запретный плод у Лены? Тут скорее наоборот, я свой вкусил, но изгнан не был."
+    "Только Бога в этом коммунистическом раю нет, на то он и коммунистический. Сами себе боги, решаем свою судьбу."
+    "Лена непохожа на того, кто поддастся искушению. Впрочем, знаю ли я её?"
+    "Скорее да, чем нет. За годы жизни удалось изучить её характер и повадки, но она всегда может выкинуть какой-нибудь сюрприз."
+    "Поживём – увидим."
+
+    pause 1
+    window hide
+    scene bg prih_rvp with dissolve
+    "И этот сюрприз произошёл."
+#ВСТАВИТЬ ПЕРЕД ДЕМО
 #    scene bg prih_rvp:
 #        align(0.1,0.5)
 #        ease 2 zoom 3
-#    scene bg kvartira_rvp with dissolve
+#    scene bg bedroom_rvp with dissolve
 #    window show
 #    "В один день я пришёл домой. Из магнитофона громко играла музыка."
 #тут цг будет
 #    "Вдруг почуял странный запах… курева? Иногда соседи курили над окном и это чувствовалось. Но тут запах был сильнее и другим. Лены не было ни на кухне, ни в ванной."
+    stop ambience fadeout 1
 #    "Раздевшись, я вошел в комнату. Затем на балкон."
 #тут сложная режиссура
 #    "Напуганные зелёные глаза смотрели на меня."
@@ -5444,6 +5803,7 @@ label a2_rvp:
 #    "Ответила Лена из глубины объятий."
 #    "Я аккуратно развернул Лену к окну. Сигарета уже дотлевала."
 #повтор слова окно
+    play ambience ambience_cold_wind_loop fadein 1
     scene cg balkon balkon_0_rvp zorder 1
     show cg balkon un_1_rvp as un1 zorder 3
     show cg balkon me_1_rvp as me1 zorder 3
@@ -5555,351 +5915,10 @@ label a2_rvp:
     pause 1.0
     scene bg black with dissolve
     stop music fadeout 1
-    jump rvp
-
-label pogodite_poka:
-    stop music fadeout 2
-    $ renpy.show("black")
-    $ renpy.with_statement(fade3)
-    $ renpy.pause(2.0, hard=True)
-    $ new_chapter(0, u'Рай в панельке: Часть 2А.')
-    $ persistent.sprite_time = "night"
-    $ night_time
-    call showtext_rvp("Сторона А. Часть 2","пу-пу-пу")
-    scene bg kvartira_rvp
-    show unblink
-    show black:
-        alpha 0.8
-    un "И зачем ты в драку полез?" with dissolve
-    me "Он надо мной насмехался."
-    me "Говорил, я тебя недостоин. И что хочет тебя."
-    un "И ты его решил за это {cps=15}поби-и-ить.{/cps}"
-    "Последнее слово Лена растянула, не скрывая удовольствия."
-    "Догадываюсь, что в ней происходила борьба. Она продолжала “воспитывать” меня, придерживаясь принципа, что конфликты надо решать словами."
-    "Но я не мог не заметить – ей приятно, что мне не наплевать."
-    un "Сёма, ну зачем драку делать? Мог бы послать и уйти."
-    "Говорила Лена и вместе с тем ласкала меня."
-    me "Ну, главное, всё хорошо закончилось."
-    un "Да. Давай спать. Завтра целый день проведём вместе и никуда не пойдём. Еда есть, в «Нагорный» не надо."
-    me "Чем займёмся?"
-    un "Ничем. Будем просто лежать вместе. И общаться."
-    scene bg black with dissolve
-    pause 1.5
-
-    #un normal sport дальше только эту одежду у неё
-    $ persistent.sprite_time = "sunset"
-    $ sunset_time
-    scene bg kitchen_rvp with dissolve
-    show un serious sport with dissolve
-    "Однако лёгким выходной не оказался."
-    "Буря произошла после обеда, когда мы разговаривали о том, как жить дальше."
-    scene bg kitchen_rvp:
-        align(0.5,0.5)
-        ease 2 zoom 1.5
-    show un serious sport:
-        align(0.5,0.3)
-        ease 2 zoom 1.5
-    un "Вот ты переживаешь из-за работы, а вообще-то, если отучишься, работа будет совсем другая."
-    "Вдруг Лена затихла на несколько секунд."
-    show un shy sport with dissolve
-    un "Сёма. А как у тебя с учёбой?"
-    me "Да… нормально."
-    "Я соврал, ведь учёбу на заочном я немного запустил. Ленился писать конспекты и разбирать весь материал."
-    un "Ну, если ты не против, я гляну, что там у тебя."
-    scene bg black with dissolve
-    "Спустя пару минут я стоял как школьник на картине “Опять двойка”."
-    pause 1
-    scene bg kitchen_rvp with dissolve
-    show un angry sport with dissolve
-    "Лена отчитывала меня. Ей, отличнице, это казалось чем-то немыслимым."
-    un "Сёма, я не поняла! Где конспект за… да это месяц назад было!"
-    un "Ты так ноешь, что у тебя нет перспектив. Но вот же, тебе дают возможность получить образование! Стать достойным меня, как ты сам говоришь."
-    un "И что ты делаешь для этого? Ни-че-го!"
-    show un angry sport:
-        align(.5,.5)
-        ease 1.5 pos(-.2,.5) alpha 0
-    pause 1
-    scene bg kitchen_rvp:
-        align(0.2,0.8)
-        ease 2 zoom 1.5
-    "Пришлось безотлагательно сесть за учёбу. Два часа я писал конспект по самому запущенному предмету."
-    "Выходной был подпорчен снова. Хотелось конечно обвинить Лену – ну взялся бы за дело завтра!"
-    "Но нет, я довёл до этой ситуации."
-    scene bg black with dissolve
-    "И вновь продолжается бой. Бой за нашу счастливую жизнь."
-    scene bg kitchen_rvp with dissolve:
-        align(0.2,0.8) zoom 1.5
-    $ persistent.sprite_time = "sunset"
-    $ sunset_time
-    pause 0.5
-    show un smile sport with dissolve:
-        align(0.95,0.3) zoom 1.5 xzoom -1
-    "Через пару часов ко мне подошла Лена."
-    un "Думаю, хватит на сегодня. Пойдём полежим."
-    pause 1
-    scene bg black with dissolve
-
-    #bg black  пока что
-    $ persistent.sprite_time = "night"
-    $ night_time
-    "Уже в кровати она продолжила."
-    un "Я не хотела у тебя забирать выходной. Просто с учёбой нельзя откладывать."
-    un "Меня спасает то, что я учусь каждый день. Так есть возможность сдать на «пятёрку»."
-    me "Мне на «пятёрку» не нужно. Вечерникам же стипендию не платят."
-    un "Да, но… Да какая стипендия?! Не будешь учить, тебя отчислят!"
-    un "Что, думаешь за день всё выучишь? Так у тебя работа! Нельзя за рулём отвлекаться."
-    un "В общем, Сём. Всё как в песне – экзамен нельзя на арапа сдавать. Займись учёбой сам, чтобы я не стояла над тобой."
-    scene bg black with dissolve
-
-    $ persistent.sprite_time = "sunset"
-    $ sunset_time
-    scene bg ext_trolley_rvp with dissolve 
-    "Утром понедельника я пошёл на свою горячо любимую работу."
-    "Встретил своих собутыльников. Пожалуй, теперь бывших собутыльников."
-    show mh4_rvp at left with dissolve
-    show iv4_rvp at right with dissolve
-    mh4 "Здравствуй, Семён."
-    mh4 "Ты как?"
-    me "Нормально."
-    me "Слушай, я там у вас водку пил. Больше не буду. Вот, возьми рубль как оплату."
-    mh4 "Да ты чо б.., с дубу рухнул! Оставь себе. Тебя угощали, а ты дурак ходишь тут вернуть хочешь. Это невежливо в конце концов."
-    me "А про жену мою сплетничать вежливо?"
-    me "Об гараж меня лицом возить, что, вежливо?"
-    me "Я просто не хочу быть обязанным этим придуркам. Особенно этому…"
-    mh4 "Ладно, но рубль себе оставь. Всё равно не позовут больше."
-    iv4 "Мне отдай, нужнее будет."
-    mh4"Не давай, он пропьёт."
-    iv4 "И че, вам жалко что ли?"
-    "Мы улыбнулись."
-    mh4 "Э-хе-хе, ладно. С женой-то как?"
-    me "Непросто. Но помирились."
-    mh4 "Это главное. Ты её береги, она у тебя хорошая."
-    pause 1.5
-    scene bg black with dissolve
-    "На душе стало полегче. Хорошо, что поговорили нормально хоть."
-    
-    $ persistent.sprite_time = "night"
-    $ night_time
-    scene bg kvartira_rvp with dissolve
-    #show black:
-        #alpha 0.4
-    #un smile
-    "И снова потянулись одинаковые дни. Однако теперь Лена взяла меня на контроль, и я подтягивал учёбу. Каждый день – конспекты, задачи." with dissolve
-    show un smile2 sport with dissolve
-    "Перед сном – краткий пересказ выученного Лене."
-    un "Это хорошая методика, чтобы запомнить. Не поймёшь материал, пока не расскажешь другому."
-    un "Ещё вечером надо учить перед сном, утром всё лучше в голове вспоминается. Так наш мозг устроен."
-    un "Я девочкам в группе всегда пересказываю лекции на следующий день, чтобы не отставали."
-    show un smile sport:
-        align(.5,.5)
-        ease 1.5 pos(-.2,.5) alpha 0
-    pause 0.5
-    #тут новый фон будет
-    $ set_mode_rvp(nvl)
-    window show
-    nvl clear
-    "Скоро наступил праздник. Праздник, из-за которого Лена оставила меня тогда наедине со своими мыслями."
-    "7 ноября. День Октябрьской Революции."
-    "В детстве остались лишь очень старые воспоминания, как я смотрел на парад. И вот всё пошло по-новой. В тот день я поймал ощущение, будто снова проживаю то время, но во взрослом состоянии."
-    nvl clear
-    "7 ноября 1990 года состоялся последний парад в истории СССР, посвящённый Дню Октябрьской Революции."
-    "Лена увлечённо смотрела парад и праздничные передачи. Даже как-то подозрительно молчала, будто ещё и думала о чём-то своём."
-    "Я даже не видел её лица в тот момент."
-    "Мы не обсуждали это. Я просто ловил момент и смотрел, как страна постепенно уходит в историю."
-    "Мысли ворочались в голове."
-    nvl clear
-    "Скоро девяностые. Нужно было что-то делать. Но я не знаю. Я погрузился в спокойную жизнь, в бытовуху. Так жить приятнее, в этой жизни есть Лена."
-    "Нужен был запасной план. Но у меня нет знакомых, которые будут строить бизнес. Я – простой водитель."
-    "Мысли увязали и захлёбывались, не приводя к какому-то итогу."
-    "Хрен с ним, подумаю потом. Не завтра же страна развалится. Ещё годик простоит."
-    window hide
-    $ set_mode_rvp()
-    pause 1
-    scene bg black with dissolve
-
-    $ persistent.sprite_time = "sunset"
-    $ sunset_time
-    pause 1
-    scene bg kvartira_rvp with dissolve
-    "Выходные – время не только для того, чтобы нежиться в постели. Но и для полезной деятельности типа уборки."
-    "Мы с Леной убирали весь наш однокомнатный дворец."
-    "Когда мы уже закончили с пылью на полках и мебели и настала очередь пола, мне резко стало лень."
-    me "Лена, можно я отдохну?"
-    show un serious sport with dissolve
-    un "Сёма, ты отлыниваешь!"
-    me "Давай ты веником подметёшь везде. А я потом полы протру."
-    un "А почему я первая?"
-    me "Дамы вперёд."
-    show un angry sport with dissolve
-    un "Ах ты!.. "
-    show un normal sport with dspr
-    extend "Ну ладно, пусть так."
-    un "Ну, вы мужики, конечно…"
-    me "Вы, женщины, к этой работе лучше приспособлены."
-    show un angry sport with dissolve
-    un "Что за глупость! Нас просто так воспитывают!"
-    me "Не просто же так…"
-    un "Сёма, мы это уже обсуждали! Это пережитки времён эксплуатации!"
-    pause 1
-    scene bg black with dissolve
-
-    #тут цг планируется
-    $ persistent.sprite_time = "sunset"
-    $ sunset_time
-    pause 1
-    scene bg kvartira_rvp with dissolve
-    "Спустя полчаса Лена, довольная своей работой, царственно лежала на кровати и смотрела, как я убираюсь. Даже успела организовать себе чай с бутербродами!"
-    un "Вот там в углу пройдись ещё. Не помыл нормально по-моему."
-    un "Вот, молодец! Заканчивай быстрее, я тебе бутербродов оставила. Но они могут не дождаться тебя, хи-хи!"
-    "Наконец, я закончил с уборкой, убрал весь инвентарь и лёг к Лене. Она меня угостила чаем с бутербродами, а потом мы снова нежились под одеялом."
-    pause 1
-    scene bg black with dissolve
-
-    #***
-    pause 1
-    scene bg kvartira_rvp with dissolve
-    show un shy sport with dissolve
-    "Один раз у нас произошёл смешной случай. Меня снова понесло на самобичевание."
-    me "Лен, я тебя не достоин. Тебе нужен более обеспеченный мужчина."
-    un "Да, Сём…"
-    "Тихо сказала Лена."
-    "Стоп, что??"
-    scene bg kvartira_rvp:
-        parallel:
-            zoom 1.0 anchor(0,0)
-            ease 5 zoom 2 anchor (800,200)
-    show un evil_smile sport at left:
-        parallel:
-            zoom 1.0 anchor(0,0)
-            ease 5 zoom 2 anchor (460,200)
-    un "Я так подумала."
-    un "Смысл быть с каким-то нытиком, который не хочет расти."
-    "Лена сверкнула глазами и скривила лицо в злобной улыбке."
-    un "Ты прав, мне нужен более уверенный в себе мужик, который будет меня обеспечивать."
-    un "Я уже присмотрела одного, на своём курсе."
-    "Да ну нет… неужели. Мой кошмар стал реальностью."
-    show blink
-    pause 1
-    "Лена. Выбрала. Другого."
-    "Я в шоке сел на кровать. Лена подошла и обняла меня." with vpunch
-    show unblink
-    scene bg kvartira_rvp:
-        subpixel True
-        truecenter
-        anchor(.5,.5) pos(.5,.7) zoom 3 blur 5
-        ease 35 xpos 1.5
-    show un sad sport:
-        subpixel True
-        anchor(.5,.5) pos(.5,.8) zoom 2
-        ease 20 xpos .33
-    un "Сёма, прости, я пошутила! Просто ты достал уже со своим нытьём…"
-    me "То есть нет никакого однокурсника?"
-    un "Нет, конечно!"
-    me "Ладно… но это было… жёстко."
-    pause 1.0
-    scene bg black with dissolve
-    
-    
-    scene bg prih_rvp with dissolve:
-        align(0.35,0.5)
-        ease 2 zoom 1.5
-    show un shy sport:
-        align(0.4,0.3)
-        ease 2 zoom 1.5
-    "На следующий день Лена, красовавшись своей талией перед зеркалом, заявила:"
-    show un grin sport with dissolve
-    un "Сём, мне кажется, я толстая."
-    "Теперь уже я ухмыльнулся. Лена успела понять, что я задумал."
-    show un_rvp ubiu sport with dspr:
-        align(0.4,0.3) zoom 1.5
-    hide un
-    un "Нет, не смей!"
-    me "Что?"
-    show un laugh sport with dspr:
-        align(0.4,0.3) zoom 1.5
-    hide un_rvp
-    "Я не мог сдержать улыбки. Лена тоже."
-    un "Вот ты какой…"
-    me " Какой?"
-    show un smile sport with dspr
-    un "Мстительный! Я ему помочь хотела, а он…"
-    un "Да, метод был радикальный, но действенный!"
-    "А ведь реально подействовало. Когда я ныл, на самом деле я хотел, чтобы Лена меня пожалела. А тут меня жёстко «обломали» и правильно сделали."
-    scene bg black with dissolve
-    pause 1.0
-    "После того случая желание ныть пропало надолго. Лена тоже перестала так “ненавязчиво” выпрашивать комплименты."
-    pause 1.0
-    scene bg black with dissolve
-
-    #***
-    scene bg kitchen_rvp with dissolve:
-        align(0.2,0.8) zoom 1.5
-    "Мы с Леной “подбивали бюджет” – считали, сколько и на что денег ушло в месяце."
-    "Обычно с этим проблем не было. Благо выработали привычку записывать все расходы."
-    "Лена переносила их из своей записной книжки на лист. Оставалось посчитать эту неделю."
-    pause 0.5
-    show un normal sport with dissolve:
-        align(0.95,0.3) zoom 1.5 xzoom -1
-    un "Значит, смотри. У нас оставалось тридцать рублей."
-    un "Квартплата – два восемьдесят, за воду – рубль восемьдесят, за свет – рубль, за отопление – рубль пятьдесят четыре, за газ – шестьдесят копеек, да за радио – полрубля."
-    un "Итого восемь двадцать четыре."
-    un "Это я оплатила три дня назад."
-    un "Дальше, вот у меня записано по дням. Пять двадцать я потратила в выходные, ходила на рынок."
-    un "Два рубля потратила сегодня, должно быть четырнадцать пятьдесят шесть."
-    "Я пересчитал при ней деньги. Но почему-то… тринадцать шестьдесят шесть?"
-    me "Не сходится. Девяносто копеек не хватает."
-    "Лена почему-то сильно напряглась."
-    show un smile2 sport with dissolve
-    un "Не знаю… может что-то ещё купила. Неужели забыла записать?"
-    "Лена как-то странно улыбнулась, будто невпопад. Недостача звучит не очень смешно."
-    "Мы вписали, сколько имели на самом деле, поправив расходы. Тем не менее… странно."
-    window hide
-    pause 1.0
-    scene bg black with dissolve
-
-    #***
-    #здесь артецкий у Вадим Зы попросить... потом это сделаю
-    pause 1
-    scene bg kvartira_rvp with dissolve
-    "Один раз я увлёкся учёбой и не заметил, что надо было спать. Об этом мне напомнила Лена – подошла и обняла сзади."
-    un "Сёма, я тебя жду."
-    me "Ленусик, подожди ещё минут пятнадцать."
-    "Лена пришла снова. И была настойчивей."
-    un "Всё, Сёма, время вышло. Надо было заниматься, а не ворон считать."
-    un "У нас в интернате например после отбоя нельзя было уроки делать. Ходили по комнатам и проверяли. Не успел – сам виноват."
-    "Лена пыталась вырвать у меня из рук тетрадь, но я не сдавался."
-    un "В принципе, можно и на стуле. Хотя сломать можно. Ну, Сёма сам и будет чинить."
-    "Лена просунула ногу, чтобы сесть мне на колени. Я наконец сдался. Пришлось закончить с учёбой и переместиться на кровать. Прямо с Леной."
-    pause .5
-    scene bg black with dissolve
-    pause .5
-    "Вот ведь упрямая."
-    pause 1.0
-    scene bg black with dissolve
-    
-    pause 1.0
-    scene bg black with dissolve
-    "Я лежал и никак не мог уснуть. Я слышал звук от потолка в тишине. Будто большой подшипник катали по бетонной плите."
-    "Мы же на последнем этаже живём, у нас даже чердака нет. Что это?"
-    "Лена, кажется, уснула. А я думал о нашей с ней жизни."
-    "Коммунизм – рай на всей земле, у нас рай на тридцати трёх квадратах этой однушки. С каждого по способностям, каждому по потребностям."
-    "Мы делаем всё, на что способны и стараемся удовлетворить все потребности друг друга."
-    "В раю все ходили голыми. Мы сейчас с Леной тоже в таком состоянии."
-    "Ну прямо таки Адам и Ева. Будет ли запретный плод у Лены? Тут скорее наоборот, я свой вкусил, но изгнан не был."
-    "Только Бога в этом коммунистическом раю нет, на то он и коммунистический. Сами себе боги, решаем свою судьбу."
-    "Лена непохожа на того, кто поддастся искушению. Впрочем, знаю ли я её?"
-    "Скорее да, чем нет. За годы жизни удалось изучить её характер и повадки, но она всегда может выкинуть какой-нибудь сюрприз."
-    "Поживём – увидим."
-
-    pause 1
-    window hide
-    scene bg prih_rvp with dissolve
-    "И этот сюрприз произошёл."
-#ВСТАВИТЬ ПЕРЕД ДЕМО
-
-
+    stop ambience fadeout 1
 #ВСТАВИТЬ ПОСЛЕ ДЕМО
-    scene bg kvartira_rvp with dissolve
+    play ambience ambience_medstation_inside_night fadein 1
+    scene bg bedroom_rvp with dissolve
     window hide
     show un smile sport:
         align(.5,.5) pos(1.2,.5) alpha 0 xzoom -1
@@ -5961,9 +5980,11 @@ label pogodite_poka:
     scene bg black with dissolve
     "Я пожелал пережить нам с Леной этот год. На этом мы не закончили. Зажгли ещё свечу и попили чаю с тортом."
     "В тот вечер мне снова захотелось назвать нашу квартиру раем в панельке."
+    stop ambience fadeout 1
 
     pause 1.0
-    scene bg okno_rvp with dissolve
+    play ambience ambience_cold_wind_loop fadein 1
+    scene okno_night_zoom_rvp with dissolve
     $ set_mode_rvp(nvl)
     window show
     "Я вышел на балкон. Он как особое место, где мы снимаем маски, забываем о рутине и начинаем думать о вещах поважнее того, что сделать на завтра."
@@ -6033,7 +6054,9 @@ label pogodite_poka:
     "То есть Лену, но не ту Лену…"
     "Чувак, заканчивай с этим. Ты сейчас своими вымыслами обидел своего любимого человека. Нельзя её оставлять, сходи и извинись."
     pause 1.0
-    scene bg kvartira_rvp with dissolve
+    stop ambience fadeout 1
+    scene bg bedroom_rvp with dissolve
+    play ambience ambience_medstation_inside_night fadein 1
     pause 1.0
     #здесь цг будет
     "Я зашёл в спальню и закрыл балкон. Лёг обратно к Лене."
@@ -6047,3 +6070,5 @@ label pogodite_poka:
     "Лена молча потянулась. В темноте я смог увидеть её улыбку. Она поцеловала меня."
     un "Хорошо. Давай спать."
     "Мы пожелали друг другу спокойной ночи и уснули."
+    stop ambience fadeout 1
+    jump rvp
