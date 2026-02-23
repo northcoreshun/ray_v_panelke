@@ -70,11 +70,55 @@ init:
     $ mods["rvp"] = "{font=[font_who_rvp]}Рай в панельке"
 
     #Титры
-    $ rvp_credits_ = "{font=[font_rvp]}Спасибо за прочтение части \n\n\n\n Сценарий - northcoreshun\n\n Код - \n\n Художник - \n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
-    $ rvp_credits_b2 = "{font=[font_rvp]}Спасибо за прочтение части 2Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Квас Квасыч, northcoreshun\n\n Работа в Photoshop - northcoreshun\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Благодарности:\n\n Noldor - вычитка\n\n poi - помощь с кодом\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
-    $ rvp_credits_b1 = "{font=[font_rvp]}Спасибо за прочтение части 1Б!\n\n\n\n Сценарий - northcoreshun\n\n Код - Flip Flaps, northcoreshun\n\n Художник интерьера вокзала - Himbeere\n\n Помощь с фонами - Андрей Серебро\n\n Новые спрайты в фш - Андрей Фоксаров\n\n ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n Благодарность:\n\n Лапенко и анониму за поддержку мода донатом.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
-    $ rvp_credits_a1 = "{font=[font_rvp]}Спасибо за прочтение части 1А!\n\n\n\n Сценарий - northcoreshun\n\n Код и работа в Photoshop - northcoreshun\n\n Благодарность:\n\n Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели - за помощь с текстом.\n\n Cyber Patsan - за помощь с кодом и передачу полезных навыков кодинга.\n\n\n Были использованы материалы других модов.\n\n Авторам также выражаю благодарность."
-
+    $ rvp_credits_ = """{font=[font_rvp]}Спасибо за прочтение части !\n\n\n\n
+Сценарий - northcoreshun\n\n
+Код - \n\n
+Художник - \n\n
+Были использованы материалы других модов.\n\n
+Авторам также выражаю благодарность."""
+    $ rvp_credits_a2 = """{font=[font_rvp]}Спасибо за прочтение части 2А!\n\n\n\n
+Сценарий - northcoreshun\n\n
+Код - Квас Квасыч, northcoreshun\n\n
+Художник вида с балкона - Himbeere\n\n
+ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n
+ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n
+Благодарности:\n\n
+poi, Mystiss, 140 kg of sex и всей беседе «Закодированные» за помощь с кодом\n\n
+Были использованы материалы других модов.\n\n
+Авторам также выражаю благодарность."""
+    $ rvp_credits_b2 = """{font=[font_rvp]}Спасибо за прочтение части 2Б!\n\n\n\n
+Сценарий - northcoreshun\n\n
+Код - Квас Квасыч, northcoreshun\n\n
+Работа в Photoshop - northcoreshun\n\n
+ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n
+ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n
+Благодарности:\n\n
+Noldor - вычитка\n\n
+poi - помощь с кодом\n\n
+Были использованы материалы других модов.\n\n
+Авторам также выражаю благодарность."""
+    $ rvp_credits_b1 = """{font=[font_rvp]}Спасибо за прочтение части 1Б!\n\n\n\n
+Сценарий - northcoreshun\n\n
+Код - Flip Flaps, northcoreshun\n\n
+Художник интерьера вокзала - Himbeere\n\n
+Помощь с фонами - Андрей Серебро\n\n
+Новые спрайты в фш - Андрей Фоксаров\n\n
+ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n
+ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n
+Редакторы - Денис Плеханов, Арсений Ожигин, Максим Болдин\n\n
+Благодарности:\n\n
+Лапенко и анониму за поддержку мода донатом.\n\n\n
+Были использованы материалы других модов.\n\n
+Авторам также выражаю благодарность."""
+    $ rvp_credits_a1 = """{font=[font_rvp]}Спасибо за прочтение части 1А!\n\n\n\n
+Сценарий - northcoreshun\n\n
+Код и работа в Photoshop - northcoreshun\n\n
+Благодарности:\n\n
+Храм Богини Лены - за публикацию и за полезную критику по тексту.\n\n
+Андрей Бганко, Денис Плеханов, Ольга Левченко и другие бета-читатели - за помощь с текстом.\n\n
+Cyber Patsan - за помощь с кодом и передачу полезных навыков кодинга.\n\n\n
+Были использованы материалы других модов.\n\n
+Авторам также выражаю благодарность."""
     #Текст-изображения
     #Для анимаций
     image uppertext = ParameterizedText(style="rvp")
@@ -85,6 +129,7 @@ init:
     #Текст реплик вне текстбокса БУДЕТ ИЗМЕНЁН
     image screentext_left = ParameterizedText(style="rvp",textalign=.0,size=40)
     image screentext_right = ParameterizedText(style="rvp",textalign=1.,size=40)
+    image screentext = ParameterizedText(style="rvp",textalign=1.,size=40,xmaximum=.3)
     #Текст по центру экрана
     image centertext = ParameterizedText(style="rvp")
 
@@ -106,7 +151,9 @@ init:
     #Зазумленные изображения
     image okno_night_zoom_rvp = Transform("bg okno_night_rvp", zoom=.35)
     image okno_day_zoom_rvp = Transform("bg okno_day_rvp", zoom=.35)
-
+    #Рамки кибербро
+    image black_1 = Solid("#000")
+    image black_2 = Solid("#000")
 label rvp:
     scene bg black with dissolve
     $ chars_define_rvp()
@@ -272,7 +319,7 @@ label showtext_rvp(outertext_upper,outertext_lower):
     stop music fadeout 2
     return
 
-#Функции реплик вне экрана
+#Функции реплик вне текстбокса
 label sementext_rvp(replika):
     show screentext_left replika zorder 2:
         anchor(0.,.5) pos(.6,.45)
@@ -287,7 +334,13 @@ label untext_rvp(replika):
     $ renpy.pause()
     hide screentext_right with dissolve
     return
-
+label screentext_rvp(replika,posx,posy):
+    show screentext replika zorder 2:
+        anchor(1.,.5) pos(posx,posy)
+    with dissolve
+    $ renpy.pause()
+    hide screentext with dissolve
+    return
 #Плавный выход из модаПОДКЛЮЧИТЬВМОДИЛИУБРАТЬ
 label exit_rvp:
     stop sound fadeout 2
@@ -367,7 +420,9 @@ label a1_rvp:
     "С такими мыслями я подходил к троллейбусному депо. Моему месту работы." with dissolve
     window hide
 
-    scene bg ext_trolley_rvp with dissolve
+    scene bg ext_trolley_rvp:
+        blur 5
+    with dissolve
     window show
     "До рассвета ещё далеко, часы на вахте показывали пять утра. Смена начинается." with dissolve
     "Взяв листок, я иду к своему троллейбусу под номером 1480." with dissolve
@@ -395,7 +450,9 @@ label a1_rvp:
     "Чёрт, местные словечки уже прилипают к моей речи. Как, например “чай”, который не в значении напитка, а как частица “всё-таки”." with dissolve
     "Ну, вот и выезжать пора. Покидаю ворота первого депо и выхожу на маршрут." with dissolve
     window hide
-    scene bg ext_trolley_rvp with dissolve
+    scene bg ext_trolley_rvp:
+        blur 5
+    with dissolve
     window show
     "Довольно интересно получилось, что я вожу троллейбус. После переезда в Горький стал искать работу." with dissolve
     "Чтобы не тратить время и деньги на дорогу, искал работу у дома. Да и Лена просила, чтобы работа была недалеко, ей так спокойнее было за меня." with dissolve
@@ -504,7 +561,9 @@ label a1_rvp:
     "Смена выдалась трудной, усы слетали с проводов раза в два чаще обычного." with dissolve
     "Один раз чуть в аварию не попал, причём по своей вине, задумался о вечере. Но это всё позади, остались считанные метры и я свободен." with dissolve
     window hide
-    scene bg ext_trolley_rvp with dissolve
+    scene bg ext_trolley_rvp:
+        blur 5
+    with dissolve
     window show
     "Часы в салоне показывали три часа дня. Я завёл троллейбус в гараж, провёл все необходимые процедуры по выключению машины." with dissolve
     stop sound_loop fadeout 1
@@ -5409,7 +5468,8 @@ label b2_rvp:
     stop ambience fadeout 1
     window hide
     play music endsummer_rvp noloop fadein 1
-    $ renpy.pause(4.0)#потом заменить на анимашку
+    $ renpy.pause(4.0)
+#потом заменить на анимашку
     show credits rvp_credits_b2:
         xalign 0.5
         ypos 1.3
@@ -5430,7 +5490,7 @@ label a2_rvp:
     play ambience ambience_medstation_inside_night fadein 1
     scene cg in_bed bed_rvp
     show cg in_bed un_1_rvp as un1
-    show cg in_bed me_1_rvp as me1
+    show cg in_bed me_2_rvp as me2
     with dissolve
     un "И зачем ты в драку полез?" with dissolve
     me "Он надо мной насмехался."
@@ -5513,7 +5573,9 @@ label a2_rvp:
     scene bg black with dissolve
     stop ambience fadeout 1
 
-    scene bg ext_trolley_rvp with dissolve
+    scene bg ext_trolley_rvp:
+        blur 5
+    with dissolve
     play ambience ambience_cold_wind_loop fadein 1
     "Утром понедельника я пошёл на свою горячо любимую работу."
 #убрал лишнее слово собутыльников
@@ -5545,9 +5607,6 @@ label a2_rvp:
     $ day_time
     play ambience ambience_medstation_inside_night fadein 1
     scene bg bedroom_rvp with dissolve
-    #show black:
-        #alpha 0.4
-    #un smile
     "И снова потянулись одинаковые дни. Однако теперь Лена взяла меня на контроль, и я подтягивал учёбу. Каждый день – конспекты, задачи." with dissolve
     show un smile2 sport with dissolve
     "Перед сном – краткий пересказ выученного Лене."
@@ -5564,22 +5623,22 @@ label a2_rvp:
         align(.5,.5) pos (.2,.8)
     with dissolve
     play music kletka_rvp fadein 1
-    "Скоро наступил праздник. Праздник, из-за которого Лена оставила меня тогда наедине со своими мыслями."
-    "7 ноября. День Октябрьской Революции."
-    "В детстве остались лишь очень старые воспоминания, как я смотрел на парад. И вот всё пошло по-новой."
-    "В тот день я поймал ощущение, будто снова проживаю то время, но во взрослом состоянии."
+    call screentext_rvp("Скоро наступил праздник. Праздник, из-за которого Лена оставила меня тогда наедине со своими мыслями.",.9,.6)
+    call screentext_rvp("7 ноября. День Октябрьской Революции.",.9,.6)
+    call screentext_rvp("В детстве остались лишь очень старые воспоминания, как я смотрел на парад. И вот всё пошло по-новой.",.9,.6)
+    call screentext_rvp("В тот день я поймал ощущение, будто снова проживаю то время, но во взрослом состоянии.",.9,.6)
     show centertext "7 ноября 1990 года состоялся последний парад в истории СССР, посвящённый Дню Октябрьской Революции." with dissolve
     $ renpy.pause()
     hide centertext with dissolve
-    "Лена увлечённо смотрела парад и праздничные передачи. Даже как-то подозрительно молчала, будто ещё и думала о чём-то своём."
-    #дрожащие буквы
-    "{cps=15}Я даже не видел её лица в тот момент.{\cps=15}"
-    "Мы не обсуждали это. Я просто ловил момент и смотрел, как страна постепенно уходит в историю."
-    "Мысли ворочались в голове."
-    "Скоро девяностые. Нужно было что-то делать. Но я не знаю. Я погрузился в спокойную жизнь, в бытовуху. Так жить приятнее, в этой жизни есть Лена."
-    "Нужен был запасной план. Но у меня нет знакомых, которые будут строить бизнес. Я – простой водитель."
-    "Мысли увязали и захлёбывались, не приводя к какому-то итогу."
-    "Хрен с ним, подумаю потом. Не завтра же страна развалится. Ещё годик простоит."
+    call screentext_rvp("Лена увлечённо смотрела парад и праздничные передачи. Даже как-то подозрительно молчала, будто ещё и думала о чём-то своём.",.9,.6)
+    #дрожащие буквы?
+    call screentext_rvp("Я даже не видел её лица в тот момент.",.9,.6)
+    call screentext_rvp("Мы не обсуждали это. Я просто ловил момент и смотрел, как страна постепенно уходит в историю.",.9,.6)
+    call screentext_rvp("Мысли ворочались в голове.",.9,.6)
+    call screentext_rvp("Скоро девяностые. Нужно было что-то делать. Но я не знаю. Я погрузился в спокойную жизнь, в бытовуху. Так жить приятнее, в этой жизни есть Лена.",.9,.6)
+    call screentext_rvp("Нужен был запасной план. Но у меня нет знакомых, которые будут строить бизнес. Я – простой водитель.",.9,.6)
+    call screentext_rvp("Мысли увязали и захлёбывались, не приводя к какому-то итогу.",.9,.6)
+    call screentext_rvp("Хрен с ним, подумаю потом. Не завтра же страна развалится. Ещё годик простоит.",.9,.6)
     stop music fadeout 1
     window hide
     pause 1
@@ -5642,7 +5701,7 @@ label a2_rvp:
     scene bg bedroom_rvp:
         zoom 1 align(0.5, 0.5)
         ease 5 zoom 2
-    show un evil_smile sport at left:
+    show un evil_smile sport:
         zoom 1.0 align(0.5, 0.5)
         ease 5 zoom 2 align(0.5, 0.25)
     un "Я так подумала."
@@ -5679,10 +5738,10 @@ label a2_rvp:
         align(0.4,0.3)
         ease 2 zoom 1.5
     "На следующий день Лена, красовавшись своей талией перед зеркалом, заявила:"
-    hide un with dissolve
+    hide un
     show un_rvp hitr sport:
         align(0.4,0.3) zoom 1.5
-    with dissolve
+    with dspr
     un "Сём, мне кажется, я толстая."
     "Теперь уже я ухмыльнулся. Лена успела понять, что я задумал."
     hide un_rvp
@@ -5716,13 +5775,26 @@ label a2_rvp:
     show un normal sport with dissolve:
         align(0.95,0.3) zoom 1.5 xzoom -1
     un "Значит, смотри. У нас оставалось тридцать рублей."
+    show centertext "30 руб." as image0:
+        anchor(0.5, 0.) pos(.2,.2)
     un "Квартплата – два восемьдесят, за воду – рубль восемьдесят, за свет – рубль, за отопление – рубль пятьдесят четыре, за газ – шестьдесят копеек, да за радио – полрубля."
+    show centertext "-2,80 руб.\n-1,00 руб.\n-1,54 руб.\n-0,60 руб.\n-0,50 руб." as image1:
+        anchor(0.5, 0.) pos(.2,.25)
+    with dissolve
     un "Итого восемь двадцать четыре."
     un "Это я оплатила три дня назад."
     un "Дальше, вот у меня записано по дням. Пять двадцать я потратила в выходные, ходила на рынок."
+    show centertext "-5,20 руб." as image2:
+        align(0.5, 0.) pos(.2,.55)
     un "Два рубля потратила сегодня, должно быть четырнадцать пятьдесят шесть."
+    show centertext "-2,00 руб." as image3:
+        align(0.5, 0.) pos(.2,.6)
     "Я пересчитал при ней деньги. Но почему-то… тринадцать шестьдесят шесть?"
+    show centertext "13,66 руб." as image4:
+        align(0.5, 0.) pos(.2,.65)
     me "Не сходится. Девяносто копеек не хватает."
+    show centertext "{color=FF3200}0,90 руб.?" as image5:
+        align(0.5, 0.) pos(.2,.7)
     "Лена почему-то сильно напряглась."
     show un smile2 sport with dissolve
     un "Не знаю… может что-то ещё купила. Неужели забыла записать?"
@@ -5731,29 +5803,30 @@ label a2_rvp:
     window hide
     pause 1.0
     scene bg black with dissolve
-
-    #здесь артецкий у Вадим Зы попросить... потом это сделаю
-    pause 1
-    scene bg bedroom_rvp with dissolve
-    "Один раз я увлёкся учёбой и не заметил, что надо было спать. Об этом мне напомнила Лена – подошла и обняла сзади."
-    un "Сёма, я тебя жду."
-    me "Ленусик, подожди ещё минут пятнадцать."
-    "Лена пришла снова. И была настойчивей."
-    un "Всё, Сёма, время вышло. Надо было заниматься, а не ворон считать."
-    un "У нас в интернате например после отбоя нельзя было уроки делать. Ходили по комнатам и проверяли. Не успел – сам виноват."
-    "Лена пыталась вырвать у меня из рук тетрадь, но я не сдавался."
-    un "В принципе, можно и на стуле. Хотя сломать можно. Ну, Сёма сам и будет чинить."
-    "Лена просунула ногу, чтобы сесть мне на колени. Я наконец сдался. Пришлось закончить с учёбой и переместиться на кровать. Прямо с Леной."
-    pause .5
-    scene bg black with dissolve
-    pause .5
-    "Вот ведь упрямая."
-    pause 1.0
-    scene bg black with dissolve
-    
-    pause 1.0
-    scene bg black with dissolve
+    #здесь бананой убрать галстук
+#    pause 1
+#    scene bg bedroom_rvp with dissolve
+#    "Один раз я увлёкся учёбой и не заметил, что надо было спать. Об этом мне напомнила Лена – подошла и обняла сзади."
+#    un "Сёма, я тебя жду."
+#    me "Ленусик, подожди ещё минут пятнадцать."
+#    "Лена пришла снова. И была настойчивей."
+#    un "Всё, Сёма, время вышло. Надо было заниматься, а не ворон считать."
+#    un "У нас в интернате например после отбоя нельзя было уроки делать. Ходили по комнатам и проверяли. Не успел – сам виноват."
+#    "Лена пыталась вырвать у меня из рук тетрадь, но я не сдавался."
+#    un "В принципе, можно и на стуле. Хотя сломать можно. Ну, Сёма сам и будет чинить."
+#    "Лена просунула ногу, чтобы сесть мне на колени. Я наконец сдался. Пришлось закончить с учёбой и переместиться на кровать. Прямо с Леной."
+#    pause .5
+#    scene bg black with dissolve
+#    pause .5
+#    "Вот ведь упрямая."
+#    pause 1.0
+    scene cg in_bed bed_rvp
+    show cg in_bed un_2_rvp as un2
+    show cg in_bed me_1_rvp as me1
+    with dissolve
+    play sound podshipnik_rvp
     "Я лежал и никак не мог уснуть. Я слышал звук от потолка в тишине. Будто большой подшипник катали по бетонной плите."
+    play sound podshipnik_rvp
     "Мы же на последнем этаже живём, у нас даже чердака нет. Что это?"
     "Лена, кажется, уснула. А я думал о нашей с ней жизни."
     "Коммунизм – рай на всей земле, у нас рай на тридцати трёх квадратах этой однушки. С каждого по способностям, каждому по потребностям."
@@ -5764,45 +5837,100 @@ label a2_rvp:
     "Лена непохожа на того, кто поддастся искушению. Впрочем, знаю ли я её?"
     "Скорее да, чем нет. За годы жизни удалось изучить её характер и повадки, но она всегда может выкинуть какой-нибудь сюрприз."
     "Поживём – увидим."
-
-    pause 1
     window hide
-    scene bg prih_rvp with dissolve
-    "И этот сюрприз произошёл."
-#ВСТАВИТЬ ПЕРЕД ДЕМО
-#    scene bg prih_rvp:
-#        align(0.1,0.5)
-#        ease 2 zoom 3
-#    scene bg bedroom_rvp with dissolve
-#    window show
-#    "В один день я пришёл домой. Из магнитофона громко играла музыка."
-#тут цг будет
-#    "Вдруг почуял странный запах… курева? Иногда соседи курили над окном и это чувствовалось. Но тут запах был сильнее и другим. Лены не было ни на кухне, ни в ванной."
+    scene bg black with dissolve
     stop ambience fadeout 1
-#    "Раздевшись, я вошел в комнату. Затем на балкон."
-#тут сложная режиссура
-#    "Напуганные зелёные глаза смотрели на меня."
-#    "А чуть ниже, в губах…"
-#    "В губах была сигарета. Лена курила."
-#    "Быстрым, самопроизвольным движением она взяла сигарету пальцами."
-#    "Из-за музыки она не услышала, как я зашёл. Или была в своих мыслях. Поэтому моё появление лишило её дара речи. Я, правда, тоже не знал, что сказать."
-#    "Но всё же взял инициативу в руки."
-#    me "Лена… ты… куришь?"
-#    un "Ну… да…"
-#    un "Сёма… прости…"
-#    "Глаза Лены увлажнились. Она закрыла их и приложила к голове руку с сигаретой."
-#    un "Какая глупость! Какая я идиотка!"
-#    me "Лен, что случилось?"
-#    un "Господи, смотреть тебе в глаза стыдно даже."
-#    "Я взял её за другую руку. Аккуратно вытащил сигарету из пальцев, чтобы не обожгла себя случайно. Или намеренно."
-#    me "Лен, всё нормально. Давай успокоимся."
-#    "Но Лена не успокаивалась. Плач перешёл в рыдание."
-#    "Я обнял её. Лена продолжала рыдать, завывая и со всхлипываниями. Но скоро всё же затихла и просто сбивчиво дышала."
-#    me "Лен, мы можем сейчас спокойно поговорить?"
-#    un "Да."
-#    "Ответила Лена из глубины объятий."
-#    "Я аккуратно развернул Лену к окну. Сигарета уже дотлевала."
+    pause 1
+
+    scene bg prih_rvp with dissolve
+    window show
+    "И этот сюрприз произошёл."
+    play ambience ambience_medstation_inside_night fadein 1
+    scene bg prih_rvp:
+        align(0.1,0.5)
+        ease 2 zoom 3
+    scene bg bedroom_reverse_rvp:
+        align(0.5, 0.5) zoom 1.7
+    with dissolve
+    window show
+    "В один день я пришёл домой. Из магнитофона громко играла музыка."
+    "Вдруг почуял странный запах… курева? Иногда соседи курили над окном и это чувствовалось. Но тут запах был сильнее и другим. Лены не было ни на кухне, ни в ванной."
+    stop ambience fadeout 1
+    "Раздевшись, я вошел в комнату. Затем на балкон."
+    scene okno_day_zoom_rvp:
+        subpixel True
+        truecenter
+        anchor(.5,.5) pos(.2,.7) zoom 3 blur 5
+        ease 7 xpos 1.5
+    show un_rvp shy sport siga:
+        subpixel True
+        anchor(.5,.5) pos(.1,.9) zoom 3
+        ease 7 xpos .5
+    show black_1:
+        subpixel True
+        align(.5,.5) ypos 0.
+        ease 1 ypos -.3
+    show black_2:
+        align(.5,.5) ypos 1.
+    with dissolve
+    "Напуганные зелёные глаза смотрели на меня."
+    "А чуть ниже, в губах…"
+    show black_1:
+        subpixel True
+        ease 1 ypos 0.
+    show black_2:
+        subpixel True
+        ease 1 ypos 1.3
+    "В губах была сигарета. Лена курила."
+    show okno_day_zoom_rvp:
+        subpixel True
+        truecenter
+        ease 2 zoom 1 blur 0 xpos .5
+    show un_rvp shy sport siga:
+        subpixel True
+        ease 2 zoom 2
+    show black_1:
+        subpixel True
+        ease 1 ypos -.5
+    show black_2:
+        subpixel True
+        ease 1 ypos 1.5
+    "Быстрым, самопроизвольным движением она взяла сигарету пальцами."
+    show un_rvp shocked sport siga with dissolve
+    "Из-за музыки она не услышала, как я зашёл. Или была в своих мыслях. Поэтому моё появление лишило её дара речи. Я, правда, тоже не знал, что сказать."
+    "Но всё же взял инициативу в руки."
+    me "Лена… ты… куришь?"
+    un "Ну… да…"
+    hide un_rvp
+    show un_rvp sad sport siga:
+        align(.5,.5) ypos .9 zoom 2
+    with dissolve
+    un "Сёма… прости…"
+    hide un_rvp
+    show un_rvp cry sport siga:
+        align(.5,.5) ypos .9 zoom 2
+    with dissolve
+    "Глаза Лены увлажнились. Она закрыла их и приложила к голове руку с сигаретой."
+    un "Какая глупость! Какая я идиотка!"
+    me "Лен, что случилось?"
+    un "Господи, смотреть тебе в глаза стыдно даже."
+    hide un_rvp
+    show un cry sport:
+        align(.5,.5) ypos .9 zoom 2
+    with dissolve
+    "Я взял её за другую руку. Аккуратно вытащил сигарету из пальцев, чтобы не обожгла себя случайно. {cps=15}Или намеренно.{/cps}"
+    me "Лен, всё нормально. Давай успокоимся."
+    "Но Лена не успокаивалась. Плач перешёл в рыдание."
+    show un cry sport:
+        ease 2 pos(-.1,1.1) rotate -10 zoom 3
+    "Я обнял её. Лена продолжала рыдать, завывая и со всхлипываниями. Но скоро всё же затихла и просто сбивчиво дышала."
+    me "Лен, мы можем сейчас спокойно поговорить?"
+    un "Да."
+    "Ответила Лена из глубины объятий."
+    "Я аккуратно развернул Лену к окну. Сигарета уже дотлевала."
 #повтор слова окно
+    show black with dissolve
+    pause 1.0
     play ambience ambience_cold_wind_loop fadein 1
     scene cg balkon balkon_0_rvp zorder 1
     show cg balkon un_1_rvp as un1 zorder 3
@@ -5916,7 +6044,7 @@ label a2_rvp:
     scene bg black with dissolve
     stop music fadeout 1
     stop ambience fadeout 1
-#ВСТАВИТЬ ПОСЛЕ ДЕМО
+
     play ambience ambience_medstation_inside_night fadein 1
     scene bg bedroom_rvp with dissolve
     window hide
@@ -5940,16 +6068,17 @@ label a2_rvp:
     pause 1.0
     scene bg black with dissolve
 
+    $ persistent.sprite_time = "night"
+    $ night_time
     pause 1.0
-    scene bg prih_rvp with dissolve
+    scene bg prih_dark_rvp with dissolve
     "Я пришёл домой после смены. За окном уже была зима, тёмная и холодная. Дома тоже было темно. Вдруг я заметил пламя свечи на кухне."
     "Ко мне вышла Лена."
     un "Наконец-то ты пришёл. Жду тебя на кухне."
-    #bg kitchen_rvp пока что
-    scene bg prih_rvp:
-        align(0.1,0.5)
+    scene bg prih_dark_rvp:
+        align(0.9,0.5)
         ease 2 zoom 3
-    scene bg kitchen_rvp with dissolve
+    scene bg kitchen_dark_rvp with dissolve
     window show
     show un smile sport with dissolve:
         align(.85,.5) xzoom -1
@@ -6042,7 +6171,6 @@ label a2_rvp:
     me "А потом встречу тебя в своём мире. И там мы уже заживём."
     "Лена стояла в шоке. Её напуганный взгляд отрезвил меня."
     "Она наверное подумала, что я сумашед…{nw}" #вот тут автопереход на некст строку
-    
     window hide
     show un surprise sport:
         align(.5,.5)
@@ -6055,10 +6183,13 @@ label a2_rvp:
     "Чувак, заканчивай с этим. Ты сейчас своими вымыслами обидел своего любимого человека. Нельзя её оставлять, сходи и извинись."
     pause 1.0
     stop ambience fadeout 1
-    scene bg bedroom_rvp with dissolve
+
+    scene cg in_bed bed_rvp
+    show cg in_bed un_1_rvp as un1
+    show cg in_bed me_2_rvp as me2
+    with dissolve
     play ambience ambience_medstation_inside_night fadein 1
     pause 1.0
-    #здесь цг будет
     "Я зашёл в спальню и закрыл балкон. Лёг обратно к Лене."
     me "Лен, прости пожалуйста. Я наговорил глупостей."
     un "Да не, ничего страшного. Всем нам надо выговориться порой."
@@ -6068,7 +6199,19 @@ label a2_rvp:
     me "И я совсем не хочу проснуться без тебя."
     me "Если я и хотел бы вернуться домой, то только с тобой."
     "Лена молча потянулась. В темноте я смог увидеть её улыбку. Она поцеловала меня."
+    hide un1
+    show cg in_bed un_2_rvp as un2
+    with dissolve
     un "Хорошо. Давай спать."
     "Мы пожелали друг другу спокойной ночи и уснули."
+    window hide
     stop ambience fadeout 1
+    scene okno_night_zoom_rvp with dissolve
+#    play music fadein 1
+    show credits rvp_credits_a2:
+        xalign 0.5
+        ypos 1.3
+        linear 52.0 ypos -4.0
+    $ renpy.pause()
+#    stop music fadeout 2
     jump rvp
