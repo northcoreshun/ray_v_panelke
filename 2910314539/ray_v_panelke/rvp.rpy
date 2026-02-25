@@ -83,7 +83,7 @@ init:
 ХУДОЖНИК ЦГ И СПРАЙТОВ - PETER KORS\n\n
 ОТБЛАГОДАРИТЕ ЕГО ДОНАТОМ ПОЖАЛУЙСТА, ССЫЛКА В ОПИСАНИИ\n\n
 Благодарности:\n\n
-poi, Mystiss, 140 kg of sex и всей беседе «Закодированные» за помощь с кодом\n\n
+poi, Mystiss, 140 kg of sex и всей беседе «Закодированные» за помощь с кодом.\n\n
 Были использованы материалы других модов.\n\n
 Авторам также выражаю благодарность."""
     $ rvp_credits_b2 = """{font=[font_rvp]}Спасибо за прочтение части 2Б!\n\n\n\n
@@ -5488,6 +5488,8 @@ label a2_rvp:
     $ night_time
     call showtext_rvp("Сторона А. Часть 2","")
     play ambience ambience_medstation_inside_night fadein 1
+    play music rvp2a_1_rvp fadein 1
+#формат m4a не работает
     scene cg in_bed bed_rvp
     show cg in_bed un_1_rvp as un1
     show cg in_bed me_2_rvp as me2
@@ -5507,6 +5509,7 @@ label a2_rvp:
     un "Ничем. Будем просто лежать вместе. И общаться."
     scene bg black with dissolve
     stop ambience fadeout 1
+    stop music fadeout 1
     pause 1.5
 
     $ persistent.sprite_time = "sunset"
@@ -5534,6 +5537,7 @@ label a2_rvp:
     pause 1
     scene bg kitchen_rvp with dissolve
     show un angry sport with dissolve
+    play music music_list["awakening_power"]
     "Лена отчитывала меня. Ей, отличнице, это казалось чем-то немыслимым."
     un "Сёма, я не поняла! Где конспект за… да это месяц назад было!"
     un "Ты так ноешь, что у тебя нет перспектив. Но вот же, тебе дают возможность получить образование! Стать достойным меня, как ты сам говоришь."
@@ -5545,6 +5549,9 @@ label a2_rvp:
     scene bg kitchen_rvp:
         align(0.6,0.8)
         ease 2 zoom 1.5
+    stop music fadeout 1
+    pause .5
+    play music rvp2a_4_rvp fadein 1
     "Пришлось безотлагательно сесть за учёбу. Два часа я писал конспект по самому запущенному предмету."
     "Выходной был подпорчен снова. Хотелось конечно обвинить Лену – ну взялся бы за дело завтра!"
     "Но нет, я довёл до этой ситуации."
@@ -5571,12 +5578,14 @@ label a2_rvp:
     un "Что, думаешь за день всё выучишь? Так у тебя работа! Нельзя за рулём отвлекаться."
     un "В общем, Сём. Всё как в песне – экзамен нельзя на арапа сдавать. Займись учёбой сам, чтобы я не стояла над тобой."
     scene bg black with dissolve
+    stop music fadeout 1
     stop ambience fadeout 1
 
     scene bg ext_trolley_rvp:
         blur 5
     with dissolve
     play ambience ambience_cold_wind_loop fadein 1
+    play music rvp2a_3_rvp fadein 1
     "Утром понедельника я пошёл на свою горячо любимую работу."
 #убрал лишнее слово собутыльников
     "Встретил своих собутыльников. Пожалуй, теперь уже бывших."
@@ -5613,6 +5622,7 @@ label a2_rvp:
     un "Это хорошая методика, чтобы запомнить. Не поймёшь материал, пока не расскажешь другому."
     un "Ещё вечером надо учить перед сном, утром всё лучше в голове вспоминается. Так наш мозг устроен."
     un "Я девочкам в группе всегда пересказываю лекции на следующий день, чтобы не отставали."
+    stop music fadeout 1
     show un smile sport:
         align(.5,.5)
         ease .5 pos(.2,.5) alpha 0
@@ -5648,6 +5658,7 @@ label a2_rvp:
     $ sunset_time
     pause 1
     scene bg bedroom_rvp with dissolve
+    play music rvp2a_2_rvp fadein 1
     "Выходные – время не только для того, чтобы нежиться в постели. Но и для полезной деятельности типа уборки."
     "Мы с Леной убирали весь наш однокомнатный дворец."
     "Когда мы уже закончили с пылью на полках и мебели и настала очередь пола, мне резко стало лень."
@@ -5688,6 +5699,7 @@ label a2_rvp:
     un "Вот, молодец! Заканчивай быстрее, я тебе бутербродов оставила. Но они могут не дождаться тебя, хи-хи!"
     "Наконец, я закончил с уборкой, убрал весь инвентарь и лёг к Лене. Она меня угостила чаем с бутербродами, а потом мы снова нежились под одеялом."
     pause 1
+    stop music fadeout 1
     scene bg black with dissolve
 
     pause 1
@@ -5697,6 +5709,7 @@ label a2_rvp:
     me "Лен, я тебя не достоин. Тебе нужен более обеспеченный мужчина."
     un "Да, Сём…"
     "Тихо сказала Лена."
+    play music music_list["doomed_to_be_defeated"] fadein 1
     "Стоп, что??"
     scene bg bedroom_rvp:
         zoom 1 align(0.5, 0.5)
@@ -5713,8 +5726,8 @@ label a2_rvp:
     show blink
     pause 1
     "Лена. Выбрала. Другого."
+    stop music fadeout 1
     "Я в шоке сел на кровать. Лена подошла и обняла меня." with vpunch
-    show unblink
     scene bg bedroom_rvp:
         subpixel True
         truecenter
@@ -5724,6 +5737,8 @@ label a2_rvp:
         subpixel True
         anchor(.5,.5) pos(.5,.8) zoom 2
         ease 20 xpos .33
+    hide blink
+    show unblink
     un "Сёма, прости, я пошутила! Просто ты достал уже со своим нытьём…"
     me "То есть нет никакого однокурсника?"
     un "Нет, конечно!"
@@ -5731,6 +5746,7 @@ label a2_rvp:
     pause 1.0
     scene bg black with dissolve
 
+    play music rvp2a_2_rvp fadein 1
     scene bg prih_rvp with dissolve:
         align(0.35,0.5)
         ease 2 zoom 1.5
@@ -5765,6 +5781,7 @@ label a2_rvp:
     "После того случая желание ныть пропало надолго. Лена тоже перестала так “ненавязчиво” выпрашивать комплименты."
     pause 1.0
     scene bg black with dissolve
+    stop music fadeout 1
 
     scene bg kitchen_rvp with dissolve:
         align(0.2,0.8) zoom 1.5
@@ -5846,6 +5863,7 @@ label a2_rvp:
     window show
     "И этот сюрприз произошёл."
     play ambience ambience_medstation_inside_night fadein 1
+    play music rvp2a_5_rvp fadein 1
     scene bg prih_rvp:
         align(0.1,0.5)
         ease 2 zoom 3
@@ -5857,6 +5875,7 @@ label a2_rvp:
     "Вдруг почуял странный запах… курева? Иногда соседи курили над окном и это чувствовалось. Но тут запах был сильнее и другим. Лены не было ни на кухне, ни в ванной."
     stop ambience fadeout 1
     "Раздевшись, я вошел в комнату. Затем на балкон."
+    play ambience ambience_cold_wind_loop fadein 1
     scene okno_day_zoom_rvp:
         subpixel True
         truecenter
@@ -5928,10 +5947,10 @@ label a2_rvp:
     un "Да."
     "Ответила Лена из глубины объятий."
     "Я аккуратно развернул Лену к окну. Сигарета уже дотлевала."
+    stop music fadeout 1
 #повтор слова окно
     show black with dissolve
     pause 1.0
-    play ambience ambience_cold_wind_loop fadein 1
     scene cg balkon balkon_0_rvp zorder 1
     show cg balkon un_1_rvp as un1 zorder 3
     show cg balkon me_1_rvp as me1 zorder 3
@@ -6078,7 +6097,10 @@ label a2_rvp:
     scene bg prih_dark_rvp:
         align(0.9,0.5)
         ease 2 zoom 3
-    scene bg kitchen_dark_rvp with dissolve
+    play music rvp2a_6_rvp fadein 1
+    scene bg kitchen_dark_rvp
+    show cake_rvp
+    with dissolve
     window show
     show un smile sport with dissolve:
         align(.85,.5) xzoom -1
@@ -6109,10 +6131,12 @@ label a2_rvp:
     scene bg black with dissolve
     "Я пожелал пережить нам с Леной этот год. На этом мы не закончили. Зажгли ещё свечу и попили чаю с тортом."
     "В тот вечер мне снова захотелось назвать нашу квартиру раем в панельке."
+    stop music fadeout 1
     stop ambience fadeout 1
 
     pause 1.0
     play ambience ambience_cold_wind_loop fadein 1
+    play music rvp2a_4_rvp fadein 1
     scene okno_night_zoom_rvp with dissolve
     $ set_mode_rvp(nvl)
     window show
@@ -6205,13 +6229,18 @@ label a2_rvp:
     un "Хорошо. Давай спать."
     "Мы пожелали друг другу спокойной ночи и уснули."
     window hide
+    stop music fadeout 1
     stop ambience fadeout 1
+    scene bg black with dissolve
+    pause 1.0
     scene okno_night_zoom_rvp with dissolve
-#    play music fadein 1
+    play music pachka_sigaret_solo_rvp fadein 1
+    play ambience ambience_cold_wind_loop fadein 1
     show credits rvp_credits_a2:
         xalign 0.5
         ypos 1.3
         linear 52.0 ypos -4.0
     $ renpy.pause()
-#    stop music fadeout 2
+    stop ambience fadeout 1
+    stop music fadeout 2
     jump rvp

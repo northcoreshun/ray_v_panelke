@@ -224,7 +224,7 @@ init python early:
         @timer
         def process_audio(self):
             """
-            Обрабатывает аудио. Поддерживает расширения (".wav", ".mp2", ".mp3", ".ogg", ".opus")
+            Обрабатывает аудио. Поддерживает расширения (".wav", ".mp2", ".mp3", ".ogg", ".opus", ".m4a")
 
             Имя аудио для вызова будет в формате:
             [имя][_постфикс]
@@ -232,7 +232,7 @@ init python early:
             Пример:
             newmusic_mymod
             """
-            audio_extensions = {".wav", ".mp2", ".mp3", ".ogg", ".opus"}
+            audio_extensions = {".wav", ".mp2", ".mp3", ".ogg", ".opus", ".m4a"}
             for file in self.renpyFiles:
                 if self.modID in file:
                     file_name = os.path.splitext(os.path.basename(file))[0] + self.modPostfix

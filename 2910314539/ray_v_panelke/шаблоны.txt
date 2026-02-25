@@ -126,6 +126,13 @@
     $ persistent.sprite_time = 
     $ _time
 
+#Титры - в отдельную функцию?
+    show credits rvp_credits_:
+        xalign 0.5
+        ypos 1.3
+        linear 52.0 ypos -4.0
+    $ renpy.pause()
+
 #Бг, цг
     scene bg  with dissolve
     show cg  with dissolve
