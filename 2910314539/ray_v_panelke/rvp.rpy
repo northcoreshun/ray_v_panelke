@@ -5486,9 +5486,9 @@ label a2_rvp:
     $ persistent.sprite_time = "night"
     $ night_time
     call showtext_rvp("Сторона А. Часть 2","")
+    pause 1
     play ambience ambience_medstation_inside_night fadein 1
-    play music rvp2a_1_rvp fadein 1
-#формат m4a не работает
+    play music rvp2a_1_rvp fadein 3
     scene cg in_bed bed_rvp
     show cg in_bed un_1_rvp as un1
     show cg in_bed me_2_rvp as me2
@@ -5508,7 +5508,6 @@ label a2_rvp:
     un "Ничем. Будем просто лежать вместе. И общаться."
     scene bg black with dissolve
     stop ambience fadeout 1
-    stop music fadeout 1
     pause 1.5
 
     $ persistent.sprite_time = "sunset"
@@ -5526,6 +5525,7 @@ label a2_rvp:
         ease 2 zoom 1.5
     un "Вот ты переживаешь из-за работы, а вообще-то, если отучишься, работа будет совсем другая."
     show un shy sport with dissolve
+    stop music fadeout 1
     "Вдруг Лена затихла на несколько секунд."
     un "Сёма. А как у тебя с учёбой?"
     me "Да… нормально."
@@ -5550,7 +5550,7 @@ label a2_rvp:
         ease 2 zoom 1.5
     stop music fadeout 1
     pause .5
-    play music rvp2a_4_rvp fadein 1
+    play music rvp2a_4_rvp fadein 3
     "Пришлось безотлагательно сесть за учёбу. Два часа я писал конспект по самому запущенному предмету."
     "Выходной был подпорчен снова. Хотелось конечно обвинить Лену – ну взялся бы за дело завтра!"
     "Но нет, я довёл до этой ситуации."
