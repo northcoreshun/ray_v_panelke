@@ -62,21 +62,31 @@ init python:
 
 screen rvp_say:
     window background None id "window":
-        $ timeofday = persistent.timeofday
-        padding(-1,-1) #хз почему но нужен этот отступ, ренпай багует 
         button:
+            offset(-7,-7)
+#хз почему но нужен это выравнивание, ренпай багует
+            xalign 0.
             xsize .06875
-            background "gui back_for_rvp"
+            background "vground_bar" #без этой строчки и прозрачного граунда тоже никак
             hover_background Fixed("gui left_bar_rvp", "lefttext")
             action ShowMenu("text_history")
 
         button:
-            xoffset -1
+            offset(7,7)
             xalign 1.
             xsize .06875
-            background "gui back_for_rvp"
-            hover_background Fixed("gui right_bar_rvp", "righttext")
+            background "vground_bar"
+            hover_background Fixed("right_bar", "righttext")
             action Skip()
+
+        button:
+            offset(-7,7)
+            yalign 1.
+            ysize .06875
+            background "hground_bar"
+            hover_background Fixed("bottom_bar", "bottomtext")
+            action HideInterface()
+
 
         if persistent.font_size == "large":
             text what id "what" font font_rvp outlines [(3,'#000',0,0)] color "#ffdd7d" pos(.1,.865) text_align(.5) xmaximum .8 size 35 line_spacing 1
@@ -87,11 +97,9 @@ screen rvp_say:
             text what id "what" font font_rvp outlines [(3,'#000',0,0)] color "#ffdd7d" pos(.1,.865) text_align .55 xmaximum .8 size 28 line_spacing 2
             if who:
                 text who id "who" font font_who_rvp outlines [(2,'#000',0,0)] pos(.1,.82) size 35 line_spacing 2
-        
-        imagebutton auto get_image("gui/dialogue_box/"+timeofday+"/hide_%s.png") pos(.895,.82) action HideInterface()
 
 screen rvp_nvl:
-    $ timeofday = persistent.timeofday
+    $ timeofday = persistent.timeofday #для изменения гуи в зависимости от времени дня
     window background Frame(get_image("gui/choice/"+timeofday+"/choice_box.png"),50,50) xfill True yfill True yalign .5 left_padding .091 right_padding .091 bottom_padding .078 top_padding .078:
         has vbox
         for who, what, who_id, what_id, window_id in dialogue:
@@ -118,21 +126,30 @@ screen rvp_nvl:
                             text caption style "nvl_menu_choice"
                     else:
                         text caption style "nvl_dialogue"
-
     button:
-        offset(-1,-1) #а тут ещё и padding не работает(( 
+        offset(-1,-1)
+#хз почему но нужен это выравнивание, ренпай багует
+        xalign 0.
         xsize .06875
-        background "gui back_for_rvp"
+        background "vground_bar" #без этой строчки и прозрачного граунда тоже никак
         hover_background Fixed("gui left_bar_rvp", "lefttext")
         action ShowMenu("text_history")
 
     button:
-        offset(1,-1) #а тут ещё и padding не работает(( 
+        offset(1,1)
         xalign 1.
         xsize .06875
-        background "gui back_for_rvp"
-        hover_background Fixed("gui right_bar_rvp", "righttext")
+        background "vground_bar"
+        hover_background Fixed("right_bar", "righttext")
         action Skip()
+
+    button:
+        offset(-1,1)
+        yalign 1.
+        ysize .06875
+        background "hground_bar"
+        hover_background Fixed("bottom_bar", "bottomtext")
+        action HideInterface()
 
 screen rvp_text_history_screen:
 
