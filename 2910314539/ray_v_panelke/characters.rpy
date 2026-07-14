@@ -60,20 +60,20 @@ init python:
         drop_shadow = (2, 2) # Наложение тени на текст
         for i, j in characters_rvp.items():
             if i == "narrator":
-                gl[i] = Character(None, kind=kind, what_color=what_color, what_drop_shadow=drop_shadow, ctc=None, ctc_position=None)
+                gl[i] = Character(None, kind=kind, what_color=what_color, what_drop_shadow=drop_shadow, ctc=None, ctc_position="fixed")
             elif i == "th":
-                gl[i] = Character(None, kind=kind, what_color=what_color, what_drop_shadow=drop_shadow, what_prefix="~ ", what_suffix=" ~", ctc=None, ctc_position=None)
+                gl[i] = Character(None, kind=kind, what_color=what_color, what_drop_shadow=drop_shadow, what_prefix="~ ", what_suffix=" ~", ctc=None, ctc_position="fixed")
             else:
-                gl[i] = Character(j[0], kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=None, ctc_position=None)
+                gl[i] = Character(j[0], kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=None, ctc_position="fixed")
                 # Добавлено дополнительное объявление персонажей, которые будут сохранять оригинальный цвет имени персонажа, но изменять его имя.
                 # Полезно, когда ГГ в моде ещё не знаком с новыми пионерами, но забивать словарь мусором не хочется.
                 # Пример использования - "new_v" - имя "Новый персонаж" меняется на "Голос", "new_pm" - "Пионер", "new_pg" - "Пионерка"
-                gl[i+"_v"] = Character(u"Голос", kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=None, ctc_position=None)
-                gl[i+"_pm"] = Character(u"Пионер", kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=None, ctc_position=None)
-                gl[i+"_pg"] = Character(u"Пионерка", kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=None, ctc_position=None)
+                gl[i+"_v"] = Character(u"Голос", kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=None, ctc_position="fixed")
+                gl[i+"_pm"] = Character(u"Пионер", kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=None, ctc_position="fixed")
+                gl[i+"_pg"] = Character(u"Пионерка", kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=None, ctc_position="fixed")
                 # Ещё одно доп.объявление: градиент от оранжевого к фиолетовому, пока что имеет смысл только для одновременных реплик Алисы и Лены, потом мб добавлю регулировку цвета
                 # Возможно для регулировки нужно будет добавить второй словарь
-                gl[i+"_grad"] = Character("{gradient_rvp=#ffa500-#8b00ff}"+j[0]+"{/gradient_rvp}", kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=None, ctc_position=None)
+                gl[i+"_grad"] = Character("{gradient_rvp=#ffa500-#8b00ff}"+j[0]+"{/gradient_rvp}", kind=kind, who_color=j[1], who_drop_shadow=drop_shadow, who_suffix=who_suffix, what_color=what_color, what_drop_shadow=drop_shadow, ctc=None, ctc_position="fixed")
             if renpy.mobile:
                 colors[i] = {'night': j[1], 'sunset': j[1], 'day': j[1], 'prolog': j[1]}
                 names[i] = j[0]
