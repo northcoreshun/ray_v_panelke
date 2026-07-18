@@ -1889,10 +1889,22 @@ label b1_rvp:
     $ new_chapter(0, u'Рай в панельке: Часть 1Б')
     $ persistent.sprite_time = "sunset"
     $ sunset_time()
-    scene bg int_bus_sunset_rvp with dissolve
+    scene bg int_bus_sunset_rvp:
+        zoom 1.05 align(.5,.5) blur 5
+        ease .25 offset(0,0) rotate(0)
+        ease .25 offset(5,5) rotate(.1)
+        ease .25 offset(0,0) rotate(0)
+        ease .25 offset(-5,5) rotate(-.1)
+        repeat
     play sound_loop sfx_bus_interior_moving fadein 1
     call showtext_rvp("Сторона Б. Часть 1.","п/л «Совёнок», ??.??.19??")
-#добавить тряску автобуса
+    scene bg int_bus_sunset_rvp:
+        zoom 1.05 align(.5,.5)
+        ease .25 offset(0,0) rotate(0)
+        ease .25 offset(5,5) rotate(.1)
+        ease .25 offset(0,0) rotate(0)
+        ease .25 offset(-5,5) rotate(-.1)
+        repeat
     "Автобус набирал обороты. Мы с Леной сели в самый конец, я уступил ей место у окна." with dissolve
     "Опять я еду в автобусе. Что же всё-таки происходит?" with dissolve
     scene bg int_house_of_un_night with dissolve
@@ -1992,7 +2004,6 @@ label b1_rvp:
         align(.5,.5)
         ease 1 zoom 3 align(.1,.1) rotate 12 alpha 0
     "Я схватил наши с Леной вещи, взял её за руку и быстро повёл к выходу." with dissolve
-#extend?
     scene bg int_bus_on_square_rvp:
         parallel:
             zoom 1.05 align(.5,.5)
