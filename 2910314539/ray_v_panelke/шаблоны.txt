@@ -71,7 +71,7 @@
     #Возврат в обычный режим
     $ set_mode_rvp()
     
-#Функция паузы со своим текстом, в разработке
+#Функция паузы со своим текстом
     call pause_rvp("Текст")
 
 #Карусель спрайтов - уже не используется, но оставил
@@ -125,13 +125,6 @@
     $ new_chapter(0, u'Рай в панельке: Часть .')
     $ persistent.sprite_time = 
     $ _time
-
-#Титры - в отдельную функцию?
-    show credits rvp_credits_:
-        xalign 0.5
-        ypos 1.3
-        linear 52.0 ypos -4.0
-    $ renpy.pause()
 
 #Бг, цг
     scene bg  with dissolve
