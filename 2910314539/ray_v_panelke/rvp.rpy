@@ -20,9 +20,7 @@ python:
     #412-бг:сюда бы автобус с противоположного вида
     #цг:вид из автобуса ночной
     #426 и 1536-бг:сделать вечернюю площадь
-    #699-включить музон из лмр японский как в ЯОД
     #1300-заменить на появление таблички с текстом капсом, без текстбоксов ниже
-    #1330-цг:Семен держит Алису за руку как Кетрин в лмр
     #1405-бг:по хорошему тут надо отдельный фон, но пока его нет
     #1511-звук: рвущегося пододеяльника
     #1493-бг: комната сюда бгшку позже
@@ -62,6 +60,8 @@ init -1:
         align(.5,.5)
         text_align .5
         outlines [(2,"#000",0,0)]
+
+#ИНИТ ОСНОВНОЙ
 init:
     $ config.developer = True
     $ mods["rvp"] = "{font=[font_who_rvp]}Рай в панельке"
@@ -166,6 +166,9 @@ label rvp:
     $ persistent.sprite_time = "day"
     play music plastinki_rvp fadein 1
     call screen menu_rvp
+
+#Справочник
+#screen
 
 #Экран меню главный
 screen menu_rvp:
@@ -273,9 +276,8 @@ label pause_rvp(outertext_pause):
 #Функция Закулисья для проверки
 label backrooms_rvp:
     stop music fadeout 2
-    $ renpy.show("white")
     $ set_mode_rvp(nvl)
-
+    show black
     dvun_grad "Текст"
     call pause_rvp("Текст")
 #Пасхалко
@@ -1722,7 +1724,6 @@ label a1_rvp:
     show un normal sport with dspr
     un "Всю жизнь это презирала. Мне не нужно золотых гор, я и без них спокойно живу. Лишь бы был человек, с которым я могу быть счастлива." with dissolve
     me "То есть ты не хочешь меня бросить?" with dissolve
-#подумать над клоз спрайтом Лены с новым фоном
     un "Нет, а с чего?" with dissolve
     un "Ты молодец, что хочешь обеспечивать семью, чтобы я не бедствовала. Но не всё сразу же." with dissolve
     un "И не надо так переживать из-за денег, мои чувства к тебе не зависят от того, сколько рублей ты в кассе получаешь." with dissolve
@@ -1946,7 +1947,6 @@ label b1_rvp:
     me "Лена, я вообще ничего не знаю. Ни какая дата на календаре, ни где я нахожусь. У нас есть время, расскажи." with dissolve
     show un_rvp normal pioneer2 with dspr
     un "Ну, смотри, всё я тебе не успею рассказать, но попробую. Город, в который мы сейчас едем, называется Лениноморск. Живёт нас там где-то тысяч сто." with dissolve
-#ещё как вариант - Ленинорецк
     me "Лениноморск? В честь тебя назвали?" with dissolve
     show un_rvp grin pioneer2 with dspr
     un "А ты смешной, ты мне нравишься. Нет, не в честь меня." with dissolve
@@ -3052,7 +3052,7 @@ label b1_rvp:
     dv "Эй, отпусти!" with dissolve 
     "В этот момент вернулась Лена. Алиса её не заметила." with dissolve
     dv "У тебя ничего не получится! Ты не уведёшь у меня подругу!" with dissolve
-#можно сделать слева и справа реплики Лены и Алисы
+#цг: Семен держит Алису за руку как Кетрин в лмр - прочитать ЛМР
     show un_rvp shy pioneer2 behind dv:
         anchor(.5,1.) pos(.5,1.1) zoom 1.25 transform_anchor True
         ease 1 rotate -10
@@ -3152,14 +3152,45 @@ label b1_rvp:
     dv "Мы тебя содержать не будем, у нас у самих денег не так много!" with dissolve
     un "Тебе надо найти работу. Что ты умеешь?" with dissolve
     play music music_list["torture"] fadein 2
-#тут бы тряску какую-нибудь добавить
+#думал добавить маску потемнения по краям, пассивно ищу 
+    scene bg ext_internat_rvp:
+        zoom 1.05 align(.5,.5) blur 5
+        ease .05 offset(0,0)
+        ease .05 offset(5,0)
+        ease .05 offset(0,0)
+        ease .05 offset(-5,0)
+        repeat
+    show un_rvp smile pioneer2 at right:
+        blur 5
+        ease .05 offset(0,0)
+        ease .05 offset(5,0)
+        ease .05 offset(0,0)
+        ease .05 offset(-5,0)
+        repeat
+    show dv normal pioneer2 at left:
+        blur 5
+        ease .05 offset(0,0)
+        ease .05 offset(5,0)
+        ease .05 offset(0,0)
+        ease .05 offset(-5,0)
+        repeat
     "И тут на меня накатил ужас. Весь мой мозг подавал сигнал тревоги, как сознательная, так и бессознательная часть." with dissolve
     "Нигде не было опыта работы, подходящей в это время." with dissolve
     "Эникейщик? Тут нет компьютеров, с которыми я умею работать." with dissolve
     "Оператор колл-центра? В это время их тут даже не было. Не уверен, что тут даже есть АТС." with dissolve
     me "Да… особо-то и ничего." with dissolve
-    show dv grin pioneer2 at left with dissolve 
+    show dv grin pioneer2 at left:
+        blur 5
+        ease .05 offset(0,0)
+        ease .05 offset(5,0)
+        ease .05 offset(0,0)
+        ease .05 offset(-5,0)
+        repeat
     dv "Мдаа, нашла ты себе жениха, Лен, ничего не скажешь." with dissolve
+    scene bg ext_internat_rvp:
+        blur 5
+    show dv grin pioneer2 at left
+    show un_rvp smile pioneer2 at right
     stop music fadeout 2
     un "Алис, перестань. Не волнуйся, Сёма, в нашей стране тебе не дадут с голоду помереть! На заводе, думаю, найдётся и работа, и крыша над головой." with dissolve
     un "Сегодня как раз понедельник, рабочая неделя началась!" with dissolve
@@ -3194,7 +3225,7 @@ label b1_rvp:
     play music music_list["tried_to_bring_it_back"] fadein 2
     "Спустя полчаса я действительно увидел громаду завода." with dissolve
     "Перед отделом кадров я остановился. А документы? Я открыл мешок с вещами. Там я нашёл конверт, которого раньше не было." with dissolve
-#тут бы нарисовать бумажку с которой Семён далеко не букашка
+#тут бы взять бумажку с которой Семён далеко не букашка
     "Внутри было временное удостоверение личности. Дата рождения была странной. Число и месяц это день моего попадания в лагерь." with dissolve
     "Год рождения не мой. С другой стороны, как раз сходилось с тем, что мне примерно столько лет биологически." with dissolve
     "Хотя бы ФИО не изменили, на том спасибо." with dissolve 
@@ -4346,14 +4377,26 @@ label b2_rvp:
     with fade
     "Я не помнил всю клавиатуру, хотя как-то в шутку учил набор букв в линиях."
     "Фывапро… Ячсмить… Ну да, буквы “в” и “ч” стояли рядом. А раскладка букв на клавиатуре перекочевала с печатных машинок. Выходит, правду говорит."
-    scene bg podezd_lmr_sunset_rvp with dissolve
-    show un_rvp smile2 pioneer2 close with dspr
-#сделать зум на сиськи Лены
-#    show un_rvp grin pioneer2:
-#        ease 3 zoom 2
+    scene bg podezd_lmr_sunset_rvp:
+        subpixel True
+        align(.5,.5)
+        ease 5 zoom 2 ypos .2
+    show un_rvp smile2 pioneer2 close:
+        subpixel True
+        align(.5,.5)
+        ease 5 zoom 2 ypos .2
+    with dspr
     stop music fadeout 1
     "Пока я размышлял, я засмотрелся на Лену. Но не мог не удержаться, чтобы посмотреть не в глаза, не в лицо, а ниже. Ниже шеи. Ниже плеч. На красивые груди Лены."
-    show un_rvp angry2 pioneer2 close with dspr
+    scene bg podezd_lmr_sunset_rvp:
+        subpixel True
+        align(.5,.5) zoom 2 ypos .2
+        ease .5 zoom 1 ypos .5
+    show un_rvp angry2 pioneer2 close:
+        subpixel True
+        align(.5,.5) zoom 2 ypos .2
+        ease .5 zoom 1 ypos .5
+    with dspr
     "Она это заметила. Ей это не понравилось."
     un "Эй, куда смотришь?!"
     "И она завелась."

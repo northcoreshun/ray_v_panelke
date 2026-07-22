@@ -58,6 +58,15 @@
             ease .25 offset(-25,25) rotate(-.35)
             repeat
 
+#Тгхряска
+    scene bg ext_internat_rvp:
+        zoom 1.05 align(.5,.5) blur 5
+        ease .05 offset(0,0)
+        ease .05 offset(5,0)
+        ease .05 offset(0,0)
+        ease .05 offset(-5,0)
+        repeat
+
 #Время суток - цвет спрайтов и текстбоксов
     $ persistent.sprite_time = 
     $ _time
