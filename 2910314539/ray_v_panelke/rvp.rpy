@@ -2,19 +2,20 @@ python:
     """ ГЛОБАЛЬНЫЕ ИЗМЕНЕНИЯ:
     ГЕНЕРАТОР СПРАЙТОВ, ТИТРОВ ИЗ БКРР - найти в коде
     CAMERA - понять, что даёт, подумать о применении
-    Ревизия кода - убрать старое и ненужное
     допроставить всем _rvp
-        Режиссура (Алюминия):
+        Режиссура (Алюминия)+редактура:
     -Часть 1А
     -Часть 2Б
+    -Часть 1Б - только редактура
         Функции:
     - функция ПЕРЕМОТКА, анимация перемотки через SaturationMatrix(0,0)
-    Есть тема пройтись по шаблонам и сделать кастомные функции show_rvp и scene_rvp. Это нужно для унификации анимаций фонов и спрайтов.
+    Есть тема - работать с трансформами(ревизия кода и новые анимации)
         Меню:
     - Глоссарий
     - Музыкальная комната
     Добавить th, где надо и докинуть в статью 'Переводим текст в мод'
     """
+
 init -1:
     $ autoInit_ray_v_panelke = autoInitialization_ray_v_panelke("ray_v_panelke", "rvp", write_into_file=False)
     $ outertext_upper = "text"
@@ -23,6 +24,7 @@ init -1:
     $ replika = "text"
 
 #Стили
+    #Базовый: для всего основного текста
     style rvp:
         color "#ffdd7d"
         size 50
@@ -30,12 +32,18 @@ init -1:
         align(.5,.5)
         text_align .5
         outlines [(3,"#000",0,0)]
-
+    #Имена персонажей
     style rvp_who:
         size 50
         font font_who_rvp
         align(.5,.5)
         text_align .5
+        outlines [(2,"#000",0,0)]
+#Мат.формулы для момента в 2Б - под сомнением
+    style rvp_formula:
+        size 30
+        #font пока дефолтный
+        align(0.5, 0.5)
         outlines [(2,"#000",0,0)]
 
 #ИНИТ ОСНОВНОЙ
@@ -95,6 +103,7 @@ poi - помощь с кодом\n\n
 Cyber Patsan - за помощь с кодом и передачу полезных навыков кодинга.\n\n\n
 Были использованы материалы других модов.\n\n
 Авторам также выражаю благодарность."""
+
 #Текст-изображения
     #Для анимаций
     image uppertext = ParameterizedText(style="rvp")
@@ -107,6 +116,8 @@ Cyber Patsan - за помощь с кодом и передачу полезн�
     image screentext = ParameterizedText(style="rvp",textalign=1.,size=40,xmaximum=.3)
     #Текст по центру экрана
     image centertext = ParameterizedText(style="rvp")
+    image formulatext = ParameterizedText(style="rvp_formula")
+    
 
 #Зацикленная карусель изображений
     image cycled_cg:
@@ -545,7 +556,7 @@ label a1_rvp:
     "Смена выдалась трудной, усы слетали с проводов раза в два чаще обычного." with dissolve
     "Один раз чуть в аварию не попал, причём по своей вине, задумался о вечере. Но это всё позади, остались считанные метры и я свободен." with dissolve
     window hide
-#1894-звук:эмбиент работы в депо, что-то типа как в кружке, но более грубое.
+#1894-звук:эмбиент работы в депо, уезжают и приезжают троллейбусы
     scene bg ext_trolley_rvp:
         blur 5
     with dissolve
@@ -618,7 +629,7 @@ label a1_rvp:
     window show
     "Всё проходило довольно мирно, мы втроём познакомились со слесарями. Не самые плохие люди оказались, но не всё было так просто…" with dissolve
     show iv4_rvp at right with dissolve
-#у спрайта хниды резкие края у рубашки
+#у спрайта хниды резкие края у рубашки - Тимси
     show gn_rvp nasmeh with dissolve
     voicegn "Семён, а что мы тебя раньше не видели в нашем кругу?" with dissolve
     "Был у них в коллективе один мутный тип, даже имя его никак не мог запомнить. А вот он меня, похоже, знал хорошо." with dissolve
@@ -2013,7 +2024,7 @@ label b1_rvp:
     me "Лена, быстрее, на свободу!" with dissolve
     scene black with dissolve
     "И вот пол сменился ступеньками и, наконец, землёй. Из автобуса я не вышел, а буквально выпрыгнул." with dissolve
-#426 и 1536-бг:сделать вечернюю площадь и в конце при встрече с Алисой?
+#426 и 1536-бг:сделать вечернюю площадь и в конце при встрече с Алисой? - Тимси
     scene bg square_lmr_night_rvp:
         xcenter 0.5 ycenter 0.5 ypos .7 zoom 2 blur 5
     with dissolve
@@ -2207,7 +2218,7 @@ label b1_rvp:
     me "Ульян, ты не в обиде, что я тебе тогда перца в компот сыпанул?" with dissolve
     us "Конечно в обиде! Но шутка удачная, так что хвалю! Записывай адрес!" with dissolve
     "Я записал её адрес." with dissolve
-#Ульяна показала светлячка
+#Ульяна показала светлячка.
 #Ульяна: Не страшно?
 #Семён: Нет, а должно?
 #Ульяна: Странно. Муж и жена вроде одна сатана.
@@ -2347,7 +2358,7 @@ label b1_rvp:
         truecenter
         anchor(.5,.5) pos(-.2,.2) zoom 3 blur 5
         ease 1.5 pos(.5,.5) zoom 1
-#ДОБАВИТЬ ЕБУЧУЮ ПЕСНЮ ИЗ ЛМР
+#ДОБАВИТЬ ЕБУЧУЮ ПЕСНЮ ИЗ ЛМР - прочитать ЛМР
     show dv_rvp far:
         anchor(.5,.5) pos(.3,.7) zoom 1.7
         ease 1.5 zoom 1 ypos .5
@@ -3218,12 +3229,22 @@ label b1_rvp:
     window hide
     $renpy.pause(1.0)
 
-    scene bg zavod_rvp with dissolve
+    scene bg zavod_rvp:
+        align(0.5, 0.5) xpos .65 zoom 1.5
+    with dissolve
     window show
     play music music_list["tried_to_bring_it_back"] fadein 2
     "Спустя полчаса я действительно увидел громаду завода." with dissolve
+    scene bg zavod_rvp:
+        align(0.5, 0.5) zoom 1.5
+        ease 2 xanchor .5 zoom 1
+#взять Семёна из ориг.арта, вырезать его и сделать посветлее - Тимси
+    show semen_back_rvp:
+        align(0.0, 0.5)
     "Перед отделом кадров я остановился. А документы? Я открыл мешок с вещами. Там я нашёл конверт, которого раньше не было." with dissolve
-#Взять из После уроков - Семён держит бумажку с которой он далеко не букашка
+    show hodat_rvp behind semen_back_rvp:
+        anchor(0.5, 0.5) pos(.3,1.2) rotate 30
+        ease 2 ypos .8
     "Внутри было временное удостоверение личности. Дата рождения была странной. Число и месяц это день моего попадания в лагерь." with dissolve
     "Год рождения не мой. С другой стороны, как раз сходилось с тем, что мне примерно столько лет биологически." with dissolve
     "Хотя бы ФИО не изменили, на том спасибо." with dissolve 
@@ -3231,6 +3252,7 @@ label b1_rvp:
     "Впрочем, какая разница! Я же не верю в какие-то там гороскопы, что дата рождения влияет на судьбу." with dissolve
     "И вообще, надо дела делать!" with dissolve
     "Я постучался в дверь отдела кадров, а затем вошёл." with dissolve
+    scene bg zavod_rvp with dissolve
     play sound sfx_knock_door7_polite
     stop ambience fadeout 1
 
@@ -3537,7 +3559,6 @@ label b2_rvp:
 
     play ambience ambience_clubs_inside_day fadein 1
     play music pesnyabezslov_rvp fadein 2
-#возможно будет 4 30 минус
     scene bg tsekh_rvp with dissolve
     show mh_rvp:
         anchor(.5,.5) pos(.1,.5) zoom 1.15 alpha 0
@@ -4047,8 +4068,8 @@ label b2_rvp:
     un "Да уж, тебе надо тренироваться."
     "Алиса вышла к нам."
     show un_rvp normal pioneer2:
-        anchor(0.5,0.5) pos (0.5,0.5)
-        ease 1 pos(.75,.5)
+        align(.5,.5)
+        ease 1 xpos .75
     show dv normal pioneer2 at left with dissolve
 #Алиса с книжкой
     me "Что хоть взяла-то?"
@@ -4060,16 +4081,19 @@ label b2_rvp:
     "Лена взяла книгу, я прочитал название."
     "Я ожидал чего угодно, но не этого…"
     window hide
-#получше фото сканави + сделать появление книги в правой половине экрана, девки в левой
+    show dv normal pioneer2:
+        ease 2 xpos .2
+    show un_rvp smile pioneer2:
+        ease 2 xpos .4
+#функция-рука, держащая книгу
     show skanavi_rvp:
-        align(.5,.5) zoom 3 ypos 1.2
-        ease 1.5 ypos 1.
+        align(.5,.5) zoom .5 pos(.8,1.2) rotate 30
+        ease 2 pos(.7,.8) rotate 10
     $ renpy.pause(1.5)
     window show
     "Я реально… прифигел."
     me "Тебе это зачем?"
     show dv guilty pioneer2 with dspr
-    hide skanavi_rvp with dissolve
     dv "К вузу буду готовиться, представь себе."
     "Алиса. Дерзкая рыжая девочка с гитарой. Учит математику."
     me "Ого, ты любишь математику?"
@@ -4084,7 +4108,6 @@ label b2_rvp:
 #ТУТ ВООБЩЕ ПЕРЕМОТКУ СДЕЛАТЬ
     show centertext "9 июня 1987, лагерь Совенок" with dissolve
     pause 2
-    
     scene ext_houses_day with dissolve
     play music music_list['my_daily_life'] fadein 1
     "Алиса спокойно гуляла по лагерю и наслаждалась летним днём"
@@ -4107,9 +4130,21 @@ label b2_rvp:
         anchor(0.5,0.5) pos (0.25,0.5) zoom 1
         ease 1 pos(1.75,.5) alpha 0
     "Лена ушла к домику вожатой. Алиса же начала рассчитывать маршрут пионера."
-    show dv surprise pioneer2 with dissolve
-#добавить, чтобы вокруг Алисы формулы летали
+    camera:
+        perspective True gl_depth True
+    scene ext_houses_day:
+        zpos -1
+#заменить текст на изображение формулы, добавить ещё формул
+    show formulatext("s=vt"):
+        anchor(0.5, 0.5) pos(0.65, 0.35) zpos -1
+        ease 1 pos(0.35, 0.65) 
+        zpos 1
+        ease 1 pos(0.65, 0.35)
+        repeat
+    show dv_rvp concent pioneer2:
+        align(.5,.5)
     "Так, ему надо пройти до площади, затем налево. Это метров сто, затем ещё сорок. Скорость где-то 4 километра в час."
+    hide formulatext
     show blink
     $ renpy.pause(2.0)
     show unblink
@@ -4803,7 +4838,6 @@ label b2_rvp:
     $ renpy.pause(1.0)
 
     scene bg square_lmr_day_rvp with dissolve
-#    play sound entuz_marsh_rvp volume 0.5 fadein 1
     play ambience ambience_camp_center_day fadein 1
     play sound radio_15_rvp volume 0.5 fadein 1
 
@@ -5087,7 +5121,6 @@ label b2_rvp:
     me "Да. Вот мы с тобой отдыхаем, а она работает."
     dv "Нехорошо. Пойдём тогда к ней. Как раз дойдём, когда её смена закончится."
     show dv laugh pioneer2 with dspr
-#тут музон мб подрубить на полминуты
     dv "Как там у Вити поётся. Всё не так и всё не то, когда твоя девушка больна."
     "Верно она подметила. Лена как раз сейчас была в больнице, хотя и не болела. А я как герой той песни, тосковал по ней."
     "Мы собрали вещи и пошли к больнице, где работала Лена."
@@ -5100,14 +5133,14 @@ label b2_rvp:
     show un normal sport:
         anchor(.5,.5) pos(1.2,.5) alpha 0
         ease 1 xpos(.5) alpha 1
+#включить люби меня люби
     "Наконец, Лена появилась. Вид у неё был уставший. Но её утомленное лицо озарилось улыбкой, когда она увидела меня."
     show un smile2 sport
     un "Сёма!.."
-    show un grin sport:
+    show un surprise sport:
         ease 2 xpos .25
         ease 2 zoom 2.5 pos(.0,.8)
     $ renpy.pause(3.5)
-#подумать над эмоциями, мб сюрпрайз вернуть
 #цг - Семён с Леной обнимаются - Тимси
 #Переход от Люби меня, люби к Le milliard et une vie плавно
     "Я быстро подошёл к ней и крепко обнял, так, что даже Лена не ожидала. С плеч будто гора упала. Мне было стыдно, что оставил Лену, а сам пошёл отдыхать."
