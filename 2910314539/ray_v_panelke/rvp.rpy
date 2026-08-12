@@ -117,7 +117,7 @@ Cyber Patsan - за помощь с кодом и передачу полезн�
     #Текст по центру экрана
     image centertext = ParameterizedText(style="rvp")
     image formulatext = ParameterizedText(style="rvp_formula")
-    
+    image formula2text = ParameterizedText(style="rvp_formula")
 
 #Зацикленная карусель изображений
     image cycled_cg:
@@ -269,6 +269,7 @@ label backrooms_rvp:
     show black
     dvun_grad "Текст"
     call pause_rvp("Текст")
+
 #Пасхалко
     #play music nv_st_rvp
     #show nvlogo2_rvp:
@@ -4130,21 +4131,30 @@ label b2_rvp:
         anchor(0.5,0.5) pos (0.25,0.5) zoom 1
         ease 1 pos(1.75,.5) alpha 0
     "Лена ушла к домику вожатой. Алиса же начала рассчитывать маршрут пионера."
+#заменить текст на изображение формулы, добавить ещё формул?
     camera:
-        perspective True gl_depth True
+        perspective True gl_depth "opaque"
     scene ext_houses_day:
         zpos -1
-#заменить текст на изображение формулы, добавить ещё формул
-    show formulatext("s=vt"):
+    show formulatext("x=x0+vt"):
+        alpha 1
         anchor(0.5, 0.5) pos(0.65, 0.35) zpos -1
         ease 1 pos(0.35, 0.65) 
         zpos 1
         ease 1 pos(0.65, 0.35)
         repeat
+    show formula2text("a*a+b*b=c*c"):
+        alpha 1
+        anchor(0.5, 0.5) pos(0.65, 0.65) zpos -1
+        ease 1 pos(0.35, 0.35) 
+        zpos 1
+        ease 1 pos(0.65, 0.65)
+        repeat
     show dv_rvp concent pioneer2:
         align(.5,.5)
     "Так, ему надо пройти до площади, затем налево. Это метров сто, затем ещё сорок. Скорость где-то 4 километра в час."
     hide formulatext
+    hide formula2text
     show blink
     $ renpy.pause(2.0)
     show unblink

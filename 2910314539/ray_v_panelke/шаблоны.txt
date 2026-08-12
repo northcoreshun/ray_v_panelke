@@ -1,6 +1,31 @@
 #ШАБЛОНЫ КОДА
 #ФАЙЛ ДЛЯ ТОГО, ЧТОБЫ ХРАНИТЬ ОСНОВНЫЕ ШАБЛОНЫ КОДА И БЫСТРО ИХ КОПИРОВАТЬ И ВСТАВЛЯТЬ
 
+#Заморожено до перехода БЛ на renpy-8 - летающие формулы вокруг Алисы
+init python:
+    def texts_zorder(trans, st, at):    
+        phase = st % 3.0    
+        if phase < 1.0:    
+            renpy.change_zorder("master", "texts", 2)    
+        elif phase < 2.0:    
+            renpy.change_zorder("master", "texts", 0)    
+        else:    
+            renpy.change_zorder("master", "texts", 2)    
+        return 0
+    scene ext_houses_day    
+    show dv_rvp concent pioneer2 zorder 1    
+    show formulatext("s=vt") as texts zorder 2:    
+        align (0.5, 0.5)    
+        parallel:    
+            function texts_zorder    
+        parallel:    
+            ease 1 pos(0.65, 0.35)    
+            ease 1 pos(0.35, 0.65)    
+            ease 1 pos(0.5, 0.5)    
+            repeat    
+        repeat    
+    $ renpy.pause(hard=True)
+
 #Зум на спрайты при рассмотрении персонажа
     scene bg square_lmr_night_rvp:
         subpixel True
