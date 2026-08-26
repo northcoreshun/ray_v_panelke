@@ -262,5 +262,16 @@ init python:
 
     show :
         ease 2 pos(.3,.9) rotate 0 zoom 2
-
 #ПОДСКАЗКА:один диссолв действует на все show и они появляются одновременно
+
+#Зум и удаление через camera
+    scene bg zavod_rvp:
+    camera:
+        zoom 2.
+        align (1.,.5)
+    window show
+    play music music_list["tried_to_bring_it_back"] fadein 2
+    "Спустя полчаса я действительно увидел громаду завода."
+    show semen_back_rvp:
+    camera:
+        linear 2.5 zoom 1.
