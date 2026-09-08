@@ -2737,8 +2737,7 @@ label b1_rvp:
     "Вот и площадь. Пройдя её, добрался до вокзала." with dissolve
     stop ambience fadeout 1
     scene bg int_vokzal_rvp with dissolve
-    "Зашёл в зал ожидания. Ничего необычного, помещение с типичной советской плиткой и мозаикой соцреализма на стене." with dissolve
-#про мозаику соцреализма убрать мб
+    "Зашёл в зал ожидания. Ничего необычного, помещение с типичной советской плиткой и расписанием на стене." with dissolve
     window hide
 
     show blink
@@ -3071,18 +3070,19 @@ label b1_rvp:
     show dv surprise pioneer2 far with dissolve
     "Лена снова подкралась бесшумно и напугала Алису." with dissolve
     dv "Лена! А я тут… Вот с ним разбираюсь!" with dissolve
-    show un_rvp angry pioneer2 behind dv with dspr
+#вторую позу спрайта - ждём от Тимси
+    show un_rvp angry sportpioneer behind dv with dspr
     un "Алиса, отстань от Сёмы! Он в милиции весь день провёл, намучался!" with dissolve
     show dv angry pioneer2 far with dspr
     dv "Так ему и надо! Небось нажрался и его забрали!"
-    show un_rvp angry pioneer2 behind dv:
+    show un_rvp angry sportpioneer behind dv:
         ease 1 xpos .33 rotate 0
     with dspr
     show dv angry pioneer2 far:
         ease 1 xpos .66 rotate 0
     with dspr
     un "Хватит на него наговаривать!"
-    show un_rvp normal pioneer2 with dissolve
+    show un_rvp normal sportpioneer with dissolve
     show dv angry pioneer2 with dissolve
     me "Вот твои деньги!" with dissolve 
     "Я достал и вложил Алисе в руку, которую держал." with dissolve 
@@ -5564,7 +5564,7 @@ label a2_rvp:
     call showtext_rvp("Сторона А. Часть 2","")
     pause 1
     play ambience ambience_medstation_inside_night fadein 1
-    play music rvp2a_1_rvp fadein 3
+    play music kazdyi_den_rvp fadein 3
     scene cg in_bed bed_rvp
     show cg in_bed un_1_rvp as un1
     show cg in_bed me_2_rvp as me2
@@ -5626,7 +5626,7 @@ label a2_rvp:
         ease 2 zoom 1.5
     stop music fadeout 1
     pause .5
-    play music rvp2a_4_rvp fadein 3
+    play music nesoglasie_radost_rvp fadein 3
     "Пришлось безотлагательно сесть за учёбу. Два часа я писал конспект по самому запущенному предмету."
     "Выходной был подпорчен снова. Хотелось конечно обвинить Лену – ну взялся бы за дело завтра!"
     "Но нет, я довёл до этой ситуации."
@@ -5660,7 +5660,7 @@ label a2_rvp:
         blur 5
     with dissolve
     play ambience ambience_cold_wind_loop fadein 1
-    play music rvp2a_3_rvp fadein 1
+    play music kak_tebya_pokorit_rvp fadein 1
     "Утром понедельника я пошёл на свою горячо любимую работу."
     "Встретил своих собутыльников. Пожалуй, теперь уже бывших."
     show mh4_rvp at left with dissolve
@@ -5732,7 +5732,7 @@ label a2_rvp:
     $ sunset_time
     pause 1
     scene bg bedroom_rvp with dissolve
-    play music rvp2a_2_rvp fadein 1
+    play music himia_rvp fadein 1
     "Выходные – время не только для того, чтобы нежиться в постели. Но и для полезной деятельности типа уборки."
     "Мы с Леной убирали весь наш однокомнатный дворец."
     "Когда мы уже закончили с пылью на полках и мебели и настала очередь пола, мне резко стало лень."
@@ -5820,7 +5820,7 @@ label a2_rvp:
     pause 1.0
     scene bg black with dissolve
 
-    play music rvp2a_2_rvp fadein 1
+    play music himia_rvp fadein 1
     scene bg prih_rvp with dissolve:
         align(0.35,0.5)
         ease 2 zoom 1.5
@@ -5938,7 +5938,7 @@ label a2_rvp:
     window show
     "И этот сюрприз произошёл."
     play ambience ambience_medstation_inside_night fadein 1
-    play music rvp2a_5_rvp fadein 1
+    play music live_tsoi_rvp fadein 1
     scene bg prih_rvp:
         align(0.1,0.5)
         ease 2 zoom 3
@@ -6173,7 +6173,7 @@ label a2_rvp:
     scene bg prih_dark_rvp:
         align(0.9,0.5)
         ease 2 zoom 3
-    play music rvp2a_6_rvp fadein 1
+    play music petite_fille_rvp fadein 1
     scene bg kitchen_dark_rvp
     show cake_rvp
     with dissolve
@@ -6212,7 +6212,7 @@ label a2_rvp:
 
     pause 1.0
     play ambience ambience_cold_wind_loop fadein 1
-    play music rvp2a_4_rvp fadein 1
+    play music nesoglasie_radost_rvp fadein 1
     scene okno_night_zoom_rvp with dissolve
     $ set_mode_rvp(nvl)
     window show
