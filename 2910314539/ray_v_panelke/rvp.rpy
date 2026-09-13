@@ -135,9 +135,7 @@ Cyber Patsan - за помощь с кодом и передачу полезн�
     image bg_ext_internat_rvp = ConditionSwitch("persistent.sprite_time=='sunset'",im.MatrixColor(ImageReference("bg ext_internat_rvp"), im.matrix.tint(0.94, 0.82, 1.0)),
                                                 "persistent.sprite_time=='night'",im.MatrixColor(ImageReference("bg ext_internat_rvp"), im.matrix.tint(0.63, 0.78, 0.82)),
                                                 True,ImageReference("bg ext_internat_rvp"))
-    image dv_with_book_rvp = ConditionSwitch("persistent.sprite_time=='sunset'",im.MatrixColor(ImageReference("dv_book_rvp"), im.matrix.tint(0.94, 0.82, 1.0)),
-                                            "persistent.sprite_time=='night'",im.MatrixColor(ImageReference("dv_book_rvp"), im.matrix.tint(0.63, 0.78, 0.82)),
-                                            True,ImageReference("dv_book_rvp"))
+
 #Зазумленные изображения
     image okno_night_zoom_rvp = Transform("bg okno_night_rvp", zoom=.35)
     image okno_day_zoom_rvp = Transform("bg okno_day_rvp", zoom=.35)
@@ -268,8 +266,6 @@ label backrooms_rvp:
     stop music fadeout 2
     $ set_mode_rvp(nvl)
     show black
-    dvun_grad "Текст"
-    call pause_rvp("Текст")
 #Пасхалко
     #play music nv_st_rvp
     #show nvlogo2_rvp:
@@ -557,7 +553,7 @@ label a1_rvp:
     "Смена выдалась трудной, усы слетали с проводов раза в два чаще обычного." with dissolve
     "Один раз чуть в аварию не попал, причём по своей вине, задумался о вечере. Но это всё позади, остались считанные метры и я свободен." with dissolve
     window hide
-#1894-звук:эмбиент работы в депо, уезжают и приезжают троллейбусы
+#1894-звук:эмбиент работы в депо, уезжают и приезжают троллейбусы - 140 кг
     scene bg ext_trolley_rvp:
         blur 5
     with dissolve
@@ -703,7 +699,7 @@ label a1_rvp:
     "Краем глаза я увидел фигуры, похожие на милиционеров. Этого ещё не хватало." with dissolve
     "Как же голова болит..." with dissolve
     window hide
-#2027-цг: где Семён лежит как Гослинг/попугай Кеша
+#2027-цг:Семён лежит как Гослинг/попугай Кеша
 
     play music music_list["meet_me_there"] fadein 2
     window show
@@ -2479,7 +2475,7 @@ label b1_rvp:
     play music music_list["drown"]
     $ persistent.sprite_time = "day"
     $ day_time
-#Добавить фразу про заход на вокзал
+    "Алиса с Леной зашли в освещённое изнутри здание вокзала."
     show un_rvp angry2 pioneer2:
         anchor(.5,.5) pos(1.1,.7) zoom 1.5
         ease 1 xpos .5
@@ -2979,30 +2975,36 @@ label b1_rvp:
     "За спиной у меня был вещмешок со всем моим скромным инвентарём. Ну, я хотя бы здесь уже был." with dissolve
     "Надо найти Лену. Я обернулся в сторону и вдруг увидел её. Она сидела и читала книгу на лавочке. Как знакомо." with dissolve
     "Я пошёл к ней. Она увидела меня, вскочила и побежала." with dissolve
-#сделать Лене футболку с юбкой - Тимси
+#анимацию спрайта сделать, проверить как это сделано в фиалковых слёзах
     scene bg square_lmr_day_rvp:
         align(.5,.5) xanchor .3 zoom 2
         ease 5 xanchor .5 zoom 1
-#подумать над анимацией спрайта, фиалковые слёзы
-    show un_rvp sad pioneer2 at cleft with dissolve
+    show un_rvp sad sportpioneer at cleft with dissolve
     un "Сёма, привет!" with dissolve
-    show un_rvp sad pioneer2 at cleft with dissolve
+    show un_rvp sad sportpioneer at cleft with dissolve
     un "Куда ты пропал? Я тебя вчера весь день ждала! Я так волновалась." with dissolve
     me "Лен, такое случилось. Просто чудо какое-то, что я снова с тобой." with dissolve
     me "Я в милиции был." with dissolve
-    show un_rvp scared pioneer2 close at cleft with dissolve
-    un "Какой ужас! Тебя били? С тобой сейчас всё в порядке?" with dissolve
-    show un_rvp sad pioneer2 close at cleft with dissolve
+    show un_rvp scared sportpioneer at cleft:
+        ease 1 zoom 1.4
+    un "Какой ужас! Тебя били? С тобой сейчас всё в порядке?"
+    show un_rvp sad sportpioneer at cleft with dspr
     un "Пойдём, расскажешь нам с Алисой." with dissolve
-    scene bg square_lmr_day_rvp with dissolve
+    scene bg square_lmr_day_rvp:
+        align(.5,.5) zoom 1.1 #почему-то 1.05 не хватило...
+        ease .5 offset(0,0) rotate(0)
+        ease .5 offset(25,25) rotate(.35)
+        ease .5 offset(0,0) rotate(0)
+        ease .5 offset(-25,25) rotate(-.35)
+        repeat
+    with dissolve
     "Пока мы с Леной дошли до их дома, я рассказал, что произошло. Как меня задержала милиция, как допрашивали, как меня посетил Генда." with dissolve
     window hide
-    
     scene bg_ext_internat_rvp with dissolve
-    show un_rvp smile pioneer2 at left with dissolve
+    show un_rvp smile sportpioneer at left with dissolve
     window show
     un "Подожди здесь, я сейчас." with dissolve
-    show un_rvp smile pioneer2:
+    show un_rvp smile sportpioneer:
         ease 1 xpos .8 alpha 0
     "Лена скрылась за дверью."
     "Я остался ждать."
@@ -3060,7 +3062,7 @@ label b1_rvp:
     "В этот момент вернулась Лена. Алиса её не заметила." with dissolve
     dv "У тебя ничего не получится! Ты не уведёшь у меня подругу!" with dissolve
 #цг: Семен держит Алису за руку как Кетрин в лмр - почитать ЛМР
-    show un_rvp shy pioneer2 behind dv:
+    show un_rvp shy sportpioneer behind dv:
         anchor(.5,1.) pos(.5,1.1) zoom 1.25 transform_anchor True
         ease 1 rotate -10
     show dv angry pioneer2 far:
@@ -3070,7 +3072,6 @@ label b1_rvp:
     show dv surprise pioneer2 far with dissolve
     "Лена снова подкралась бесшумно и напугала Алису." with dissolve
     dv "Лена! А я тут… Вот с ним разбираюсь!" with dissolve
-#вторую позу спрайта - ждём от Тимси
     show un_rvp angry sportpioneer behind dv with dspr
     un "Алиса, отстань от Сёмы! Он в милиции весь день провёл, намучался!" with dissolve
     show dv angry pioneer2 far with dspr
@@ -3097,7 +3098,7 @@ label b1_rvp:
     scene bg int_dining_hall_day:
         align(.5,.5) ypos 0.15 zoom 1.5 blur 5
     show chairs_rvp
-    show un_rvp smile pioneer2:
+    show un_rvp smile sportpioneer:
         align(.5,.5) xpos .4 zoom 1.25
     show dv normal pioneer2:
         align(.5,.5) xpos .8 zoom 1.25
@@ -3110,13 +3111,13 @@ label b1_rvp:
     show dv laugh pioneer2 with dspr
     dv "Герой Донбасса и Кузбасса…" with dissolve
     "Пошутила Алиса." with dissolve
-    show un_rvp smile3 pioneer2 with dspr
+    show un_rvp smile3 sportpioneer with dspr
     un "Первый секретарь нашего обкома. Уроженец нашего города и настоящий коммунист! Мой папа с ним работал." with dissolve
     "Надо бы про родителей спросить." with dissolve
     me "Можно вопрос?" with dissolve
     un "Да, конечно." with dissolve
     me "А вы тут без родителей живёте, где они?" with dissolve
-    show un_rvp normal pioneer2 with dspr
+    show un_rvp normal sportpioneer with dspr
     show dv angry pioneer2 with dspr
     "Девочкам не понравился мой вопрос." with dissolve
     dv "Не твоё дело." with dissolve
@@ -3127,17 +3128,17 @@ label b1_rvp:
     un "Слушай, а я вспомнила, почему захотела тебя ударить." with dissolve
     show dv surprise pioneer2 with dspr
     dv "И почему же?" with dissolve
-    show un_rvp angry pioneer2  with dspr
+    show un_rvp angry sportpioneer  with dspr
     un "Да ты булки лопала!" with dissolve
     "Неожиданное заявление. Действительно, Алиса тогда жевала булочку. Но бить-то зачем?" with dissolve
     un "Алис, ты мне мозги вынесла на тему, как бы не потолстеть. Я решила поддержать тебя, сама терпела и не ела, а ты!" with dissolve
     me "Но это же не повод бить её!" with dissolve
-    show un_rvp grin pioneer2 with dspr
+    show un_rvp grin sportpioneer with dspr
     "Лена ласково улыбнулась." with dissolve
     un "Да, не повод! Просто кое-кто мне все нервы поднял, и это стало спусковым крючком." with dissolve
-    show un_rvp normal pioneer2 with dspr
+    show un_rvp normal sportpioneer with dspr
     "Лена призадумалась." with dissolve
-    show un_rvp sad pioneer2 with dspr
+    show un_rvp sad sportpioneer with dspr
     un "Но вообще я неправильно поступила. Не злитесь на меня, пожалуйста, я так больше не буду." with dissolve
     me "Я-то не злюсь. А вот Алиса… не знаю." with dissolve
     show dv guilty pioneer2 with dspr
@@ -3151,7 +3152,7 @@ label b1_rvp:
         blur 5
     with dissolve
     play ambience ambience_camp_center_day fadein 1
-    show un_rvp smile pioneer2 at right with dissolve
+    show un_rvp smile sportpioneer at right with dissolve
     show dv normal pioneer2 at left with dissolve
     window show
     dv "Ну что, гость из будущего, чем займёшься теперь?" with dissolve 
@@ -3166,7 +3167,7 @@ label b1_rvp:
         ease .05 offset(0,0)
         ease .05 offset(-5,0)
         repeat
-    show un_rvp smile pioneer2 at right:
+    show un_rvp smile sportpioneer at right:
         blur 5
         ease .05 offset(0,0)
         ease .05 offset(5,0)
@@ -3185,6 +3186,13 @@ label b1_rvp:
     "Эникейщик? Тут нет компьютеров, с которыми я умею работать." with dissolve
     "Оператор колл-центра? В это время их тут даже не было. Не уверен, что тут даже есть АТС." with dissolve
     me "Да… особо-то и ничего." with dissolve
+    scene bg_ext_internat_rvp:
+        zoom 1.05 align(.5,.5) blur 5
+        ease .05 offset(0,0)
+        ease .05 offset(5,0)
+        ease .05 offset(0,0)
+        ease .05 offset(-5,0)
+        repeat
     show dv grin pioneer2 at left:
         blur 5
         ease .05 offset(0,0)
@@ -3192,28 +3200,35 @@ label b1_rvp:
         ease .05 offset(0,0)
         ease .05 offset(-5,0)
         repeat
-    dv "Мдаа, нашла ты себе жениха, Лен, ничего не скажешь." with dissolve
+    show un_rvp smile sportpioneer at right:
+        blur 5
+        ease .05 offset(0,0)
+        ease .05 offset(5,0)
+        ease .05 offset(0,0)
+        ease .05 offset(-5,0)
+        repeat
+    dv "Мдаа, нашла ты себе жениха, Лен, ничего не скажешь."
     scene bg_ext_internat_rvp:
         blur 5
     show dv grin pioneer2 at left
-    show un_rvp smile pioneer2 at right
+    show un_rvp smile sportpioneer at right
     stop music fadeout 2
     un "Алис, перестань. Не волнуйся, Сёма, в нашей стране тебе не дадут с голоду помереть! На заводе, думаю, найдётся и работа, и крыша над головой." with dissolve
     un "Сегодня как раз понедельник, рабочая неделя началась!" with dissolve
     "Делать нечего, пойду на неквалифицированную физическую работу." with dissolve
     me "Пойду на завод тогда. А вы где работаете?" with dissolve
-    show un_rvp laugh pioneer2 at right
+    show un_rvp laugh sportpioneer at right
     show dv laugh pioneer2 at left
     with dspr
     dvun_grad "А нигде, у нас каникулы!" with dissolve
     "Сказали девочки очень радостным голосом." with dissolve
     me "Везёт же вам." with dissolve
-    show un_rvp smile pioneer2 at right with dissolve
+    show un_rvp smile sportpioneer at right with dissolve
     show dv normal pioneer2 at left with dspr
     un "Да ладно, Семён. Я уверена, что у тебя всё получится!" with dissolve
     me "Ладно, где завод-то хоть?" with dissolve
     un "Как идёшь до площади, так и иди прямо по улице. Там дойдёшь до него. Сразу узнаешь, не ошибёшься." with dissolve
-    scene bg street_lmr_day_rvp:
+    scene bg square_lmr_day_rvp:
         align(.5,.5) zoom 1.1 #почему-то 1.05 не хватило...
         ease .5 offset(0,0) rotate(0)
         ease .5 offset(25,25) rotate(.35)
@@ -3229,6 +3244,7 @@ label b1_rvp:
     camera:
         zoom 2.
         align (1.,.5)
+    with dissolve
     window show
     play music music_list["tried_to_bring_it_back"] fadein 2
     "Спустя полчаса я действительно увидел громаду завода."
@@ -3341,12 +3357,11 @@ label b1_rvp:
     scene bg square_lmr_night_rvp:
         blur 5
     with dissolve
-    show dv_with_book_rvp:
-        align(0.5, 0.5) ypos .8
-    with dissolve
+#dv2 довести до ума размеры - Тимси
+    show dv2_rvp with dissolve
     dv "Куда идём? Неужто снова к нам?" with dissolve
     me "К вам, куда же ещё? А ты откуда?" with dissolve
-    hide dv_with_book_rvp with dspr
+    hide dv2_rvp with dspr
     show dv angry pioneer2 with dspr
     dv "Не твоё дело." with dissolve
     dv "Так, ты нашёл работу? Тебя заселили куда-нибудь? Мы тебя к себе не возьмём, не думай." with dissolve
@@ -3371,9 +3386,7 @@ label b1_rvp:
     dv "Слушай… извини тогда за то, что наехала на тебя с утра. Ну не каждый день приезжают вот так, из ниоткуда!" with dissolve
     me "Ладно, проехали. Я сам должен извиниться, что подглядывал за тобой." with dissolve
     hide dv with dspr
-    show dv_with_book_rvp:
-        align(0.5, 0.5) ypos .8
-    with dspr
+    show dv2_rvp with dspr
     dv "Да ладно, забавная ситуация была. И у тебя всё равно выхода не было." with dissolve
     me "Рад, что ты это понимаешь. А что это у тебя?" with dissolve
     dv "Да в библиотеку ходила, книгу новую взяла." with dissolve
@@ -3394,7 +3407,7 @@ label b1_rvp:
     "Впрочем, больно я ей нужен. Смешно, однако, я воображаю, что две таких прекрасных девушки будут биться за меня, никчёмного безработного."
     "Впрочем, уже и не безработного." with dissolve
     "Через пять минут она уже пришла ко мне." with dissolve
-    show un_rvp smile2 pioneer2 with dissolve
+    show un smile2 sport with dissolve
     un "Сёма, привет. Алиса сказала, что ты работу нашёл." with dissolve
     me "Да, токарь помощником взял. Комнату в общежитии дали." with dissolve
     me "Слушай, есть что поесть? Я не обедал сегодня." with dissolve
@@ -3406,7 +3419,7 @@ label b1_rvp:
         blur 5
     with dissolve
     play ambience ambience_dining_hall_empty fadein 1
-    show un_rvp smile pioneer2 with dissolve
+    show un smile sport with dissolve
     window show
     "За ужином я рассказал Лене, как прошёл мой день. Про удачную встречу с токарем, про общагу." with dissolve
     un "Ну, вот видишь, на заводе нашлась для тебя работа." with dissolve
@@ -3424,16 +3437,16 @@ label b1_rvp:
     with dissolve
     play ambience ambience_camp_center_evening fadein 1
     play music zapomnyu_rvp fadein 1
-    show un_rvp smile pioneer2 with dissolve
+    show un smile sport with dissolve
     window show
     "Мы вышли из столовой." with dissolve
-#развить диалог
+#развить диалог, например, что Лена начала заниматься спортом
     me "Ладно, мне пора. В общагу надо до одиннадцати вернуться." with dissolve
-    show un_rvp serious pioneer2 with dspr
+    show un serious sport with dspr
     un "Ну вот, а я хотела погулять."
     "Лена надула губки. Хотелось её порадовать. В принципе, времени не так много." with dissolve
     me "Ну, пойдём до площади." with dissolve
-    show un_rvp smile pioneer2 with dissolve
+    show un smile sport with dissolve
     un "Давай!" with dissolve
     window hide
     
@@ -3443,16 +3456,16 @@ label b1_rvp:
     scene bg square_lmr_night_rvp:
         blur 5
     with dissolve
-    show un_rvp smile pioneer2 with dissolve
+    show un smile sport with dissolve
     un "Сёма, ты молодец. Со всеми трудностями справился. Находишь себя в этом мире." with dissolve
     un "Я думаю, у тебя всё получится!" with dissolve
     me "Ты, правда, так считаешь?" with dissolve
     un "Ну конечно! Ладно, уже поздно. Тебе выспаться надо, мне тоже домой пора." with dissolve
     me "Да уж, завтра на смену. Спокойной ночи!" with dissolve
-    show un_rvp smile2 pioneer2 close with dissolve
+    show un smile2 sport close with dissolve
     un "Спокойной ночи!" with dissolve
     window hide
-    show un_rvp grin pioneer2 close at left: #оказывается at left это только xpos, а остальное надо дописать
+    show un grin sport close at left: #оказывается at left это только xpos, а остальное надо дописать
         anchor(.5,.5) ypos .5
         ease 1 zoom 1.75 pos(.1,.7) rotate -10
         ease 1 zoom 1.25 pos(.33,.5) rotate 0
@@ -5150,7 +5163,7 @@ label b2_rvp:
         ease 2 zoom 2.5 pos(.0,.8)
     $ renpy.pause(3.5)
 #цг - Семён с Леной обнимаются - Тимси
-#Переход от Люби меня, люби к Le milliard et une vie плавно
+#Переход от Люби меня, люби к Le milliard et une vie плавно - 140 кг
     "Я быстро подошёл к ней и крепко обнял, так, что даже Лена не ожидала. С плеч будто гора упала. Мне было стыдно, что оставил Лену, а сам пошёл отдыхать."
     me "Лен, прости, что оставил тебя!"
     un "Я и не злилась на тебя."
@@ -5626,7 +5639,7 @@ label a2_rvp:
         ease 2 zoom 1.5
     stop music fadeout 1
     pause .5
-    play music nesoglasie_radost_rvp fadein 3
+    play music vse_v_poryadke_rvp fadein 3
     "Пришлось безотлагательно сесть за учёбу. Два часа я писал конспект по самому запущенному предмету."
     "Выходной был подпорчен снова. Хотелось конечно обвинить Лену – ну взялся бы за дело завтра!"
     "Но нет, я довёл до этой ситуации."
@@ -6212,7 +6225,7 @@ label a2_rvp:
 
     pause 1.0
     play ambience ambience_cold_wind_loop fadein 1
-    play music nesoglasie_radost_rvp fadein 1
+    play music vse_v_poryadke_rvp fadein 1
     scene okno_night_zoom_rvp with dissolve
     $ set_mode_rvp(nvl)
     window show
