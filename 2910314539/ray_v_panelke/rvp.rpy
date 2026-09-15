@@ -553,7 +553,7 @@ label a1_rvp:
     "Смена выдалась трудной, усы слетали с проводов раза в два чаще обычного." with dissolve
     "Один раз чуть в аварию не попал, причём по своей вине, задумался о вечере. Но это всё позади, остались считанные метры и я свободен." with dissolve
     window hide
-#1894-звук:эмбиент работы в депо, уезжают и приезжают троллейбусы - 140 кг
+    play sound [ stopping_trolleybus_rvp, "<silence 30.0>" ] loop
     scene bg ext_trolley_rvp:
         blur 5
     with dissolve
@@ -573,9 +573,7 @@ label a1_rvp:
     "Со слесарями всё было непросто – о них ходила дурная слава, что они приблатнённые раздолбаи с руками явно не из плеч." with dissolve
     "Из-за них и приходилось мучиться, потому что делали кое-как. Вдобавок я им завидовал в душе, что они занимают должность, которую я хотел, когда устраивался в депо." with dissolve
     "Если бы мне дали написать список того, что погубит в ближайшее время Союз, наверное, первым на листе появилось бы слово из четырёх букв - блат." with dissolve
-    play sound sfx_intro_bus_engine_start
     "Вдруг из-за поворота возникли ещё двое “рогатых”. Я узнал их. Это были два водителя, работавших на одном маршруте со мной." with dissolve
-    stop sound fadeout 2
     "По сложившейся пролетарской традиции я их называл по отчеству Михалыч и Иваныч." with dissolve
     show mh4_rvp at left with dissolve
     show iv4_rvp at right with dissolve
@@ -594,6 +592,7 @@ label a1_rvp:
     iv4 "Да я…" with dissolve
     mh4 "Все, угомонись. Семён, мы набухиваться не будем, просто немного выпьем и посидим. Немного хоть посиди, а?" with dissolve
     me "Ну, пойдёмте тогда." with dissolve
+    stop sound fadeout 2
     window hide
     show mh4_rvp at left:
         ease 1.5 pos(1.1,.5)
@@ -3357,11 +3356,9 @@ label b1_rvp:
     scene bg square_lmr_night_rvp:
         blur 5
     with dissolve
-#dv2 довести до ума размеры - Тимси
-    show dv2_rvp with dissolve
+    show dv normal pioneer2 with dissolve
     dv "Куда идём? Неужто снова к нам?" with dissolve
     me "К вам, куда же ещё? А ты откуда?" with dissolve
-    hide dv2_rvp with dspr
     show dv angry pioneer2 with dspr
     dv "Не твоё дело." with dissolve
     dv "Так, ты нашёл работу? Тебя заселили куда-нибудь? Мы тебя к себе не возьмём, не думай." with dissolve
@@ -3395,11 +3392,11 @@ label b1_rvp:
     scene bg_ext_internat_rvp:
         blur 5
     with dissolve
-    show dv normal pioneer2 with dissolve
+    show dv2_rvp with dissolve
     window show
     "Мы дошли до интерната." with dissolve
     dv "Ладно, я пойду Лене скажу, что ты пришёл." with dissolve
-    show dv normal pioneer2:
+    show dv2_rvp:
         align(.5,.5)
         ease 1 pos(1.,.5) alpha 0
     "Алиса пошла за Леной." with dissolve
