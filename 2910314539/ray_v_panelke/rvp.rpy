@@ -2266,13 +2266,23 @@ label b1_rvp:
     show mz smile glasses pioneer:
         align(.5,.5) xpos .33
         ease 1 xpos .5
-    show ext_square_sunset behind mz
+    show ext_square_sunset behind mz:
+        align(0.5,0.5)
+        crop (480,0,960,1080)
+    show white as white1:
+        align (.5,.5) xpos .25
+        crop (3,0,3,1080)
+    show white as white2:
+        align (.5,.5) xpos .75
+        crop (3,0,3,1080)
     "Ох, вспомнила. Тот самый турнир на втором дне. А ведь момент, когда я уговаривал Женю играть, был одним из самых приятных… после всех моментов с Леной, конечно." with dissolve
     "Не в Жене дело. Просто это был приятный и беззаботный, ничем не омрачённый день. Даже обходной для меня обернулся приятной прогулкой и знакомством с ребятами." with dissolve
     "И когда я уговаривал Женю, я примерил на себе совершенно нетипичную для себя, даже противоположную моему естеству роль." with dissolve
     "Будто сам себя вытягивал из кокона затворничества к людям, к обществу." with dissolve
     mz "Эй, ты чего там задумался. Семёёён?" with dissolve
     hide ext_square_sunset behind mz
+    hide white1
+    hide white2
     $ persistent.sprite_time = "night"
     $ night_time
     show mz angry glasses pioneer:
@@ -2287,12 +2297,22 @@ label b1_rvp:
     show mz normal glasses pioneer:
         align(.5,.5) xpos .33
         ease 1 xpos .5
-    show int_dining_hall_day behind mz
+    show int_dining_hall_day behind mz:
+        align(0.5,0.5)
+        crop (480,0,960,1080)
+    show white as white1:
+        align (.5,.5) xpos .25
+        crop (3,0,3,1080)
+    show white as white2:
+        align (.5,.5) xpos .75
+        crop (3,0,3,1080)
     "Ага, как тогда в столовой, когда она мне что-то тараторила." with dissolve
     hide mz normal glasses pioneer
     show un smile2 pioneer with dissolve
     "Хотя стоп, я же с Леной тогда решил сесть. Да что же не так с моей памятью…" with dissolve
-#Мб сделать как в Пипи-пупуне - по центру кусок бг площади вырван и под ним бг столовой и спрайт Жени и Лены
+    hide ext_square_sunset behind mz
+    hide white1
+    hide white2
     scene bg square_lmr_night_rvp with dissolve
     $ persistent.sprite_time = "night"
     $ night_time
@@ -3800,8 +3820,16 @@ label b2_rvp:
     un "Сём, мне что-то плохо." with dissolve
     me "Тебе помочь? Может в больницу отвести?" with dissolve
     un "Давай просто сядем." with dissolve
-    scene bg roof_rvp with dissolve
-#цгшка2 - Лена и Семён сидят как на острове - Тимси
+    scene bg roof_rvp:
+        subpixel True
+        truecenter
+        anchor(.5,.5) pos(.3,.7) zoom 1.4 blur 5
+        ease 7 xpos .7
+    show roof_sitting_rvp:
+        subpixel True
+        anchor(.5,.5) pos(.1,.8) zoom 1.7
+        ease 7 xpos .6
+    with dissolve
     "Мы с Леной сели на крышу. Лена устало опёрлась на меня и закрыла глаза." with dissolve
     "Прямо как тогда, на острове, когда пошли за земляникой." with dissolve
     "Так мы сидели какое-то время. Я задумался." with dissolve
@@ -3810,6 +3838,7 @@ label b2_rvp:
     "Сейчас всё, что мне оставалось делать – смотреть на закат, красящий город золотым цветом." with dissolve
     $ renpy.pause(2.0)
     "Лена очнулась от дрёмы." with dissolve
+    scene bg roof_rvp with dissolve
     show un_rvp normal pioneer2 with dissolve
     me "Как себя чувствуешь? Может, пойдём отсюда?" with dissolve
     show un_rvp shy pioneer2 with dissolve

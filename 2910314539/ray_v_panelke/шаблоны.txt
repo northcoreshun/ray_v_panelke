@@ -275,3 +275,21 @@ init python:
     show semen_back_rvp:
     camera:
         linear 2.5 zoom 1.
+
+#Появление второго фона на части экрана
+    show mz smile glasses pioneer:
+        align(.5,.5) xpos .33
+        ease 1 xpos .5
+    show ext_square_sunset behind mz:
+        align(0.5,0.5)
+        crop (480,0,960,1080)
+    show white as white1:
+        align (.5,.5) xpos .25
+        crop (3,0,3,1080)
+    show white as white2:
+        align (.5,.5) xpos .75
+        crop (3,0,3,1080)
+
+    hide ext_square_sunset behind mz
+    hide white1
+    hide white2
