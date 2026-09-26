@@ -148,6 +148,13 @@ Cyber Patsan - за помощь с кодом и передачу полезн�
     image vground_bar = Transform(Solid("#0000"), xysize=(132,1080))
     image hground_bar = Transform(Solid("#0000"), xysize=(1920,132))
 
+#Сброс камеры
+transform atl_camera_reset_rvp: # чтобы исправить проблемы с неработающей перспективой во всех анимациях с z-pos
+    perspective True
+    pos (0.5, 0.5) zpos 0 zoom 1 offset (0.0, 0.0) anchor(0.5,0.5) rotate 0
+    matrixcolor BrightnessMatrix(0)*ContrastMatrix(1)*SaturationMatrix(1)
+    blur 0
+
 #Главное меню
 label rvp:
     scene bg black with dissolve
@@ -264,8 +271,6 @@ label pause_rvp(outertext_pause):
 #Функция Закулисья для проверки
 label backrooms_rvp:
     stop music fadeout 2
-    $ set_mode_rvp(nvl)
-    show black
 #Пасхалко
     #play music nv_st_rvp
     #show nvlogo2_rvp:
@@ -4195,6 +4200,7 @@ label b2_rvp:
     show blink
     $ renpy.pause(2.0)
     show unblink
+    camera at atl_camera_reset_rvp
     scene ext_houses_day with dissolve
     "Прошло время, но никакой парень не появлялся."
     show dv_rvp nenrav pioneer2 with dissolve
@@ -5176,20 +5182,30 @@ label b2_rvp:
     $ renpy.pause(1.0)
     scene bg ext_hospital_rvp with dissolve
     "Ещё какое-то время пришлось подождать. Видимо, Лена решила задержаться."
-    "Я начал переживать. Вспоминая наше первое свидание на крыше, она может натворить делов."
+#закинуть переписанную фразу на фб как будет впн
+    "Вспомнив наше первое свидание на крыше, я начал переживать, не сделает ли она чего с собой."
     show un normal sport:
-        anchor(.5,.5) pos(1.2,.5) alpha 0
-        ease 1 xpos(.5) alpha 1
-#включить люби меня люби
+        align(.5,.5) xpos 1.2 alpha 0
+        ease 1 xpos .5 alpha 1
+    play music lyubi_menya_lyubi_rvp fadein 1
     "Наконец, Лена появилась. Вид у неё был уставший. Но её утомленное лицо озарилось улыбкой, когда она увидела меня."
-    show un smile2 sport
+    show un smile2 sport with dspr
     un "Сёма!.."
+    scene bg ext_hospital_rvp:
+        align(.5,.5)
+        ease .75 zoom 1.5 ypos .75
     show un surprise sport:
-        ease 2 xpos .25
-        ease 2 zoom 2.5 pos(.0,.8)
-    $ renpy.pause(3.5)
-#цг - Семён с Леной обнимаются - Тимси
-#Переход от Люби меня, люби к Le milliard et une vie плавно - 140 кг
+        align(.5,.5)
+        ease .75 zoom 1.5 ypos .75
+    $ renpy.pause(1.0)
+    scene bg ext_hospital_rvp:
+    camera:
+        pos(.83,.83) zoom 1.5
+    show hugging_rvp:
+        align(1.,1.) zoom .67
+    with dissolve
+    window show
+#Переход от Люби меня, люби к Le milliard et une vie с потемнением bg - нужно переписывать сцену, да и нужно ли?
     "Я быстро подошёл к ней и крепко обнял, так, что даже Лена не ожидала. С плеч будто гора упала. Мне было стыдно, что оставил Лену, а сам пошёл отдыхать."
     me "Лен, прости, что оставил тебя!"
     un "Я и не злилась на тебя."
@@ -5201,16 +5217,21 @@ label b2_rvp:
     me "Эх, а я ведь город не знаю."
     un "Я подскажу."
     me "У вас есть в городе парк?"
+#подумать над вторым вариантом Алисы со спины
     "В этот момент мы не замечали, как за нами наблюдала пара янтарных глаз."
-#добавить Алису со спины
-    $ renpy.pause(1.0)
-    scene bg black with dissolve
-    $ renpy.pause(1.0)
+    show dv_rvp:
+        anchor(.5,.5)
+        pos(.17,.66) zoom 1.5
+    camera:
+        ease 2.5 pos(.5,.5) zoom 1.
+    $ renpy.pause(2.5)
     "Что ж, он любит её. Нечего мне встревать в их отношения."
     "Буду просто дружить с Семёном. Пусть Лена строит с ним своё счастье."
     "А я найду другого."
     $ renpy.pause(1.0)
+    stop music fadeout 1
     scene bg black with dissolve
+    camera at atl_camera_reset_rvp
     play sound radio_intro_rvp fadein 1
     show centertext "На следующий день" with dissolve
     $ renpy.pause(1.0)
@@ -5355,7 +5376,7 @@ label b2_rvp:
     $ renpy.pause(1.0)
     scene bg black with dissolve
     stop music fadeout 1
-
+#подумать над артом, где Лена и транспарант про перестройку
     $ renpy.pause(1.0)
     scene bg ext_park_evening_rvp with dissolve
     "Мы с Леной пошли дальше."
