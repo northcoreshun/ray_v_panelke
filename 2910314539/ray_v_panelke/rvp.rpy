@@ -154,7 +154,27 @@ transform atl_camera_reset_rvp: # чтобы исправить проблемы
     pos (0.5, 0.5) zpos 0 zoom 1 offset (0.0, 0.0) anchor(0.5,0.5) rotate 0
     matrixcolor BrightnessMatrix(0)*ContrastMatrix(1)*SaturationMatrix(1)
     blur 0
+#Трансформы - спрайт бежит к нам
+transform close_rvp:
+    align (0.5, 0.5)
+    zoom(2.0)
+    linear 20 zoom (1.0)
 
+transform run_rvp:
+    zoom 1.05 anchor (.5,.5) pos (.5,.5)
+    ease .25 offset (0, 0) rotate (0)
+    ease .25 offset (15,15) rotate (.15)
+    ease .25 offset (0, 0) rotate (0)
+    ease .25 offset (-15,15) rotate (-.15)
+    repeat
+
+transform run_2_rvp:
+    zoom 1.05 anchor (.5,.5) pos (.5,.5)
+    easeout .4 offset (0, 0) rotate (0)
+    easeout .4 offset (1,2) rotate (.2)
+    easeout .4 offset (0, 0) rotate (0)
+    easeout .4 offset (-1,2) rotate (-.2)
+    repeat
 #Главное меню
 label rvp:
     scene bg black with dissolve
@@ -2594,9 +2614,10 @@ label b1_rvp:
         ease 1 zoom 1.75
     un "Ты, правда, подглядывал за Алисой?" with dissolve
     "Да вы серьёзно, опять это. Один мой легкомысленный поступок, а столько последствий." with dissolve
+#соотнести с фб
+    "Алиса смотрела испытывающе. Видать она эту тему и вспомнила."
     "И ведь целых два дня уже эта канитель длится. Впрочем, я сам смалодушничал и соврал Лене тогда в лесу. Нужно исправить ошибку." with dissolve
     "Теперь остаётся только сказать правду. Я не могу строить отношения на лжи, скрывая что-то от неё." with dissolve
-#Алиса смотрела испытывающе. Видать она эту тему и вспомнила.
     "Я тяжело вздохнул." with dissolve
     me "Да, Лена, это правда." with dissolve
     show un_rvp ubiu pioneer2
@@ -2999,20 +3020,17 @@ label b1_rvp:
     "За спиной у меня был вещмешок со всем моим скромным инвентарём. Ну, я хотя бы здесь уже был." with dissolve
     "Надо найти Лену. Я обернулся в сторону и вдруг увидел её. Она сидела и читала книгу на лавочке. Как знакомо." with dissolve
     "Я пошёл к ней. Она увидела меня, вскочила и побежала." with dissolve
-#анимацию спрайта сделать, проверить как это сделано в фиалковых слёзах
-    scene bg square_lmr_day_rvp:
-        align(.5,.5) xanchor .3 zoom 2
-        ease 5 xanchor .5 zoom 1
-    show un_rvp sad sportpioneer at cleft with dissolve
+    scene bg square_lmr_day_rvp at close_rvp,run_rvp
+    show un_rvp sad sportpioneer at run_2_rvp
+    with dissolve
     un "Сёма, привет!" with dissolve
-    show un_rvp sad sportpioneer at cleft with dissolve
     un "Куда ты пропал? Я тебя вчера весь день ждала! Я так волновалась." with dissolve
     me "Лен, такое случилось. Просто чудо какое-то, что я снова с тобой." with dissolve
     me "Я в милиции был." with dissolve
-    show un_rvp scared sportpioneer at cleft:
-        ease 1 zoom 1.4
+    scene bg square_lmr_day_rvp with dissolve
+    show un_rvp scared sportpioneer with dissolve
     un "Какой ужас! Тебя били? С тобой сейчас всё в порядке?"
-    show un_rvp sad sportpioneer at cleft with dspr
+    show un_rvp sad sportpioneer with dspr
     un "Пойдём, расскажешь нам с Алисой." with dissolve
     scene bg square_lmr_day_rvp:
         align(.5,.5) zoom 1.1 #почему-то 1.05 не хватило...
@@ -5217,7 +5235,6 @@ label b2_rvp:
     me "Эх, а я ведь город не знаю."
     un "Я подскажу."
     me "У вас есть в городе парк?"
-#подумать над вторым вариантом Алисы со спины
     "В этот момент мы не замечали, как за нами наблюдала пара янтарных глаз."
     show dv_rvp:
         anchor(.5,.5)
