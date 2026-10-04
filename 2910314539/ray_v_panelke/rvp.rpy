@@ -291,19 +291,20 @@ label pause_rvp(outertext_pause):
 #Функция Закулисья для проверки
 label backrooms_rvp:
     stop music fadeout 2
-#Пасхалко
-    #play music nv_st_rvp
-    #show nvlogo2_rvp:
-    #    align(.5,.5)
-    #show nvlogo_rvp behind nvlogo2:
-    #    align(.5,.5)
-    #    linear 6 rotate -900
-    #with dissolve
-    #$ renpy.pause(4.5)
-    #stop music fadeout 2
-    #scene bg black with dissolve
+
     $ renpy.pause()
     jump rvp
+#Пасхалко
+    play music nv_st_rvp
+    show nvlogo2_rvp:
+        align(.5,.5)
+    show nvlogo_rvp behind nvlogo2:
+        align(.5,.5)
+        linear 6 rotate -900
+    with dissolve
+    $ renpy.pause(4.5)
+    stop music fadeout 2
+    scene bg black with dissolve
 
 #Функция вывода превьюшки
 label showtext_rvp(outertext_upper,outertext_lower):
@@ -3055,12 +3056,15 @@ label b1_rvp:
         ease 3 zoom 3 align(.9,.9)
     "Вскоре я начал смотреть на место её жительства. Не похоже на обычный дом, ограждено забором."
     "Наконец, я прочитал название на табличке." with dissolve
-#1300-заменить на появление таблички с текстом капсом, без текстбоксов ниже
-    "МИНИСТЕРСТВО ПРОСВЕЩЕНИЯ СССР" with dissolve
-    "ОТДЕЛ НАРОДНОГО ОБРАЗОВАНИЯ" with dissolve
-    "ИСПОЛКОМА ЛЕНИНОМОРСКОГО РАЙОННОГО СОВЕТА ДЕПУТАТОВ" with dissolve 
-    "ШКОЛА-ИНТЕРНАТ №2" with dissolve
+    show shkola_rvp:
+        align(.5,.5) ypos 1.5
+        ease 2 ypos .5
+    $renpy.pause(2.0)
     "Что такое интернат? Это там, где дети и учатся и живут? Почему Лена и Алиса живут здесь, а не с родителями?" with dissolve
+    show shkola_rvp:
+        align(.5,.5) ypos .5
+        ease 1 ypos 1.5
+    $renpy.pause(2.0)
     scene bg_ext_internat_rvp:
         align(.9,.9) zoom 3
         ease 3 zoom 1 align(.5,.5)
