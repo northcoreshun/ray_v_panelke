@@ -135,7 +135,17 @@ Cyber Patsan - за помощь с кодом и передачу полезн�
     image bg_ext_internat_rvp = ConditionSwitch("persistent.sprite_time=='sunset'",im.MatrixColor(ImageReference("bg ext_internat_rvp"), im.matrix.tint(0.94, 0.82, 1.0)),
                                                 "persistent.sprite_time=='night'",im.MatrixColor(ImageReference("bg ext_internat_rvp"), im.matrix.tint(0.63, 0.78, 0.82)),
                                                 True,ImageReference("bg ext_internat_rvp"))
-
+#Собранное изображение через contains
+    image hand_skanavi_rvp:
+        contains:
+            "skanavi_rvp"
+            align(.5,.5)
+            zoom 0.5 
+        contains:
+            "hand_rvp"
+            anchor(.5,.5)
+            pos(.52,.45)
+            rotate -2
 #Зазумленные изображения
     image okno_night_zoom_rvp = Transform("bg okno_night_rvp", zoom=.35)
     image okno_day_zoom_rvp = Transform("bg okno_day_rvp", zoom=.35)
@@ -149,7 +159,7 @@ Cyber Patsan - за помощь с кодом и передачу полезн�
     image hground_bar = Transform(Solid("#0000"), xysize=(1920,132))
 
 #Сброс камеры
-transform atl_camera_reset_rvp: # чтобы исправить проблемы с неработающей перспективой во всех анимациях с z-pos
+transform atl_camera_reset_rvp: # чтобы исправить проблемы с неработающей перспективой во всех анимациях с zpos
     perspective True
     pos (0.5, 0.5) zpos 0 zoom 1 offset (0.0, 0.0) anchor(0.5,0.5) rotate 0
     matrixcolor BrightnessMatrix(0)*ContrastMatrix(1)*SaturationMatrix(1)
@@ -291,7 +301,7 @@ label pause_rvp(outertext_pause):
 #Функция Закулисья для проверки
 label backrooms_rvp:
     stop music fadeout 2
-
+    show hand_skanavi_rvp
     $ renpy.pause()
     jump rvp
 #Пасхалко
@@ -1643,18 +1653,18 @@ label a1_rvp:
     "Хорошо, что наушники были, а то затея не имела бы смысла." with dissolve
     "А что послушать?" with dissolve
     "В такой момент хорошо подходило что-то лиричное, про ночь." with dissolve
-#функция-рука показывает кассету
     "Руки сами нашли кассету." with dissolve
     show kasseta_rvp:
-        align(0.5, 0.5) ypos 1.4 zoom .5
-        ease 2 ypos .8
+        align(0.5, 0.5) ypos 1.5 rotate -10
+        ease 2 ypos .7 rotate 0
     "Кино. Последний герой. Последняя песня альбома." with dissolve
     show kasseta_rvp:
-        align(0.5, 0.5) ypos .8 zoom .5
-        ease 1 ypos 1.4
+        align(0.5, 0.5) ypos .7
+        ease 1 ypos 1.5
+    pause 1
     play sound open_cassette_rvp
     play sound open_mafon_rvp
-    "Я вставил кассету в магнитофон и включил перемотку." with dissolve
+    "Я вставил кассету в магнитофон и включил перемотку."
     "Перед тем как включить песню, немного отвлёкся." with dissolve
     "Помню, как мне подарила эту кассету Алиса ещё в райцентре перед самым отъездом." with dissolve
     "Кинул взгляд на гитару в углу. А ведь музыка много помогала мне, когда было трудно. Может, сейчас поможет?" with dissolve
@@ -3205,7 +3215,6 @@ label b1_rvp:
     dv "Мы тебя содержать не будем, у нас у самих денег не так много!" with dissolve
     un "Тебе надо найти работу. Что ты умеешь?" with dissolve
     play music music_list["torture"] fadein 2
-#думал добавить маску потемнения по краям, пассивно ищу 
     scene bg_ext_internat_rvp:
         zoom 1.05 align(.5,.5) blur 5
         ease .05 offset(0,0)
@@ -3227,6 +3236,7 @@ label b1_rvp:
         ease .05 offset(0,0)
         ease .05 offset(-5,0)
         repeat
+    show ramka_rvp
     "И тут на меня накатил ужас. Весь мой мозг подавал сигнал тревоги, как сознательная, так и бессознательная часть." with dissolve
     "Нигде не было опыта работы, подходящей в это время." with dissolve
     "Эникейщик? Тут нет компьютеров, с которыми я умею работать." with dissolve
@@ -3253,6 +3263,7 @@ label b1_rvp:
         ease .05 offset(0,0)
         ease .05 offset(-5,0)
         repeat
+    show ramka_rvp
     dv "Мдаа, нашла ты себе жениха, Лен, ничего не скажешь."
     scene bg_ext_internat_rvp:
         blur 5
@@ -4150,9 +4161,8 @@ label b2_rvp:
         ease 2 xpos .2
     show un_rvp smile pioneer2:
         ease 2 xpos .4
-#функция-рука, держащая книгу
-    show skanavi_rvp:
-        align(.5,.5) zoom .5 pos(.8,1.2) rotate 30
+    show hand_skanavi_rvp:
+        align(.5,.5) pos(.8,1.2) rotate 30
         ease 2 pos(.7,.8) rotate 10
     $ renpy.pause(1.5)
     window show

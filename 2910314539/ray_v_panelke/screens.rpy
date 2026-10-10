@@ -1,4 +1,8 @@
 init python:
+# Чтобы не переключаться на англ раскладку
+    config.keymap['reload_game'].append('shift_K_r')
+    config.keymap['console'].append('shift_K_o')
+
     # Уберите из списка ненужные названия экранов, если не хотите их заменять.
     RVP_SCREENS = [
         "say",
