@@ -1,3 +1,9 @@
+# Файл называть с цифр (НЕ НУЛЯ) или "_"
+init 999 python:
+    config.keymap["action_editor"]=['shift_K_p']
+    config.keymap["image_viewer"]=['shift_K_u']
+    config.keymap["sound_viewer"]=['shift_K_s']
+
 init python:
 # Чтобы не переключаться на англ раскладку
     config.keymap['reload_game'].append('shift_K_r')

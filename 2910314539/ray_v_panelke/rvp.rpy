@@ -14,6 +14,7 @@ python:
     - Глоссарий
     - Музыкальная комната
     Добавить th, где надо и докинуть в статью 'Переводим текст в мод'
+    Оставить пиксели или всё перевести в доли экрана?
     """
 
 init -1:
@@ -213,20 +214,20 @@ screen menu_rvp:
 screen a_rvp:
     add "bg square_rvp":
         align(0.,0.)
-        crop (0,0,960,1080)
+        crop(0,0,960,1080)
     text "Сторона А" style "rvp" size 70 anchor(.5,.5) pos(.25,.3)
     add "white":
-        align (.5,.5)
-        crop (3,0,3,1080)
+        align(.5,.5)
+        xysize(.002,1.)
     add "un_rvp smile coat" align(.5,.5)
 screen b_rvp:
     add "bg square_lmr_day_rvp":
-        anchor(0.,0.) pos(.5,.0)
-        crop (960,0,1920,1080)
+        align(0.,0.) xpos .5
+        crop(960,0,1920,1080)
     text "Сторона Б" style "rvp" size 70 anchor(.5,.5) pos(.75,.3)
     add "white":
-        align (.5,.5)
-        crop (3,0,3,1080)
+        align(.5,.5)
+        xysize(.002,1.)
     add "un_rvp smile pioneer2" align(.5,.5)
 
 #Экран Стороны А
@@ -244,22 +245,22 @@ screen side_a_rvp:
             unhovered [Hide("a2_rvp", transition=Dissolve(1.0))]
             action [Hide("a2_rvp", transition=Dissolve(0.5)),Jump("a2_rvp")]
 screen a1_rvp:
-    add "bg walking_rvp":
 #надо цг, но для части 1А пока нет
+    add "bg walking_rvp":
         align(0.,0.)
-        crop (480,0,960,1080)
+        crop(480,0,960,1080)
     text "Часть 1" style "rvp" size 70 anchor(.5,.5) pos(.25,.5)
     add "white":
         align (.5,.5)
-        crop (3,0,3,1080)
+        xysize(.002,1.)
 screen a2_rvp:
     add "cg balkon balkon_0_rvp":
         align(0.,0.) xpos .5
-        crop (480,0,1440,1080)
+        crop(480,0,1440,1080)
     text "Часть 2" style "rvp" size 70 anchor(.5,.5) pos(.75,.5)
     add "white":
         align (.5,.5)
-        crop (3,0,3,1080)
+        xysize(.002,1.)
 
 #Экран Стороны Б
 screen side_b_rvp:
@@ -278,19 +279,19 @@ screen side_b_rvp:
 screen b1_rvp:
     add "cg un_dv pic1_rvp":
         align(0.,0.)
-        crop (480,0,960,1080)
+        crop(480,0,960,1080)
     text "Часть 1" style "rvp" size 70 anchor(.5,.5) pos(.25,.5)
     add "white":
         align (.5,.5)
-        crop (3,0,3,1080)
+        xysize(.002,1.)
 screen b2_rvp:
     add "cg un_roof pic1_rvp":
         align(0.,0.) xpos .5
-        crop (480,0,1440,1080)
+        crop(480,0,1440,1080)
     text "Часть 2" style "rvp" size 70 anchor(.5,.5) pos(.75,.45) #чуть повыше середины для красоты
     add "white":
         align (.5,.5)
-        crop (3,0,3,1080)
+        xysize(.002,1.)
 
 #Функция паузы с нотифаем
 #сделать новый кэкран
@@ -301,7 +302,6 @@ label pause_rvp(outertext_pause):
 #Функция Закулисья для проверки
 label backrooms_rvp:
     stop music fadeout 2
-    show hand_skanavi_rvp
     $ renpy.pause()
     jump rvp
 #Пасхалко
@@ -323,7 +323,7 @@ label showtext_rvp(outertext_upper,outertext_lower):
     show white:
         subpixel True
         align(.5,.5)
-        easein_expo 1.5 crop (480,0,1440,3)
+        easein_expo 1.5 crop(480,0,1440,3)
     #Вывод текста
     show uppertext outertext_upper:
         subpixel True
@@ -1654,6 +1654,7 @@ label a1_rvp:
     "А что послушать?" with dissolve
     "В такой момент хорошо подходило что-то лиричное, про ночь." with dissolve
     "Руки сами нашли кассету." with dissolve
+#найти футляр, сфотать руку, сравнить, обработать обложку, ночное освещение через автоинит?
     show kasseta_rvp:
         align(0.5, 0.5) ypos 1.5 rotate -10
         ease 2 ypos .7 rotate 0
@@ -2303,14 +2304,14 @@ label b1_rvp:
         align(.5,.5) xpos .33
         ease 1 xpos .5
     show ext_square_sunset behind mz:
-        align(0.5,0.5)
-        crop (480,0,960,1080)
+        align(.5,.5)
+        crop(480,0,960,1080)
     show white as white1:
         align (.5,.5) xpos .25
-        crop (3,0,3,1080)
+        xysize(.002,1.)
     show white as white2:
         align (.5,.5) xpos .75
-        crop (3,0,3,1080)
+        xysize(.002,1.)
     "Ох, вспомнила. Тот самый турнир на втором дне. А ведь момент, когда я уговаривал Женю играть, был одним из самых приятных… после всех моментов с Леной, конечно." with dissolve
     "Не в Жене дело. Просто это был приятный и беззаботный, ничем не омрачённый день. Даже обходной для меня обернулся приятной прогулкой и знакомством с ребятами." with dissolve
     "И когда я уговаривал Женю, я примерил на себе совершенно нетипичную для себя, даже противоположную моему естеству роль." with dissolve
@@ -2335,13 +2336,13 @@ label b1_rvp:
         ease 1 xpos .5
     show int_dining_hall_day behind mz:
         align(0.5,0.5)
-        crop (480,0,960,1080)
+        crop(480,0,960,1080)
     show white as white1:
         align (.5,.5) xpos .25
-        crop (3,0,3,1080)
+        xysize(.002,1.)
     show white as white2:
         align (.5,.5) xpos .75
-        crop (3,0,3,1080)
+        xysize(.002,1.)
     "Ага, как тогда в столовой, когда она мне что-то тараторила." with dissolve
     hide mz normal glasses pioneer
     show un smile2 pioneer with dissolve
@@ -5957,27 +5958,44 @@ label a2_rvp:
     show un normal sport with dissolve:
         align(0.95,0.3) zoom 1.5 xzoom -1
     un "Значит, смотри. У нас оставалось тридцать рублей."
+    show image Solid("#ffdd7d") as verimage1:
+        anchor(.5,.0) pos(.02,.15)
+        xysize(.002,.6)
+    show image Solid("#ffdd7d") as verimage2:
+        anchor(.5,.0) pos(.18,.15)
+        xysize(.002,.6)
+    show image Solid("#ffdd7d") as verimage3:
+        anchor(.5,.0) pos(.32,.15)
+        xysize(.002,.6)
     show centertext "30 руб." as image0:
-        anchor(0.5, 0.) pos(.2,.2)
+        anchor(.5, 0.) pos(.25,.15)
+    with dissolve
     un "Квартплата – два восемьдесят, за воду – рубль восемьдесят, за свет – рубль, за отопление – рубль пятьдесят четыре, за газ – шестьдесят копеек, да за радио – полрубля."
-#таблицу сделать?
-    show centertext "-2,80 руб.\n-1,00 руб.\n-1,54 руб.\n-0,60 руб.\n-0,50 руб." as image1:
-        anchor(0.5, 0.) pos(.2,.25)
+    show centertext "-2,80 руб.\n-1,80 руб.\n-1,00 руб.\n-1,54 руб.\n-0,60 руб.\n-0,50 руб." as image1:
+        anchor(.5, 0.) pos(.25,.21)
+    show centertext "Квартплата\nВода\nСвет\nОтопление\nГаз\nРадио" as leftimage1:
+        anchor(.5, 0.) pos(.1,.21)
     with dissolve
     un "Итого восемь двадцать четыре."
     un "Это я оплатила три дня назад."
     un "Дальше, вот у меня записано по дням. Пять двадцать я потратила в выходные, ходила на рынок."
     show centertext "-5,20 руб." as image2:
-        align(0.5, 0.) pos(.2,.55)
+        align(.5, 0.) pos(.25,.55)
+    show centertext "Рынок" as leftimage2:
+        anchor(.5, 0.) pos(.1,.55)
+    with dissolve
     un "Два рубля потратила сегодня, должно быть четырнадцать пятьдесят шесть."
     show centertext "-2,00 руб." as image3:
-        align(0.5, 0.) pos(.2,.6)
+        align(.5, 0.) pos(.25,.6)
+    with dissolve
     "Я пересчитал при ней деньги. Но почему-то… тринадцать шестьдесят шесть?"
     show centertext "13,66 руб." as image4:
-        align(0.5, 0.) pos(.2,.65)
+        align(.5, 0.) pos(.25,.65)
+    with dissolve
     me "Не сходится. Девяносто копеек не хватает."
     show centertext "{color=FF3200}0,90 руб.?" as image5:
-        align(0.5, 0.) pos(.2,.7)
+        align(.5, 0.) pos(.25,.7)
+    with dissolve
     "Лена почему-то сильно напряглась."
     show un smile2 sport with dissolve
     un "Не знаю… может что-то ещё купила. Неужели забыла записать?"
