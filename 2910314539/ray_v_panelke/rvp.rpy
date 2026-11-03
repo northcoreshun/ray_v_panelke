@@ -41,12 +41,6 @@ init -1:
         align(.5,.5)
         text_align .5
         outlines [(2,"#000",0,0)]
-#Мат.формулы для момента в 2Б - под сомнением
-    style rvp_formula:
-        size 30
-        #font пока дефолтный
-        align(0.5, 0.5)
-        outlines [(2,"#000",0,0)]
 
 #ИНИТ ОСНОВНОЙ
 init:
@@ -81,6 +75,7 @@ poi, Mystiss, 140 kilograms of sex и всей беседе «Закодиров
 Благодарности:\n\n
 Noldor - вычитка\n\n
 poi - помощь с кодом\n\n
+Аземар - помощь с музыкой\n\n
 Были использованы материалы других модов.\n\n
 Авторам также выражаю благодарность."""
     $ rvp_credits_b1 = """{font=[font_rvp]}Спасибо за прочтение части 1Б!\n\n\n\n
@@ -118,8 +113,6 @@ Cyber Patsan - за помощь с кодом и передачу полезн�
     image screentext = ParameterizedText(style="rvp",textalign=1.,size=40,xmaximum=.3)
     #Текст по центру экрана
     image centertext = ParameterizedText(style="rvp")
-    image formulatext = ParameterizedText(style="rvp_formula")
-    image formula2text = ParameterizedText(style="rvp_formula")
 
 #Зацикленная карусель изображений
     image cycled_cg:
@@ -3968,8 +3961,7 @@ label b2_rvp:
         align(.5,.5) xpos .4
     with dissolve
     window show
-#обработать музыку будто из репродуктора
-    play music velosiped_rvp volume .3 fadein 1
+    play music buket_rvp volume .5 fadein 1
     dv "Конечно, ты не понимаешь её." with dissolve
     dv "Да ты вообще, похоже, девушек не понимаешь!"
     dv "Что это вообще за поведение такое? Она для тебя постаралась, не побоялась залезть на крышу. А он нос воротит, не нравится ему, видите ли!"
@@ -4230,20 +4222,17 @@ label b2_rvp:
         anchor(0.5,0.5) pos (0.25,0.5) zoom 1
         ease 1 pos(1.75,.5) alpha 0
     "Лена ушла к домику вожатой. Алиса же начала рассчитывать маршрут пионера."
-#заменить текст на изображение формулы, добавить ещё формул?
     camera:
         perspective True gl_depth "opaque"
     scene ext_houses_day:
         zpos -1
-    show formulatext("x=x0+vt"):
-        alpha 1
+    show formula1_rvp:
         anchor(0.5, 0.5) pos(0.65, 0.35) zpos -1
         ease 1 pos(0.35, 0.65) 
         zpos 1
         ease 1 pos(0.65, 0.35)
         repeat
-    show formula2text("a*a+b*b=c*c"):
-        alpha 1
+    show formula2_rvp:
         anchor(0.5, 0.5) pos(0.65, 0.65) zpos -1
         ease 1 pos(0.35, 0.35) 
         zpos 1
@@ -4252,8 +4241,8 @@ label b2_rvp:
     show dv_rvp concent pioneer2:
         align(.5,.5)
     "Так, ему надо пройти до площади, затем налево. Это метров сто, затем ещё сорок. Скорость где-то 4 километра в час."
-    hide formulatext
-    hide formula2text
+    hide formula1_rvp
+    hide formula2_rvp
     show blink
     $ renpy.pause(2.0)
     show unblink
